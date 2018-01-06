@@ -1,0 +1,37 @@
+<h1> Inventories </h1>
+
+                <table class="table">
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Game</th>
+
+                        <th>Platform</th> 
+
+                        <th>Release</th>
+
+                        <th>Quantity</th>
+
+                        <th>Enable</th>
+
+                    </tr>
+
+                    <tr *ngFor="let inventory of inventories; let i = index">
+
+                        <td>{{i + 1}}</td>
+
+                        <td>{{inventory?.find_by_asin[0].title}}</td>
+
+                        <td>{{inventory?.asin}}</td>
+
+                        <td>{{inventory?.find_by_asin[0].small_image}}</td>
+
+                        <td>{{inventory?.quantity}}</td>
+
+                        <td>Enable</td>
+
+                    </tr>
+
+                </table>
