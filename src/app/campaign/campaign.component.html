@@ -1,1 +1,25 @@
  <button mat-raised-button color="primary" (click)="openDialog()"> Create Campaign </button>
+
+<mat-slide-toggle color="primary" [checked]=true></mat-slide-toggle>
+
+ <ckeditor
+    [(ngModel)]="ckeditorContent"
+    [config]="ckeConfig"
+    [readonly]="false"
+    (change)="onChange($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+    debounce="500">
+    <ckgroup
+      [name]="'documenthandling'"
+      [previous]="'1'">
+ <ckbutton [name]="'imageExplorer'"
+ [command]="'insertcontent'"
+ (click)="insert($event)"
+ [icon]="'https://png.icons8.com/color/540/bow-tie-half-filled.png'"
+ [label]="'Insert_content'"></ckbutton>
+    </ckgroup>
+  </ckeditor>
+
+
+  <div [froalaEditor]>Hello, Froala!</div>

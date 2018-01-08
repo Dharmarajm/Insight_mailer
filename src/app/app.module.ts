@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';  // replaces previous Http service
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { CKEditorModule } from 'ng2-ckeditor';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 //List Of Modules
 import { AppComponent } from './app.component';
@@ -13,7 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
-import { CampaignComponent, DialogOverviewExampleDialog } from './campaign/campaign.component';
+import { CampaignComponent, CampaignName, CampaignTemplate, CampaignAsin, CampaignTrigger } from './campaign/campaign.component';
 
 //List Of Service
 import { LoginService } from './login/login.service';
@@ -31,7 +33,10 @@ import { CampaignService } from './campaign/campaign.service';
     InventoryComponent,
     OrderComponent,
     CampaignComponent,
-    DialogOverviewExampleDialog
+    CampaignName,
+    CampaignTemplate,
+    CampaignAsin,
+    CampaignTrigger
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,10 @@ import { CampaignService } from './campaign/campaign.service';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    CKEditorModule,
+    FroalaEditorModule.forRoot(), 
+    FroalaViewModule.forRoot()
   ],
   providers: [
                LoginService,
@@ -50,7 +58,10 @@ import { CampaignService } from './campaign/campaign.service';
                CampaignService
              ],
   entryComponents: [
-                DialogOverviewExampleDialog
+                CampaignName,
+                CampaignTemplate,
+                CampaignAsin,
+                CampaignTrigger
                ],
   bootstrap: [AppComponent]
 })

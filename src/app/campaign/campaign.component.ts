@@ -12,25 +12,102 @@ export class CampaignComponent implements OnInit {
 
 animal: string = "test";
   name: string = "test1";
+  ckeditorContent:any;
+
+  ckeConfig: any;
 
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private campaign_service:CampaignService) { }
 
   ngOnInit() {
+
+this.ckeConfig = {
+            height: 50,
+            uiColor: '#ebebeb',
+            language: "en",
+            allowedContent: true,
+            toolbar: [
+            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat"] },
+                { name: "editing", items: ["Scayt", "Find", "Replace", "SelectAll"] },
+                { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
+                { name: "tools", items: ["Maximize", "ShowBlocks", "Preview", "Print", "Templates"] },
+                { name: "document", items: ["Source"] },
+                { name: "insert", items: ["Image", "Table", "HorizontalRule", "SpecialChar", "Iframe", "imageExplorer"] },
+                "/",
+                { name: "paragraph", items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent", "CreateDiv", "-", "Blockquote"] },
+                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
+            ]
+        };
+
+
+  this.ckeditorContent = `<p>My HTML</p>`;
   }
 
 
+insert(event){
+	alert("ji");
+	//event.insertText("#{user_name}");
+	event.insertText("ji");
+}
+
 
 openDialog(): void {
-    let dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-      width: '250px',
+    let dialogRef1 = this.dialog.open(CampaignName, {
+      width: '500px',
       data: { name: this.name, animal: this.animal }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+    dialogRef1.afterClosed().subscribe(result => {
+      console.log( result );
       this.animal = result;
-    });
+
+          let dialogRef2 = this.dialog.open(CampaignTemplate, {
+            width: '1000px',
+            data: { name: this.name, animal: this.animal }
+          });
+
+          dialogRef2.afterClosed().subscribe(result => {
+           console.log( result );
+           this.animal = result;
+
+
+              let dialogRef3 = this.dialog.open(CampaignAsin, {
+                width: '1000px',
+                data: { name: this.name, animal: this.animal }
+               });
+
+              dialogRef3.afterClosed().subscribe(result => {
+               console.log( result );
+               this.animal = result;
+
+
+                  let dialogRef4 = this.dialog.open(CampaignTrigger, {
+                    width: '1000px',
+                    data: { name: this.name, animal: this.animal }
+                  });
+
+                  dialogRef4.afterClosed().subscribe(result => {
+                    console.log( result );
+                    this.animal = result;
+                  });
+
+
+
+                });
+
+
+
+
+
+
+           });
+
+
+
+     });
+
+
   }
 
 
@@ -38,17 +115,93 @@ openDialog(): void {
 
 
 @Component({
-  selector: 'dialog-overview-example-dialog',
-  templateUrl: 'dialog-overview-example-dialog.html',
+  selector: 'campaign_name',
+  templateUrl: 'campaign_name.html',
 })
-export class DialogOverviewExampleDialog {
+export class CampaignName {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    public dialogRef1: MatDialogRef<CampaignName>) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
   onNoClick(): void {
-    this.dialogRef.close();
+    alert("sure");
+  }
+
+ok(name): void {
+alert(name);
+     this.dialogRef1.close();
+  }
+
+
+}
+
+@Component({
+  selector: 'CampaignTemplate',
+  templateUrl: 'campaign_template.html',
+})
+export class CampaignTemplate {
+
+templates:any;
+
+  constructor(
+    public dialogRef2: MatDialogRef<CampaignTemplate>,
+    @Inject(MAT_DIALOG_DATA) public data: any,private CampaignService:CampaignService) {
+    
+   this.CampaignService.gettemplates().subscribe( res => {
+    this.templates = res;
+    });
+
+   }
+
+  templatedata(template): void {
+    alert(template);
+    this.dialogRef2.close();
+  }
+
+
+}
+
+@Component({
+  selector: 'campaign_asin',
+  templateUrl: 'campaign_asin.html',
+})
+export class CampaignAsin {
+
+inventories:any;
+
+  constructor(
+    public dialogRef3: MatDialogRef<CampaignAsin>,
+    @Inject(MAT_DIALOG_DATA) public data: any,private CampaignService:CampaignService) { 
+
+ this.CampaignService.getinventories().subscribe( res => {
+    this.inventories = res;
+    });
+
+    }
+
+  onNoClick(): void {
+    this.dialogRef3.close();
+  }
+
+ok(): void {
+     alert("hi");
+  }
+
+
+}
+
+@Component({
+  selector: 'campaign_trigger',
+  templateUrl: 'campaign_trigger.html',
+})
+export class CampaignTrigger {
+
+  constructor(
+    public dialogRef4: MatDialogRef<CampaignTrigger>,
+    @Inject(MAT_DIALOG_DATA) public data: any,private campaign_service:CampaignService) { }
+
+  onNoClick(): void {
+    this.dialogRef4.close();
   }
 
 ok(): void {

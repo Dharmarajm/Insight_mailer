@@ -11,12 +11,16 @@ export class InventoryComponent implements OnInit {
 
 inventories:any;
 
-  constructor(private InventoryService:InventoryService) { }
+  constructor(private InventoryService:InventoryService ) { }
 
   ngOnInit() {
    this.InventoryService.getinventories().subscribe( res => {
    this.inventories = res;
    });
+  }
+
+  ngAfterViewInit() {
+    
   }
 
 }

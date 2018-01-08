@@ -12,7 +12,15 @@ export class CampaignService {
   constructor(private http:HttpClient) { }
 
  getcampaigns() {
-        return this.http.get('192.168.1.64:3021/campaignes');
+        return this.http.get('http://192.168.1.64:3021/campaignes');
+    }
+
+    gettemplates() {
+        return this.http.get('http://192.168.1.64:3021/templates');
+    }
+
+    getinventories() {
+        return this.http.get('http://192.168.1.64:3021/inventories');
     }
 
 }
