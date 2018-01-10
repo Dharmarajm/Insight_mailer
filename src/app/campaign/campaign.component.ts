@@ -10,10 +10,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class CampaignComponent implements OnInit {
 
-animal: string = "test";
+  animal: string = "test";
   name: string = "test1";
   ckeditorContent:any;
-
   ckeConfig: any;
 
 
@@ -46,16 +45,18 @@ this.ckeConfig = {
 
 
 insert(event){
-	alert("ji");
 	//event.insertText("#{user_name}");
-	event.insertText("ji");
+	event.insertText("{{Buyer_Name}}");
 }
+
+  onChange($event){}
+  onFocus($event){}
+  onBlur($event){}
 
 
 openDialog(): void {
     let dialogRef1 = this.dialog.open(CampaignName, {
-      width: '500px',
-      data: { name: this.name, animal: this.animal }
+      width: '500px'
     });
 
     dialogRef1.afterClosed().subscribe(result => {
@@ -63,8 +64,7 @@ openDialog(): void {
       this.animal = result;
 
           let dialogRef2 = this.dialog.open(CampaignTemplate, {
-            width: '1000px',
-            data: { name: this.name, animal: this.animal }
+            width: '1000px'
           });
 
           dialogRef2.afterClosed().subscribe(result => {
@@ -73,8 +73,7 @@ openDialog(): void {
 
 
               let dialogRef3 = this.dialog.open(CampaignAsin, {
-                width: '1000px',
-                data: { name: this.name, animal: this.animal }
+                width: '1000px'
                });
 
               dialogRef3.afterClosed().subscribe(result => {
@@ -83,8 +82,7 @@ openDialog(): void {
 
 
                   let dialogRef4 = this.dialog.open(CampaignTrigger, {
-                    width: '1000px',
-                    data: { name: this.name, animal: this.animal }
+                    width: '1000px'
                   });
 
                   dialogRef4.afterClosed().subscribe(result => {
@@ -120,6 +118,8 @@ openDialog(): void {
 })
 export class CampaignName {
 
+name: string;
+
   constructor(
     public dialogRef1: MatDialogRef<CampaignName>) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
@@ -128,7 +128,6 @@ export class CampaignName {
   }
 
 ok(name): void {
-alert(name);
      this.dialogRef1.close();
   }
 
@@ -154,7 +153,6 @@ templates:any;
    }
 
   templatedata(template): void {
-    alert(template);
     this.dialogRef2.close();
   }
 
@@ -184,7 +182,7 @@ inventories:any;
   }
 
 ok(): void {
-     alert("hi");
+     
   }
 
 
@@ -205,7 +203,7 @@ export class CampaignTrigger {
   }
 
 ok(): void {
-     alert("hi");
+     
   }
 
 

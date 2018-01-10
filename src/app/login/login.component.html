@@ -1,20 +1,3 @@
-<!--form #f="ngForm" novalidate (ngSubmit)="login()">
-
-  <div class="form-group">
-    <label>Email</label>
-    <input type="email" class="form-control" id="email" name="email" [(ngModel)] = "email">
-  </div>
-
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" id="password" name="password" [(ngModel)] = "password">
-  </div>
-
-<button type="submit" mat-raised-button color="primary"> Login </button>
-
-</form-->
-
-
 <form class="example-form" novalidate (ngSubmit)="login()">
   <mat-form-field class="example-full-width">
     <input matInput placeholder="Email" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email">
@@ -26,11 +9,10 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="password" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password">
+    <input matInput type=password placeholder="password" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password">
     <mat-error *ngIf="passwordFormControl.hasError('required')">
       Password is <strong>required</strong>
     </mat-error>
   </mat-form-field>
-
   <button type="submit" mat-raised-button color="primary"> Login </button>
 </form>

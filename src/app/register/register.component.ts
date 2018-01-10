@@ -9,9 +9,17 @@ import { Observable } from 'rxjs/Rx';
 })
 export class RegisterComponent implements OnInit {
 
+firstname: string;
+lastname: string;
+email: string;
+password: string;
+phone: number;
+
   constructor() { }
 
   ngOnInit() {
   }
+
+  register(){ }
 
 }

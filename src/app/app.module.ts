@@ -7,7 +7,6 @@ import { HttpClientModule } from '@angular/common/http';  // replaces previous H
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { CKEditorModule } from 'ng2-ckeditor';
-import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 //List Of Modules
 import { AppComponent } from './app.component';
@@ -46,9 +45,7 @@ import { CampaignService } from './campaign/campaign.service';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    CKEditorModule,
-    FroalaEditorModule.forRoot(), 
-    FroalaViewModule.forRoot()
+    CKEditorModule
   ],
   providers: [
                LoginService,
