@@ -2,6 +2,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CampaignService } from './campaign.service';
 import { Observable } from 'rxjs/Rx';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
+import { Customer, Address } from './trigger.interface';
 
 @Component({
   selector: 'app-campaign',
@@ -60,7 +62,6 @@ openDialog(): void {
     });
 
     dialogRef1.afterClosed().subscribe(result => {
-      console.log( result );
       this.animal = result;
 
           let dialogRef2 = this.dialog.open(CampaignTemplate, {
@@ -128,6 +129,7 @@ name: string;
   }
 
 ok(name): void {
+localStorage.setItem("campaign",name);
      this.dialogRef1.close();
   }
 
@@ -153,6 +155,11 @@ templates:any;
    }
 
   templatedata(template): void {
+  this.CampaignService.campaign_create(template.id).subscribe( res => {
+    console.log(res);
+    let camp_id:any = res;
+    localStorage.setItem("campaign_id",camp_id);
+    });
     this.dialogRef2.close();
   }
 
@@ -177,6 +184,20 @@ inventories:any;
 
     }
 
+    asin(event,asin_data){
+    if (event.checked){
+     console.log("asin added" + asin_data );
+     this.CampaignService.asin_push(asin_data).subscribe( res => {
+      console.log(res);
+    });
+     }else{
+      console.log("asin removed" + asin_data );
+      this.CampaignService.asin_remove(asin_data).subscribe( res => {
+       console.log(res);
+    });
+     }
+    }
+
   onNoClick(): void {
     this.dialogRef3.close();
   }
@@ -194,17 +215,66 @@ ok(): void {
 })
 export class CampaignTrigger {
 
+public myForm: FormGroup;
+
+
+values: string[] = ["ordered","shipped","delevered","returned"];
+
   constructor(
     public dialogRef4: MatDialogRef<CampaignTrigger>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private campaign_service:CampaignService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, private _fb: FormBuilder, private CampaignService:CampaignService) { }
 
   onNoClick(): void {
     this.dialogRef4.close();
   }
 
-ok(): void {
-     
-  }
+
+    ngOnInit() {
+        this.myForm = this._fb.group({
+            name: [''],
+            addresses: this._fb.array([])
+        });
+        
+        // add address
+        this.addAddress();
+        
+        /* subscribe to addresses value changes */
+        // this.myForm.controls['addresses'].valueChanges.subscribe(x => {
+        //   console.log(x);
+        // })
+    }
+
+    initAddress() {
+        return this._fb.group({
+            trigger: ['', Validators.required],
+            days: ['']
+        });
+    }
+
+    addAddress() {
+        const control = <FormArray>this.myForm.controls['addresses'];
+        const addrCtrl = this.initAddress();
+        
+        control.push(addrCtrl);
+        
+        /* subscribe to individual address value changes */
+        // addrCtrl.valueChanges.subscribe(x => {
+        //   console.log(x);
+        // })
+    }
+
+    removeAddress(i: number) {
+        const control = <FormArray>this.myForm.controls['addresses'];
+        control.removeAt(i);
+    }
+
+    save(myForm) {
+      console.log(myForm.value.addresses[0]);
+     this.CampaignService.campaign_update(myForm.value.addresses[0]).subscribe( res => {
+      console.log(res);
+    });
+        // call API to save
+    }
 
 
 }

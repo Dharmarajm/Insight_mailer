@@ -1,10 +1,44 @@
 <h1 mat-dialog-title>Hi </h1>
 <div mat-dialog-content>
   <p>Select Your Trigger</p>
-  <mat-form-field>
-    <input matInput tabindex="1" >
-  </mat-form-field>
+  <!--button mat-fab color="primary">Start</button>
+ <mat-form-field>
+  <mat-select placeholder="select triggers">
+    <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field>
+ <input type="number" matInput placeholder="">
+</mat-form-field>
+
+<button mat-fab color="primary">End</button>
+
+<button mat-raised-button (click)="new_trigger()">Add New</button-->
+
+
+<form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+  <p>Select Your Trigger</p>
+        <div formArrayName="addresses">
+          <div *ngFor="let address of myForm.controls.addresses.controls; let i=index">
+            <div class="panel-heading">
+              <span>trigger {{i + 1}}</span>
+              <button mat-raised-button *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)">Remove Trigger</button>
+            </div>
+            <div class="panel-body" [formGroupName]="i">
+              <trigger [group]="myForm.controls.addresses.controls[i]"></trigger>
+            </div>
+          </div>
+        </div>
+<button mat-raised-button (click)="addAddress()">Add Trigger</button>
+<br>
+        
+          <button mat-raised-button type="submit"  [disabled]="!myForm.valid">Create Campaign</button>
+      
+      </form>
+
+{{myForm.value | json}}
+
+
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button (click)="ok()" cdkFocusInitial>Ok</button>
+  <!--button mat-button (click)="ok()" cdkFocusInitial>Create Campaign</button-->

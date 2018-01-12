@@ -16,13 +16,13 @@
 
                     <tr *ngFor="let inventory of inventories">
 
-                    	<td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
+                       <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
 
-                        <td>{{inventory?.find_by_asin[0].title}}</td>
+                       <td>{{inventory?.find_by_asin[0].title}}</td>
 
-                        <td>{{inventory?.asin}}</td>
+                       <td>{{inventory?.asin}}</td>
 
-                        <td> <mat-slide-toggle [color]="primary" [checked]="true"></mat-slide-toggle> </td>
+                       <td> <mat-slide-toggle [color]="primary" [checked]="inventory.children_in_use" (change)=asin($event,inventory.asin)></mat-slide-toggle> </td>
 
                     </tr>
 

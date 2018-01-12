@@ -15,6 +15,7 @@ import { RegisterComponent } from './register/register.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
 import { CampaignComponent, CampaignName, CampaignTemplate, CampaignAsin, CampaignTrigger } from './campaign/campaign.component';
+import { TriggerComponent } from './campaign/trigger.component';
 
 //List Of Service
 import { LoginService } from './login/login.service';
@@ -35,7 +36,8 @@ import { CampaignService } from './campaign/campaign.service';
     CampaignName,
     CampaignTemplate,
     CampaignAsin,
-    CampaignTrigger
+    CampaignTrigger,
+    TriggerComponent
   ],
   imports: [
     BrowserModule,
