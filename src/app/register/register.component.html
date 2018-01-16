@@ -1,31 +1,36 @@
-<form novalidate (ngSubmit)="register()">
+<form class="example-form" novalidate (ngSubmit)="register()">
+<mat-form-field class="example-full-width">
+    <input matInput placeholder="Firstname" [formControl]="firstnameFormControl" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name">
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      First Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
 
-<div class="form-group">
-    <label>First Name</label>
-    <input type="text" class="form-control" id="firstname" name="firstname" [(ngModel)] = "firstname">
-  </div>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Lastname" [formControl]="lastnameFormControl" class="form-control" id="last_name" name="last_name" [(ngModel)] = "last_name">
+  </mat-form-field>
+  
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Email" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email">
+    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput type=password placeholder="password" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password">
+    <mat-error *ngIf="passwordFormControl.hasError('required')">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Phone" [formControl]="phoneFormControl" class="form-control" id="phone" name="phone" [(ngModel)] = "phone">
+    <mat-error *ngIf="emailFormControl.hasError('required')">
+      Phone is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
 
-<div class="form-group">
-    <label>Last Name</label>
-    <input type="text" class="form-control" id="lastname" name="lastname" [(ngModel)] = "lastname">
-  </div>
-
-  <div class="form-group">
-    <label>Email</label>
-    <input type="email" class="form-control" id="email" name="email" [(ngModel)] = "email">
-  </div>
-
-  <div class="form-group">
-    <label>Password</label>
-    <input type="password" class="form-control" id="password" name="password" [(ngModel)] = "password">
-  </div>
-
-<div class="form-group">
-    <label>Phone</label>
-    <input type="number" class="form-control" id="phone" name="phone" [(ngModel)] = "phone">
-  </div>
-
-<div>
-<button type="submit"> Login </button>
-</div>
+  <button type="submit" mat-raised-button color="primary"> Register </button>
 </form>

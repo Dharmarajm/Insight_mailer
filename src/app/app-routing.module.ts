@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
 import { CampaignComponent } from './campaign/campaign.component';
+import { PromotionComponent } from './promotion/promotion.component';
 
 const routes: Routes = [
                          { path: '', component: LoginComponent, pathMatch: 'full' },
@@ -13,6 +14,7 @@ const routes: Routes = [
                          { path: 'inventory', component: InventoryComponent },
                          { path: 'order', component: OrderComponent },
                          { path: 'campaign', component: CampaignComponent },
+                         { path: 'promotion', component: PromotionComponent },
                          { path: '**', component: LoginComponent }
                        ];
 

@@ -7,12 +7,12 @@ const httpOptions = {
 };
 
 @Injectable()
-export class RegisterService {
+export class PromotionService {
 
   constructor(private http:HttpClient) { }
 
-register(registerdata) {
-        return this.http.post('http://192.168.1.64:3021/users',registerdata);
+  getinventories() {
+        return this.http.get('http://192.168.1.64:3021/inventories');
     }
 
 }
