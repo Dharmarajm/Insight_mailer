@@ -216,7 +216,7 @@ ok(): void {
 export class CampaignTrigger {
 
 public myForm: FormGroup;
-
+public formArray: any;
 
 values: string[] = ["ordered","shipped","delevered","returned"];
 
@@ -250,6 +250,10 @@ values: string[] = ["ordered","shipped","delevered","returned"];
             days: ['']
         });
     }
+
+    getTasks(myForm){
+    return myForm.get('addresses').controls
+  }
 
     addAddress() {
         const control = <FormArray>this.myForm.controls['addresses'];

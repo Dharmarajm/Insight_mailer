@@ -19,7 +19,7 @@
 <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
   <p>Select Your Trigger</p>
         <div formArrayName="addresses">
-          <div *ngFor="let address of myForm.controls.addresses.controls; let i=index">
+          <div *ngFor="let address of getTasks(myForm); let i=index">
             <div class="panel-heading">
               <span>trigger {{i + 1}}</span>
               <button mat-raised-button *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)">Remove Trigger</button>
