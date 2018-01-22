@@ -16,8 +16,8 @@
     <script>
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/ngsw-worker.js')
-        .then(() => alert('service worker installed'))
-        .catch(err => alert('Error', err));
+        .then(() => console.log('service worker installed'))
+        .catch(err => console.log('Error', err));
     }
   </script>
 

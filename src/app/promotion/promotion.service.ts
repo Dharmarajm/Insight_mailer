@@ -11,6 +11,10 @@ export class PromotionService {
 
   constructor(private http:HttpClient) { }
 
+  getpromotion() {
+        return this.http.get('http://192.168.1.64:3021/promotions');
+    }
+
   getinventories() {
         return this.http.get('http://192.168.1.64:3021/inventories');
     }

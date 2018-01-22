@@ -9,10 +9,19 @@ import { PromotionService } from './promotion.service';
 })
 export class PromotionComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,private promotion_service:PromotionService) { }
+promotions: any;
+
+  constructor(public dialog: MatDialog,private PromotionService:PromotionService) { }
 
   ngOnInit() {
+  this.PromotionService.getpromotion().subscribe( res => {
+      this.promotions = res;
+    });
   }
+
+enable(id,event){
+  console.log(id,event.checked);
+}
 
 promote(){
 

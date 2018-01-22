@@ -1,1 +1,35 @@
 <button mat-raised-button color="primary" (click)="promote()"> Create Promotion </button>
+<h1> Promotions </h1>
+
+                <table class="table">
+
+                    <tr>
+
+                        <th>#</th>
+
+                        <th>Title</th>
+
+                        <th>price</th> 
+
+                        <th>Image</th>
+
+                        <th>Enable</th>
+
+                    </tr>
+
+                    <tr *ngFor="let promotion of promotions; let i = index">
+
+                        <td>{{i + 1}}</td>
+
+                        <td>{{promotion?.promotion_title}}</td>
+
+                        <td>{{promotion?.inventory?.price_cents}}</td>
+
+                        <td><img [src]="promotion.inventory.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
+
+                        <td> <mat-slide-toggle [color]="primary" [checked]="promotion.inventory.children_in_use"
+      (change)="enable(promotion.id,$event)"> </mat-slide-toggle> </td>
+
+                    </tr>
+
+                </table>

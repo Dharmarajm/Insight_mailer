@@ -16,11 +16,15 @@ export class CampaignComponent implements OnInit {
   name: string = "test1";
   ckeditorContent:any;
   ckeConfig: any;
+  campaings: any;
 
-
-  constructor(public dialog: MatDialog,private campaign_service:CampaignService) { }
+  constructor(public dialog: MatDialog,private CampaignService:CampaignService) { }
 
   ngOnInit() {
+
+  this.CampaignService.getcampaigns().subscribe( res => {
+    this.campaings = res;
+    });
 
 this.ckeConfig = {
             height: 50,
@@ -46,6 +50,7 @@ this.ckeConfig = {
   }
 
 
+
 insert(event){
 	//event.insertText("#{user_name}");
 	event.insertText("{{Buyer_Name}}");
@@ -54,6 +59,14 @@ insert(event){
   onChange($event){}
   onFocus($event){}
   onBlur($event){}
+
+
+enable(_id,event){
+console.log(status);
+  this.CampaignService.enable_campaign(_id,event.checked).subscribe( res => {
+    console.log(res);
+    });
+}
 
 
 openDialog(): void {
@@ -274,7 +287,7 @@ values: string[] = ["ordered","shipped","delevered","returned"];
 
     save(myForm) {
       console.log(myForm.value.addresses[0]);
-     this.CampaignService.campaign_update(myForm.value.addresses[0]).subscribe( res => {
+     this.CampaignService.campaign_update(myForm.value.addresses).subscribe( res => {
       console.log(res);
     });
         // call API to save

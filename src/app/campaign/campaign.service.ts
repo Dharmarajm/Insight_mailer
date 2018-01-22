@@ -12,7 +12,7 @@ export class CampaignService {
   constructor(private http:HttpClient) { }
 
  getcampaigns() {
-        return this.http.get('http://192.168.1.64:3021/campaignes');
+        return this.http.get('http://192.168.1.64:3021/campaigns');
     }
 
     gettemplates() {
@@ -28,16 +28,18 @@ export class CampaignService {
    }
 
    campaign_update(trigger_data){
-      return this.http.put('http://192.168.1.64:3021/campaigns/'+localStorage.getItem("campaign_id"),{campaign: {triggers: trigger_data}});
-   }
+      return this.http.post('http://192.168.1.64:3021/campaigns/trigger',{campaign: {id: localStorage.getItem("campaign_id"),triggers: trigger_data}});
+   } 
     
-
     asin_push(asin_data) {
         return this.http.put('http://192.168.1.64:3021/campaigns/asin_push',{campaign_id: localStorage.getItem("campaign_id"),push: asin_data});
     }
 
     asin_remove(asin_data) {
         return this.http.put('http://192.168.1.64:3021/campaigns/asin_slice',{campaign_id: localStorage.getItem("campaign_id"),remove: asin_data});
+    }
+    enable_campaign(_id,status) {
+        return this.http.put('http://192.168.1.64:3021/campaigns/cam_enable',{id: _id,enable: status});
     }
 
 }
