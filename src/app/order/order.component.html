@@ -1,18 +1,14 @@
 <h1> Orders </h1>
 
-                <table class="table">
+                <table class="table" width="100%">
 
                     <tr>
 
-                        <th>#</th>
+                        <th>S.No</th>
 
                         <th>amazon_order_id</th>
 
-                        <th>Title</th>
-
                         <th>Asin</th>
-
-                        <th>Total</th>
 
                         <th>Buyer Name</th>
 
@@ -20,26 +16,50 @@
 
                         <th>Quantity</th>
 
-                    </tr>
+                        <th>Order Status</th>
 
-                    <tr *ngFor="let order of orders; let i = index">
+                        <th>Total</th>                    
 
-                        <td>{{i + 1}}</td>
+                        </tr>
+                      
+                    <tr *ngFor="let order of orders | paginate: { itemsPerPage: 10, currentPage: j } let i = index ">
+
+                        
+
+                        <td *ngIf="j == null">{{ i+1}}</td>
+
+                         <td *ngIf="j != null">{{5 *(j*1-1)+i+1}}</td>
 
                         <td>{{order?.amazon_order_id}}</td>
 
-                        <td>{{order?.find_order[0].title}}</td>
+                        
 
                         <td>{{order?.find_order[0].asin}}</td>
 
-                        <td>{{order?.total}}</td>
-
-                        <td>{{order?.buyer_name}}</td>
+                        <td>{{order?.buyer_name? order?.buyer_name : "Order Canceled"}}</td>
 
                         <td>{{order?.purchased_at}}</td>
 
                         <td>{{order?.find_order[0].order_quantity}}</td>
 
+                        <td>{{order?.tfm_shipment_status ? order?.tfm_shipment_status : order?.status }}</td>
+                        
+
+                        <td>{{order?.total}}</td>                     
+
+                        
                     </tr>
 
                 </table>
+                <pagination-controls (pageChange)="j = $event"></pagination-controls>
+                <style>
+                     th, td {
+                    border: 1px solid black;
+                    background-color: white;
+                    }
+                    table{
+                        border: 1px solid black;
+                        
+                    }
+
+                </style>

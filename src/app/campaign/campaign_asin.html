@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Hi </h1>
+
 <div mat-dialog-content>
   <p>Select Your asin</p>
  <h1> Inventories </h1>
@@ -14,7 +14,7 @@
                         <th>Enable</th>
                     </tr>
 
-                    <tr *ngFor="let inventory of inventories">
+                    <tr *ngFor="let inventory of inventories | paginate: { itemsPerPage: 5, currentPage: j }">
 
                        <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
 
@@ -29,7 +29,7 @@
                     </tr>
 
                 </table>
-
+                <pagination-controls (pageChange)="j = $event"></pagination-controls>
 </div>
 <div mat-dialog-actions>
   <!--button mat-button (click)="onNoClick()">No Thanks</button-->

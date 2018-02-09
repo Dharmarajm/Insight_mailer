@@ -1,6 +1,6 @@
 <form class="example-form" novalidate (ngSubmit)="register()">
 <mat-form-field class="example-full-width">
-    <input matInput placeholder="Firstname" [formControl]="firstnameFormControl" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name">
+    <input matInput placeholder="Firstname*" [formControl]="firstnameFormControl" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name">
     <mat-error *ngIf="emailFormControl.hasError('required')">
       First Name is <strong>required</strong>
     </mat-error>
@@ -11,7 +11,7 @@
   </mat-form-field>
   
   <mat-form-field class="example-full-width">
-    <input matInput placeholder="Email" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email">
+    <input matInput placeholder="Your@email.com*" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email">
     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
       Please enter a valid email address
     </mat-error>
@@ -20,7 +20,7 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput type=password placeholder="password" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password">
+    <input matInput type=password placeholder="Password" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password">
     <mat-error *ngIf="passwordFormControl.hasError('required')">
       Password is <strong>required</strong>
     </mat-error>

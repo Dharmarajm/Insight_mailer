@@ -1,12 +1,12 @@
  <button mat-raised-button color="primary" (click)="openDialog()"> Create Campaign </button>
 
 
-<div *ngFor="let campaing of campaings">
+<div *ngFor=" let campaing of campaings">
 <mat-card class="example-card">
   <mat-card-header>
     <mat-card-title>{{campaing.campagin_name}}</mat-card-title>
     <mat-card-title>{{campaing.asin}}</mat-card-title>
-    <mat-card-subtitle><mat-slide-toggle [color]="primary" [checked]="campaing.enabled"
+    <mat-card-subtitle><mat-slide-toggle [color]="primary" [checked]="campaing.enable"
       (change)="enable(campaing.id,$event)" ></mat-slide-toggle>
     </mat-card-subtitle>
   </mat-card-header>

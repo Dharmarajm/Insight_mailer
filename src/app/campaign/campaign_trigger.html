@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Hi </h1>
+
 <div mat-dialog-content>
   <p>Select Your Trigger</p>
   <!--button mat-fab color="primary">Start</button>
@@ -17,11 +17,10 @@
 
 
 <form [formGroup]="myForm" novalidate >
-  <p>Select Your Trigger</p>
         <div formArrayName="addresses">
           <div *ngFor="let address of getTasks(myForm); let i=index">
             <div class="panel-heading">
-              <span>trigger {{i + 1}}</span>
+              <span> Trigger {{i + 1}}</span>
               <button mat-raised-button *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)">Remove Trigger</button>
             </div>
             <div class="panel-body" [formGroupName]="i">

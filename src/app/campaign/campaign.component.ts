@@ -138,7 +138,7 @@ name: string;
     public dialogRef1: MatDialogRef<CampaignName>) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
   onNoClick(): void {
-    alert("sure");
+    this.dialogRef1.close();
   }
 
 ok(name): void {

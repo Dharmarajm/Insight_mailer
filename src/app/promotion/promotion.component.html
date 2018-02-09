@@ -1,5 +1,5 @@
 <button mat-raised-button color="primary" (click)="promote()"> Create Promotion </button>
-<h1> Promotions </h1>
+<!--h1> Promotions </h1>
 
                 <table class="table">
 
@@ -32,4 +32,38 @@
 
                     </tr>
 
-                </table>
+                </table-->
+                <mat-card *ngFor="let promotion of promotions; let i = index" class="example-card">
+  <mat-card-header >
+    <!--div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ promotion?.promotion_title }}</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle-->
+  </mat-card-header>
+  <img mat-card-image [src]="promotion.inventory.find_by_asin[0].small_image" height="100" alt="Image">
+  <mat-card-subtitle>{{ promotion?.promotion_title }}</mat-card-subtitle>
+  <mat-card-content>
+    <p style="font-size: 13px;">
+      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+    </p>
+  </mat-card-content>
+  
+  <p><s>{{ promotion.inventory.price_paisas }}</s> ${{  promotion?.discount_price }}
+  <mat-slide-toggle [color]="primary" [disabled]="promotion?.enable" style="padding-left: 50%;"></mat-slide-toggle></p>
+
+  <mat-form-field class="example-full-width" style="width: 48%;">
+  <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker1" placeholder="Start date">
+  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+  <mat-datepicker #picker1></mat-datepicker>
+</mat-form-field>
+<mat-form-field class="example-full-width" style="width: 48%;">
+  <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="End date">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+  <mat-card-actions>
+    <button mat-raised-button color="accent" >PRIVIEW</button>
+    <!--button mat-button>SHARE</button-->
+  </mat-card-actions>
+</mat-card>
+

@@ -1,16 +1,16 @@
-<h1> Inventories </h1>
+<h1> My Products </h1>
 
                 <table class="table">
 
                     <tr>
 
-                        <th>#</th>
+                        <th>S.No</th>
 
-                        <th>Title</th>
+                        <th>Image</th>
 
                         <th>Asin</th> 
 
-                        <th>Image</th>
+                        <th>Title</th>
 
                         <th>Quantity</th>
 
@@ -18,20 +18,35 @@
 
                     </tr>
 
-                    <tr *ngFor="let inventory of inventories; let i = index">
+                    <tr *ngFor= " let inventory of inventories | paginate: { itemsPerPage: 5, currentPage: j } let i = index" >
+                         
+                         <td *ngIf="j == null">{{ i+1}}</td>
 
-                        <td>{{i + 1}}</td>
-
-                        <td>{{inventory?.find_by_asin[0].title}}</td>
-
-                        <td>{{inventory?.asin}}</td>
+                         <td *ngIf="j != null">{{5 *(j*1-1)+i+1}}</td>
 
                         <td><img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
 
+                        <td>{{inventory?.asin}}</td>
+
+                        <td>{{inventory?.find_by_asin[0].title}}</td>
+
                         <td>{{inventory?.quantity}}</td>
 
-                        <td>Enable</td>
+                        <td> <mat-slide-toggle [color]="primary" (change)=asin($event,inventory.asin)></mat-slide-toggle> </td>
 
                     </tr>
 
                 </table>
+                <pagination-controls (pageChange)="j = $event"></pagination-controls>
+                <style>
+                     th, td {
+                    border: 1px solid black;
+                    background-color: white;
+                    }
+                    table{
+                        border: 1px solid black;
+                        
+                    }
+
+                </style>
+

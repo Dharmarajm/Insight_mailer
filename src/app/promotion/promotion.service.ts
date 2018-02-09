@@ -19,4 +19,12 @@ export class PromotionService {
         return this.http.get('http://192.168.1.64:3021/inventories');
     }
 
+   getdata(id) {
+        return this.http.get('http://192.168.1.64:3021/inventories/'+ id);
+    }
+
+    create_promotion(data) {
+        return this.http.post('http://192.168.1.64:3021/promotions',{promotion: data});
+    }
+
 }
