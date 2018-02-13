@@ -1,5 +1,6 @@
 .example-card {
   max-width: 200px;
+  border-style: ridge;
 }
 
 .example-header-image {
@@ -8,7 +9,12 @@
 }
 
 .mat-card-image {
-    width: 84%;
-    padding-left: 20%;
+    width: 60%;
+    height:50%;
+    padding-left: 30%;
     padding-right: 20%;
+}
+
+.mat-card{
+	width:100%;
 }

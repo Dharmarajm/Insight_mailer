@@ -1,26 +1,7 @@
  <button mat-raised-button color="primary" (click)="openDialog()"> Create Campaign </button>
 
 
-<div *ngFor=" let campaing of campaings">
-<mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-title>{{campaing.campagin_name}}</mat-card-title>
-    <mat-card-title>{{campaing.asin}}</mat-card-title>
-    <mat-card-subtitle><mat-slide-toggle [color]="primary" [checked]="campaing.enable"
-      (change)="enable(campaing.id,$event)" ></mat-slide-toggle>
-    </mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <mat-list role="list">
-      <div *ngFor="let trigger of campaing.triggers">
-  <mat-list-item role="listitem">{{trigger.trigger}},{{trigger.days}}</mat-list-item>
-</div>
-</mat-list>
-  </mat-card-content>
-  <mat-card-actions>
-  </mat-card-actions>
-</mat-card>
-</div>
+
 
  <!--ckeditor
     [(ngModel)]="ckeditorContent"
@@ -43,5 +24,46 @@
    </ckgroup>
  </ckeditor-->
 
-  
+  <mat-grid-list cols="2" rowHeight="200px">
+ <mat-grid-tile *ngFor=" let campaing of campaings; let i = index" class="example-card">
+ <mat-card>
+  <mat-card-header >
+    
+    <mat-card-title><b>{{ campaing.campagin_name }}</b></mat-card-title>
+    
 
+    <mat-slide-toggle [color]="primary" [checked]="campaing.enable"
+      (change)="enable(campaing.id,$event)" style= "padding-left: 70%;"></mat-slide-toggle>
+  </mat-card-header>
+  <mat-card-subtitle><b>{{ campaing.asin }}</b></mat-card-subtitle>
+  <mat-card-content>
+  </mat-card-content>  
+  <mat-card-content>
+    <mat-list role="list">     
+          <table class="table" width="100%">
+          <tr>
+            <th>Trigger</th>
+            <th>Days</th>
+          </tr>
+      <tr *ngFor="let trigger of campaing.triggers">      
+          
+            <td>{{trigger.trigger}}</td>
+            <td>{{trigger.days}}</td>
+          </tr>
+  </table>
+</mat-list>
+  </mat-card-content>
+  </mat-card></mat-grid-tile></mat-grid-list>
+
+
+<style>
+                     th, td {
+                    border: 1px solid black;
+                    background-color: white;
+                    }
+                    table{
+                        border: 1px solid black;
+                        
+                    }
+
+                </style>

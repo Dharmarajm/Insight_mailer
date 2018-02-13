@@ -1,52 +1,19 @@
-<h1> My Products </h1>
+  <h1> My Products </h1>
 
-                <table class="table">
-
-                    <tr>
-
-                        <th>S.No</th>
-
-                        <th>Image</th>
-
-                        <th>Asin</th> 
-
-                        <th>Title</th>
-
-                        <th>Quantity</th>
-
-                        <th>Enable</th>
-
-                    </tr>
-
-                    <tr *ngFor= " let inventory of inventories | paginate: { itemsPerPage: 5, currentPage: j } let i = index" >
-                         
-                         <td *ngIf="j == null">{{ i+1}}</td>
-
-                         <td *ngIf="j != null">{{5 *(j*1-1)+i+1}}</td>
-
-                        <td><img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
-
-                        <td>{{inventory?.asin}}</td>
-
-                        <td>{{inventory?.find_by_asin[0].title}}</td>
-
-                        <td>{{inventory?.quantity}}</td>
-
-                        <td> <mat-slide-toggle [color]="primary" (change)=asin($event,inventory.asin)></mat-slide-toggle> </td>
-
-                    </tr>
-
-                </table>
-                <pagination-controls (pageChange)="j = $event"></pagination-controls>
-                <style>
-                     th, td {
-                    border: 1px solid black;
-                    background-color: white;
-                    }
-                    table{
-                        border: 1px solid black;
-                        
-                    }
-
-                </style>
-
+ <mat-grid-list cols="5" rowHeight="400px">
+  <mat-grid-tile *ngFor="let inventory of inventories; let i = index" class="example-card" >
+  <mat-card>
+  <mat-card-header >
+    <!--div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ promotion?.promotion_title }}</mat-card-title>
+    <mat-card-subtitle>Dog Breed</mat-card-subtitle-->
+  </mat-card-header>
+ <mat-card class="temp"> <img mat-card-image [src]="inventory?.find_by_asin[0].small_image"  alt="Image"></mat-card>
+  
+  <p style="font-size: 13px;"> {{ inventory?.find_by_asin[0].title }}</p>
+  
+  <mat-card-content>
+  <b>ASIN:<br> {{ inventory?.asin }}</b><mat-slide-toggle [color]="primary" (change)=asin($event,inventory.asin) style="padding-left: 80%;"></mat-slide-toggle>
+  </mat-card-content></mat-card></mat-grid-tile>
+  
+</mat-grid-list>

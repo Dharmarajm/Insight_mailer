@@ -1,6 +1,30 @@
 <h1> Orders </h1>
 
-                <table class="table" width="100%">
+<div style="width: 40%;">
+  <canvas
+      baseChart
+      [chartType]="'line'"
+      [datasets]="chartData"
+      [labels]="chartLabels"
+      [options]="chartOptions"
+      [legend]="true"
+      (chartClick)="onChartClick($event)">
+  </canvas>
+</div>
+
+<div style="width: 40%;">
+  <canvas
+      baseChart
+      [chartType]="'doughnut'"
+      [datasets]="chartData1"
+      [labels]="chartLabels1"
+      [options]="chartOptions1"
+      [legend]="true"
+      (chartClick)="onChart1Click($event)">
+  </canvas>
+</div>
+
+                <!--table class="table" width="100%">
 
                     <tr>
 
@@ -62,4 +86,64 @@
                         
                     }
 
-                </style>
+                </style-->
+
+<div class="example-container mat-elevation-z8">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="amazon_order_id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> amazon_order_id </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.amazon_order_id}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="asin">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Asin </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.find_order[0].asin}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="buyer_name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Buyer Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.buyer_name? element?.buyer_name : "Order Canceled"}} </mat-cell>
+    </ng-container>
+
+     <ng-container matColumnDef="purchased_at">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Ordered Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.purchased_at}} </mat-cell>
+    </ng-container>
+
+     <ng-container matColumnDef="order_quantity">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.find_order[0].order_quantity}} </mat-cell>
+    </ng-container>
+
+     <ng-container matColumnDef="shipment_status">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Order Status </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.tfm_shipment_status ? element?.tfm_shipment_status : element?.status }} </mat-cell>
+    </ng-container>
+
+     <ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.total}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+ <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>

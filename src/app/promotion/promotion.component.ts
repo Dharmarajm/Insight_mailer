@@ -118,9 +118,9 @@ name: string;
   }
 
   promotion(myPromotionForm){
-   alert("product promoted");
+  alert(this.data.id)
    console.log(myPromotionForm);
-   this.PromotionService.create_promotion(myPromotionForm).subscribe( res => {
+   this.PromotionService.create_promotion(myPromotionForm,this.data.id).subscribe( res => {
       alert("res");
     });
 
@@ -141,16 +141,18 @@ name: string;
      this.myGroup = new FormGroup({ firstName: new FormControl() });
      this.PromotionForm = new FormGroup({
             product_asin: new FormControl(''),
-            product_category: new FormControl(''),
             product_title: new FormControl(''),
             product_price: new FormControl(''),
             discount_price: new FormControl('',Validators.required),
-            product_description: new FormControl(''),
-            product_msg: new FormControl('',Validators.required),
+            personal_msg: new FormControl('',Validators.required),
             promotion_title: new FormControl('',Validators.required),
             coupon_code: new FormControl('',Validators.required),
-            support_email: new FormControl('',Validators.required)
+            support_email: new FormControl('',Validators.required),
+            mail_frequency: new FormControl('',Validators.required)
          });
+
+         //product_category: new FormControl(''),
+         //product_description: new FormControl(''),
   }
 
 ok(name): void {

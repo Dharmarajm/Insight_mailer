@@ -1,10 +1,15 @@
 
 <div mat-dialog-content>
-  <p>What's your Campagin Name ?</p>
+  <p><b>Create New Campaign</b></p>
    <mat-form-field class="example-full-width">
-    <input matInput tabindex="1" [(ngModel)] = "name" autoFocus="true">
+    <input matInput tabindex="1" [(ngModel)] = "name" placeholder= "Campaign Name" autoFocus="true">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Close</button>
-  <button mat-button (click)="ok(name)" cdkFocusInitial>Next</button>
+  <button mat-button (click)="onNoClick()" >Cancel</button>
+  <button  mat-button (click)="ok(name)" cdkFocusInitial>CONFIRM</button>
+
+
+
+
+  

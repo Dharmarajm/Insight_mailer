@@ -1,39 +1,8 @@
-<button mat-raised-button color="primary" (click)="promote()"> Create Promotion </button>
-<!--h1> Promotions </h1>
+<button mat-raised-button color="primary" (click)="promote()"> Create Promotion </button> 
 
-                <table class="table">
-
-                    <tr>
-
-                        <th>#</th>
-
-                        <th>Title</th>
-
-                        <th>price</th> 
-
-                        <th>Image</th>
-
-                        <th>Enable</th>
-
-                    </tr>
-
-                    <tr *ngFor="let promotion of promotions; let i = index">
-
-                        <td>{{i + 1}}</td>
-
-                        <td>{{promotion?.promotion_title}}</td>
-
-                        <td>{{promotion?.inventory?.price_cents}}</td>
-
-                        <td><img [src]="promotion.inventory.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
-
-                        <td> <mat-slide-toggle [color]="primary" [checked]="promotion.inventory.children_in_use"
-      (change)="enable(promotion.id,$event)"> </mat-slide-toggle> </td>
-
-                    </tr>
-
-                </table-->
-                <mat-card *ngFor="let promotion of promotions; let i = index" class="example-card">
+                <mat-grid-list cols="5" rowHeight="400px">
+                <mat-grid-tile *ngFor="let promotion of promotions; let i = index" class="example-card">
+                <mat-card>
   <mat-card-header >
     <!--div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{ promotion?.promotion_title }}</mat-card-title>
@@ -41,12 +10,12 @@
   </mat-card-header>
   <img mat-card-image [src]="promotion.inventory.find_by_asin[0].small_image" height="100" alt="Image">
   <mat-card-subtitle>{{ promotion?.promotion_title }}</mat-card-subtitle>
-  <mat-card-content>
-    <p style="font-size: 13px;">
-      The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-    </p>
-  </mat-card-content>
   
+    <p style="font-size: 13px;">
+      Details of the Product
+    </p>
+  
+  <mat-card-content>
   <p><s>{{ promotion.inventory.price_paisas }}</s> ${{  promotion?.discount_price }}
   <mat-slide-toggle [color]="primary" [disabled]="promotion?.enable" style="padding-left: 50%;"></mat-slide-toggle></p>
 
@@ -59,11 +28,11 @@
   <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="End date">
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
+</mat-form-field></mat-card-content>
 
   <mat-card-actions>
-    <button mat-raised-button color="accent" >PRIVIEW</button>
+    <button mat-raised-button color="accent" style="margin-left: 30%;">PRIVIEW</button>
     <!--button mat-button>SHARE</button-->
   </mat-card-actions>
-</mat-card>
+</mat-card></mat-grid-tile></mat-grid-list>
 

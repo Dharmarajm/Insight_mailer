@@ -1,5 +1,4 @@
-<img [src]="data1?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100">
-<div [formGroup]="myGroup"> <input formControlName="firstName"> </div> 
+<img [src]="data1?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> 
 <form [formGroup]="PromotionForm" class ="example_form" novalidate (ngsubmit)="promotion(PromotionForm.value)">
  <mat-form-field class="example-full-width">
    <input matInput type=text placeholder="Product ASIN" formControlName="product_asin"
@@ -9,13 +8,13 @@
      </mat-error-->
      </mat-form-field>
 
-     <mat-form-field class="example-full-width">
+     <!--mat-form-field class="example-full-width">
    <input matInput type=text placeholder="Product Category" formControlName="product_category"
-   class="form-control" id="product_category" name="product_category" [(ngModel)] = "product_category">
+   class="form-control" id="product_category" name="product_category" [(ngModel)] = "product_category"-->
    <!--mat-error *ngIf="product_category.hasError('required')">
      Product Category is <strong>required</strong>
      </mat-error-->
-     </mat-form-field>
+     <!--/mat-form-field-->
 
      <mat-form-field class="example-full-width">
    <input matInput type=text placeholder="Product Title" formControlName="product_title"
@@ -50,8 +49,8 @@
      </mat-form-field>
 
      <mat-form-field class="example-full-width">
-   <textarea matInput type=text placeholder="Product Message" formControlName="product_msg"
-   class="form-control" id="product_msg" name="Product Message" [(ngModel)] = "product_msg"></textarea>
+   <textarea matInput type=text placeholder="Personal Message" formControlName="personal_msg"
+   class="form-control" id="product_msg" name="Product Message" [(ngModel)] = "personal_msg"></textarea>
    <!--mat-error *ngIf="product_msgFormControl.hasError('required')">
      Product Message is <strong>required</strong>
      </mat-error-->
@@ -76,6 +75,14 @@
      <mat-form-field class="example-full-width">
    <input matInput type=text placeholder="Support Email" formControlName="support_email"
    class="form-control" id="support_email" name="Support Email" [(ngModel)] = "support_email">
+   <!--mat-error *ngIf="support_emailFormControl.hasError('required')">
+     Support Email is <strong>required</strong>
+     </mat-error-->
+     </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+   <input matInput type=text placeholder="Frequency" formControlName="mail_frequency"
+   class="form-control" id="Frequency" name="Frequency" [(ngModel)] = "mail_frequency">
    <!--mat-error *ngIf="support_emailFormControl.hasError('required')">
      Support Email is <strong>required</strong>
      </mat-error-->

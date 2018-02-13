@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';  // replaces previous H
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { ChartsModule } from 'ng2-charts';
 
 //List Of Modules
 import { AppComponent } from './app.component';
@@ -58,6 +59,7 @@ import { PromotionService } from './promotion/promotion.service';
     MaterialModule,
     CKEditorModule,
     NgxPaginationModule,
+    ChartsModule,
     ServiceWorkerModule.register('/ngsw-worker.js')
   ],
   providers: [
