@@ -15,4 +15,8 @@ export class InventoryService {
         return this.http.get('http://192.168.1.64:3021/inventories');
     }
 
+    enable(event,asin){
+        return this.http.post('http://192.168.1.64:3021/inventories/enable',{asin: asin, enable: event});
+    }
+
 }

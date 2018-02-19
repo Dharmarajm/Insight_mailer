@@ -1,0 +1,28 @@
+.mat-icon.material-icons
+{
+	font-size: 42px;
+}
+
+.mat-raised-button{
+	margin-right: 20px;
+}
+
+
+.mat-raised-button:hover {
+    background-color: rgb(12, 194, 171);
+}
+
+.mat-card{
+	width:35%;
+	border-color: rgb(12, 194, 171);
+	align-items: center;
+	display: flex;
+	border-style: ridge;
+}
+
+.mat-card.ng-star-inserted{
+	width:62%;
+	border-color: rgb(63, 81, 181);
+	
+	border-style: ridge;
+}

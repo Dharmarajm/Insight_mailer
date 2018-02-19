@@ -3,34 +3,6 @@
   <p>Select Your asin</p>
  <h1> Inventories </h1>
 
-                <!-- <table class="table" width="100%">
-                    <tr>
-                        <th>Image</th>
-
-                        <th>Title</th> 
-
-                        <th>Asin</th>
-
-                        <th>Enable</th>
-                    </tr>
-
-                    <tr *ngFor="let inventory of inventories | paginate: { itemsPerPage: 5, currentPage: j }">
-
-                       <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
-
-                       <td>{{inventory?.find_by_asin[0].title}}</td>
-
-                       <td>{{inventory?.asin}}</td>
-
-                       <td> <mat-slide-toggle [color]="primary" [checked]="inventory.children_in_use" 
-                        [disabled]="inventory.children_in_use" (change)=asin($event,inventory.asin)></mat-slide-toggle> 
-                       </td>
-
-                    </tr>
-
-                </table> -->
-                <!-- <pagination-controls (pageChange)="j = $event"></pagination-controls> -->
-
                 <mat-grid-list cols="5" rowHeight="400px">
   <mat-grid-tile *ngFor="let inventory of inventories; let i = index" class="example-card" >
   <mat-card>
@@ -50,8 +22,8 @@
 </mat-grid-list>
 </div>
 <div mat-dialog-actions>
-  <!--button mat-button (click)="onNoClick()">No Thanks</button-->
   <button mat-button (click)="ok()" cdkFocusInitial>Ok</button>
+  <!--button mat-button (click)="onNoClick()">No Thanks</button-->
 
   <style>
                      th, td {

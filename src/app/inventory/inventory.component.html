@@ -1,4 +1,7 @@
+<app-shared></app-shared>
   <h1> My Products </h1>
+
+  
 
  <mat-grid-list cols="5" rowHeight="400px">
   <mat-grid-tile *ngFor="let inventory of inventories; let i = index" class="example-card" >
@@ -8,12 +11,88 @@
     <mat-card-title>{{ promotion?.promotion_title }}</mat-card-title>
     <mat-card-subtitle>Dog Breed</mat-card-subtitle-->
   </mat-card-header>
+
+<div class="card-container">
+  <div class="card">
+    <div class="side">
+
  <mat-card class="temp"> <img mat-card-image [src]="inventory?.find_by_asin[0].small_image"  alt="Image"></mat-card>
+ </div>
+
+ <div class="side back">
+ <table class="table" width="60%" height="40%" align="center">
+  <tr>
+  <th>ASIN</th><td>{{ inventory?.asin }}</td></tr>
+  <tr><th>SKU</th><td>{{ inventory?.sku }}</td></tr>
+  <tr><th>TITLE</th><td>{{ inventory?.find_by_asin[0].title }}</td></tr>
+  <tr><th>PRICE</th><td>{{ inventory?.price_paisas }}</td></tr>
+  <tr><th>QTY</th><td>{{ inventory?.quantity }}</td></tr></table>
+  
+  
+ 
+ 
+ </div>
+  </div>
+</div>
   
   <p style="font-size: 13px;"> {{ inventory?.find_by_asin[0].title }}</p>
-  
+ 
   <mat-card-content>
-  <b>ASIN:<br> {{ inventory?.asin }}</b><mat-slide-toggle [color]="primary" (change)=asin($event,inventory.asin) style="padding-left: 80%;"></mat-slide-toggle>
+
+  <b>ASIN:<br> {{ inventory?.asin }}</b><mat-slide-toggle [color]="warn" [checked]="inventory.enable" (change)=inventory_asin($event,inventory.asin) style="padding-left: 80%;"></mat-slide-toggle>
   </mat-card-content></mat-card></mat-grid-tile>
-  
+   
 </mat-grid-list>
+
+
+
+
+<style>
+
+.card-container {
+  cursor: pointer;
+  height: 150px;
+  perspective: 600;
+  position: relative;
+  width: 150px;
+}
+.card {
+  height: 100%;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 1s ease-in-out;
+  width: 100%;
+}
+.card:hover {
+  transform: rotateY(180deg);
+}
+.card .side {
+  backface-visibility: hidden;
+  border-radius: 6px;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+}
+.card .back {
+  background: #eaeaed;
+  color: #0087cc;
+  outline-width: 40px;
+  line-height: 13px;
+  font-size: 10px;
+  transform: rotateY(180deg);
+  width: 172px;
+}
+
+
+
+th, td {
+                    border: 1px solid black;
+                    background-color: white;
+                    }
+                    table{
+                        border: 1px solid black;
+                        width:172px;
+                        
+                    }
+</style>

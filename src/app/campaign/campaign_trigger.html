@@ -1,41 +1,27 @@
 
 <div mat-dialog-content>
   <b><p>Schedule E-Mail</p></b>
-  <!--button mat-fab color="primary">Start</button>
- <mat-form-field>
-  <mat-select placeholder="select triggers">
-    <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
-  </mat-select>
-</mat-form-field>
-<mat-form-field>
- <input type="number" matInput placeholder="">
-</mat-form-field>
-
-<button mat-fab color="primary">End</button>
-
-<button mat-raised-button (click)="new_trigger()">Add New</button-->
-
 
 <form [formGroup]="myForm" novalidate >
         <div formArrayName="addresses">
           <div *ngFor="let address of getTasks(myForm); let i=index">
             <div class="panel-heading">
               <span> Trigger {{i + 1}}</span>
-              <button mat-raised-button *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)">Remove Trigger</button>
+            <mat-icon *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)">delete</mat-icon>
             </div>
             <div class="panel-body" [formGroupName]="i">
               <trigger [group]="myForm.controls.addresses.controls[i]"></trigger>
             </div>
           </div>
         </div>
-<button mat-raised-button (click)="addAddress()">Add Trigger</button>
+     <mat-icon (click)="addAddress()">add_circle</mat-icon>
 <br>
         
           <button mat-raised-button type="submit"  [disabled]="!myForm.valid" (click)="save(myForm)">Create Campaign</button>
       
       </form>
 
-{{myForm.value.addresses | json}}
+<!--{{myForm.value.addresses | json}}-->
 
 
 </div>

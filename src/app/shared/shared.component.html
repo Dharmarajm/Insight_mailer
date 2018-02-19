@@ -1,0 +1,29 @@
+ <mat-toolbar>
+
+ <button routerLink="/dashboard" mat-raised-button > Overview </button> 
+ <button routerLink="/inventory" mat-raised-button > My Products </button>
+ <button routerLink="/order" mat-raised-button > My Orders </button>
+ <button routerLink="/campaign" mat-raised-button > Email Campaigns </button>
+ <button routerLink="/promotion" mat-raised-button > Promotions </button>
+
+ <mat-icon>notifications</mat-icon>
+ <button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>person</mat-icon>
+    <span>profile</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>settings</mat-icon>
+    <span>setting</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>power_settings_new</mat-icon>
+    <span>logout</span>
+  </button>
+</mat-menu>
+ </mat-toolbar> 
+
+ 

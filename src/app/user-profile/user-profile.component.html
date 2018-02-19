@@ -1,0 +1,75 @@
+<form class="example-form" novalidate (ngSubmit)="userprofile()">
+<mat-form-field class="example-full-width">
+    <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name">
+    <mat-error *ngIf="myForm.controls.first_name.errors.required">
+      First Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Lastname" formControlName="last_name" class="form-control" id="last_name" name="last_name" [(ngModel)] = "last_name">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Your@email.com*" formControlName="email" class="form-control" id="email" name="email" [(ngModel)] = "email">
+    <mat-error *ngIf="myForm.controls.email.errors.required && myForm.controls.email.errors.email ">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="myForm.controls.email.errors.required">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput type=password placeholder="Old_Password" formControlName="old_password" class="form-control" id="password" name="old_password" [(ngModel)] = "old_password">
+    <mat-error *ngIf="myForm.controls.password.errors.required">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput type=password placeholder="New_Password" formControlName="new_password" class="form-control" id="new_password" name="new_password" [(ngModel)] = "new_password">
+    <mat-error *ngIf="myForm.controls.password.errors.required">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput type=password placeholder="Confirm_Password" formControlName="confirm_password" class="form-control" id="confirm_password" name="confirm_password" [(ngModel)] = "confirm_password">
+    <mat-error *ngIf="myForm.controls.password.errors.required">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Card Number" formControlName="card_number" class="form-control" id="card_number" name="card_number" [(ngModel)] = "card_number">
+    <mat-error *ngIf="myForm.controls.first_name.errors.required">
+      Card Number is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="subscription_plan*" formControlName="subscription_plan" class="form-control" id="subscription_plan" name="Subscription_plan" [(ngModel)] = "subscription_plan">
+    <mat-error *ngIf="myForm.controls.first_name.errors.required">
+      Subscription Plan is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Merchant ID*" formControlName="merchant_id" class="form-control" id="merchant_id" name="merchant_id" [(ngModel)] = "merchant_id">
+    <mat-error *ngIf="myForm.controls.merchant_id.errors.required">
+      Merchant ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Marketplace ID" formControlName="marketplace_id" class="form-control" id="marketplace_id" name="marketplace_id" [(ngModel)] = "marketplace_id">
+    <mat-error *ngIf="myForm.controls.marketplace_id.errors.required">
+      Marketplace ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="aws_accesskey_id" name="aws_accesskey_id" [(ngModel)] = "aws_accesskey_id">
+    <mat-error *ngIf="myForm.controls.aws-accesskey_id.errors.required">
+      AWS Accesskey ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <button type="submit" [disabled]="!myForm.valid" mat-raised-button color="primary"> Register </button>
+</form>

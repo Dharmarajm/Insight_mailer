@@ -12,6 +12,12 @@ import { Router } from '@angular/router';
 export class PromotionComponent implements OnInit {
 
 promotions: any;
+min_date: any;
+start_date: any; 
+end_date: any;
+data_enable: any;
+previewSelected: any;
+data: any;
 
   constructor(public dialog: MatDialog,private PromotionService:PromotionService) { }
 
@@ -19,31 +25,60 @@ promotions: any;
   this.PromotionService.getpromotion().subscribe( res => {
       this.promotions = res;
     });
+    this.min_date = new Date()
+    //this.showSelected = true;
   }
 
-enable(id,event){
-  console.log(id,event.checked);
+promotion_delete(id){
+  this.PromotionService.delete_promotion(id).subscribe( res => {
+    console.log(res);
+    });
+}
+
+enable(event,id,inventory_id){
+  console.log(this.start_date,this.end_date);
+  this.data = { id: id,inventory_id: inventory_id,enable: event.checked,from_date: this.start_date,to_date: this.end_date }
+  this.PromotionService.promotion_enable(this.data).subscribe( res => {
+      this.data_enable = res;
+    });
 }
 
 promotion(){
   alert("promoted");
 }
 
+promotion_preview(data){
+
+let dialogRefprev = this.dialog.open(TemplatePreview, {
+                    width: '1000px',
+                    disableClose: true,
+                    data: {data: data}
+                  });
+
+                  dialogRefprev.afterClosed().subscribe(result1 => {
+
+                  })
+
+                  }
+
+
 promote(){
 
  let dialogRef1 = this.dialog.open(SelectPromotion, {
-                    width: '1000px'
+                    width: '1000px',
+                    disableClose: true
                   });
 
                   dialogRef1.afterClosed().subscribe(result1 => {
-                    alert(result1);
+                    
 let dialogRef2 = this.dialog.open(CreatePromotion, {
                     width: '1000px',
-                    data: { id:  result1 },
+                    disableClose: true,
+                    data: { id:  result1 }
                   });
 
                   dialogRef2.afterClosed().subscribe(result2 => {
-                    //alert("result");
+                  
                   });
 
                   });
@@ -118,10 +153,10 @@ name: string;
   }
 
   promotion(myPromotionForm){
-  alert(this.data.id)
+  
    console.log(myPromotionForm);
    this.PromotionService.create_promotion(myPromotionForm,this.data.id).subscribe( res => {
-      alert("res");
+      
     });
 
   }
@@ -161,3 +196,25 @@ ok(name): void {
 
 
 }
+
+
+@Component({
+  selector: 'template_preview',
+  templateUrl: 'template_preview.html',
+  styleUrls: ['./promotion.component.css']
+})
+export class TemplatePreview {
+
+promotion_template: any;
+
+  constructor(
+    public dialogRefprev: MatDialogRef<TemplatePreview>,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+
+
+ok(): void {
+     this.dialogRefprev.close();
+  }
+
+
+}
+

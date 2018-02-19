@@ -11,5 +11,5 @@ export class TriggerComponent {
  @Input('group')
     public adressForm: FormGroup;
 
-    values: string[] = ["ordered","shipped","delevered","returned"];
+    values: string[] = ["ordered","shipped","delivered","returned"];
 }

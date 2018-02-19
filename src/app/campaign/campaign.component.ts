@@ -16,7 +16,7 @@ export class CampaignComponent implements OnInit {
   name: string = "test1";
   ckeditorContent:any;
   ckeConfig: any;
-  campaings: any;
+public  campaings: any[] = [];
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService) { }
 
@@ -49,7 +49,11 @@ this.ckeConfig = {
   this.ckeditorContent = `<p>My HTML</p>`;
   }
 
-
+campaign_delete(id){
+  this.CampaignService.delete_campaign(id).subscribe( res => {
+    console.log(res);
+    });
+}
 
 insert(event){
 	//event.insertText("#{user_name}");
@@ -71,20 +75,22 @@ console.log(status);
 
 openDialog(): void {
     let dialogRef1 = this.dialog.open(CampaignName, {
-      width: '500px'
+      width: '500px',
+      disableClose: true
     });
 
     dialogRef1.afterClosed().subscribe(result => {
       this.animal = result;
-
+      let dialogRef2;
+      if(this.animal){
           let dialogRef2 = this.dialog.open(CampaignTemplate, {
-            width: '1000px'
+            width: '1000px',
+            disableClose: true
           });
-
+         
           dialogRef2.afterClosed().subscribe(result => {
            console.log( result );
            this.animal = result;
-
 
               let dialogRef3 = this.dialog.open(CampaignAsin, {
                 width: '1000px'
@@ -94,28 +100,21 @@ openDialog(): void {
                console.log( result );
                this.animal = result;
 
-
                   let dialogRef4 = this.dialog.open(CampaignTrigger, {
-                    width: '1000px'
+                    width: '1000px',
+                    disableClose: true
                   });
 
                   dialogRef4.afterClosed().subscribe(result => {
-                    console.log( result );
-                    this.animal = result;
+                    console.log(result);
+                    this.campaings.push(result);
                   });
-
-
 
                 });
 
-
-
-
-
-
            });
 
-
+        } // this is for dialog1 cancel button
 
      });
 
@@ -129,6 +128,7 @@ openDialog(): void {
 @Component({
   selector: 'campaign_name',
   templateUrl: 'campaign_name.html',
+  styleUrls: ['./campaign.component.css']
 })
 export class CampaignName {
 
@@ -139,11 +139,12 @@ name: string;
 
   onNoClick(): void {
     this.dialogRef1.close();
+    //alert("are you sure?");
   }
 
 ok(name): void {
 localStorage.setItem("campaign",name);
-     this.dialogRef1.close();
+     this.dialogRef1.close(name);
   }
 
 
@@ -160,7 +161,6 @@ templates:any;
   constructor(
     public dialogRef2: MatDialogRef<CampaignTemplate>,
     @Inject(MAT_DIALOG_DATA) public data: any,private CampaignService:CampaignService) {
-    
    this.CampaignService.gettemplates().subscribe( res => {
     this.templates = res;
     });
@@ -216,7 +216,7 @@ inventories:any;
   }
 
 ok(): void {
-     
+     this.dialogRef3.close();
   }
 
 
@@ -238,7 +238,7 @@ values: string[] = ["ordered","shipped","delevered","returned"];
     @Inject(MAT_DIALOG_DATA) public data: any, private _fb: FormBuilder, private CampaignService:CampaignService) { }
 
   onNoClick(): void {
-    this.dialogRef4.close();
+   // this.dialogRef4.close();
   }
 
 
@@ -289,6 +289,8 @@ values: string[] = ["ordered","shipped","delevered","returned"];
       console.log(myForm.value.addresses[0]);
      this.CampaignService.campaign_update(myForm.value.addresses).subscribe( res => {
       console.log(res);
+      //this.campaings.push(res);
+      this.dialogRef4.close(res);
     });
         // call API to save
     }

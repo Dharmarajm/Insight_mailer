@@ -21,24 +21,22 @@
   border-style: ridge;
 }
 
-.example-header-image {
-  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;
-}
 
-.mat-card-image {
-    width: 100%;
-    height: 100%;
-    padding-left: 20%;
-    padding-right: 20%;
-    padding-bottom: 0%;
-   padding-top: 62%;
-}
+
+
 
 .mat-slide-toggle.mat-accent{
 	padding-bottom: 40%;
 }
+
 .mat-card{
-  background-color: papayawhip;
+  padding-top: 25%;
 }
+
+/*svg image.img{
+  float:center;
+  object-position: 0 -234px;
+}*/
+
+
 

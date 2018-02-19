@@ -15,6 +15,10 @@ export class PromotionService {
         return this.http.get('http://192.168.1.64:3021/promotions');
     }
 
+    delete_promotion(id) {
+      return this.http.delete('http://192.168.1.64:3021/promotions/'+id);
+    }
+
   getinventories() {
         return this.http.get('http://192.168.1.64:3021/inventories');
     }
@@ -25,6 +29,10 @@ export class PromotionService {
 
     create_promotion(data,inventory_id) {
         return this.http.post('http://192.168.1.64:3021/promotions', { promotion: data, id: inventory_id } );
+    }
+
+    promotion_enable(data) {
+        return this.http.post('http://192.168.1.64:3021/promotions/enable',data);
     }
 
 }

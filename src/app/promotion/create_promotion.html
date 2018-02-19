@@ -33,7 +33,7 @@
      </mat-form-field>
 
      <mat-form-field class="example-full-width">
-   <input matInput type=text placeholder="Discount Price" formControlName="discount_price"
+   <input matInput type=text placeholder="Discount Price" formControlName="discount_price" max="data1.price_paisas"
    class="form-control" id="discount_price" name="Discount Price" [(ngModel)] = "discount_price">
    <!--mat-error *ngIf="discount_priceFormControl.hasError('required')">
      Discount Price is <strong>required</strong>
@@ -81,7 +81,7 @@
      </mat-form-field>
 
       <mat-form-field class="example-full-width">
-   <input matInput type=text placeholder="Frequency" formControlName="mail_frequency"
+   <input matInput type=text placeholder="Frequency" formControlName="mail_frequency" placeholder="End date"
    class="form-control" id="Frequency" name="Frequency" [(ngModel)] = "mail_frequency">
    <!--mat-error *ngIf="support_emailFormControl.hasError('required')">
      Support Email is <strong>required</strong>
@@ -93,5 +93,5 @@
 
      </form>
 
-     <p>Form value: {{ PromotionForm.value | json }}</p>
-<p>Form status: {{ PromotionForm.status | json }}</p>
+     <!--p>Form value: {{ PromotionForm.value | json }}</p>
+<p>Form status: {{ PromotionForm.status | json }}</p-->

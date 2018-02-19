@@ -4,6 +4,8 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { WindowService } from '../window.service';
+//import * as swal from 'sweetalert';
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-login',
@@ -33,24 +35,22 @@ voices:any;
 
   constructor( private LoginService:LoginService, private router:Router, private _window:WindowService ) { }
 
-  ngOnInit() {
-  
+  ngOnInit() {  
   }
 
  login(){
  this.data = {"auth":{"user_email": this.email,"password": this.password}}
   this.LoginService.userlogin(this.data).subscribe( res => {
   this.status = res;
-    if(this.status.jwt){
     this.utterance = new SpeechSynthesisUtterance('Hey You Have Succesfulli Logged In');
     //this.voices = window.speechSynthesis.getVoices();
       (<any>window).speechSynthesis.speak(this.utterance);
        this.router.navigate(['inventory']);
-    } else {
-      alert("Login Failed");
-    }
-
-   });
+   },
+   error => {
+    swal("Oops!", "Login Failed", "error") 
+   }
+   );
  }
 
 }

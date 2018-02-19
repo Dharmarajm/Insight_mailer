@@ -1,7 +1,5 @@
- <button mat-raised-button color="primary" (click)="openDialog()"> Create Campaign </button>
-
-
-
+<app-shared></app-shared>
+ <button mat-fab mat-raised-button color="primary" (click)="openDialog()"><mat-icon>add_circle</mat-icon> </button>
 
  <!--ckeditor
     [(ngModel)]="ckeditorContent"
@@ -29,15 +27,15 @@
  <mat-card>
   <mat-card-header >
     
-    <mat-card-title><b>{{ campaing.campagin_name }}</b></mat-card-title>
+    <mat-card-title><b>{{ campaing.campagin_name }} </b> </mat-card-title>
     
 
     <mat-slide-toggle [color]="primary" [checked]="campaing.enable"
       (change)="enable(campaing.id,$event)" style= "padding-left: 70%;"></mat-slide-toggle>
+      <mat-icon>edit</mat-icon>
+      <mat-icon (click)="campaign_delete(campaing.id)">delete</mat-icon>
   </mat-card-header>
-  <mat-card-subtitle><b>{{ campaing.asin }}</b></mat-card-subtitle>
-  <mat-card-content>
-  </mat-card-content>  
+  <mat-card-subtitle><b>{{ campaing.asin }}</b></mat-card-subtitle> 
   <mat-card-content>
     <mat-list role="list">     
           <table class="table" width="100%">
@@ -67,3 +65,9 @@
                     }
 
                 </style>
+  <mat-icon>add_circle</mat-icon>
+  <mat-icon>edit</mat-icon>
+  <mat-icon>delete</mat-icon>
+  <span matTooltip="This Product already exists in another campaign" value="right"><mat-icon>error_outline</mat-icon></span>
+
+

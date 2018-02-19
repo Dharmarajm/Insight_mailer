@@ -23,4 +23,10 @@ inventories:any;
     
   }
 
+  inventory_asin($event,inventory){
+   this.InventoryService.enable($event.checked,inventory).subscribe( res => {
+   //res;
+   });  
+  }
+
 }

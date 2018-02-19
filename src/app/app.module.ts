@@ -13,6 +13,7 @@ import { MaterialModule } from './material.module';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { ChartsModule } from 'ng2-charts';
 
+
 //List Of Modules
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -21,7 +22,10 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
 import { CampaignComponent, CampaignName, CampaignTemplate, CampaignAsin, CampaignTrigger } from './campaign/campaign.component';
 import { TriggerComponent } from './campaign/trigger.component';
-import { PromotionComponent, SelectPromotion, CreatePromotion } from './promotion/promotion.component';
+import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview } from './promotion/promotion.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { SharedComponent } from './shared/shared.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 //List Of Service
 import { LoginService } from './login/login.service';
@@ -30,6 +34,8 @@ import { InventoryService } from './inventory/inventory.service';
 import { OrderService } from './order/order.service';
 import { CampaignService } from './campaign/campaign.service';
 import { PromotionService } from './promotion/promotion.service';
+import { DashboardService } from './dashboard/dashboard.service';
+import { UserProfileService } from './user-profile/user-profile.service';
 
 
 @NgModule({
@@ -47,7 +53,11 @@ import { PromotionService } from './promotion/promotion.service';
     TriggerComponent,
     PromotionComponent,
     SelectPromotion, 
-    CreatePromotion
+    CreatePromotion,
+    DashboardComponent,
+    SharedComponent,
+    UserProfileComponent,
+    TemplatePreview
   ],
   imports: [
     BrowserModule,
@@ -68,7 +78,9 @@ import { PromotionService } from './promotion/promotion.service';
                InventoryService,
                OrderService,
                CampaignService,
-               PromotionService
+               PromotionService,
+               UserProfileService,
+               DashboardService
              ],
   entryComponents: [
                 CampaignName,
@@ -76,7 +88,8 @@ import { PromotionService } from './promotion/promotion.service';
                 CampaignAsin,
                 CampaignTrigger,
                 SelectPromotion, 
-                CreatePromotion
+                CreatePromotion,
+                TemplatePreview
                ],
   bootstrap: [AppComponent]
 })
