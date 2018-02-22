@@ -1,17 +1,13 @@
 <mat-card>
 <mat-tab-group>
  <mat-tab label="Login"> 
-<!-- <mat-toolbar><button routerLink="dashboard" routerLinkActive="active" mat-raised-button > DashBoard </button>   
- <button routerLink="inventory" mat-raised-button > My Products </button>
- <button routerLink="order" mat-raised-button > My Orders </button>
- <button routerLink="campaign" mat-raised-button > Email Campaigns </button>
- <button routerLink="promotion" mat-raised-button > Promotions </button>
- </mat-toolbar> -->
+
   
   <mat-card>
 
   <form class="example-form" novalidate (ngSubmit)="login()">
   <mat-form-field class="example-full-width">
+   <mat-label>Email</mat-label>
     <input matInput placeholder="Your@email.com" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email">
     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
       Please enter a valid email address
@@ -21,7 +17,9 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width">
-    <input matInput type=password placeholder="Password" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password">
+   <mat-label>Password</mat-label>
+    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Your passowrd" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
     <mat-error *ngIf="passwordFormControl.hasError('required')">
       Password is <strong>required</strong>
     </mat-error>
@@ -43,7 +41,3 @@
 
 </mat-tab-group>
 </mat-card>
-
-
-
-

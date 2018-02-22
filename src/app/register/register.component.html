@@ -2,6 +2,7 @@
 
 <form [formGroup]="myForm" class="example-form" novalidate (ngSubmit)="register()">
 <mat-form-field class="example-full-width">
+ <mat-label>First Name</mat-label>
     <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name">
     <mat-error *ngIf="myForm.hasError('required', 'first_name')">
       First Name is <strong>required</strong>
@@ -9,10 +10,11 @@
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
+   <mat-label>Last Name</mat-label>
     <input matInput placeholder="Lastname" formControlName="last_name" class="form-control" id="last_name" name="last_name" [(ngModel)] = "last_name">
   </mat-form-field>
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field class="example-full-width"> <mat-label>Email</mat-label>
     <input matInput placeholder="Your@email.com*" formControlName="email" class="form-control" id="email" name="email" [(ngModel)] = "email">
     <mat-error *ngIf="myForm.hasError('required', 'email') && myForm.hasError('email', 'email') ">
       Please enter a valid email address
@@ -21,14 +23,16 @@
       Email is <strong>required</strong>
     </mat-error>
   </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput type=password placeholder="Password" formControlName="password" class="form-control" id="password" name="password" [(ngModel)] = "password">
+  <mat-form-field class="example-full-width"> <mat-label>Password</mat-label>
+   
+    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Space not allowed" formControlName="password" class="form-control" id="password" name="password" [(ngModel)] = "password">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
     <mat-error *ngIf="myForm.hasError('required', 'password')">
       Password is <strong>required</strong>
     </mat-error>
   </mat-form-field>
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Phone" formControlName="phone" class="form-control" id="phone" name="phone" [(ngModel)] = "phone">
+  <mat-form-field class="example-full-width"> <mat-label>Phone Number</mat-label>
+    <input matInput placeholder="975094****" formControlName="phone" class="form-control" id="phone" name="phone" [(ngModel)] = "phone">
     <mat-error *ngIf="myForm.hasError('required', 'phone')">
       Phone is <strong>required</strong>
     </mat-error>

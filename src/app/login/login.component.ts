@@ -15,6 +15,7 @@ import swal from 'sweetalert2'
 })
 export class LoginComponent implements OnInit {
 
+hide = true;
 user:any;
 email:any;
 password:any;

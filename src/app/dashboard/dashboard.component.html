@@ -1,14 +1,25 @@
 <app-shared></app-shared>
 <h1>Dashboard</h1>
+<mat-grid-list cols="4" rowHeight="100px">
+<mat-grid-tile [colspan]="1" [rowspan]="1" width="100%" *ngFor="let count of counts">
 
-<mat-card class="example-card">
- <mat-icon>grade</mat-icon> Products </mat-card>
-<mat-card class="example-card"> 
-  <mat-icon>shopping_cart</mat-icon> Delivered Orders </mat-card>
-<mat-card class="example-card"> 
+<mat-card class="example-card"><h2><b>{{count.product_count}}</b></h2>
+ <mat-icon>grade</mat-icon> Total Products </mat-card>
+<mat-card class="example-card"> <h2><b>{{count.order_count}}</b></h2>
+  <mat-icon>shopping_cart</mat-icon> Total Orders </mat-card>
+<mat-card class="example-card"> <h2><b>{{count.order_count}}</b></h2>
   <mat-icon>near_me</mat-icon> Email Sent </mat-card>
-<mat-card class="example-card"> 
+<mat-card class="example-card"> <h2><b>{{count.order_count}}</b></h2>
   <mat-icon>mail_outline</mat-icon> Email Scheduled </mat-card>
+  </mat-grid-tile>
+   
+</mat-grid-list>
+
+
+<mat-grid-list cols="2" rowHeight="300px" rowWidth="80%">
+<mat-grid-tile>
+
+
 
 <mat-card>
   <mat-card-header >
@@ -53,9 +64,15 @@
   </canvas>
 </div>
   </mat-card-content>
-  </mat-card>
+  </mat-card></mat-grid-tile>
+   
+</mat-grid-list>
 
-<div style="width: 40%;">
+<mat-grid-list cols="3" rowHeight="300px" rowWidth="80%">
+<mat-grid-tile>
+<mat-card>
+
+<div style="width: 100%;">
   <canvas
       baseChart
       [chartType]="'doughnut'"
@@ -66,77 +83,97 @@
       (chartClick)="onChart1Click($event)">
   </canvas>
 </div>
+</mat-card>
 
-<!--mat-card>
-  <mat-card-header >
-    Order Statistics
-  </mat-card-header>
-  <mat-card-content-->
+
+<mat-card>
 
   <div class="example-container mat-elevation-z8" style="width: 35%;">
+  <h3>Top Product</h3>
   <mat-table #table [dataSource]="dataSource1">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
+    
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
+    
     <ng-container matColumnDef="product_list">
       <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.product_list}} </mat-cell>
     </ng-container>
-
-
-    <!-- Symbol Column -->
+  
     <ng-container matColumnDef="count">
-      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef> Count </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.count}} </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
   </mat-table>
 </div>
-
+</mat-card>
 <br>
 
+<mat-card>
+
 <div class="example-container mat-elevation-z8" style="width: 35%;">
+<h3>Latest Orders</h3>
   <mat-table #table [dataSource]="dataSource2">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
+   
     <ng-container matColumnDef="id">
       <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
     </ng-container>
 
-    <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+      <mat-header-cell *matHeaderCellDef> Asin </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
     </ng-container>
 
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="value">
+ 
+    <!--ng-container matColumnDef="value">
       <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.value}} </mat-cell>
+      <mat-cell *matCellDef="let element"> {{element.order_value}} </mat-cell>
+    </ng-container-->
+
+    <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
+  </mat-table>
+</div></mat-card></mat-grid-tile></mat-grid-list>
+
+
+
+  <!--div class="example-container mat-elevation-z8">
+  <mat-table #table [dataSource]="dataSource">
+
+    
+    <ng-container matColumnDef="position">
+      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    </ng-container>
+
+   
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+
+   
+    <ng-container matColumnDef="weight">
+      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+    </ng-container>
+
+   
+    <ng-container matColumnDef="symbol">
+      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-</div>
-
-
-<!--/mat-card-content>
-  </mat-card-->
-
-{{this.latest_orders | json }}
-{{this.top_products }}
+</div-->

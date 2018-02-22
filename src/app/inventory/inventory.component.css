@@ -21,7 +21,10 @@
   border-style: ridge;
 }
 
-
+.mat-card-image{
+  width:75%;
+  padding-left:30px;
+}
 
 
 

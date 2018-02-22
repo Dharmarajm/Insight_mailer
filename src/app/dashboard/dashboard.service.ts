@@ -18,5 +18,9 @@ export class DashboardService {
         return this.http.get('http://192.168.1.64:3021/dashboard/top_product');
     }
 
+    count(){
+    	return this.http.get('http://192.168.1.64:3021/dashboard/product');
+    }
+
 
 }

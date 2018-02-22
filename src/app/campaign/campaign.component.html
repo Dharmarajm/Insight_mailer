@@ -23,17 +23,17 @@
  </ckeditor-->
 
   <mat-grid-list cols="2" rowHeight="200px">
- <mat-grid-tile *ngFor=" let campaing of campaings; let i = index" class="example-card">
+ <mat-grid-tile *ngFor=" let campaing of campaings| paginate: {itemsPerPage: 5, currentPage:page1, id:'1'} let i = index" class="example-card">
  <mat-card>
-  <mat-card-header >
+  <mat-card-header>
     
     <mat-card-title><b>{{ campaing.campagin_name }} </b> </mat-card-title>
     
 
     <mat-slide-toggle [color]="primary" [checked]="campaing.enable"
       (change)="enable(campaing.id,$event)" style= "padding-left: 70%;"></mat-slide-toggle>
-      <mat-icon>edit</mat-icon>
-      <mat-icon (click)="campaign_delete(campaing.id)">delete</mat-icon>
+      <mat-icon (click)="campaign_edit(campaing.id,$index)">edit</mat-icon>
+      <mat-icon (click)="campaign_delete(campaing.id,$index)">delete</mat-icon>
   </mat-card-header>
   <mat-card-subtitle><b>{{ campaing.asin }}</b></mat-card-subtitle> 
   <mat-card-content>
@@ -52,6 +52,15 @@
 </mat-list>
   </mat-card-content>
   </mat-card></mat-grid-tile></mat-grid-list>
+  <pagination-controls (pageChange)="page1 = $event" id="1"
+
+                      maxSize="5"
+
+                      directionLinks="true"
+
+                      autoHide="true" style="cursor: pointer">
+
+                </pagination-controls>
 
 
 <style>
@@ -65,9 +74,9 @@
                     }
 
                 </style>
-  <mat-icon>add_circle</mat-icon>
+  <!-- <mat-icon>add_circle</mat-icon>
   <mat-icon>edit</mat-icon>
   <mat-icon>delete</mat-icon>
-  <span matTooltip="This Product already exists in another campaign" value="right"><mat-icon>error_outline</mat-icon></span>
+  <span matTooltip="This Product already exists in another campaign" value="right"><mat-icon>error_outline</mat-icon></span> -->
 
 

@@ -21,3 +21,6 @@
   overflow: auto;
   max-height: 500px;
 }
+.mat-grid-tile{
+	width:100% !important;
+}

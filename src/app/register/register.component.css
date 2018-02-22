@@ -7,3 +7,17 @@
 .example-full-width {
   width: 100%;
 }
+
+.mat-icon.material-icons
+{
+	width: 20px;
+font-size: 21px;
+}
+.mat-input-wrapper.mat-form-field-wrapper{
+	width:150px;
+}
+
+.mat-input-wrapper.mat-form-field-wrapper
+{
+	width:120px;
+}

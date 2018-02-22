@@ -5,6 +5,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Customer, Address } from './trigger.interface';
 
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-campaign',
   templateUrl: './campaign.component.html',
@@ -16,7 +18,7 @@ export class CampaignComponent implements OnInit {
   name: string = "test1";
   ckeditorContent:any;
   ckeConfig: any;
-public  campaings: any[] = [];
+public  campaings: any;
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService) { }
 
@@ -49,9 +51,18 @@ this.ckeConfig = {
   this.ckeditorContent = `<p>My HTML</p>`;
   }
 
-campaign_delete(id){
+campaign_edit(id,index){
+ // this.CampaignService.edit_campaign(id).subscribe( res => {
+ //   console.log(res);
+    //this.campaings.splice(index, 1);
+ //   });
+}
+
+
+campaign_delete(id,index){
   this.CampaignService.delete_campaign(id).subscribe( res => {
     console.log(res);
+    this.campaings.splice(index, 1);
     });
 }
 
@@ -106,9 +117,12 @@ openDialog(): void {
                   });
 
                   dialogRef4.afterClosed().subscribe(result => {
-                    console.log(result);
-                    this.campaings.push(result);
+                    this.campaings.unshift(result);
                   });
+
+
+                  
+                  
 
                 });
 
@@ -211,13 +225,18 @@ inventories:any;
      }
     }
 
+  
+
   onNoClick(): void {
     this.dialogRef3.close();
+    //alert("are you sure?");
   }
 
-ok(): void {
-     this.dialogRef3.close();
+ok(name): void {
+localStorage.setItem("campaign",name);
+     this.dialogRef3.close(name);
   }
+
 
 
 }
@@ -260,7 +279,7 @@ values: string[] = ["ordered","shipped","delevered","returned"];
     initAddress() {
         return this._fb.group({
             trigger: ['', Validators.required],
-            days: ['']
+            days: ['', Validators.required]
         });
     }
 

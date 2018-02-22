@@ -18,7 +18,7 @@ last_name: string;
 email: string;
 password: string;
 phone: number;
-registerdata:any;
+registerdata:any;  
 
   constructor(private RegisterService:RegisterService, private router:Router, private _fb: FormBuilder) { }
 
@@ -29,8 +29,8 @@ public myForm: FormGroup;
             first_name: new FormControl('',[Validators.required]),
             last_name: new FormControl(''),
             email: new FormControl('',[Validators.required,Validators.email]),
-            password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern(/^(?=.[A-Za-z])(?=.\d)[A-Za-z\d]{4,20}/),
-            phone: new FormControl('',[Validators.required,Validators.minLength(6)])
+            password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")]),
+            phone: new FormControl('',[Validators.required,Validators.minLength(10)])
         });
   }
 

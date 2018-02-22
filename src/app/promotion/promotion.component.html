@@ -1,14 +1,16 @@
 <app-shared></app-shared>
 <button mat-raised-button color="primary" (click)="promote()"> Create Promotion </button>
 <!--  {{start_date}} {{end_date}} -->
-
+<div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+  
                 <mat-grid-list cols="5" rowHeight="400px">
-                <mat-grid-tile *ngFor="let promotion of promotions; let i = index" class="example-card">
+                <mat-grid-tile *ngFor="let promotion of promotions| paginate: {itemsPerPage: 5, currentPage:page1, id:'1'} let i = index" class="example-card">
                 <mat-card>
   <mat-card-header >
-    <!--div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{ promotion?.promotion_title }}</mat-card-title>
-    <mat-card-subtitle>Dog Breed</mat-card-subtitle-->
   </mat-card-header>
 <div class="card-container">
   <div class="card">
@@ -37,9 +39,9 @@
   <mat-card-subtitle>{{ promotion?.promotion_title }}</mat-card-subtitle>
   
    {{ promotion.inventory.find_by_asin[0].title }}
-  
+  {{i}}
   <mat-card-content>
-  <p><s>{{ promotion.inventory.price_paisas }}</s> ${{  promotion?.discount_price }}
+  <p>&#8377;<s>{{ promotion.inventory.price_paisas }}</s> &#8377;<b>{{  promotion?.discount_price }}</b>
   <mat-slide-toggle [color]="primary" [disabled]="promotion?.enable" (change)=enable($event,promotion.id,promotion.inventory.id) style="padding-left: 50%;"></mat-slide-toggle></p>
 
   <mat-form-field class="example-full-width" style="width: 48%;">
@@ -56,10 +58,20 @@
   <mat-card-actions>
     <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="accent" style="margin-left: 30%;" >Preview</button>
 
-    <mat-icon (click)="promotion_delete(promotion.id)">delete</mat-icon>
+    <mat-icon (click)="promotion_delete(promotion.id,$index)">delete</mat-icon>
     <!--button mat-button>SHARE</button-->
   </mat-card-actions>
 </mat-card></mat-grid-tile></mat-grid-list>
+
+<pagination-controls (pageChange)="page1 = $event" id="1"
+
+                      maxSize="5"
+
+                      directionLinks="true"
+
+                      autoHide="true" style="cursor: pointer">
+
+                </pagination-controls>
 
 <!--div [innerHtml]="promotion.promotion_template"></div-->
 
@@ -108,7 +120,7 @@ th, td {
                     }
                     table{
                         border: 1px solid black;
-                        width:172px;
+                        width:200px;
                         
                     }
 </style>

@@ -3,6 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PromotionService } from './promotion.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatTableDataSource } from '@angular/material';
+
 
 @Component({
   selector: 'app-promotion',
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class PromotionComponent implements OnInit {
 
-promotions: any;
+public promotions: any;
 min_date: any;
 start_date: any; 
 end_date: any;
@@ -19,19 +21,23 @@ data_enable: any;
 previewSelected: any;
 data: any;
 
+dataSource = new MatTableDataSource;
+
   constructor(public dialog: MatDialog,private PromotionService:PromotionService) { }
 
   ngOnInit() {
   this.PromotionService.getpromotion().subscribe( res => {
       this.promotions = res;
+      this.dataSource = new MatTableDataSource(this.promotions);
     });
     this.min_date = new Date()
-    //this.showSelected = true;
+    //  this.showSelected = true;
   }
 
-promotion_delete(id){
+promotion_delete(id,index){
   this.PromotionService.delete_promotion(id).subscribe( res => {
     console.log(res);
+     this.promotions.splice(index, 1);
     });
 }
 
@@ -46,6 +52,14 @@ enable(event,id,inventory_id){
 promotion(){
   alert("promoted");
 }
+
+ applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    this.promotions = this.dataSource.filteredData;
+    console.log(this.dataSource.filteredData);
+  }
 
 promotion_preview(data){
 
@@ -70,7 +84,7 @@ promote(){
                   });
 
                   dialogRef1.afterClosed().subscribe(result1 => {
-                    
+                    if(result1){
 let dialogRef2 = this.dialog.open(CreatePromotion, {
                     width: '1000px',
                     disableClose: true,
@@ -78,9 +92,9 @@ let dialogRef2 = this.dialog.open(CreatePromotion, {
                   });
 
                   dialogRef2.afterClosed().subscribe(result2 => {
-                  
+                       this.promotions.unshift(result2);
                   });
-
+}
                   });
 	
 }
@@ -119,6 +133,7 @@ if (event.checked){
 
   cancel(): void {
     alert("sure");
+    this.dialogRef1.close();
   }
 
 ok(name): void {
@@ -156,7 +171,7 @@ name: string;
   
    console.log(myPromotionForm);
    this.PromotionService.create_promotion(myPromotionForm,this.data.id).subscribe( res => {
-      
+      this.dialogRef2.close(res);
     });
 
   }
@@ -179,6 +194,7 @@ name: string;
             product_title: new FormControl(''),
             product_price: new FormControl(''),
             discount_price: new FormControl('',Validators.required),
+            product_description: new FormControl(''),
             personal_msg: new FormControl('',Validators.required),
             promotion_title: new FormControl('',Validators.required),
             coupon_code: new FormControl('',Validators.required),
