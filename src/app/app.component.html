@@ -1,2 +1,50 @@
-
+<header>
+  <div class="container">
+    <mat-toolbar>
+     <a href="" class="logo">
+         <img src="assets/logo_white.png">
+     </a>
+      <div>
+        <button mat-button routerLink="/dashboard"> Overview </button>
+        <button mat-button routerLink="/inventory"> My Products </button>
+        <button mat-button routerLink="/order"> My Orders </button>
+        <button mat-button routerLink="/campaign"> Email Campaigns </button>
+        <button mat-button routerLink="/promotion"> Promotions </button>
+<!--         <button mat-icon-button>
+          <mat-icon>search</mat-icon>
+        </button>  -->       
+        <span>
+	        <button mat-icon-button>
+	          <mat-icon>notifications_none</mat-icon>
+	        </button>
+	        <button mat-icon-button>
+	          <div mat-card-avatar class="avatar-image"></div>
+	        </button>
+	        <button mat-icon-button [matMenuTriggerFor]="menu">
+	          <mat-icon>more_vert</mat-icon>
+	        </button>
+	        <mat-menu #menu="matMenu">
+	          <button mat-menu-item>
+	            <mat-icon>person</mat-icon>
+	            <span>profile</span>
+	          </button>
+	          <button mat-menu-item>
+	            <mat-icon>settings</mat-icon>
+	            <span>setting</span>
+	          </button>
+	          <button mat-menu-item>
+	            <mat-icon>power_settings_new</mat-icon>
+	            <span>logout</span>
+	          </button>
+	        </mat-menu>
+        </span>
+      </div>
+    </mat-toolbar>    
+  </div>
+</header>	
 <router-outlet></router-outlet>
+<footer>
+	<div class="container">
+		<p>Copyright 2018 Altius Technology Solution</p>
+	</div>
+</footer>

@@ -1,2 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body{
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+}
+
+.mat-page-content {
+/*    margin-top: 65px;*/
+/*    padding: 1px 0 0px 0;*/
+    height: calc(100vh - 100px);
+    overflow: auto;    
+}
+
+@media (min-width: 1200px){
+	.container {
+	    width: 1280px;
+	    margin: auto;
+	}
+}

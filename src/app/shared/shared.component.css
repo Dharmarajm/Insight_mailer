@@ -1,4 +1,4 @@
-.mat-icon.material-icons
+/*.mat-icon.material-icons
 {
 	font-size: 42px;
 }
@@ -25,4 +25,35 @@
 	border-color: rgb(63, 81, 181);
 	
 	border-style: ridge;
+}*/
+/*.mat-toolbar{
+	background-color: #fff;
+	padding: 0;
+    display: flex;
+    justify-content: space-between;	
 }
+
+.logo{
+	display: inline-flex;
+}
+
+.mat-button{
+	color: #212121;
+}
+
+.mat-button:hover{
+	background-color: #7dc585;
+	color: #fff;
+}
+
+.mat-icon-button{
+	color: #212121;
+}
+
+.avatar-image {
+	background-image: url('../../assets/temp-avatar.png');
+	background-size: cover;
+	display: inline-block;
+    width: 30px;
+    height: 30px;
+}*/

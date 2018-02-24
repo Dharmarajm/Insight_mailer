@@ -54,6 +54,17 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
     { data: [330, 600, 260, 700], label: 'Account A' }
   ];
 
+  ChartColors = [
+    { 
+      backgroundColor: 'rgba(195, 210, 245, 0.35)',
+      borderColor: 'rgb(110, 136, 188)',
+      pointBackgroundColor: 'rgba(148,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+    }
+  ]
+
   chartLabels = ['January', 'February', 'Mars', 'April'];
 
   onChartClick(event) {
