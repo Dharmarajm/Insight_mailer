@@ -14,13 +14,13 @@ top_products: any;
 counts: any;
 
 displayedColumns = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+dataSource = new MatTableDataSource(ELEMENT_DATA);
 
 displayedColumns1 = ['id', 'product_list', 'count'];
-dataSource1 = new MatTableDataSource(ELEMENT_DATA1);
+dataSource1 = new MatTableDataSource;
 
 displayedColumns2 = ['id', 'name'];
-dataSource2 = new MatTableDataSource(ELEMENT_DATA2);
+dataSource2 = new MatTableDataSource;
 
 values: any = ['7 Days','15 Days','30 Days','45 Days']
 
@@ -33,12 +33,14 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
  this.DashboardService.top_products().subscribe( res => {
    this.top_products = res;
-  // this.dataSource1 = new MatTableDataSource(this.top_products);
+   console.log(this.top_products);
+   this.dataSource1 = new MatTableDataSource(this.top_products);
    });
 
   this.DashboardService.lastest_order().subscribe( res => {
    this.latest_orders = res;
-  // this.dataSource2 = new MatTableDataSource(this.latest_orders);
+   console.log(this.latest_orders);
+   this.dataSource2 = new MatTableDataSource(this.latest_orders);
    });
   
 
@@ -47,7 +49,15 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
   chartOptions = {
     responsive: true,
     fill: 'start',
-    showLine: false
+    showLine: false,
+    scales: {
+        xAxes: [{
+             gridLines: { drawBorder: true, display: true }
+        }],
+        yAxes: [{
+             gridLines: { drawBorder: true, display: true }
+        }]
+    }    
   };
 
   chartData = [
@@ -56,14 +66,25 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
   ChartColors = [
     { 
-      backgroundColor: 'rgba(195, 210, 245, 0.35)',
-      borderColor: 'rgb(110, 136, 188)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
+      backgroundColor: 'rgba(11, 193, 170, 0.2)',
+      borderColor: 'rgb(11, 193, 170)',
+      pointBackgroundColor: 'rgb(11, 193, 170)',
       pointBorderColor: '#fff',
       pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+      pointHoverBorderColor: 'rgb(11, 193, 170)'
     }
-  ]
+  ];
+
+  Doughnutcolors = [
+    { 
+      backgroundColor: 'rgb(200, 230, 206)'
+    },
+
+    { 
+      backgroundColor: 'rgb(227, 72, 102)'
+    }
+
+  ];  
 
   chartLabels = ['January', 'February', 'Mars', 'April'];
 
@@ -76,10 +97,8 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
   };
 
   chartData1 = [
-    { data: [10, 10] }
+    { data: [10, 20] }
   ];
-
-  chartLabels1 = ['Red','Yellow'];
 
   onChart1Click(event) {
     console.log(event);

@@ -1,6 +1,13 @@
- <button mat-fab mat-raised-button color="primary" (click)="openDialog()"><mat-icon>add_circle</mat-icon> </button>
+<div class="mat-page-content">
+  <div class="container">
+    <div class="filters">
+      <h1 class="page-title">Email Campaigns</h1>
+      <button mat-mini-fab color="primary" class="float-right" (click)="new_campaign()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
 
- <!--ckeditor
+    <!--ckeditor
     [(ngModel)]="ckeditorContent"
     [config]="ckeConfig"
     [readonly]="false"
@@ -21,61 +28,54 @@
    </ckgroup>
  </ckeditor-->
 
-  <mat-grid-list cols="2" rowHeight="200px">
- <mat-grid-tile *ngFor=" let campaing of campaings| paginate: {itemsPerPage: 5, currentPage:page1, id:'1'} let i = index" class="example-card">
- <mat-card>
-  <mat-card-header>
-    
-    <mat-card-title><b>{{ campaing.campagin_name }} </b> </mat-card-title>
-    
+  <div class="row">
+    <mat-grid-list cols="2" rowHeight="380px">
+      <mat-grid-tile *ngFor=" let campaing of campaings| paginate: {itemsPerPage: 6, currentPage:page1, id:'1'} let i = 'index'">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{ campaing.campagin_name }}</mat-card-title>
+            <div class="nav_ic">
+              <mat-slide-toggle [color]="primary" [checked]="campaing.enable" (change)="enable(campaing.id,$event)"></mat-slide-toggle>
+              <button mat-icon-button (click)="campaign_edit(campaing.id)">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="campaign_delete(campaing.id,$index)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <mat-card-subtitle><p>Asin: <span>  1937707903, 9380658745, 9311122521, 1937707849</span></p></mat-card-subtitle> <!-- <p>{{ campaing.asin }}</p> -->
+          </mat-card-header>
+          <mat-card-content>
+            <mat-list role="list">
+              <table class="table" width="100%">
+                <thead>
+                  <tr>
+                    <th>Subjects</th>
+                    <th>Trigger</th>
+                    <th>Days</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let trigger of campaing.triggers">
+                    <td>Feedback Message1</td>
+                    <td>{{trigger.trigger}}</td>
+                    <td>{{trigger.days}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div class="row">
+    <mat-grid-list cols="1" rowHeight="60px">
+      <mat-grid-tile>
+        <pagination-controls (pageChange)="page1 = $event" id="1" maxSize="5" directionLinks="true" autoHide="true"></pagination-controls>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
 
-    <mat-slide-toggle [color]="primary" [checked]="campaing.enable"
-      (change)="enable(campaing.id,$event)" style= "padding-left: 70%;"></mat-slide-toggle>
-      <mat-icon (click)="campaign_edit(campaing.id,$index)">edit</mat-icon>
-      <mat-icon (click)="campaign_delete(campaing.id,$index)">delete</mat-icon>
-  </mat-card-header>
-  <mat-card-subtitle><b>{{ campaing.asin }}</b></mat-card-subtitle> 
-  <mat-card-content>
-    <mat-list role="list">     
-          <table class="table" width="100%">
-          <tr>
-            <th>Trigger</th>
-            <th>Days</th>
-          </tr>
-      <tr *ngFor="let trigger of campaing.triggers">      
-          
-            <td>{{trigger.trigger}}</td>
-            <td>{{trigger.days}}</td>
-          </tr>
-  </table>
-</mat-list>
-  </mat-card-content>
-  </mat-card></mat-grid-tile></mat-grid-list>
-  <pagination-controls (pageChange)="page1 = $event" id="1"
-
-                      maxSize="5"
-
-                      directionLinks="true"
-
-                      autoHide="true" style="cursor: pointer">
-
-                </pagination-controls>
-
-
-<style>
-                     th, td {
-                    border: 1px solid black;
-                    background-color: white;
-                    }
-                    table{
-                        border: 1px solid black;
-                        
-                    }
-
-                </style>
-  <!-- <mat-icon>add_circle</mat-icon>
-  <mat-icon>edit</mat-icon>
-  <mat-icon>delete</mat-icon>
-  <span matTooltip="This Product already exists in another campaign" value="right"><mat-icon>error_outline</mat-icon></span> -->
-
-
+  </div>
+</div>

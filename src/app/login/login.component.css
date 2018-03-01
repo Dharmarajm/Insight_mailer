@@ -1,4 +1,4 @@
-.example-form {
+/*.example-form {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
@@ -59,17 +59,60 @@
 	width: 20px;
 font-size: 21px;
 }
+*/
 
+mat-card{
+	width: 40%;
+  min-height: 400px;
+}
 
+.mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 100%;
+    margin: 10px 0;
+}
 
+.mat-tab-label{
+    font-size: 20px;
+    font-weight: 500;
+    color: #000 !important;
+}
 
+::ng-deep .mat-tab-labels {
+    display: flex;
+    justify-content: space-evenly;
+}
 
+::ng-deep .mat-tab-header{
+	margin-bottom: 10px;
+}
 
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: #0dc2ab !important;
+}
 
+::ng-deep .mat-tab-group.mat-primary .mat-tab-label:focus, ::ng-deep .mat-tab-group.mat-primary .mat-tab-link:focus, ::ng-deep .mat-tab-nav-bar.mat-primary .mat-tab-label:focus, ::ng-deep .mat-tab-nav-bar.mat-primary .mat-tab-link:focus {
+    background-color: rgba(13, 194, 171, 0.09);
+}
 
+::ng-deep .mat-form-field-ripple {
+    background-color: #0dc2ab;
+}
 
+::ng-deep .mat-form-field-underline {
+    background-color: rgba(188, 187, 187, 0.42);
+}
 
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #0dc2ab;
+}
 
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #0dc2ab;
+}
 
-
-
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #0dc2ab;
+}

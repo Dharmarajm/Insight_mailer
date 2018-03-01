@@ -1,8 +1,8 @@
 <div class="mat-page-content">
   <div class="container">
     <h1 class="page-title">Dashboard</h1>
-    <div class="overview">
-      <mat-grid-list cols="4" rowHeight="120px" *ngFor="let count of counts">
+    <div class="overview row">
+      <mat-grid-list cols="4" rowHeight="110px" *ngFor="let count of counts">
         <mat-grid-tile>
           <mat-card class="example-card">
             <mat-icon>grade</mat-icon>
@@ -31,7 +31,7 @@
             <p>Email Scheduled</p>
           </mat-card>
         </mat-grid-tile>
-  <!--       <mat-grid-tile [colspan]="1" [rowspan]="1" width="100%" *ngFor="let count of counts">
+        <!--       <mat-grid-tile [colspan]="1" [rowspan]="1" width="100%" *ngFor="let count of counts">
           <mat-card class="example-card">
             <h2>{{count.product_count}}</h2>
             <mat-icon>grade</mat-icon> Total Products </mat-card>
@@ -49,8 +49,8 @@
       </mat-grid-list>
     </div>
 
-    <div class="line-chart">
-      <mat-grid-list cols="2" rowHeight="400px">
+    <div class="line-chart row">
+      <mat-grid-list cols="2" rowHeight="320px">
         <mat-grid-tile>
           <mat-card>
             <mat-card-title>
@@ -82,61 +82,96 @@
       </mat-grid-list>
     </div>
 
-    <div class="doughnut-chart">
-      <mat-grid-list cols="3" rowHeight="420px">
+    <div class="doughnut-chart row">
+      <mat-grid-list cols="3" rowHeight="410px">
         <mat-grid-tile>
           <mat-card>
             <mat-card-title>
               Customer Statistics
             </mat-card-title>
-              <canvas baseChart [chartType]="'doughnut'" [datasets]="chartData1" [labels]="chartLabels1" [options]="chartOptions1" [legend]="true" (chartClick)="onChart1Click($event)">
+
+            <button mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-card-content>
+              <canvas height="210px" baseChart [chartType]="'doughnut'" [datasets]="chartData1" [colors]="Doughnutcolors" [options]="chartOptions1" [legend]="true" (chartClick)="onChart1Click($event)">
               </canvas>
+            </mat-card-content>
+            <mat-card-footer>
+              <div class="doughnut-label">
+                <span></span>
+                <span>
+                  <h3>500</h3>
+                  <p>Total Customers</p>
+                </span>
+              </div>
+              <div class="doughnut-label">
+                <span></span>
+                <span>
+                  <h3>500</h3>
+                  <p>Total Customers</p>
+                </span>
+              </div>
+            </mat-card-footer>
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-card>
-            <div class="">
-              <h3>Top Product</h3>
+            <mat-card-title>
+              Top Product
+            </mat-card-title>
+
+            <button mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-card-content>
               <mat-table #table [dataSource]="dataSource1">
                 <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                  <mat-cell *matCellDef="let i = index "> {{ i + 1  }} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="product_list">
                   <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.product_list}} </mat-cell>
+                  <mat-cell *matCellDef="let element"> {{element[0] | slice:0:40 }} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="count">
                   <mat-header-cell *matHeaderCellDef> Count </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.count}} </mat-cell>
+                  <mat-cell *matCellDef="let element"> <span>{{element[1] }}</span> </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
               </mat-table>
-            </div>
+            </mat-card-content>
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-card>
-            <div class="">
-              <h3>Latest Orders</h3>
+            <mat-card-title>
+              Latest Orders
+            </mat-card-title>
+            <button mat-icon-button>
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-card-content>
               <mat-table #table [dataSource]="dataSource2">
                 <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                  <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                  <mat-cell *matCellDef="let i = index "> {{ i + 1 }} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">
                   <mat-header-cell *matHeaderCellDef> Asin </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+                  <mat-cell *matCellDef="let element"> {{element.find_order[0].title | slice:0:40 }} </mat-cell><!--| slice:0:6-->
                 </ng-container>
-                <!--ng-container matColumnDef="value">
-        <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.order_value}} </mat-cell>
-      </ng-container-->
+                <!--ng-container matColumnDef="total">
+                  <mat-header-cell *matHeaderCellDef> Order Value </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> {{element.find_order[0].total}} </mat-cell>
+                </ng-container-->
                 <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
               </mat-table>
-            </div>
+            </mat-card-content>
           </mat-card>
         </mat-grid-tile>
       </mat-grid-list>

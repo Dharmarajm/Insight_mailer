@@ -1,7 +1,8 @@
 /*Angular Material design.css*/
 header{
-	display: block;
-    background: #5d51cf;
+    display: block;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 footer{
@@ -22,8 +23,8 @@ footer p {
 }
 
 .mat-toolbar{
-    background: none !;
-    background-color: #5d51cf;
+    background: none;
+    background-color: #fff;
     padding: 0;
     display: flex;
     justify-content: space-between; 
@@ -34,20 +35,24 @@ footer p {
 }
 
 .mat-button{
-    color: #fff;
+    color: #2e2e2e;
 }
 
 .mat-button:hover{
-    background-color: #8477ff;
+    background-color: #7dc586;
     color: #ffffff;
 }
 
+::ng-deep .mat-button:hover .mat-button-focus-overlay {
+    opacity: 0 !important;
+}
+
 .mat-icon-button{
-    color: #fff;
+    color: #2e2e2e;
 }
 
 .avatar-image {
-    background-image: url('../assets/temp-avatar.png');
+    background-image: url('../assets/user-icon.png');
     background-size: cover;
     display: inline-block;
     width: 30px;

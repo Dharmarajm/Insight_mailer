@@ -1,4 +1,4 @@
-.example-container {
+/*.example-container {
   display: flex;
   flex-direction: column;
   min-width: 300px;
@@ -17,4 +17,77 @@
 .mat-table {
   overflow: auto;
   max-height: 500px;
+}*/
+
+.mat-table {
+  overflow: auto;
+  max-height: calc(100vh - 300px);
+}
+
+.mat-header-cell {
+    font-size: 12px;
+    font-weight: 600;
+    color: #333333;
+}
+
+.mat-cell {
+    color: #4e4e4e;
+}
+
+.mat-header-row {
+  position: sticky;
+  top: 0;
+  background: white;
+}
+
+.mat-column-id {
+    max-width: 5%;
+}
+
+.mat-column-amazon_order_id {
+    max-width: 20%;
+}
+
+.mat-column-asin {
+    max-width: 10%;
+}
+
+.mat-column-title {
+    max-width: 30%;
+}
+
+.mat-column-buyer_name {
+    max-width: 15%;
+}
+
+.mat-column-purchased_at {
+    max-width: 10%;
+}
+
+.mat-column-shipment_status {
+    max-width: 10%;
+}
+
+::ng-deep .mat-paginator-container {
+    justify-content: space-between !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+    background-color: #0dc2ab;
+}
+
+::ng-deep .mat-form-field-underline {
+    background-color: rgba(188, 187, 187, 0.42);
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #0dc2ab;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #0dc2ab;
+}
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #0dc2ab;
 }

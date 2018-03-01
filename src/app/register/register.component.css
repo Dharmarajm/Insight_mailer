@@ -1,4 +1,4 @@
-.example-form {
+/*.example-form {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
@@ -20,4 +20,12 @@ font-size: 21px;
 .mat-input-wrapper.mat-form-field-wrapper
 {
 	width:120px;
+}*/
+
+.mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 48%;
+    margin: 10px 0;
 }

@@ -1,34 +1,64 @@
 
 <div mat-dialog-content>
-  
- <h1> Select Your Product </h1>
+  <mat-grid-list cols="1" rowHeight="430px">
+    <mat-grid-tile>
+      <div class="popup-select">
+        <h1> Select Your Product </h1>
+        <div class="table-scroll">
+          <table class="table" width="100%">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Asin</th>
+                <th>Enable</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let inventory of inventories">
+                <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
+                <td>{{inventory?.find_by_asin[0].title}}</td>
+                <td>{{inventory?.asin}}</td>
+                <td><mat-slide-toggle [color]="primary" [checked]="edit_data?.inventory.asin" [disabled]="(inventory.id != id && id != 0)" 
+                *ngIf="!inventory?.promotion_in_use" (change)=asin($event,inventory.id)></mat-slide-toggle>
+                <!--[checked]="inventory.children_in_use"-->
+                <mat-icon *ngIf="inventory?.promotion_in_use" matTooltip="Promotion already in use">error_outline</mat-icon></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <!--div *ngFor="let inventory of inventories; let i = index" class="example-card"-->
 
-                <table class="table">
-                    <tr>
-                        <th>Image</th>
-
-                        <th>Title</th> 
-
-                        <th>Asin</th>
-
-                        <th>Enable</th>
-                    </tr>
-
-                    <tr *ngFor="let inventory of inventories">
-
-                       <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
-
-                       <td>{{inventory?.find_by_asin[0].title}}</td>
-
-                       <td>{{inventory?.asin}}</td>
-
-                       <td> <mat-slide-toggle [color]="primary" [disabled]="(inventory.id != id && id != 0)" (change)=asin($event,inventory.id)></mat-slide-toggle> </td> <!--[checked]="inventory.children_in_use"-->
-
-                    </tr>
-
-                </table>
-
+          <!--/div-->
+          <!--  <button mat-button (click)="onNoClick()" color="warn" > Cancel </button>
+        <button  mat-button (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>
+       -->
+        <div mat-dialog-actions class="float-right">
+          <button mat-button (click)="cancel()" mat-raised-button>Cancel</button>
+          <button mat-button (click)="ok()" cdkFocusInitial mat-raised-button color="primary">Confirm</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+<!--   <h1> Select Your Product </h1>
+  <table class="table">
+      <tr>
+          <th>Image</th>
+          <th>Title</th> 
+          <th>Asin</th>
+          <th>Enable</th>
+      </tr>
+      <tr *ngFor="let inventory of inventories">
+         <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
+         <td>{{inventory?.find_by_asin[0].title}}</td>
+         <td>{{inventory?.asin}}</td>
+         <td> <mat-slide-toggle [color]="primary" [disabled]="(inventory.id != id && id != 0)" (change)=asin($event,inventory.id)></mat-slide-toggle> </td>
+      </tr>
+  </table>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="cancel()">Cancel</button>
-  <button mat-button (click)="ok()" cdkFocusInitial>Confirm</button>
+<div mat-dialog-actions class="float-right">
+  <button mat-button (click)="cancel()" mat-raised-button>Cancel</button>
+  <button mat-button (click)="ok()" cdkFocusInitial mat-raised-button color="primary">Confirm</button>
+</div> -->
+
+ <!--[checked]="inventory.children_in_use"-->

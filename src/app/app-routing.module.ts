@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
 import { CampaignComponent } from './campaign/campaign.component';
+import { CampaignNewComponent } from './campaign-new/campaign-new.component';
 import { PromotionComponent } from './promotion/promotion.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -16,6 +17,8 @@ const routes: Routes = [
                          { path: 'inventory', component: InventoryComponent },
                          { path: 'order', component: OrderComponent },
                          { path: 'campaign', component: CampaignComponent },
+                         { path: 'new_campaign', component: CampaignNewComponent },
+                         { path: 'new_campaign/:id', component: CampaignNewComponent },
                          { path: 'promotion', component: PromotionComponent },
                          { path: 'dashboard', component: DashboardComponent },
                          { path: 'profile', component: UserProfileComponent },

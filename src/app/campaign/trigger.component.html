@@ -1,5 +1,5 @@
 <div [formGroup]="adressForm">
-  <button mat-fab color="primary">Start</button>
+  <!-- <button mat-fab color="primary">Start</button> -->
  <mat-form-field>
   <mat-select placeholder="select triggers" formControlName="trigger">
     <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
@@ -8,5 +8,5 @@
 <mat-form-field>
  <input type="number" min='0' max='30' (change)="onlyNumberKey(num)"  [(ngModel)] = "num" matInput placeholder="Days" formControlName="days" />
 </mat-form-field>
-<button mat-fab color="primary">End</button>
+<!-- <button mat-fab color="primary">End</button> -->
 </div>

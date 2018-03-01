@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
 import { CampaignComponent, CampaignName, CampaignTemplate, CampaignAsin, CampaignTrigger } from './campaign/campaign.component';
+import { CampaignNewComponent } from './campaign-new/campaign-new.component';
 import { TriggerComponent } from './campaign/trigger.component';
 import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview } from './promotion/promotion.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -50,6 +51,7 @@ import { UserProfileService } from './user-profile/user-profile.service';
     CampaignTemplate,
     CampaignAsin,
     CampaignTrigger,
+    CampaignNewComponent,
     TriggerComponent,
     PromotionComponent,
     SelectPromotion, 
@@ -70,7 +72,7 @@ import { UserProfileService } from './user-profile/user-profile.service';
     CKEditorModule,
     NgxPaginationModule,
     ChartsModule,
-    ServiceWorkerModule.register('/ngsw-worker.js')
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
   providers: [
                LoginService,

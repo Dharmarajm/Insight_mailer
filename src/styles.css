@@ -3,6 +3,7 @@
 
 body{
 	margin: 0;
+	background-color: #f6f6f6;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -15,7 +16,141 @@ body{
 
 @media (min-width: 1200px){
 	.container {
-	    width: 1280px;
+	    width: 1024px;
 	    margin: auto;
 	}
+}
+
+.page-title{
+    font-size: 20px;
+    font-weight: 400;
+    color: #333333;
+    margin-bottom: 0;
+}
+
+.filters{
+  display: inline-block;
+  width: 100%;
+  /*margin-top: 30px;*/
+}
+
+.filters .page-title{
+  display: inline-flex;
+  /*margin-top: 25px;*/
+}
+
+.filters div{
+  float: right;
+  display: flex;
+  align-items: center;
+}
+
+.filters .mat-form-field{
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
+    background-color: #0cc2ab;
+}
+
+.float-right{
+	float: right !important;
+}
+
+.row{
+	margin: 0 -10px;
+}
+
+.ngx-pagination .current {
+    background: #0dc2ab !important;
+    color: #fefefe !important;
+}
+
+.ngx-pagination a, .ngx-pagination button {
+    color: #494949 !important;
+}
+
+
+.ngx-pagination li {
+    border-radius: 4px !important;
+}
+
+.card-shadow{
+	box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+
+.promotion-popup .half-width{
+	width: 48%;
+	font-size: 14px;
+}
+
+.promotion-popup button{
+	margin-left: 10px;
+}
+
+.promotion-popup .mat-grid-tile .mat-figure{
+	justify-content: flex-start;
+}
+
+.promotion-popup mat-form-field textarea{
+	min-height: 50px;
+}
+
+.popup-select{
+  width: 100%;
+  height: 100%;
+}
+
+.popup-select h1{
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.popup-select .table-scroll{
+	height: 330px;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.popup-select .table{
+  padding: 10px;
+}
+
+.popup-select .table tr th{
+  text-align: left;
+}
+
+.popup-select .table tr td:first-child, .popup-select .table tr td:last-child, .popup-select .table tr th:first-child, .popup-select .table tr th:last-child {
+  text-align: center;
+}
+
+.popup-select .table td img {
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: 1px solid #dedede;
+}
+
+.popup-select .table thead th{
+  padding: 10px 0;
+  border-bottom: 1px solid #dedede;
+  font-size: 13px;
+}
+
+.popup-select .table tbody td{
+  border-bottom: 1px solid #dedede;
+  font-size: 12px;
+}
+
+.popup-select .table tbody tr:last-child td{
+  border-bottom: 0px solid #dedede;
+}
+
+.popup-select .table tbody tr:hover {
+    background-color: #ddf1ef;
+    cursor: pointer;
 }

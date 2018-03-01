@@ -1,126 +1,82 @@
-<app-shared></app-shared>
-<button mat-raised-button color="primary" (click)="promote()"> Create Promotion </button>
-<!--  {{start_date}} {{end_date}} -->
-<div class="example-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-  </div>
-  
-                <mat-grid-list cols="5" rowHeight="400px">
-                <mat-grid-tile *ngFor="let promotion of promotions| paginate: {itemsPerPage: 5, currentPage:page1, id:'1'} let i = index" class="example-card">
-                <mat-card>
-  <mat-card-header >
-  </mat-card-header>
-<div class="card-container">
-  <div class="card">
-    <div class="side">
-
- <mat-card class="temp"> <img mat-card-image [src]="promotion.inventory.find_by_asin[0].small_image"  alt="Image"></mat-card>
- </div>
-
- <div class="side back">
- <table class="table" width="60%" height="40%" align="center">
-  <tr>
-  <th>ASIN</th><td>{{ promotion.inventory.asin }}</td></tr>
-  <tr><th>SKU</th><td>{{ promotion.inventory.sku }}</td></tr>
-  <tr><th>TITLE</th><td>{{ promotion.inventory.find_by_asin[0].title }}</td></tr>
-  <tr><th>PRICE</th><td>{{ promotion.inventory.price_paisas }}</td></tr>
-  <tr><th>QTY</th><td>{{ promotion.inventory.quantity }}</td></tr></table>
-  
-  
- 
- 
- </div>
+<div class="mat-page-content">
+  <div class="container">
+    <div class="filters">
+      <h1 class="page-title">My Promotions</h1>
+      <div>
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <!--button mat-mini-fab>
+          <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+        </button-->
+        <button mat-mini-fab (click)="promote()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <mat-grid-list cols="4" rowHeight="520px">
+        <mat-grid-tile *ngFor=" let promotion of promotions| paginate: {itemsPerPage: 5, currentPage:page1, id:'1'} let i = 'index'">
+          <mat-card>
+            <div class="product-img">
+              <img [src]="promotion.inventory.find_by_asin[0].small_image">
+              <div class="product-details">
+                <h4>ASIN:&nbsp;<span>{{ promotion.inventory.asin }}</span></h4>
+                <h4>SKU:&nbsp;<span>{{ promotion.inventory.sku }}</span></h4>
+                <h4>TITLE:&nbsp;<span>{{ promotion.inventory.find_by_asin[0].title }}</span></h4>
+                <h4>PRICE:&nbsp;<span>{{ promotion.inventory.price_paisas }}</span></h4>
+                <h4>QTY:&nbsp;<span>{{ promotion.inventory.quantity }}</span></h4>
+              </div>
+            </div>
+            <mat-card-content>
+              <div class="modify">
+                <button mat-icon-button (click)="promotion_edit(promotion.id)">
+                  <mat-icon>mode_edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="promotion_delete(promotion.id,$index)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <h4>{{ promotion?.promotion_title }} </h4>
+              <p>{{ promotion.inventory.find_by_asin[0].title }} </p>
+              <div class="price">
+                <span><s>&#8377;{{ promotion.inventory.price_paisas }}</s>&nbsp;<b> &#8377;{{  promotion?.discount_price }}</b></span>
+                <mat-slide-toggle [color]="primary" [checked]="promotion?.enable" (change)=enable($event,promotion.id,promotion.inventory.id)></mat-slide-toggle>
+              </div>
+            </mat-card-content>
+            <mat-card-footer>
+              <mat-grid-list cols="2" rowHeight="65px">
+                <mat-grid-tile>
+                  <mat-form-field>
+                    <input matInput [min]="min_date" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="start_date[i]" placeholder="Start date">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field>
+                    <input matInput [min]="start_date[i]" [max]="maxDate" [matDatepicker]="picker" [(ngModel)]="end_date[i]" placeholder="End date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <mat-grid-list cols="1" rowHeight="58px">
+                <mat-grid-tile>
+                    <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="primary">Preview</button>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </mat-card-footer>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div class="row">
+      <mat-grid-list cols="1" rowHeight="60px">
+        <mat-grid-tile>
+          <pagination-controls (pageChange)="page1 = $event" id="1" maxSize="5" directionLinks="true" autoHide="true"></pagination-controls>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
   </div>
 </div>
-
-
-  <mat-card-subtitle>{{ promotion?.promotion_title }}</mat-card-subtitle>
-  
-   {{ promotion.inventory.find_by_asin[0].title }}
-  {{i}}
-  <mat-card-content>
-  <p>&#8377;<s>{{ promotion.inventory.price_paisas }}</s> &#8377;<b>{{  promotion?.discount_price }}</b>
-  <mat-slide-toggle [color]="primary" [disabled]="promotion?.enable" (change)=enable($event,promotion.id,promotion.inventory.id) style="padding-left: 50%;"></mat-slide-toggle></p>
-
-  <mat-form-field class="example-full-width" style="width: 48%;">
-  <input matInput [min]="min_date" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="start_date" placeholder="Start date">
-  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-  <mat-datepicker #picker1></mat-datepicker>
-</mat-form-field>
-<mat-form-field class="example-full-width" style="width: 48%;">
-  <input matInput [min]="start_date" [max]="maxDate" [matDatepicker]="picker" [(ngModel)]="end_date" placeholder="End date">
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-</mat-form-field></mat-card-content>
-
-  <mat-card-actions>
-    <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="accent" style="margin-left: 30%;" >Preview</button>
-
-    <mat-icon (click)="promotion_delete(promotion.id,$index)">delete</mat-icon>
-    <!--button mat-button>SHARE</button-->
-  </mat-card-actions>
-</mat-card></mat-grid-tile></mat-grid-list>
-
-<pagination-controls (pageChange)="page1 = $event" id="1"
-
-                      maxSize="5"
-
-                      directionLinks="true"
-
-                      autoHide="true" style="cursor: pointer">
-
-                </pagination-controls>
-
-<!--div [innerHtml]="promotion.promotion_template"></div-->
-
-<style>
-
-.card-container {
-  cursor: pointer;
-  height: 150px;
-  perspective: 600;
-  position: relative;
-  width: 150px;
-}
-.card {
-  height: 100%;
-  position: absolute;
-  transform-style: preserve-3d;
-  transition: all 1s ease-in-out;
-  width: 100%;
-}
-.card:hover {
-  transform: rotateY(180deg);
-}
-.card .side {
-  backface-visibility: hidden;
-  border-radius: 6px;
-  height: 100%;
-  position: absolute;
-  overflow: hidden;
-  width: 100%;
-}
-.card .back {
-  background: #eaeaed;
-  color: #0087cc;
-  outline-width: 40px;
-  line-height: 13px;
-  font-size: 10px;
-  transform: rotateY(180deg);
-  width: 172px;
-}
-
-
-
-th, td {
-                    border: 1px solid black;
-                    background-color: white;
-                    }
-                    table{
-                        border: 1px solid black;
-                        width:200px;
-                        
-                    }
-</style>

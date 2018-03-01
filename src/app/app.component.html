@@ -1,8 +1,8 @@
 <header>
   <div class="container">
     <mat-toolbar>
-     <a href="" class="logo">
-         <img src="assets/logo_white.png">
+     <a matTooltip="Home" routerLink="/dashboard" class="logo">
+         <img src="assets/logo_sml.png">
      </a>
       <div>
         <button mat-button routerLink="/dashboard"> Overview </button>
@@ -14,13 +14,17 @@
           <mat-icon>search</mat-icon>
         </button>  -->       
         <span>
-	        <button mat-icon-button>
+	        <button matTooltip="Notification" mat-icon-button>
 	          <mat-icon>notifications_none</mat-icon>
 	        </button>
-	        <button mat-icon-button>
+	        <button matTooltip="Profile" mat-icon-button routerLink="/profile">
 	          <div mat-card-avatar class="avatar-image"></div>
 	        </button>
-	        <button mat-icon-button [matMenuTriggerFor]="menu">
+	        <button matTooltip="logout" mat-icon-button (click)=logout()>
+	          <!--div mat-card-avatar class="avatar-image"></div-->
+	          <mat-icon>power_settings_new</mat-icon>
+	        </button>
+	        <!--button matTooltip="Menu" mat-icon-button [matMenuTriggerFor]="menu">
 	          <mat-icon>more_vert</mat-icon>
 	        </button>
 	        <mat-menu #menu="matMenu">
@@ -32,11 +36,11 @@
 	            <mat-icon>settings</mat-icon>
 	            <span>setting</span>
 	          </button>
-	          <button mat-menu-item>
+	          <button mat-menu-item (click)=logout()>
 	            <mat-icon>power_settings_new</mat-icon>
 	            <span>logout</span>
 	          </button>
-	        </mat-menu>
+	        </mat-menu-->
         </span>
       </div>
     </mat-toolbar>    

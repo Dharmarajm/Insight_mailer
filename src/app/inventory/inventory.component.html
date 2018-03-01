@@ -1,104 +1,165 @@
-  <h1> My Products </h1>
-  <div class="example-header">
-    <mat-form-field>
-    <mat-label>Search</mat-label>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search By ASIN">
-    </mat-form-field>
-  </div>
- <mat-grid-list cols="4" rowHeight="400px">
-  <mat-grid-tile *ngFor="let inventory of inventories| paginate: {itemsPerPage: 5, currentPage:page1, id:'1'} let i = index" class="example-card" >
-  <mat-card>
-  <mat-card-header >
+<div class="mat-page-content">
+  <div class="container">
+    <div class="filters">
+      <h1 class="page-title">My Products</h1>
+      <div>
+        <label>Sort by:</label>
+        <mat-form-field>
+          <mat-select class="example-select" placeholder="Product title" [(ngModel)]="position">
+            <mat-option value="before">Before</mat-option>
+            <mat-option value="after">After</mat-option>
+            <mat-option value="above">Above</mat-option>
+            <mat-option value="below">Below</mat-option>
+            <mat-option value="left">Left</mat-option>
+            <mat-option value="right">Right</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Search</mat-label>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search By ASIN">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <mat-grid-list cols="4" rowHeight="390px">
+        <mat-grid-tile *ngFor=" let inventory of inventories| paginate: {itemsPerPage: 8, currentPage:page1, id:'1'} let i = 'index'" class="example-card">
+          <mat-card>
+            <div class="product-img">
+              <img [src]="inventory?.find_by_asin[0].small_image" alt="Image">
+              <div class="product-details">
+                <h4>ASIN:&nbsp;<span>{{ inventory?.asin }}</span></h4>
+                <h4>SKU:&nbsp;<span>{{ inventory?.sku }}</span></h4>
+                <h4>TITLE:&nbsp;<span>{{ inventory?.find_by_asin[0].title }}</span></h4>
+                <h4>PRICE:&nbsp;<span>{{ inventory?.price_paisas }}</span></h4>
+                <h4>QTY:&nbsp;<span>{{ inventory?.quantity }}</span></h4>
+              </div>
+            </div>
+            <mat-card-content>
+              <p>{{ inventory?.find_by_asin[0].title }}</p>
+            </mat-card-content>
+            <mat-card-footer>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Asin</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>9380658745</td>
+                    <td>
+                      <mat-slide-toggle [checked]="inventory.enable" (change)=inventory_asin($event,inventory.asin)></mat-slide-toggle>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-card-footer>
+          </mat-card>
+  <!--         <mat-card>
+            <div class="card-container">
+              <div class="card">
+                <div class="side">
+                  <mat-card class="temp"> <img mat-card-image [src]="inventory?.find_by_asin[0].small_image" alt="Image"></mat-card>
+                </div>
+                <div class="side back">
+                  <table class="table" width="60%" height="40%" align="center">
+                    <tr>
+                      <th>ASIN</th>
+                      <td>{{ inventory?.asin }}</td>
+                    </tr>
+                    <tr>
+                      <th>SKU</th>
+                      <td>{{ inventory?.sku }}</td>
+                    </tr>
+                    <tr>
+                      <th>TITLE</th>
+                      <td>{{ inventory?.find_by_asin[0].title }}</td>
+                    </tr>
+                    <tr>
+                      <th>PRICE</th>
+                      <td>{{ inventory?.price_paisas }}</td>
+                    </tr>
+                    <tr>
+                      <th>QTY</th>
+                      <td>{{ inventory?.quantity }}</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
 
-  </mat-card-header>
+            <p> {{ inventory?.find_by_asin[0].title }}</p>
 
-<div class="card-container">
-  <div class="card">
-    <div class="side">
+            <mat-card-content>
 
- <mat-card class="temp"> <img mat-card-image [src]="inventory?.find_by_asin[0].small_image"  alt="Image"></mat-card>
- </div>
+              <b>ASIN:<br> {{ inventory?.asin }}</b>
+              <mat-slide-toggle [color]="warn" [checked]="inventory.enable" (change)=inventory_asin($event,inventory.asin)></mat-slide-toggle>
+            </mat-card-content>
+          </mat-card> -->
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div class="row">
+      <mat-grid-list cols="1" rowHeight="60px">
+        <mat-grid-tile>
+          <pagination-controls (pageChange)="page1 = $event" id="1" maxSize="5" directionLinks="true" autoHide="true"></pagination-controls>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
 
- <div class="side back">
- <table class="table" width="60%" height="40%" align="center">
-  <tr>
-  <th>ASIN</th><td>{{ inventory?.asin }}</td></tr>
-  <tr><th>SKU</th><td>{{ inventory?.sku }}</td></tr>
-  <tr><th>TITLE</th><td>{{ inventory?.find_by_asin[0].title }}</td></tr>
-  <tr><th>PRICE</th><td>{{ inventory?.price_paisas }}</td></tr>
-  <tr><th>QTY</th><td>{{ inventory?.quantity }}</td></tr></table> 
- </div>
+<!--     <style>
+      .card-container {
+        cursor: pointer;
+        height: 150px;
+        perspective: 600;
+        position: relative;
+        width: 150px;
+      }
+      
+      .card {
+        height: 100%;
+        position: absolute;
+        transform-style: preserve-3d;
+        transition: all 1s ease-in-out;
+        width: 100%;
+      }
+      
+      .card:hover {
+        transform: rotateY(180deg);
+      }
+      
+      .card .side {
+        backface-visibility: hidden;
+        border-radius: 6px;
+        position: absolute;
+        overflow: hidden;
+        width: 173px;
+        height: 148px;
+      }
+      
+      .card .back {
+        background: #eaeaed;
+        color: black;
+        outline-width: 40px;
+        line-height: 13px;
+        font-size: 10px;
+        transform: rotateY(180deg);
+        width: 172px;
+      }
+      
+      th,
+      td {
+        border: 1px solid black;
+        background-color: white;
+      }
+      
+      table {
+        border: 5px solid #1abc9c;
+        width: 172px;
+        background-color: #1abc9c;
+      }
+    </style> -->
+
   </div>
 </div>
-  
-  <p style="font-size: 13px;"> {{ inventory?.find_by_asin[0].title }}</p>
- 
-  <mat-card-content>
-
-  <b>ASIN:<br> {{ inventory?.asin }}</b><mat-slide-toggle [color]="warn" [checked]="inventory.enable" (change)=inventory_asin($event,inventory.asin) style="padding-left: 80%;"></mat-slide-toggle>
-  </mat-card-content></mat-card></mat-grid-tile>
-   
-</mat-grid-list>
-<pagination-controls (pageChange)="page1 = $event" id="1"
-
-                      maxSize="5"
-
-                      directionLinks="true"
-
-                      autoHide="true" style="cursor: pointer">
-
-                </pagination-controls>
-
-<style>
-
-.card-container {
-  cursor: pointer;
-  height: 150px;
-  perspective: 600;
-  position: relative;
-  width: 150px;
-}
-.card {
-  height: 100%;
-  position: absolute;
-  transform-style: preserve-3d;
-  transition: all 1s ease-in-out;
-  width: 100%;
-}
-.card:hover {
-  transform: rotateY(180deg);
-}
-.card .side {
-  backface-visibility: hidden;
-  border-radius: 6px;
-  position: absolute;
-  overflow: hidden;
-  width: 173px;
-  height: 148px;
-  
-}
-.card .back {
-  background: #eaeaed;
-  color: black;
-  outline-width: 40px;
-  line-height: 13px;
-  font-size: 10px;
-  transform: rotateY(180deg);
-  width: 172px;
-}
-
-th, td {
-                    border: 1px solid black;
-                    background-color: white;
-                    }
-                    table{
-                        border: 5px solid #1abc9c;
-                        width:172px;
-                        background-color: #1abc9c;
-                        
-                    }
-</style>
-
-
-
-

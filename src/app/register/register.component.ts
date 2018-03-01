@@ -41,7 +41,10 @@ public myForm: FormGroup;
     this.RegisterService.register(this.registerdata).subscribe( res => {
         swal("Registered!", "You Have Sucessfully Registered", "success");
         this.router.navigate(['login']);
-    });
+          swal("Registered!", "res.id" , "warning");
+    },
+    error => { console.log(error); }
+    );
    }
 
 }

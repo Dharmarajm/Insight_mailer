@@ -1,43 +1,40 @@
-<mat-card>
-<mat-tab-group>
- <mat-tab label="Login"> 
+<div class="mat-page-content">
+  <div class="container">
+    <mat-grid-list cols="1" rowHeight="550px">
+      <mat-grid-tile>
+        <mat-card>
+          <mat-tab-group>
+             <mat-tab label="Login">
+                <form class="example-form" novalidate (ngSubmit)="login()">
+                <mat-form-field>
+                 <mat-label>Email</mat-label>
+                  <input matInput placeholder="Your@email.com" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email">
+                  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Email is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                 <mat-label>Password</mat-label>
+                  <input matInput [type]="hide ? 'password' : 'text'" placeholder="Your passowrd" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password" autocomplete="off" >
+                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                  <mat-error *ngIf="passwordFormControl.hasError('required')">
+                    Password is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+                <button type="submit" mat-raised-button color="primary" class="float-right"> Login </button>
+              </form>
+            </mat-tab>
+            
+            <mat-tab label="Register"> 
+              <app-register> </app-register>
+            </mat-tab>
 
-  
-  <mat-card>
-
-  <form class="example-form" novalidate (ngSubmit)="login()">
-  <mat-form-field class="example-full-width">
-   <mat-label>Email</mat-label>
-    <input matInput placeholder="Your@email.com" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email">
-    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-      Please enter a valid email address
-    </mat-error>
-    <mat-error *ngIf="emailFormControl.hasError('required')">
-      Email is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-  <mat-form-field class="example-full-width">
-   <mat-label>Password</mat-label>
-    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Your passowrd" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password">
-    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-    <mat-error *ngIf="passwordFormControl.hasError('required')">
-      Password is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-  <button type="submit" mat-raised-button color="primary"> Login </button>
-</form>
-</mat-card>
-
-</mat-tab>
-
-
-<mat-tab label="Register"> 
-<mat-card>
-
-<app-register> </app-register>
-
-</mat-card>
-</mat-tab>
-
-</mat-tab-group>
-</mat-card>
+          </mat-tab-group>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

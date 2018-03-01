@@ -15,11 +15,12 @@ export class PromotionComponent implements OnInit {
 
 public promotions: any;
 min_date: any;
-start_date: any; 
-end_date: any;
-data_enable: any;
+start_date: any[] = [];
+end_date: any[] = [];
+data_enable: any; 
 previewSelected: any;
 data: any;
+edit_data: any;
 
 dataSource = new MatTableDataSource;
 
@@ -34,7 +35,38 @@ dataSource = new MatTableDataSource;
     //  this.showSelected = true;
   }
 
+promotion_edit(id){
+alert(id);
+  this.PromotionService.edit_promotion(id).subscribe( res => {
+    console.log(res);
+    this.edit_data = res;
+    localStorage.setItem('edit_data', this.edit_data);
+let dialogRef1 = this.dialog.open(SelectPromotion, {
+                    width: '1000px',
+                    disableClose: true
+                  });
+
+                  dialogRef1.afterClosed().subscribe(result1 => {
+                    
+                   // if(result1){
+let dialogRef2 = this.dialog.open(CreatePromotion, {
+                    width: '1000px',
+                    disableClose: true,
+                    data: { id:  this.edit_data.inventory.id }
+                  });
+
+                  dialogRef2.afterClosed().subscribe(result2 => {
+                       //this.promotions.unshift(result2);
+                  });
+//}
+                  });
+
+
+    });
+}
+
 promotion_delete(id,index){
+
   this.PromotionService.delete_promotion(id).subscribe( res => {
     console.log(res);
      this.promotions.splice(index, 1);
@@ -84,6 +116,7 @@ promote(){
                   });
 
                   dialogRef1.afterClosed().subscribe(result1 => {
+                    
                     if(result1){
 let dialogRef2 = this.dialog.open(CreatePromotion, {
                     width: '1000px',
@@ -112,11 +145,12 @@ export class SelectPromotion {
 name: string;
 inventories: any;
 id: number = 0;
-
+edit_data1: any;
   constructor(
     public dialogRef1: MatDialogRef<SelectPromotion>,private PromotionService:PromotionService) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
 ngOnInit() {
+  this.edit_data1 = localStorage.getItem('edit_data');
       this.PromotionService.getinventories().subscribe( res => {
       this.inventories = res;
     });
@@ -152,7 +186,7 @@ ok(name): void {
 export class CreatePromotion {
 
 name: string;
-
+edit_data1: any;
   
 
   data1:any;
@@ -184,8 +218,10 @@ name: string;
 
 
   ngOnInit() {
+  this.edit_data1 = localStorage.getItem('edit_data');
       this.PromotionService.getdata(this.data.id).subscribe( res => {
       this.data1 = res;
+
     });
 
      this.myGroup = new FormGroup({ firstName: new FormControl() });

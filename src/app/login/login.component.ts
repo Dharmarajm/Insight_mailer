@@ -23,6 +23,7 @@ data:any;
 status:any;
 utterance:any;
 voices:any;
+response:any;
 
  emailFormControl = new FormControl('', [
     Validators.required,
@@ -43,10 +44,13 @@ voices:any;
  this.data = {"auth":{"user_email": this.email,"password": this.password}}
   this.LoginService.userlogin(this.data).subscribe( res => {
   this.status = res;
+  alert(res);
+  this.response = res;
     this.utterance = new SpeechSynthesisUtterance('Hey You Have Succesfulli Logged In');
     //this.voices = window.speechSynthesis.getVoices();
       (<any>window).speechSynthesis.speak(this.utterance);
-       this.router.navigate(['inventory']);
+      sessionStorage.setItem('prathip', this.response.id);
+       this.router.navigate(['dashboard']);
    },
    error => {
     swal("Oops!", "Login Failed", "error") 

@@ -16,9 +16,9 @@ export class CampaignService {
     }
     
 
-    //edit_campaign(id){
-    // return this.http.put('http://192.168.1.64:3021/campaigns/'+id);
-   // }
+    edit_campaign(campaign_id){
+     return this.http.get('http://192.168.1.64:3021/campaigns/'+ campaign_id);
+    }
 
 
     delete_campaign(id) {

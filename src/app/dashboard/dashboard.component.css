@@ -25,13 +25,6 @@
 	width:100% !important;
 }*/
 
-
-.page-title{
-    font-size: 24px;
-    font-weight: 500;
-    color: #333333;  
-}
-
 mat-grid-list{
   margin:10px 0px;
 }
@@ -39,11 +32,13 @@ mat-grid-list{
 mat-card{
     width: 100%;
     margin: 10px;
+    padding: 15px;
 }
 
 mat-card-title{
-  font-size: 20px;
-  color: #212121;
+  font-size: 16px;
+  color: #433e3b;
+  margin-bottom: 26px;
 }
 
 mat-select{
@@ -57,6 +52,16 @@ mat-select{
     font-size: 14px;
 }
 
+/*.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+}*/
+
+.mat-header-cell {
+    font-size: 14px;
+    font-weight: 600;
+    color: #413d3a;
+}
+
 .overview mat-card mat-icon{
     position: absolute;
     right: 15px;
@@ -64,7 +69,7 @@ mat-select{
     height: auto;
     width: auto;
     font-size: 30px;
-    color: #f84c7c;
+    color: #7cc387;
 }
 
 .overview mat-card h2{
@@ -76,9 +81,99 @@ mat-select{
 
 .overview mat-card p{
     margin: 0;
-    color: #97989a;
+    font-weight: 200;
+    color: #313131;
+}
+
+.line-chart mat-card-title{
+  margin-bottom: 30px;
 }
 
 .doughnut-chart mat-card{
   min-height: 355px;
+}
+
+.doughnut-chart mat-card button{
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    color: #4c4c4c;
+}
+
+.doughnut-chart mat-card-footer{
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.doughnut-chart mat-card-footer{
+  margin: 35px -15px -15px -15px;
+}
+
+.mat-header-row, .mat-row {
+    border-bottom-color: rgba(0,0,0, .07);
+}
+
+.mat-column-id {
+    max-width: 15%;
+}
+
+.mat-column-product_list {
+    max-width: 65%;
+}
+
+.mat-column-count {
+    max-width: 20%;
+    text-align: center;
+}
+
+.mat-cell.mat-column-count span{
+    background-color: #7cc387;
+    padding: 5px 10px;
+    border-radius: 50%;
+    display: inline-flex;
+    color: #fff;
+}
+
+.doughnut-label{
+    display: inline-flex;
+    align-items: flex-start;
+    margin: 0 10px;
+}
+
+.doughnut-label span:first-child{
+    background-color: #c9e6ce;
+    padding: 10px;
+    border-radius: 4px;
+    height: 20px;
+    margin-right: 15px;
+}
+
+.doughnut-label h3{
+  margin:0;
+}
+
+.doughnut-label p{
+  margin: 0;
+  font-size: 14px;
+}
+
+::ng-deep .mat-form-field-ripple {
+    background-color: #0dc2ab;
+}
+
+::ng-deep .mat-form-field-underline {
+    background-color: rgba(188, 187, 187, 0.42);
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #0dc2ab;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #0dc2ab;
+}
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #0dc2ab;
 }

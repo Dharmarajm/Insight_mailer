@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CampaignService } from './campaign.service';
 import { Observable } from 'rxjs/Rx';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Customer, Address } from './trigger.interface';
 
@@ -18,9 +19,9 @@ export class CampaignComponent implements OnInit {
   name: string = "test1";
   ckeditorContent:any;
   ckeConfig: any;
-public  campaings: any;
+  public  campaings: any;
 
-  constructor(public dialog: MatDialog,private CampaignService:CampaignService) { }
+  constructor(public dialog: MatDialog,private CampaignService:CampaignService,private router:Router) { }
 
   ngOnInit() {
 
@@ -51,12 +52,14 @@ this.ckeConfig = {
   this.ckeditorContent = `<p>My HTML</p>`;
   }
 
-campaign_edit(id,index){
- // this.CampaignService.edit_campaign(id).subscribe( res => {
- //   console.log(res);
-    //this.campaings.splice(index, 1);
- //   });
+campaign_edit(id){
+    this.router.navigate(['new_campaign', id]);
 }
+
+
+new_campaign(){
+     this.router.navigate(['new_campaign']);
+  }
 
 
 campaign_delete(id,index){

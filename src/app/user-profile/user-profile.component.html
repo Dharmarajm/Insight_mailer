@@ -1,4 +1,172 @@
-<form class="example-form" novalidate (ngSubmit)="userprofile()">
+<form [formGroup]="myForm" class="example-form" novalidate (ngSubmit)="userprofile()">
+<mat-form-field class="example-full-width">
+ <mat-label>First Name</mat-label>
+    <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name">
+    <mat-error *ngIf="myForm.hasError('required', 'first_name')">
+      First Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+   <mat-label>Last Name</mat-label>
+    <input matInput placeholder="Lastname" formControlName="last_name" class="form-control" id="last_name" name="last_name" [(ngModel)] = "last_name">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width"> <mat-label>Email</mat-label>
+    <input matInput placeholder="Your@email.com*" formControlName="email" class="form-control" id="email" name="email" [(ngModel)] = "email">
+    <mat-error *ngIf="myForm.hasError('required', 'email') && myForm.hasError('email', 'email') ">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="myForm.hasError('required', 'email')">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> <mat-label>Password</mat-label>
+   
+    <input matInput [type]="hide ? 'password' : 'text'" placeholder="old_password" formControlName="password" class="form-control" id="old_password" name="old_password" [(ngModel)] = "old_password">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <mat-error *ngIf="myForm.hasError('required', 'old_password')">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> <mat-label>NewPassword</mat-label>
+   
+    <input matInput [type]="hide ? 'password' : 'text'" placeholder="New_Password" formControlName="password" class="form-control" id="new_password" name="new_password" [(ngModel)] = "new_password">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <mat-error *ngIf="myForm.hasError('required', 'new_password')">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> <mat-label>Confirm_Password</mat-label>
+   
+    <input matInput [type]="hide ? 'password' : 'text'" placeholder="Confirm_Password" formControlName="confirm_password" class="form-control" id="confirm_password" name="confirm_password" [(ngModel)] = "confirm_password">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+    <mat-error *ngIf="myForm.hasError('required', 'confirm_password')">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> <mat-label>Card Number</mat-label>
+    <input matInput placeholder="1654 5412 5412 ****" formControlName="card_number" class="form-control" id="card_number" name="card_number" [(ngModel)] = "card_number">
+    <mat-error *ngIf="myForm.hasError('required', 'card_number')">
+      card_number is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> <mat-label>Subscription Plan</mat-label>
+    <input matInput placeholder="Your subscription plan" formControlName="subscription_plan" class="form-control" id="subscription_plan" name="subscription_plan" [(ngModel)] = "subscription_plan">
+    <mat-error *ngIf="myForm.hasError('required', 'subscription_plan')">
+      subscription_plan is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> <mat-label>Merchant Id</mat-label>
+    <input matInput placeholder="Enter your merchant_id" formControlName="merchant_id" class="form-control" id="merchant_id" name="merchant_id" [(ngModel)] = "merchant_id">
+    <mat-error *ngIf="myForm.hasError('required', 'merchant_id')">
+      merchant_id is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> <mat-label>MarketPlace Id</mat-label>
+    <input matInput placeholder="Enter your marketplace_id" formControlName="marketplace_id" class="form-control" id="marketplace_id" name="marketplace_id" [(ngModel)] = "markerplace_id">
+    <mat-error *ngIf="myForm.hasError('required', 'marketplace_id')">
+      marketplace_id is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> <mat-label>AWS Access Key Id</mat-label>
+    <input matInput placeholder="Enter your AWS AccessKey Id" formControlName="aws_accesskey_id" class="form-control" id="aws_accesskey_id" name="aws_accesskey_id" [(ngModel)] = "aws_accesskey_id">
+    <mat-error *ngIf="myForm.hasError('required', 'aws_accesskey_id')">
+      aws_accesskey_id is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width"> <mat-label>AWS Secret Accesskey Id</mat-label>
+    <input matInput placeholder="Enter your AWS Secret Accesskey Id" formControlName="aws_secret_accesskey_id" class="form-control" id="aws_secret_accesskey_id" name="aws_secret_accesskey_id" [(ngModel)] = "aws_secret_accesskey_id">
+    <mat-error *ngIf="myForm.hasError('required', 'aws_secret_accesskey_id')">
+      aws_secret_accesskey_id is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <button type="submit" [disabled]="!myForm.valid" mat-raised-button color="primary"> Register </button>
+</form>
+
+ <!--p>Form value: {{ myForm.value | json }}</p>
+<p>Form status: {{ myForm.valid | json }}</p-->
+
+
+
+<!-- <form [formGroup]="myForm" class="example-form" novalidate (ngSubmit)="userprofile()">
+<mat-form-field class="example-full-width">
+    <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name">
+    <mat-error *ngIf="myForm.controls.first_name.errors.required">
+      First Name is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Lastname" formControlName="last_name" class="form-control" id="last_name" name="last_name" [(ngModel)] = "last_name">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Your@email.com*" formControlName="email" class="form-control" id="email" name="email" [(ngModel)] = "email">
+    <mat-error *ngIf="myForm.controls.email.errors.required && myForm.controls.email.errors.email ">
+      Please enter a valid email address
+    </mat-error>
+    <mat-error *ngIf="myForm.controls.email.errors.required">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput type=password placeholder="Old_Password" formControlName="old_password" class="form-control" id="password" name="old_password" [(ngModel)] = "old_password">
+    <mat-error *ngIf="myForm.controls.password.errors.required">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput type=password placeholder="New_Password" formControlName="new_password" class="form-control" id="new_password" name="new_password" [(ngModel)] = "new_password">
+    <mat-error *ngIf="myForm.controls.password.errors.required">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput type=password placeholder="Confirm_Password" formControlName="confirm_password" class="form-control" id="confirm_password" name="confirm_password" [(ngModel)] = "confirm_password">
+    <mat-error *ngIf="myForm.controls.password.errors.required">
+      Password is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Card Number" formControlName="card_number" class="form-control" id="card_number" name="card_number" [(ngModel)] = "card_number">
+    <mat-error *ngIf="myForm.controls.first_name.errors.required">
+      Card Number is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="subscription_plan*" formControlName="subscription_plan" class="form-control" id="subscription_plan" name="Subscription_plan" [(ngModel)] = "subscription_plan">
+    <mat-error *ngIf="myForm.controls.first_name.errors.required">
+      Subscription Plan is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Merchant ID*" formControlName="merchant_id" class="form-control" id="merchant_id" name="merchant_id" [(ngModel)] = "merchant_id">
+    <mat-error *ngIf="myForm.controls.merchant_id.errors.required">
+      Merchant ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Marketplace ID" formControlName="marketplace_id" class="form-control" id="marketplace_id" name="marketplace_id" [(ngModel)] = "marketplace_id">
+    <mat-error *ngIf="myForm.controls.marketplace_id.errors.required">
+      Marketplace ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="aws_accesskey_id" name="aws_accesskey_id" [(ngModel)] = "aws_accesskey_id">
+    <mat-error *ngIf="myForm.controls.aws-accesskey_id.errors.required">
+      AWS Accesskey ID is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <button type="submit" [disabled]="!myForm.valid" (click)="userprofile()" mat-raised-button color="primary"> Register </button>
+</form> -->
+
+<!-- <form class="example-form" novalidate (ngSubmit)="userprofile()">
 <mat-form-field class="example-full-width">
     <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name">
     <mat-error *ngIf="myForm.controls.first_name.errors.required">
@@ -72,4 +240,4 @@
     </mat-error>
   </mat-form-field>
   <button type="submit" [disabled]="!myForm.valid" mat-raised-button color="primary"> Register </button>
-</form>
+</form> -->

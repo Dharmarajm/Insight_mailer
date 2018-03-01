@@ -1,4 +1,4 @@
-.example-container {
+/*.example-container {
   display: flex;
   flex-direction: column;
   min-width: 300px;
@@ -35,11 +35,210 @@
 .mat-card{
   padding-top: 25%;
 }
-
+*/
 /*svg image.img{
   float:center;
   object-position: 0 -234px;
 }*/
 
 
+mat-card{
+  /*width: -webkit-fill-available;*/
+  /*width: -moz-available;*/
+  width: 100%;
+  margin: 10px;
+  padding: 0px 15px;
+  min-height: 363px;
+}
 
+/*.mat-grid-list .mat-grid-tile:last-child mat-card {
+    margin: 0;
+}*/
+
+mat-card-content p{
+  font-size: 16px;
+  font-weight: 600;
+  color: #3a3a3a;
+  min-height: 28px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* number of lines to show */
+}
+
+.product-img{
+  position:relative;
+  overflow:hidden;
+  display:block;
+  margin: 0px -15px 16px -15px;
+  height: 230px;
+}
+
+.product-img img{
+  width: 100%;
+}
+
+.product-details{
+  position:absolute;
+  top:0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  /*width: -webkit-fill-available;*/
+/*  width: -moz-available;
+  width: 100%;*/
+  background: rgba(34,34,34,.95);
+  color:white;
+  padding: 10px;
+  border-bottom: 2px solid #EC015D;
+  opacity: 0;
+  animation-name: fadeFromtop;
+  -webkit-animation-name: fadeFromtop;
+  animation-duration: 800ms;
+  -webkit-animation-duration: 800ms;
+  animation-timing-function: ease-out;
+  -webkit-animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+.product-img:hover .product-details{
+  animation-name: fadeFromBottom;
+  -webkit-animation-name: fadeFromBottom;
+  animation-duration: 400ms;
+  -webkit-animation-duration: 400ms;
+  animation-timing-function: ease-in;
+  -webkit-animation-timing-function: ease-in;
+  animation-fill-mode: forwards;
+  -webkit-animation-fill-mode: forwards;
+}
+
+@keyframes fadeFromBottom  {
+    0%{
+        opacity:0;
+        -webkit-transform: translateY(100%);
+        -moz-transform: translateY(100%);
+        -ms-transform: translateY(100%);
+        -o-transform: translateY(100%);
+        transform: translateY(100%);
+    }
+    100%{
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+        -moz-transform: translateY(0px);
+        -ms-transform: translateY(0px);
+        -o-transform: translateY(0px);
+        transform: translateY(0px);
+        display: block;
+    }
+}
+@keyframes fadeFromtop  {
+  0%{
+      opacity:1;
+      -webkit-transform: translateY(0px);
+      -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+      -o-transform: translateY(0px);
+      transform: translateY(0px);
+  }
+  100%{
+      opacity: 0;
+      -webkit-transform: translateY(100%);
+      -moz-transform: translateY(100%);
+      -ms-transform: translateY(400%);
+      -o-transform: translateY(100%);
+      transform: translateY(100%);
+  }
+}
+
+.product-details h4 {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.product-details h4 span{
+  font-weight: 300;
+}
+
+.mat-card-footer{
+  margin: 0px;
+  padding: 10px 0px;
+  border-top: 1px solid #dedede;
+}
+
+.mat-card-footer table {
+    width: 100%;
+}
+
+.mat-card-footer th:first-child{
+  text-align: left;
+}
+
+.mat-card-footer td:last-child{
+  text-align: center;
+}
+
+.mat-card-footer th {
+    font-size: 14px;
+    font-weight: 500;
+    color: #393939;
+}
+
+.mat-card-footer td {
+    font-size: 12px;
+    color: #545454;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+    background-color: #7dc586;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+    background-color: #fff;
+}
+
+::ng-deep .mat-slide-toggle-thumb-container {
+    width: 14px !important;
+    height: 14px !important;
+    top: 3px !important;
+    left: 3px !important;
+}
+
+::ng-deep .mat-slide-toggle-thumb {
+    height: 14px !important;
+    width: 14px !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+}
+
+::ng-deep .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
+    top: 3px !important;
+}
+
+::ng-deep .mat-slide-toggle-bar {
+    position: relative !important;
+    width: 36px !important;
+    height: 20px !important;
+    border-radius: 20px !important;
+}
+
+::ng-deep .mat-form-field-ripple {
+    background-color: #0dc2ab;
+}
+
+::ng-deep .mat-form-field-underline {
+    background-color: rgba(188, 187, 187, 0.42);
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #0dc2ab;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #0dc2ab;
+}
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #0dc2ab;
+}
