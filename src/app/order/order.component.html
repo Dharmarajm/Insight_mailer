@@ -2,18 +2,16 @@
   <div class="container">
     <div class="filters">
       <h1 class="page-title">My Orders </h1>
-      <div>
-        <mat-form-field>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="search">
-        </mat-form-field>
-      </div>
+      <span>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search keyword..">
+      </span>
     </div>
-    <div class="card-shadow">
+    <div class="card-border">
       <mat-table #table [dataSource]="dataSource" matSort>
 
         <!-- Position Column -->
         <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> ID. </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> # </mat-header-cell>
           <mat-cell *matCellDef="let i = index; "> {{ i + 1 }} </mat-cell>
         </ng-container>
 
@@ -41,8 +39,7 @@
         </ng-container>
 
         <ng-container matColumnDef="purchased_at">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Ordered Date
-            <br>(YYYY-MM-DD) </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Ordered Date</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.purchased_at}} </mat-cell>
         </ng-container>
 
@@ -65,7 +62,7 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;">
         </mat-row>
       </mat-table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      <!--mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator-->
     </div>
 
   </div>

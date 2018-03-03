@@ -21,7 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
 import { CampaignComponent, CampaignName, CampaignTemplate, CampaignAsin, CampaignTrigger } from './campaign/campaign.component';
-import { CampaignNewComponent } from './campaign-new/campaign-new.component';
+import { CampaignNewComponent, EditTemplate } from './campaign-new/campaign-new.component';
 import { TriggerComponent } from './campaign/trigger.component';
 import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview } from './promotion/promotion.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -37,6 +37,7 @@ import { CampaignService } from './campaign/campaign.service';
 import { PromotionService } from './promotion/promotion.service';
 import { DashboardService } from './dashboard/dashboard.service';
 import { UserProfileService } from './user-profile/user-profile.service';
+import { AuthGuardService } from './shared/auth-guard.service';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { UserProfileService } from './user-profile/user-profile.service';
     CampaignAsin,
     CampaignTrigger,
     CampaignNewComponent,
+    EditTemplate,
     TriggerComponent,
     PromotionComponent,
     SelectPromotion, 
@@ -82,7 +84,8 @@ import { UserProfileService } from './user-profile/user-profile.service';
                CampaignService,
                PromotionService,
                UserProfileService,
-               DashboardService
+               DashboardService,
+               AuthGuardService
              ],
   entryComponents: [
                 CampaignName,
@@ -91,7 +94,8 @@ import { UserProfileService } from './user-profile/user-profile.service';
                 CampaignTrigger,
                 SelectPromotion, 
                 CreatePromotion,
-                TemplatePreview
+                TemplatePreview,
+                EditTemplate
                ],
   bootstrap: [AppComponent]
 })

@@ -2,20 +2,18 @@
   <div class="container">
     <div class="filters">
       <h1 class="page-title">My Promotions</h1>
-      <div>
-        <mat-form-field>
+      <span>
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-        </mat-form-field>
         <!--button mat-mini-fab>
           <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
         </button-->
         <button mat-mini-fab (click)="promote()">
           <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
         </button>
-      </div>
+      </span>
     </div>
     <div class="row">
-      <mat-grid-list cols="4" rowHeight="520px">
+      <mat-grid-list cols="5" rowHeight="520px">
         <mat-grid-tile *ngFor=" let promotion of promotions| paginate: {itemsPerPage: 5, currentPage:page1, id:'1'} let i = 'index'">
           <mat-card>
             <div class="product-img">
@@ -61,11 +59,12 @@
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>
-              <mat-grid-list cols="1" rowHeight="58px">
+              <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="primary">Preview</button>
+<!--               <mat-grid-list cols="1" rowHeight="65px">
                 <mat-grid-tile>
-                    <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="primary">Preview</button>
+                    
                 </mat-grid-tile>
-              </mat-grid-list>
+              </mat-grid-list> -->
             </mat-card-footer>
           </mat-card>
         </mat-grid-tile>

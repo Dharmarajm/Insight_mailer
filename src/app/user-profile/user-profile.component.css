@@ -1,0 +1,34 @@
+mat-card{
+	width: 70%;
+}
+
+mat-form-field{
+	width: 95%;
+}
+
+.mat-icon-button{
+    position: absolute;
+    right: 0;
+    top: -10px;
+    color: #7d7d7d;
+}
+
+::ng-deep .mat-form-field-ripple {
+    background-color: #0dc2ab;
+}
+
+::ng-deep .mat-form-field-underline {
+    background-color: rgba(188, 187, 187, 0.42);
+}
+
+::ng-deep .mat-focused .mat-form-field-label {
+    color: #0dc2ab;
+}
+
+::ng-deep .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #0dc2ab;
+}
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+    color: #0dc2ab;
+}

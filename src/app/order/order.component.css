@@ -19,25 +19,36 @@
   max-height: 500px;
 }*/
 
-.mat-table {
+/*.mat-table {
   overflow: auto;
   max-height: calc(100vh - 300px);
+}*/
+
+.card-border{
+  background-color: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
 }
 
 .mat-header-cell {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 600;
     color: #333333;
 }
 
 .mat-cell {
-    color: #4e4e4e;
+    color: #645f5b;
+    font-size: 12px;
 }
 
 .mat-header-row {
   position: sticky;
   top: 0;
-  background: white;
+  background: #fbfbfb;
+}
+
+mat-row:nth-child(odd) {
+    background-color: #fbfbfb;
 }
 
 .mat-column-id {
@@ -72,12 +83,28 @@
     justify-content: space-between !important;
 }
 
+::ng-deep .mat-paginator-page-size-label {
+    color: #757575;
+}
+
+::ng-deep .mat-paginator-container .mat-paginator-range-label{
+  color: 757575;
+}
+
+::ng-deep .mat-paginator-container .mat-icon-button{
+  color: #757575;
+}
+
+::ng-deep .mat-paginator-container .mat-icon-button[disabled][disabled]{
+  color: #9e9e9e;
+}
+
 ::ng-deep .mat-form-field-ripple {
     background-color: #0dc2ab;
 }
 
 ::ng-deep .mat-form-field-underline {
-    background-color: rgba(188, 187, 187, 0.42);
+    background-color: rgb(148, 148, 148);
 }
 
 ::ng-deep .mat-focused .mat-form-field-label {

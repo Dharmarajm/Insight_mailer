@@ -16,9 +16,17 @@ body{
 
 @media (min-width: 1200px){
 	.container {
-	    width: 1024px;
+	    width: 1200px;
 	    margin: auto;
 	}
+}
+
+mat-card, .card-border{
+  border: 1px solid #e5e5e5;
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: none !important;
 }
 
 .page-title{
@@ -29,25 +37,61 @@ body{
 }
 
 .filters{
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  /*margin-top: 30px;*/
+  margin-top: 25px;
+  margin-bottom: 10px;
 }
 
 .filters .page-title{
   display: inline-flex;
-  /*margin-top: 25px;*/
+  margin-top: 0px;
 }
 
-.filters div{
+/*.filters div{
   float: right;
   display: flex;
   align-items: center;
-}
+}*/
 
-.filters .mat-form-field{
+/*.filters .mat-form-field{
   margin-left: 20px;
   font-size: 14px;
+}*/
+
+.filters .mat-input-element {
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    padding: 5px 25px 5px 10px;
+    font-size: 13px;
+    color: #333;
+    background-image: url(assets/search.jpg);
+    background-position: 130px 6px;
+    background-repeat: no-repeat;
+    width: 120px;
+}
+
+.filters mat-select{
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    padding: 5px 5px 5px 10px;
+    font-size: 13px;
+    color: #333;
+    /* background-image: url(search.b0f761f….jpg); */
+    /* background-position: 130px 6px; */
+    /* background-repeat: no-repeat; */
+    width: 140px;
+    margin-right: 10px;
+}
+
+.filters label{
+  font-size: 13px;
+  color: #363636;
+  font-weight: 400;
 }
 
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary {
@@ -96,6 +140,20 @@ body{
 
 .promotion-popup mat-form-field textarea{
 	min-height: 50px;
+}
+
+.promotion-popup header{
+  margin: -24px -24px 0 -24px;
+  padding: 10px 24px;
+  margin-bottom: 20px;
+  background-color: #7dc586;
+}
+
+.promotion-popup header h1{
+  margin: 0;
+  font-size: 18px;
+  font-weight: 400;
+  color: #fff;
 }
 
 .popup-select{
@@ -153,4 +211,30 @@ body{
 .popup-select .table tbody tr:hover {
     background-color: #ddf1ef;
     cursor: pointer;
+}
+
+.filters .mat-mini-fab{
+  margin-left: 10px;
+}
+
+.mat-mini-fab {
+    width: 30px !important;
+    height: 30px !important;
+}
+
+.mat-mini-fab .mat-icon {
+    background-repeat: no-repeat;
+    display: inline-block;
+    fill: currentColor;
+    height: 20px;
+    width: 20px;
+}
+
+.mat-mini-fab .mat-button-wrapper {
+    line-height: 20px !important;
+}
+
+.mat-mini-fab .material-icons{
+    font-size: 20px;
+    line-height: 0.8;
 }

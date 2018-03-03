@@ -150,6 +150,7 @@ mat-card-title{
 
 .mat-slide-toggle{
 	margin-top: 5px;
+    margin-left: 10px;    
 }
 
 ::ng-deep .mat-card-header-text {

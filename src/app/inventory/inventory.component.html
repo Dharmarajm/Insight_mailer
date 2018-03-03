@@ -2,10 +2,9 @@
   <div class="container">
     <div class="filters">
       <h1 class="page-title">My Products</h1>
-      <div>
+      <span>
         <label>Sort by:</label>
-        <mat-form-field>
-          <mat-select class="example-select" placeholder="Product title" [(ngModel)]="position">
+          <mat-select class="example-select" placeholder="Product title">
             <mat-option value="before">Before</mat-option>
             <mat-option value="after">After</mat-option>
             <mat-option value="above">Above</mat-option>
@@ -13,15 +12,11 @@
             <mat-option value="left">Left</mat-option>
             <mat-option value="right">Right</mat-option>
           </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search By ASIN">
-        </mat-form-field>
-      </div>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+      </span>
     </div>
     <div class="row">
-      <mat-grid-list cols="4" rowHeight="390px">
+      <mat-grid-list cols="5" rowHeight="390px">
         <mat-grid-tile *ngFor=" let inventory of inventories| paginate: {itemsPerPage: 8, currentPage:page1, id:'1'} let i = 'index'" class="example-card">
           <mat-card>
             <div class="product-img">
@@ -47,7 +42,7 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>9380658745</td>
+                    <td>{{ inventory?.asin }}</td>
                     <td>
                       <mat-slide-toggle [checked]="inventory.enable" (change)=inventory_asin($event,inventory.asin)></mat-slide-toggle>
                     </td>

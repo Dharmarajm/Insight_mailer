@@ -35,15 +35,15 @@
           <mat-card-header>
             <mat-card-title>{{ campaing.campagin_name }}</mat-card-title>
             <div class="nav_ic">
-              <mat-slide-toggle [color]="primary" [checked]="campaing.enable" (change)="enable(campaing.id,$event)"></mat-slide-toggle>
               <button mat-icon-button (click)="campaign_edit(campaing.id)">
                 <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button (click)="campaign_delete(campaing.id,$index)">
                 <mat-icon>delete</mat-icon>
               </button>
+              <mat-slide-toggle [color]="primary" [checked]="campaing.enable" (change)="enable(campaing.id,$event)"></mat-slide-toggle>
             </div>
-            <mat-card-subtitle><p>Asin: <span>  1937707903, 9380658745, 9311122521, 1937707849</span></p></mat-card-subtitle> <!-- <p>{{ campaing.asin }}</p> -->
+            <mat-card-subtitle><p>Asin: <span>  {{ campaing.asin }} </span></p></mat-card-subtitle> <!-- <p>{{ campaing.asin }}</p> -->
           </mat-card-header>
           <mat-card-content>
             <mat-list role="list">

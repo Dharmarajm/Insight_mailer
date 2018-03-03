@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 //import * as swal from 'sweetalert';
 import swal from 'sweetalert2'
 
@@ -13,12 +13,12 @@ import swal from 'sweetalert2'
 })
 export class RegisterComponent implements OnInit {
 
-first_name: string;
-last_name: string;
-email: string;
-password: string;
-phone: number;
-registerdata:any;  
+first_name: any;
+last_name: any;
+email: any;
+password: any;
+phone: any;
+registerdata: any;  
 
   constructor(private RegisterService:RegisterService, private router:Router, private _fb: FormBuilder) { }
 

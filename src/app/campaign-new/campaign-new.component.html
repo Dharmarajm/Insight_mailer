@@ -12,10 +12,10 @@
               <div>
                 <button mat-button matStepperNext>Next</button>
               </div>
-            </form-->{{this.edit_data | json }}
+            </form-->
 
             <ng-template matStepLabel>Fill out your name </ng-template>
-            <mat-grid-list cols="1" rowHeight="380px">
+            <mat-grid-list cols="1" rowHeight="460px">
               <mat-grid-tile>
                 <mat-card class="step1">
                   <mat-card-header>
@@ -48,7 +48,7 @@
                   </mat-card-title>
                   <mat-card-content>
                     <form [formGroup]="secondFormGroup">
-                      <ng-template matStepLabel>Fill out your address</ng-template>
+                      <ng-template matStepLabel>Select your Template</ng-template>
                       <table class="table" width="100%">
                         <thead>
                           <tr>
@@ -60,17 +60,16 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngFor="let template of templates" (click)=templatedata(template)>
+                          <tr *ngFor="let template of templates">
                             <td> <img [src]="template?.image_url" height="100" width="100"> </td>
                             <td>{{template?.name}}</td>
                             <td>{{template?.description}}</td>
                             <td>{{template?.email_limit}}</td>
-                            <td><mat-slide-toggle [color]="primary" [checked]="template?.id == edit_data?.template_id" 
-                              (change)=enable($event,inventory.id)></mat-slide-toggle></td>
+                            <td><mat-slide-toggle [color]="primary" [disabled]="(template.id != id && id != 0)" (change)="template_data(template,$event)"></mat-slide-toggle></td>
                           </tr>
                         </tbody>
                       </table>
-                      <!--mat-form-field>
+                      <!--mat-form-field [checked]="template?.id == edit_data?.template_id" (click)=templatedata(template)>
                         <input matInput placeholder="Address" formControlName="secondCtrl" required>
                       </mat-form-field-->
                     </form>
@@ -89,7 +88,7 @@
 
 
             <ng-template matStepLabel>Select Your asin</ng-template>
-            <mat-grid-list cols="1" rowHeight="450px">
+            <mat-grid-list cols="1" rowHeight="460px">
               <mat-grid-tile>
                 <mat-card class="step3">
                   <mat-card-title>Inventories</mat-card-title>
@@ -109,7 +108,9 @@
                           <td>{{inventory?.find_by_asin[0].title}}</td>
                           <td>{{inventory?.asin}}</td>
                           <td>
-                            <mat-slide-toggle [color]="primary" (change)=asin($event,inventory.id)></mat-slide-toggle>
+                            <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use"
+                            (change)=asin($event,inventory.asin)></mat-slide-toggle>
+                            <mat-icon *ngIf="inventory?.children_in_use" matTooltip="Asin already in use">error_outline</mat-icon>
                           </td>
                           <!--[checked]="inventory.children_in_use"-->
                         </tr>
@@ -157,6 +158,7 @@
                           </div>
                           <div class="panel-body" [formGroupName]="i">
                             <trigger [group]="myForm.controls.addresses.controls[i]"></trigger>
+                            <button mat-raised-button (click)="promotion_template()" color="primary">Template Preview</button>
                           </div>
                         </div>
                       </div>

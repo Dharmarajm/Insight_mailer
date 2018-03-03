@@ -46,7 +46,7 @@ mat-card{
   width: 100%;
   margin: 10px;
   padding: 0px 15px;
-  min-height: 505px;
+  min-height: 490px;
 }
 
 /*.mat-grid-list .mat-grid-tile:last-child mat-card {
@@ -163,6 +163,7 @@ mat-card-content p{
 .mat-card-footer{
   margin: 0px;
   padding: 10px 0px;
+  text-align: center;
 }
 
 ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {

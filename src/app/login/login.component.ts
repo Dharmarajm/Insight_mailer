@@ -44,7 +44,7 @@ response:any;
  this.data = {"auth":{"user_email": this.email,"password": this.password}}
   this.LoginService.userlogin(this.data).subscribe( res => {
   this.status = res;
-  alert(res);
+//  alert(res);
   this.response = res;
     this.utterance = new SpeechSynthesisUtterance('Hey You Have Succesfulli Logged In');
     //this.voices = window.speechSynthesis.getVoices();

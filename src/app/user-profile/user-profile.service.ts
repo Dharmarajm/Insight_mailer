@@ -12,7 +12,7 @@ export class UserProfileService {
   constructor(private http:HttpClient) { }
 
 userprofileregister(userprofiledata) {
-        return this.http.post('http://192.168.1.64:3022/users',userprofiledata);
+        return this.http.post('http://192.168.1.64:3021/users/user_profile',userprofiledata);
     }
 
 }

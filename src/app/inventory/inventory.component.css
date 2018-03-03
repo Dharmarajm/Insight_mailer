@@ -56,9 +56,9 @@ mat-card{
 }*/
 
 mat-card-content p{
-  font-size: 16px;
-  font-weight: 600;
-  color: #3a3a3a;
+  font-size: 12px;
+  font-weight: 400;
+  color: #545454;
   min-height: 28px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -73,6 +73,7 @@ mat-card-content p{
   display:block;
   margin: 0px -15px 16px -15px;
   height: 230px;
+  cursor: pointer;
 }
 
 .product-img img{

@@ -4,31 +4,43 @@
     <div class="overview row">
       <mat-grid-list cols="4" rowHeight="110px" *ngFor="let count of counts">
         <mat-grid-tile>
-          <mat-card class="example-card">
+
+          
+
+
+         <mat-card class="example-card">
             <mat-icon>grade</mat-icon>
-            <h2>{{count.product_count}}</h2>
-            <p>Total Products</p>
+            <span>
+              <h2>{{count.product_count}}</h2>
+              <p>Total Products</p>
+            </span>
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-card class="example-card">
             <mat-icon>shopping_cart</mat-icon>
-            <h2>{{count.order_count}}</h2>
-            <p>Total Orders</p>
+            <span>
+              <h2>{{count.order_count}}</h2>
+              <p>Total Orders</p>
+            </span>
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-card class="example-card">
             <mat-icon>near_me</mat-icon>
-            <h2>{{count.order_count}}</h2>
-            <p>Email Sent</p>
+              <span>
+                <h2>{{count.sent_email}}</h2>
+                <p>Email Sent</p>
+              </span>
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-card class="example-card">
             <mat-icon>email</mat-icon>
-            <h2>{{count.order_count}}</h2>
-            <p>Email Scheduled</p>
+              <span>
+                <h2>{{count.scheduled_email}}</h2>
+                <p>Email Scheduled</p>
+              </span>
           </mat-card>
         </mat-grid-tile>
         <!--       <mat-grid-tile [colspan]="1" [rowspan]="1" width="100%" *ngFor="let count of counts">
@@ -50,12 +62,12 @@
     </div>
 
     <div class="line-chart row">
-      <mat-grid-list cols="2" rowHeight="320px">
+      <mat-grid-list cols="2" rowHeight="370px">
         <mat-grid-tile>
           <mat-card>
             <mat-card-title>
               Order Statistics
-              <mat-select placeholder="select filter">
+              <mat-select placeholder="select filter" (change)="order_stat_filter($event)">
                 <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
               </mat-select>
             </mat-card-title>
@@ -102,15 +114,15 @@
               <div class="doughnut-label">
                 <span></span>
                 <span>
-                  <h3>500</h3>
-                  <p>Total Customers</p>
+                  <h3>{{ happy_customer }}</h3>
+                  <p>Happy Customers</p>
                 </span>
               </div>
               <div class="doughnut-label">
                 <span></span>
                 <span>
-                  <h3>500</h3>
-                  <p>Total Customers</p>
+                  <h3>{{ unhappy_customer }}</h3>
+                  <p>UnHappy Customers</p>
                 </span>
               </div>
             </mat-card-footer>

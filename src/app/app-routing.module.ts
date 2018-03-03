@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, CanActivate } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -11,17 +11,19 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
+import { AuthGuardService as AuthGuard } from './shared/auth-guard.service';
+
 const routes: Routes = [
                          { path: '', component: LoginComponent, pathMatch: 'full' },
                          { path: 'register', component: RegisterComponent },
-                         { path: 'inventory', component: InventoryComponent },
-                         { path: 'order', component: OrderComponent },
-                         { path: 'campaign', component: CampaignComponent },
-                         { path: 'new_campaign', component: CampaignNewComponent },
-                         { path: 'new_campaign/:id', component: CampaignNewComponent },
-                         { path: 'promotion', component: PromotionComponent },
-                         { path: 'dashboard', component: DashboardComponent },
-                         { path: 'profile', component: UserProfileComponent },
+                         { path: 'inventory', component: InventoryComponent, canActivate: [AuthGuard] },
+                         { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
+                         { path: 'campaign', component: CampaignComponent, canActivate: [AuthGuard] },
+                         { path: 'new_campaign', component: CampaignNewComponent, canActivate: [AuthGuard] },
+                         { path: 'new_campaign/:id', component: CampaignNewComponent, canActivate: [AuthGuard] },
+                         { path: 'promotion', component: PromotionComponent, canActivate: [AuthGuard] },
+                         { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+                         { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
                          { path: '**', component: LoginComponent }
                        ];
 
