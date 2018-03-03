@@ -26,7 +26,10 @@ marketplace_id: string;
 aws_accesskey_id: string;
 aws_secret_accesskey_id: string;
 //userprofile: any;
-userprofiledata: any  
+userprofiledata: any 
+hide1: boolean = true; 
+hide2: boolean = true;
+hide3: boolean = true;
 
   constructor(private UserProfileService:UserProfileService, private router:Router, private _fb: FormBuilder) { }
 

@@ -24,6 +24,7 @@ inventories:any;
 edit_id: any;
 edit_data: any;
 id: number = 0;
+name: any;
 
 public myForm: FormGroup;
 public formArray: any;
@@ -165,6 +166,10 @@ promotion_template(){
 export class EditTemplate {
 
 name: string;
+
+//editor
+ckeConfig: any;
+ckeditorContent: any;
 
   constructor(
     public dialogRef: MatDialogRef<EditTemplate>) { } //,@Inject(MAT_DIALOG_DATA) public data: any

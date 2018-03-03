@@ -12,6 +12,7 @@ export class InventoryComponent implements OnInit {
 
 inventories:any;
 dataSource = new MatTableDataSource;
+page1: any;
 
   constructor(private InventoryService:InventoryService ) { }
 

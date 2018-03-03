@@ -17,6 +17,8 @@ review: any;
 happy_customer: any;
 unhappy_customer: any;
 
+
+
 displayedColumns1 = ['id', 'product_list', 'count'];
 dataSource1 = new MatTableDataSource;
 
@@ -88,11 +90,11 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
     }    
   };
 
-   private chartData = [
+   public chartData = [
     { data: [], label: '' }
   ];
 
- private chartLabels = [];
+ public chartLabels = [];
 
   ChartColors = [
     { 
@@ -129,7 +131,7 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
   }
   };
 
-  private chartData1 = [
+  public chartData1 = [
     { data: [] }
   ];
 
@@ -143,11 +145,11 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
     showLine: false
   };
 
-private  chartData2 = [
+public  chartData2 = [
     { data: [330, 600, 260, 700, 320, 530], label: 'Account A' }
   ];
 
- private chartLabels2 = ['January', 'February', 'March', 'April', 'May', 'June'];
+ public chartLabels2 = ['January', 'February', 'March', 'April', 'May', 'June'];
 
   onChart2Click(event) {
     console.log(event);

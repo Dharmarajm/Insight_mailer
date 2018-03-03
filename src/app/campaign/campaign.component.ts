@@ -20,6 +20,7 @@ export class CampaignComponent implements OnInit {
   ckeditorContent:any;
   ckeConfig: any;
   public  campaings: any;
+  page1: any;
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService,private router:Router) { }
 
@@ -160,8 +161,9 @@ name: string;
   }
 
 ok(name): void {
-localStorage.setItem("campaign",name);
-     this.dialogRef1.close(name);
+this.name = name;
+localStorage.setItem("campaign",this.name);
+     this.dialogRef1.close(this.name);
   }
 
 
@@ -203,6 +205,7 @@ templates:any;
 export class CampaignAsin {
 
 inventories:any;
+name: any;
 
   constructor(
     public dialogRef3: MatDialogRef<CampaignAsin>,

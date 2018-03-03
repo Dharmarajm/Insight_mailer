@@ -8,7 +8,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
 
-constructor(private router:Router) {  }
+state: any;
+
+constructor(private router:Router) { }
 
 logout(){
 sessionStorage.clear();

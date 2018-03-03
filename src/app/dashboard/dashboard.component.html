@@ -4,10 +4,6 @@
     <div class="overview row">
       <mat-grid-list cols="4" rowHeight="110px" *ngFor="let count of counts">
         <mat-grid-tile>
-
-          
-
-
          <mat-card class="example-card">
             <mat-icon>grade</mat-icon>
             <span>
@@ -102,9 +98,9 @@
               Customer Statistics
             </mat-card-title>
 
-            <button mat-icon-button>
+            <!-- <button mat-icon-button>
               <mat-icon>more_vert</mat-icon>
-            </button>
+            </button> -->
 
             <mat-card-content>
               <canvas height="210px" baseChart [chartType]="'doughnut'" [datasets]="chartData1" [colors]="Doughnutcolors" [options]="chartOptions1" [legend]="true" (chartClick)="onChart1Click($event)">
@@ -134,14 +130,14 @@
               Top Product
             </mat-card-title>
 
-            <button mat-icon-button>
+            <!-- <button mat-icon-button>
               <mat-icon>more_vert</mat-icon>
-            </button>
+            </button> -->
 
             <mat-card-content>
               <mat-table #table [dataSource]="dataSource1">
                 <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
                   <mat-cell *matCellDef="let i = index "> {{ i + 1  }} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="product_list">
@@ -163,13 +159,13 @@
             <mat-card-title>
               Latest Orders
             </mat-card-title>
-            <button mat-icon-button>
+            <!-- <button mat-icon-button>
               <mat-icon>more_vert</mat-icon>
-            </button>
+            </button> -->
             <mat-card-content>
               <mat-table #table [dataSource]="dataSource2">
                 <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
                   <mat-cell *matCellDef="let i = index "> {{ i + 1 }} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">

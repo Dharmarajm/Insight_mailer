@@ -15,7 +15,6 @@ import swal from 'sweetalert2'
 })
 export class LoginComponent implements OnInit {
 
-hide = true;
 user:any;
 email:any;
 password:any;
@@ -24,6 +23,7 @@ status:any;
 utterance:any;
 voices:any;
 response:any;
+hide: boolean = true;
 
  emailFormControl = new FormControl('', [
     Validators.required,
@@ -50,6 +50,7 @@ response:any;
     //this.voices = window.speechSynthesis.getVoices();
       (<any>window).speechSynthesis.speak(this.utterance);
       sessionStorage.setItem('prathip', this.response.id);
+      console.log(this.response.id);
        this.router.navigate(['dashboard']);
    },
    error => {

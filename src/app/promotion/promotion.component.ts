@@ -22,6 +22,9 @@ previewSelected: any;
 data: any;
 edit_data: any;
 
+
+page1: any;
+
 dataSource = new MatTableDataSource;
 
   constructor(public dialog: MatDialog,private PromotionService:PromotionService) { }
@@ -170,7 +173,9 @@ if (event.checked){
     this.dialogRef1.close();
   }
 
-ok(name): void {
+
+//name
+ok(): void {
      this.dialogRef1.close(this.id);
   }
 
@@ -185,9 +190,22 @@ ok(name): void {
 })
 export class CreatePromotion {
 
+// data_types
+product_asin: any;
+product_title: any;
+product_price: any;
+discount_price: any;
+product_description: any;
+personal_msg: any;
+promotion_title: any;
+coupon_code: any;
+support_email: any;
+mail_frequency: any;
+
+
 name: string;
 edit_data1: any;
-  
+edit_data: any;
 
   data1:any;
   public PromotionForm: FormGroup;

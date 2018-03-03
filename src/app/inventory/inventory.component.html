@@ -3,7 +3,7 @@
     <div class="filters">
       <h1 class="page-title">My Products</h1>
       <span>
-        <label>Sort by:</label>
+        <!-- <label>Sort by:</label>
           <mat-select class="example-select" placeholder="Product title">
             <mat-option value="before">Before</mat-option>
             <mat-option value="after">After</mat-option>
@@ -11,12 +11,12 @@
             <mat-option value="below">Below</mat-option>
             <mat-option value="left">Left</mat-option>
             <mat-option value="right">Right</mat-option>
-          </mat-select>
+          </mat-select> -->
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
       </span>
     </div>
     <div class="row">
-      <mat-grid-list cols="5" rowHeight="390px">
+      <mat-grid-list cols="4" rowHeight="390px">
         <mat-grid-tile *ngFor=" let inventory of inventories| paginate: {itemsPerPage: 8, currentPage:page1, id:'1'} let i = 'index'" class="example-card">
           <mat-card>
             <div class="product-img">

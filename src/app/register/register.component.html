@@ -1,8 +1,8 @@
 <form [formGroup]="myForm" class="example-form" novalidate (ngSubmit)="register()">
 <mat-form-field class="example-full-width">
- <mat-label>First Name</mat-label>
+ <mat-label>First Name*</mat-label>
     <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name" autocomplete="off" >
-    <mat-error *ngIf="myForm.hasError('required', 'first_name')">
+    <mat-error *ngIf="myForm.get('first_name').hasError('required')">   // myForm.hasError('required', 'first_name')
       First Name is <strong>required</strong>
     </mat-error>
   </mat-form-field>
@@ -12,35 +12,35 @@
     <input matInput placeholder="Lastname" formControlName="last_name" class="form-control" id="last_name" name="last_name" [(ngModel)] = "last_name" autocomplete="off">
   </mat-form-field>
 
-  <mat-form-field class="example-full-width"> <mat-label>Email</mat-label>
+  <mat-form-field class="example-full-width"> <mat-label>Email*</mat-label>
     <input matInput placeholder="Your@email.com*" formControlName="email" class="form-control" id="email" name="email" [(ngModel)] = "email" autocomplete="off" >
-    <mat-error *ngIf="myForm.hasError('required', 'email')">
+    <mat-error *ngIf="myForm.get('email').hasError('required') ">
       Email is <strong>required</strong>
     </mat-error>
-    <mat-error *ngIf="myForm.hasError('email', 'email') ">
+    <mat-error *ngIf="myForm.get('email').hasError('email')">   
       Please enter a valid email address
     </mat-error>
   </mat-form-field>
-  <mat-form-field class="example-full-width"> <mat-label>Password</mat-label>
+  <mat-form-field class="example-full-width"> <mat-label>Password*</mat-label>
    
     <input matInput [type]="hide ? 'password' : 'text'" placeholder="Space not allowed" formControlName="password" class="form-control" id="password" name="password" [(ngModel)] = "password" autocomplete="off" >
-    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-    <mat-error *ngIf="myForm.hasError('required', 'password')">
+    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <mat-error *ngIf="myForm.get('password').hasError('required')"> 
       Password is <strong>required</strong>
     </mat-error>
-    <mat-error *ngIf="myForm.hasError('minLength', 'password')">
+    <mat-error *ngIf="myForm.get('password').hasError('minLength')">
       Password is <strong>required</strong>
     </mat-error>
-    <mat-error *ngIf="myForm.hasError('pattern', 'password')">
+    <mat-error *ngIf="myForm.get('password').hasError('pattern')">
       Password should contain <strong>minimum one number and a special character</strong>
     </mat-error>
   </mat-form-field>
-  <mat-form-field class="example-full-width"> <mat-label>Phone Number</mat-label>
+  <mat-form-field class="example-full-width"> <mat-label>Phone Number*</mat-label>
     <input matInput placeholder="975094****" formControlName="phone" class="form-control" id="phone" name="phone" [(ngModel)] = "phone" autocomplete="off" >
-    <mat-error *ngIf="myForm.hasError('required', 'phone')">
+    <mat-error *ngIf="myForm.get('phone').hasError('required')">
       Phone is <strong>required</strong>
     </mat-error>
-    <mat-error *ngIf="myForm.hasError('minlength', 'phone')">
+    <mat-error *ngIf="myForm.get('phone').hasError('minlength')"> 
       Enter a <strong>Valid</strong> phone number
     </mat-error>
   </mat-form-field>
