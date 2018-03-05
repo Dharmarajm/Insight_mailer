@@ -4,7 +4,7 @@ import { PromotionService } from './promotion.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
-
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-promotion',
@@ -68,12 +68,40 @@ let dialogRef2 = this.dialog.open(CreatePromotion, {
     });
 }
 
-promotion_delete(id,index){
+promotion_delete(promotion_data,index){
 
-  this.PromotionService.delete_promotion(id).subscribe( res => {
+swal({
+  title: 'Are you sure?',
+  text: 'You will not be able to recover this file!',
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, keep it'
+}).then((result) => {
+  if (result.value) {
+  this.PromotionService.delete_promotion(promotion_data.id).subscribe( res => {
     console.log(res);
-     this.promotions.splice(index, 1);
+    console.log(this.promotions.indexOf(promotion_data));
+     this.promotions.splice(this.promotions.indexOf(promotion_data), 1);   
     });
+    swal(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  // For more information about handling dismissals please visit
+  // https://sweetalert2.github.io/#handling-dismissals
+  } else if (result.dismiss === swal.DismissReason.cancel) {
+    swal(
+      'Cancelled',
+      'Your file is safe :)',
+      'error'
+    )
+  }
+})
+
+  
+   
 }
 
 enable(event,id,inventory_id){
@@ -128,7 +156,9 @@ let dialogRef2 = this.dialog.open(CreatePromotion, {
                   });
 
                   dialogRef2.afterClosed().subscribe(result2 => {
+                      if(result2){
                        this.promotions.unshift(result2);
+                      }
                   });
 }
                   });
@@ -264,6 +294,12 @@ ok(name): void {
      this.dialogRef2.close();
   }
 
+  discount(){
+     if(this.discount_price >= this.data1.price_paisas){
+          alert("promotion price should be less than actual price");
+          this.discount_price= this.data1.price_paisas - 1;
+     }
+  }
 
 }
 
@@ -287,4 +323,3 @@ ok(): void {
 
 
 }
-

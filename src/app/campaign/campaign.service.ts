@@ -52,4 +52,8 @@ export class CampaignService {
         return this.http.put('http://192.168.1.64:3021/campaigns/cam_enable',{id: _id,enable: status});
     }
 
+    name_uniq(name){
+      return this.http.post('http://192.168.1.64:3021/campaigns/uniq_campaign',{name: name});
+    }
+
 }

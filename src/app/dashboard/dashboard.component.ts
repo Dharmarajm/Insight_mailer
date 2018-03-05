@@ -122,6 +122,8 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
     console.log(event);
   }
 
+  public chartLabel1 = ['happy customers','unhappy customers'];
+
   chartOptions1 = {
     responsive: true,
     animation: {

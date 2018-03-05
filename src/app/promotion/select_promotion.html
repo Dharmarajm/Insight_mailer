@@ -35,7 +35,7 @@
        -->
         <div mat-dialog-actions class="float-right">
           <button mat-button (click)="cancel()" mat-raised-button>Cancel</button>
-          <button mat-button (click)="ok()" cdkFocusInitial mat-raised-button color="primary">Confirm</button>
+          <button mat-button (click)="ok()" cdkFocusInitial mat-raised-button [disabled]='id == 0' color="primary">Confirm</button>
         </div>
       </div>
     </mat-grid-tile>

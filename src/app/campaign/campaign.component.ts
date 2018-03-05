@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 import { Customer, Address } from './trigger.interface';
 
 import { map } from 'rxjs/operators';
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-campaign',
@@ -21,6 +22,8 @@ export class CampaignComponent implements OnInit {
   ckeConfig: any;
   public  campaings: any;
   page1: any;
+
+  del_id: any;
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService,private router:Router) { }
 
@@ -63,11 +66,46 @@ new_campaign(){
   }
 
 
-campaign_delete(id,index){
-  this.CampaignService.delete_campaign(id).subscribe( res => {
+campaign_delete(campaign,index){
+console.log(campaign);
+this.del_id = campaign.id;
+alert(this.del_id);
+swal({
+  title: 'Are you sure?',
+  text: 'You will not be able to recover this file!',
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, keep it'
+}).then((result) => {
+  if (result.value) {
+  this.CampaignService.delete_campaign(this.del_id).subscribe( res => {
     console.log(res);
-    this.campaings.splice(index, 1);
+    console.log(this.campaings.indexOf(campaign));
+    this.campaings.splice(this.campaings.indexOf(campaign), 1);
+    
     });
+    swal(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  // For more information about handling dismissals please visit
+  // https://sweetalert2.github.io/#handling-dismissals
+  } else if (result.dismiss === swal.DismissReason.cancel) {
+    swal(
+      'Cancelled',
+      'Your file is safe :)',
+      'error'
+    )
+  }
+})
+
+
+
+
+
+
 }
 
 insert(event){

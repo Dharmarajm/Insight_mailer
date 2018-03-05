@@ -103,7 +103,7 @@
             </button> -->
 
             <mat-card-content>
-              <canvas height="210px" baseChart [chartType]="'doughnut'" [datasets]="chartData1" [colors]="Doughnutcolors" [options]="chartOptions1" [legend]="true" (chartClick)="onChart1Click($event)">
+              <canvas height="210px" baseChart [chartType]="'doughnut'" [datasets]="chartData1" [labels]="chartLabel1" [colors]="Doughnutcolors" [options]="chartOptions1" [legend]="true" (chartClick)="onChart1Click($event)">
               </canvas>
             </mat-card-content>
             <mat-card-footer>

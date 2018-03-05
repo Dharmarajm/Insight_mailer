@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@ang
 import { Customer, Address } from './../campaign/trigger.interface';
 
 
+
 @Component({
   selector: 'app-campaign-new',
   templateUrl: './campaign-new.component.html',
@@ -15,6 +16,7 @@ import { Customer, Address } from './../campaign/trigger.interface';
 export class CampaignNewComponent implements OnInit {
 
 campaings: any;
+isLinear = true;
 
 public firstFormGroup: FormGroup;
 public secondFormGroup: FormGroup;
@@ -28,6 +30,7 @@ name: any;
 
 public myForm: FormGroup;
 public formArray: any;
+
 
 values: string[] = ["ordered","shipped","delevered","returned"];
 
@@ -52,7 +55,6 @@ values: string[] = ["ordered","shipped","delevered","returned"];
     this.CampaignService.getinventories().subscribe( res => {
     this.inventories = res;
     });
-
     
  this.myForm = this._formBuilder.group({
             name: [''],
@@ -72,6 +74,15 @@ values: string[] = ["ordered","shipped","delevered","returned"];
     });
 
   }
+
+  campaign_name_uniq(name){
+      this.CampaignService.name_uniq(name).subscribe( res => {
+      if(res){
+        alert("Campaign name aleredy in use");
+        this.name = '';
+        }
+     });
+    }
 
 
   name_ok(name): void {
@@ -113,9 +124,12 @@ localStorage.setItem("campaign",name);
 
    addAddress() {
         const control = <FormArray>this.myForm.controls['addresses'];
+        if(control.controls.length <= 4){
         const addrCtrl = this.initAddress();
-        
         control.push(addrCtrl);
+        }else{
+                alert("hi");
+        }
     }
 
     initAddress() {

@@ -49,4 +49,13 @@ public myForm: FormGroup;
     );
    }
 
+   email_uniq(email){
+      this.RegisterService.email_uniq(email).subscribe( res => {
+      if(res){
+        alert("Email aleredy in use");
+        this.email = '';
+        }
+  });
+ }
+
 }

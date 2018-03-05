@@ -11,8 +11,12 @@ export class RegisterService {
 
   constructor(private http:HttpClient) { }
 
-register(registerdata) {
+    register(registerdata) {
         return this.http.post('http://192.168.1.64:3021/users',registerdata);
+    }
+
+    email_uniq(email){
+        return this.http.post('http://192.168.1.64:3021/users/uniq_email',{email: email});
     }
 
 }

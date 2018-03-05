@@ -50,7 +50,6 @@ hide: boolean = true;
     //this.voices = window.speechSynthesis.getVoices();
       (<any>window).speechSynthesis.speak(this.utterance);
       sessionStorage.setItem('prathip', this.response.id);
-      console.log(this.response.id);
        this.router.navigate(['dashboard']);
    },
    error => {

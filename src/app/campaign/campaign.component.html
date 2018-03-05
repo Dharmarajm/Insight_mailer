@@ -38,7 +38,7 @@
               <button mat-icon-button (click)="campaign_edit(campaing.id)">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="campaign_delete(campaing.id,$index)">
+              <button mat-icon-button (click)="campaign_delete(campaing,$index)">
                 <mat-icon>delete</mat-icon>
               </button>
               <mat-slide-toggle [color]="primary" [checked]="campaing.enable" (change)="enable(campaing.id,$event)"></mat-slide-toggle>

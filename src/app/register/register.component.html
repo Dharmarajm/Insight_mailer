@@ -13,7 +13,8 @@
   </mat-form-field>
 
   <mat-form-field class="example-full-width"> <mat-label>Email*</mat-label>
-    <input matInput placeholder="Your@email.com*" formControlName="email" class="form-control" id="email" name="email" [(ngModel)] = "email" autocomplete="off" >
+    <input matInput placeholder="Your@email.com*" formControlName="email" class="form-control" id="email" name="email" 
+    (change)="email_uniq(email)" [(ngModel)]="email" autocomplete="off" >
     <mat-error *ngIf="myForm.get('email').hasError('required') ">
       Email is <strong>required</strong>
     </mat-error>

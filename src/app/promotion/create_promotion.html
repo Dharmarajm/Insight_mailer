@@ -39,9 +39,9 @@
 
         <mat-form-field class="half-width">
           <mat-label>Discount Price</mat-label>
-          <input matInput type=text placeholder="Reduced Price For your Product" formControlName="discount_price" 
+          <input matInput type=number placeholder="Reduced Price For your Product" formControlName="discount_price" 
           max="data1.price_paisas" class="form-control" id="discount_price" name="Discount Price" 
-          [value]="edit_data?.discount_price" [(ngModel)]="discount_price">
+          [value]="edit_data?.discount_price" [(ngModel)]="discount_price" (change)="discount()">
           <!--mat-error *ngIf="discount_priceFormControl.hasError('required')">
          Discount Price is <strong>required</strong>
          </mat-error-->
@@ -86,13 +86,13 @@
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Frequency" formControlName="mail_frequency" class="form-control" id="Frequency" name="Frequency" [value]="edit_data?.mail_frequency" [(ngModel)]="mail_frequency">
+          <input matInput type=number placeholder="Frequency" formControlName="mail_frequency" class="form-control" id="Frequency" name="Frequency" [value]="edit_data?.mail_frequency" [(ngModel)]="mail_frequency">
           <!--mat-error *ngIf="support_emailFormControl.hasError('required')">
          Support Email is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
         <div class="float-right">
-          <button type=submit mat-raised-button color="primary" (click)="promotion(PromotionForm.value)"> Promote </button>
+          <button type=submit mat-raised-button color="primary" [disabled]="!PromotionForm.valid" (click)="promotion(PromotionForm.value)"> Promote </button>
           <button mat-raised-button color="danger" (click)="cancel()"> Cancel </button>
         </div>
       </form>
