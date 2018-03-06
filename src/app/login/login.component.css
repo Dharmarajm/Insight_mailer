@@ -62,8 +62,21 @@ font-size: 21px;
 */
 
 mat-card{
-	width: 40%;
-  min-height: 400px;
+  width: 24%;
+  padding: 30px !important;
+  border: none !important;
+/*  min-height: 400px;*/
+}
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12) !important;
+}
+
+.login{
+  background-image: url(../../assets/login-bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
 }
 
 .mat-form-field {
@@ -74,10 +87,121 @@ mat-card{
     margin: 10px 0;
 }
 
-.mat-tab-label{
+.login-panel{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.login-panel mat-card-header{
+  background-color: #0cc2ab;
+  margin: -30px -30px 15px -30px;
+  padding: 30px 30px 20px 30px;
+  justify-content: center;
+}
+
+.login-panel mat-card-title{
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.login-panel mat-card-title img{
+  width: 80%;
+}
+
+.login-panel button.mat-raised-button.mat-primary{
+  background-color: #7dc586;
+}
+
+/*.login-panel img{
+  margin-bottom: 55px;
+}*/
+
+.login-panel mat-card{
+  text-align: left;
+  margin: 0 auto;
+}
+
+.login-panel p{
+  font-size: 13px;
+  font-weight: 400;
+  color: #c5c4c0;
+  margin-top: 30px;
+}
+
+.login-panel p a{
+  text-decoration: none;
+  color: #c5c4c0;
+}
+
+/*.mat-tab-label{
     font-size: 20px;
     font-weight: 500;
     color: #000 !important;
+}*/
+
+/*.mat-icon-button{
+    position: absolute;
+    right: 0;
+    top: 0px;
+    color: #7d7d7d;
+    height: 28px;
+    width: 28px;
+    line-height: 28px;
+}
+
+.mat-icon-button .mat-icon, .mat-icon-button i {
+    line-height: 20px;
+}*/
+
+.stay-signed{
+  margin-bottom: 30px;
+  color: #a59a91;
+  font-size: 14px;
+}
+
+.forgot-pswd{
+    color: #405371;
+    text-decoration: underline;
+    font-size: 13px;
+    padding: 5px 0;
+}
+
+/*.forgot-pswd:hover{
+    text-decoration: underline;
+    color: #405371;
+}*/
+
+p.signup{
+    color: #405371 !important;
+    font-size: 13px;
+    padding: 5px 0;
+    margin-top: 5px !important;
+}
+
+p.signup a{
+    color: #405371 !important;
+    text-decoration: underline !important;
+}
+
+
+::ng-deep .mat-checkbox-checkmark-path {
+    stroke: #20bba7!important;
+}
+
+::ng-deep .stay-signed .mat-ripple-element {
+    background-color: rgba(13, 194, 171, 0) !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background, ::ng-deep .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: #fff;
+}
+
+::ng-deep .mat-form-field-suffix .mat-icon{
+  font-size: 20px;
+  color: #646464;
+  cursor: pointer;
 }
 
 ::ng-deep .mat-tab-labels {

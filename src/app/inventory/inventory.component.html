@@ -16,21 +16,21 @@
       </span>
     </div>
     <div class="row">
-      <mat-grid-list cols="4" rowHeight="390px">
-        <mat-grid-tile *ngFor=" let inventory of inventories| paginate: {itemsPerPage: 8, currentPage:page1, id:'1'} let i = 'index'" class="example-card">
+      <mat-grid-list cols="5" rowHeight="390px">
+        <mat-grid-tile *ngFor=" let inventory of inventories| paginate: {itemsPerPage: 10, currentPage:page1, id:'1'} let i = 'index'" class="example-card">
           <mat-card>
             <div class="product-img">
               <img [src]="inventory?.find_by_asin[0].small_image" alt="Image">
               <div class="product-details">
                 <h4>ASIN:&nbsp;<span>{{ inventory?.asin }}</span></h4>
                 <h4>SKU:&nbsp;<span>{{ inventory?.sku }}</span></h4>
-                <h4>TITLE:&nbsp;<span>{{ inventory?.find_by_asin[0].title }}</span></h4>
+                <h4>TITLE:&nbsp;<span>{{ inventory?.find_by_asin[0].title  }}</span></h4>
                 <h4>PRICE:&nbsp;<span>{{ inventory?.price_paisas }}</span></h4>
                 <h4>QTY:&nbsp;<span>{{ inventory?.quantity }}</span></h4>
               </div>
             </div>
             <mat-card-content>
-              <p>{{ inventory?.find_by_asin[0].title }}</p>
+              <p>{{ inventory?.find_by_asin[0].title | slice:0:50 }}</p>
             </mat-card-content>
             <mat-card-footer>
               <table>

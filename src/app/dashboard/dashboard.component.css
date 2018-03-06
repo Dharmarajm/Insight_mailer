@@ -121,6 +121,10 @@ mat-select{
     border-bottom-color: rgba(0,0,0, .07);
 }
 
+.mat-row:last-child{
+  border-bottom: 0px;
+}
+
 .mat-column-id {
     max-width: 15%;
 }
@@ -168,9 +172,9 @@ mat-select{
 
 .mat-cell {
     color: #433e3b;
-    overflow: hidden;
+/*    overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis;*/
 }
 
 ::ng-deep .mat-form-field-ripple {

@@ -104,12 +104,15 @@ swal({
    
 }
 
-enable(event,id,inventory_id){
-  console.log(this.start_date,this.end_date);
-  this.data = { id: id,inventory_id: inventory_id,enable: event.checked,from_date: this.start_date,to_date: this.end_date }
+enable(event,id,inventory_id,date){
+  
+      console.log(this.start_date[date],this.end_date[date]);
+  this.data = { id: id,inventory_id: inventory_id,enable: event.checked,from_date: this.start_date[date],to_date: this.end_date[date] }
   this.PromotionService.promotion_enable(this.data).subscribe( res => {
       this.data_enable = res;
     });
+
+  
 }
 
 promotion(){
@@ -282,7 +285,7 @@ edit_data: any;
             personal_msg: new FormControl('',Validators.required),
             promotion_title: new FormControl('',Validators.required),
             coupon_code: new FormControl('',Validators.required),
-            support_email: new FormControl('',Validators.required),
+            support_email: new FormControl('',[Validators.required,Validators.email]),
             mail_frequency: new FormControl('',Validators.required)
          });
 

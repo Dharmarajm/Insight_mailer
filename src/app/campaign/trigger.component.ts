@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Customer, Address } from './trigger.interface';
 
@@ -7,10 +7,16 @@ import { Customer, Address } from './trigger.interface';
     selector: 'trigger',
     templateUrl: 'trigger.component.html',
 })
-export class TriggerComponent {
+export class TriggerComponent implements OnInit {
  @Input('group')
     public adressForm: FormGroup;
     num: number;
+
+values: string[] = ["ordered","shipped","delivered","returned"];
+
+     ngOnInit() {
+
+     }
 
     onlyNumberKey(num){
 
@@ -20,7 +26,5 @@ export class TriggerComponent {
         }
 
     }
-
-    values: string[] = ["ordered","shipped","delivered","returned"];
    
 }

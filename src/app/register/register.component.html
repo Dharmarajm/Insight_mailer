@@ -46,9 +46,11 @@
     </mat-error>
   </mat-form-field>
 
-  <div>
-    <button type="submit" [disabled]="!myForm.valid" mat-raised-button color="primary" class="float-right"> Register </button>
-  </div>
+  <mat-grid-list cols="1" rowHeight="70px">
+    <mat-grid-tile>
+      <button type="submit" [disabled]="!myForm.valid" mat-raised-button color="primary"> Register </button>
+    </mat-grid-tile>
+  </mat-grid-list>
 </form>
 
  <!--p>Form value: {{ myForm.value | json }}</p>

@@ -16,7 +16,7 @@ import { Customer, Address } from './../campaign/trigger.interface';
 export class CampaignNewComponent implements OnInit {
 
 campaings: any;
-isLinear = true;
+isLinear = false;
 
 public firstFormGroup: FormGroup;
 public secondFormGroup: FormGroup;
@@ -69,9 +69,9 @@ values: string[] = ["ordered","shipped","delevered","returned"];
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-    this.thirdFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
+   // this.thirdFormGroup = this._formBuilder.group({
+   //   thirdCtrl: ['', Validators.required]
+   // });
 
   }
 
@@ -124,23 +124,49 @@ localStorage.setItem("campaign",name);
 
    addAddress() {
         const control = <FormArray>this.myForm.controls['addresses'];
+
         if(control.controls.length <= 4){
+        //addrCtrl.controls.get('days').setValue('yourEmailId@gmail.com');
         const addrCtrl = this.initAddress();
+        console.log(addrCtrl);
+       //  addrCtrl.setValue({
+      //        trigger: 'shipped',
+      //        days: '4'
+      // });
+       
         control.push(addrCtrl);
         }else{
-                alert("hi");
+                alert("more than 5 triggers are not allowed");
         }
     }
 
     initAddress() {
         return this._formBuilder.group({
-            trigger: ['', Validators.required],
-            days: ['', Validators.required]
+            days: ['', Validators.required],
+            trigger: ['', Validators.required]
         });
     }
 
     getTasks(myForm){
+
+
+    //this.CampaignService.edit_campaign(localStorage.getItem("campaign_id")).subscribe( res => { 
+          
+    //[{trigger: 'shipped', days: '4'},{trigger: 'shipped', days: '4'},{trigger: 'shipped', days: '4'},{trigger: 'shipped', 
+    //days: '4'} ]
+    // let triggerdata = res;
+     //console.log(res);
+     // console.log(myForm.get('addresses').controls);
+   //   myForm.patchValue({
+    //        name: 'test',
+     //       addresses: triggerdata
+     //  });
+
+      //  } );
+                     alert('a');
     return myForm.get('addresses').controls
+
+
   }
 
   removeAddress(i: number) {

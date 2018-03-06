@@ -58,7 +58,7 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
    this.happy_customer = res[0];
    this.unhappy_customer = res[1];
    this.chartData1 = [{ data: this.review }];
-   });  
+   })  
 
   }
 
@@ -117,6 +117,8 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
     }
 
   ];  
+
+  private doughnutChartColors: any[] = [{ backgroundColor: ["#7cc387","#c8e6ce"] }];
 
   onChartClick(event) {
     console.log(event);

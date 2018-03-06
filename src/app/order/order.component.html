@@ -29,7 +29,7 @@
 
         <ng-container matColumnDef="title">
           <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.find_order[0].title}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.find_order[0].title | slice:0:45 }} </mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->

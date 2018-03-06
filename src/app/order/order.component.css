@@ -65,6 +65,7 @@ mat-row:nth-child(odd) {
 
 .mat-column-title {
     max-width: 30%;
+    padding-right: 20px;
 }
 
 .mat-column-buyer_name {

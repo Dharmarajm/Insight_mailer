@@ -14,16 +14,18 @@
     </div>
     <div class="row">
       <mat-grid-list cols="5" rowHeight="520px">
-        <mat-grid-tile *ngFor=" let promotion of promotions| paginate: {itemsPerPage: 5, currentPage:page1, id:'1'} let i = 'index'">
+        <mat-grid-tile *ngFor=" let promotion of promotions| paginate: {itemsPerPage: 10, currentPage:page1, id:'1'} let i = 'index'">
           <mat-card>
             <div class="product-img">
               <img [src]="promotion.inventory.find_by_asin[0].small_image">
               <div class="product-details">
-                <h4>ASIN:&nbsp;<span>{{ promotion.inventory.asin }}</span></h4>
-                <h4>SKU:&nbsp;<span>{{ promotion.inventory.sku }}</span></h4>
-                <h4>TITLE:&nbsp;<span>{{ promotion.inventory.find_by_asin[0].title }}</span></h4>
-                <h4>PRICE:&nbsp;<span>{{ promotion.inventory.price_paisas }}</span></h4>
-                <h4>QTY:&nbsp;<span>{{ promotion.inventory.quantity }}</span></h4>
+                <div class="details">
+                  <h4>ASIN:&nbsp;<span>{{ promotion.inventory.asin }}</span></h4>
+                  <h4>SKU:&nbsp;<span>{{ promotion.inventory.sku }}</span></h4>
+                  <h4>TITLE:&nbsp;<span>{{ promotion.inventory.find_by_asin[0].title }}</span></h4>
+                  <h4>PRICE:&nbsp;<span>{{ promotion.inventory.price_paisas }}</span></h4>
+                  <h4>QTY:&nbsp;<span>{{ promotion.inventory.quantity }}</span></h4>
+                </div>
               </div>
             </div>
             <mat-card-content>
@@ -39,8 +41,9 @@
               <p>{{ promotion.inventory.find_by_asin[0].title }} </p>
               <div class="price">
                 <span><s>&#8377;{{ promotion.inventory.price_paisas }}</s>&nbsp;<b> &#8377;{{  promotion?.discount_price }}</b></span>
-                <mat-slide-toggle [color]="primary" [checked]="promotion?.enable" (change)=enable($event,promotion.id,promotion.inventory.id)></mat-slide-toggle>
-              </div>
+                <mat-slide-toggle [color]="primary"[checked]="promotion?.enable"  
+                (change)=enable($event,promotion.id,promotion.inventory.id,i)></mat-slide-toggle>
+              </div><!--[disabled]="!(start_date[i] && end_date[i])"-->
             </mat-card-content>
             <mat-card-footer>
               <mat-grid-list cols="2" rowHeight="65px">

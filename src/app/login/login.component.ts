@@ -58,4 +58,8 @@ hide: boolean = true;
    );
  }
 
+register(){
+  this.router.navigate(['register']);
+}
+
 }

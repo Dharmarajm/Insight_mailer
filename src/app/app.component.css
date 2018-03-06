@@ -1,4 +1,9 @@
 /*Angular Material design.css*/
+
+/*header, footer{
+    display: none !important;
+}*/
+
 header{
     display: block;
     background: #fff;
@@ -20,6 +25,11 @@ footer p {
     margin: 0;
     font-size: 12px;
     text-align: right;
+}
+
+footer p a{
+    color: #fff;
+    text-decoration: none;
 }
 
 .mat-toolbar{
@@ -57,4 +67,30 @@ footer p {
     display: inline-block;
     width: 30px;
     height: 30px;
+}
+
+span button.mat-icon-button:first-child:after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #20bba7;
+    border: 2px solid #fff;
+}
+
+.toggle-menu{
+    display: none;
+}
+
+@media screen and (max-width: 900px){
+    .menu{
+        display: none;
+    }
+
+    .toggle-menu{
+        display: block;
+    }
 }

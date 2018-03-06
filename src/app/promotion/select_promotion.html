@@ -1,9 +1,9 @@
-
-<div mat-dialog-content>
-  <mat-grid-list cols="1" rowHeight="430px">
+<div class="popup-select">
+  <header>
+    <h1>Select Your Product</h1>
+  </header>
+  <mat-grid-list cols="1" rowHeight="340px">
     <mat-grid-tile>
-      <div class="popup-select">
-        <h1> Select Your Product </h1>
         <div class="table-scroll">
           <table class="table" width="100%">
             <thead>
@@ -33,13 +33,17 @@
           <!--  <button mat-button (click)="onNoClick()" color="warn" > Cancel </button>
         <button  mat-button (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>
        -->
-        <div mat-dialog-actions class="float-right">
-          <button mat-button (click)="cancel()" mat-raised-button>Cancel</button>
-          <button mat-button (click)="ok()" cdkFocusInitial mat-raised-button [disabled]='id == 0' color="primary">Confirm</button>
-        </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="1" rowHeight="70px">
+    <mat-grid-tile>
+      <div>
+        <button mat-button (click)="cancel()" mat-raised-button>Cancel</button>
+        <button mat-button (click)="ok()" cdkFocusInitial mat-raised-button [disabled]='id == 0' color="primary">Confirm</button>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
+</div>
 <!--   <h1> Select Your Product </h1>
   <table class="table">
       <tr>

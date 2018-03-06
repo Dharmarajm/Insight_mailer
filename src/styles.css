@@ -14,11 +14,20 @@ body{
     overflow: auto;    
 }
 
-@media (min-width: 1200px){
+@media (min-width: 1024px){
 	.container {
 	    width: 1200px;
+      padding: 0 10px;
 	    margin: auto;
 	}
+}
+
+@media (max-width: 900px){
+  .container {
+      max-width: 850px;
+      padding: 0 10px;
+      margin: auto;
+  }
 }
 
 mat-card, .card-border{
@@ -125,6 +134,11 @@ mat-card, .card-border{
 }
 
 
+.mat-dialog-container{
+  width: 780px !important;
+  margin: 0px auto;
+}
+
 .promotion-popup .half-width{
 	width: 48%;
 	font-size: 14px;
@@ -149,7 +163,14 @@ mat-card, .card-border{
   background-color: #7dc586;
 }
 
-.promotion-popup header h1{
+.popup-select header{
+  margin: 0;
+  padding: 10px 24px;
+  /*margin-bottom: 20px;*/
+  background-color: #7dc586;
+}
+
+.promotion-popup header h1, .popup-select header h1{
   margin: 0;
   font-size: 18px;
   font-weight: 400;
@@ -157,8 +178,9 @@ mat-card, .card-border{
 }
 
 .popup-select{
-  width: 100%;
-  height: 100%;
+/*  width: 100%;
+  height: 100%;*/
+  margin: -24px;
 }
 
 .popup-select h1{
@@ -170,8 +192,9 @@ mat-card, .card-border{
 
 .popup-select .table-scroll{
 	height: 330px;
-    overflow: auto;
-    margin-bottom: 10px;
+  width: 100%;
+  overflow: auto;
+  margin-bottom: 10px;
 }
 
 .popup-select .table{
@@ -208,10 +231,10 @@ mat-card, .card-border{
   border-bottom: 0px solid #dedede;
 }
 
-.popup-select .table tbody tr:hover {
+/*.popup-select .table tbody tr:hover {
     background-color: #ddf1ef;
     cursor: pointer;
-}
+}*/
 
 .filters .mat-mini-fab{
   margin-left: 10px;
@@ -236,5 +259,24 @@ mat-card, .card-border{
 
 .mat-mini-fab .material-icons{
     font-size: 20px;
-    line-height: 0.8;
+    line-height: 0.7;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill, 
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: currentColor;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.full-width{
+  width: 100%;
 }
