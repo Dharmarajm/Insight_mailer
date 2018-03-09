@@ -19,7 +19,7 @@ email: any;
 password: any;
 phone: any;
 registerdata: any;
-hide: boolean = true;
+hide: boolean = true; 
 
   constructor(private RegisterService:RegisterService, private router:Router, private _fb: FormBuilder) { }
 
@@ -30,8 +30,7 @@ public myForm: FormGroup;
             first_name: new FormControl('',[Validators.required]),
             last_name: new FormControl(''),
             email: new FormControl('',[Validators.required,Validators.email]),
-            password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")]), 
-            //^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$ 
+            password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]), 
             phone: new FormControl('',[Validators.required,Validators.minLength(10),Validators.maxLength(10)])
         });
   }

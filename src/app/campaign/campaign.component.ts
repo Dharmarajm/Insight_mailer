@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Customer, Address } from './trigger.interface';
+import { AppService } from './../app.service';
 
 import { map } from 'rxjs/operators';
 import swal from 'sweetalert2'
@@ -25,15 +26,17 @@ export class CampaignComponent implements OnInit {
 
   del_id: any;
 
-  constructor(public dialog: MatDialog,private CampaignService:CampaignService,private router:Router) { }
+  constructor(public dialog: MatDialog,private CampaignService:CampaignService,private router:Router,public nav: AppService) { }
 
   ngOnInit() {
-
+  this.nav.show();
   this.CampaignService.getcampaigns().subscribe( res => {
     this.campaings = res;
     });
 
-this.ckeConfig = {
+    // extraPlugins: 'strinsert',
+
+/*this.ckeConfig = {
             height: 50,
             uiColor: '#ebebeb',
             language: "en",
@@ -53,7 +56,7 @@ this.ckeConfig = {
         };
 
 
-  this.ckeditorContent = `<p>My HTML</p>`;
+  this.ckeditorContent = `<p>My HTML</p>`;*/
   }
 
 campaign_edit(id){

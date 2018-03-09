@@ -57,6 +57,15 @@
                 </mat-form-field>
               </mat-grid-tile>
             </mat-grid-list>
+
+
+
+
+
+
+
+
+            
             <mat-grid-list cols="2" rowHeight="85px">
               <mat-grid-tile>
                 <mat-form-field class="example-full-width"> <mat-label>NewPassword</mat-label>
@@ -79,7 +88,7 @@
             </mat-grid-list>
             <mat-grid-list cols="1" rowHeight="65px">
               <mat-grid-tile>
-                <button type="submit" mat-raised-button color="primary"> Save </button>
+                <button type="submit" mat-raised-button color="primary" (click)="save_ok(save)"> Save </button>
               </mat-grid-tile>
             </mat-grid-list>
           </mat-card>
@@ -98,18 +107,20 @@
             <mat-grid-list cols="2" rowHeight="85px">
               <mat-grid-tile>
                 <mat-form-field class="example-full-width"> <mat-label>Card Number</mat-label>
-                  <input matInput placeholder="1654 5412 5412 ****" formControlName="card_number" class="form-control" id="card_number" name="card_number" [(ngModel)] = "card_number">
-                  <mat-error *ngIf="myForm.get('card_number').hasError('required')">
+                  <input matInput placeholder="1654 5412 5412 ****" formControlName="card_number" 
+                  class="form-control" id="card_number" name="card_number" [readonly]="true" 
+                  [(ngModel)] = "card_number">
+                  <!--mat-error *ngIf="myForm.get('card_number').hasError('required')">
                     card_number is <strong>required</strong>
-                  </mat-error>
+                  </mat-error-->
                 </mat-form-field>
               </mat-grid-tile>
               <mat-grid-tile>
                 <mat-form-field class="example-full-width"> <mat-label>Subscription Plan</mat-label>
-                  <input matInput placeholder="Your subscription plan" formControlName="subscription_plan" class="form-control" id="subscription_plan" name="subscription_plan" [(ngModel)] = "subscription_plan">
-                  <mat-error *ngIf="myForm.get('subscription_plan').hasError('required')">
+                  <input matInput placeholder="Your subscription plan" formControlName="subscription_plan" class="form-control" id="subscription_plan" name="subscription_plan" [readonly]="true" [(ngModel)] = "subscription_plan">
+                  <!--mat-error *ngIf="myForm.get('subscription_plan').hasError('required')">
                     subscription_plan is <strong>required</strong>
-                  </mat-error>
+                  </mat-error-->
                 </mat-form-field>
               </mat-grid-tile>
             </mat-grid-list>

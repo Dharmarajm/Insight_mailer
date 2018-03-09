@@ -1,7 +1,7 @@
 <div [formGroup]="adressForm">
   <!-- <button mat-fab color="primary">Start</button> -->
  <mat-form-field>
-  <mat-select placeholder="select triggers" formControlName="trigger">
+  <mat-select placeholder="Select Triggers" formControlName="trigger">
     <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
   </mat-select>
 </mat-form-field>

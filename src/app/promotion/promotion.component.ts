@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PromotionService } from './promotion.service';
+import { AppService } from './../app.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
@@ -27,9 +28,10 @@ page1: any;
 
 dataSource = new MatTableDataSource;
 
-  constructor(public dialog: MatDialog,private PromotionService:PromotionService) { }
+  constructor(public dialog: MatDialog,private PromotionService:PromotionService, public nav: AppService) { }
 
   ngOnInit() {
+  this.nav.show();
   this.PromotionService.getpromotion().subscribe( res => {
       this.promotions = res;
       this.dataSource = new MatTableDataSource(this.promotions);

@@ -21,7 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
 import { CampaignComponent, CampaignName, CampaignTemplate, CampaignAsin, CampaignTrigger } from './campaign/campaign.component';
-import { CampaignNewComponent, EditTemplate } from './campaign-new/campaign-new.component';
+import { CampaignNewComponent, EditTemplate, DetailTemplate } from './campaign-new/campaign-new.component';
 import { TriggerComponent } from './campaign/trigger.component';
 import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview } from './promotion/promotion.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -29,6 +29,7 @@ import { SharedComponent } from './shared/shared.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 //List Of Service
+import { AppService } from './app.service';
 import { LoginService } from './login/login.service';
 import { RegisterService } from './register/register.service';
 import { InventoryService } from './inventory/inventory.service';
@@ -54,6 +55,7 @@ import { AuthGuardService } from './shared/auth-guard.service';
     CampaignTrigger,
     CampaignNewComponent,
     EditTemplate,
+    DetailTemplate,
     TriggerComponent,
     PromotionComponent,
     SelectPromotion, 
@@ -77,6 +79,7 @@ import { AuthGuardService } from './shared/auth-guard.service';
     environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
   providers: [
+               AppService,
                LoginService,
                RegisterService,
                InventoryService,
@@ -95,7 +98,8 @@ import { AuthGuardService } from './shared/auth-guard.service';
                 SelectPromotion, 
                 CreatePromotion,
                 TemplatePreview,
-                EditTemplate
+                EditTemplate,
+                DetailTemplate
                ],
   bootstrap: [AppComponent]
 })

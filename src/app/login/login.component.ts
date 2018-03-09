@@ -3,6 +3,7 @@ import { LoginService } from './login.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
+import { AppService } from './../app.service';
 import { WindowService } from '../window.service';
 //import * as swal from 'sweetalert';
 import swal from 'sweetalert2'
@@ -35,7 +36,8 @@ hide: boolean = true;
   ]);
 
 
-  constructor( private LoginService:LoginService, private router:Router, private _window:WindowService ) { }
+  constructor( private LoginService:LoginService, private router:Router, private _window:WindowService,
+  public nav:AppService ) { }
 
   ngOnInit() {  
   }
@@ -50,6 +52,7 @@ hide: boolean = true;
     //this.voices = window.speechSynthesis.getVoices();
       (<any>window).speechSynthesis.speak(this.utterance);
       sessionStorage.setItem('prathip', this.response.id);
+       this.nav.show();
        this.router.navigate(['dashboard']);
    },
    error => {

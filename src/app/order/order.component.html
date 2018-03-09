@@ -24,17 +24,17 @@
         <!-- Weight Column -->
         <ng-container matColumnDef="asin">
           <mat-header-cell *matHeaderCellDef> ASIN </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.find_order[0].asin}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.asin}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="title">
           <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.find_order[0].title | slice:0:45 }} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.title | slice:0:45 }} </mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="buyer_name">
-          <mat-header-cell *matHeaderCellDef> Buyer Name </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Buyer Name </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.buyer_name? element?.buyer_name : "Order Canceled"}} </mat-cell>
         </ng-container>
 
@@ -62,7 +62,12 @@
         <mat-row *matRowDef="let row; columns: displayedColumns;">
         </mat-row>
       </mat-table>
-      <!--mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator-->
+       <mat-paginator #paginator
+                 [length]="dataSource.filteredData.length"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
 
 
     </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard.service';
+import { AppService } from './../app.service';
 import {  MatTableDataSource } from '@angular/material';
 
 @Component({
@@ -27,10 +28,10 @@ dataSource2 = new MatTableDataSource;
 
 values: any = ['7 Days','15 Days','30 Days','45 Days']
 
-  constructor(private DashboardService:DashboardService) { }
+  constructor(private DashboardService:DashboardService, public nav: AppService) { }
 
   ngOnInit() {
-
+  this.nav.show();
   this.DashboardService.count().subscribe( res => {
    this.counts = res;
    });
@@ -118,7 +119,7 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
   ];  
 
-  private doughnutChartColors: any[] = [{ backgroundColor: ["#7cc387","#c8e6ce"] }];
+  public doughnutChartColors: any[] = [{ backgroundColor: ["#7cc387","#c8e6ce"] }];
 
   onChartClick(event) {
     console.log(event);

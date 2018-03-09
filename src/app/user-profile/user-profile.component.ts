@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserProfileService } from './user-profile.service';
+import { AppService } from './../app.service';
 import { Observable } from 'rxjs/Rx';
 //import * as swal from 'sweetalert';
 //import swal from 'sweetalert2'
@@ -31,26 +32,32 @@ hide1: boolean = true;
 hide2: boolean = true;
 hide3: boolean = true;
 
-  constructor(private UserProfileService:UserProfileService, private router:Router, private _fb: FormBuilder) { }
+  constructor(private UserProfileService:UserProfileService, private router:Router, private _fb: FormBuilder,public nav: AppService) { }
 
 public myForm: FormGroup;
 
   ngOnInit() {
+  this.nav.show();
   this.myForm = new FormGroup({
             first_name: new FormControl('',[Validators.required]),
             last_name: new FormControl(''),
             email: new FormControl('',[Validators.required,Validators.email]),
-            old_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")]),
-            new_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")]),
+            old_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
+            new_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
             confirm_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")]),
-            card_number: new FormControl('',[Validators.required]),
-            subscription_plan: new FormControl('',[Validators.required]),
+            card_number: new FormControl(''),
+            subscription_plan: new FormControl('Beta Customer',[Validators.required]),
             merchant_id: new FormControl('',[Validators.required]),
             marketplace_id: new FormControl('',[Validators.required]),
             aws_accesskey_id: new FormControl('',[Validators.required]),
             aws_secret_accesskey_id: new FormControl('',[Validators.required])
             //phone: new FormControl('',[Validators.required,Validators.minLength(10)])
         });
+  }
+
+   save_ok(save): void {
+localStorage.setItem("user-profile",save);
+    // this.dialogRef1.close(name);
   }
 
 
