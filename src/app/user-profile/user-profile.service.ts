@@ -15,4 +15,12 @@ userprofileregister(userprofiledata) {
         return this.http.post('http://192.168.1.64:3021/users/user_profile',userprofiledata);
     }
 
+    userprofilecredential(userprofiledata){
+        return this.http.post('http://192.168.1.64:3021/users/credential',userprofiledata);
+    }
+
+    userprofileaccdetail(userprofiledata){
+        return this.http.post('http://192.168.1.64:3021/users/accdetail',userprofiledata);
+    }
+
 }

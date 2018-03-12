@@ -19,4 +19,8 @@ export class RegisterService {
         return this.http.post('http://192.168.1.64:3021/users/uniq_email',{email: email});
     }
 
+    phone_uniq(phone){
+        return this.http.post('http://192.168.1.64:3021/users/uniq_phone',{phone: phone});
+    }
+
 }

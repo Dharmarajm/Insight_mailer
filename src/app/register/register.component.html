@@ -2,7 +2,7 @@
 <mat-form-field class="example-full-width">
  <mat-label>First Name*</mat-label>
     <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name" autocomplete="off" >
-    <mat-error *ngIf="myForm.get('first_name').hasError('required')">   // myForm.hasError('required', 'first_name')
+    <mat-error *ngIf="myForm.get('first_name').hasError('required')">
       First Name is <strong>required</strong>
     </mat-error>
   </mat-form-field>
@@ -33,11 +33,12 @@
       Password is <strong>required</strong>
     </mat-error>
     <mat-error *ngIf="myForm.get('password').hasError('pattern')">
-      Password should contain <strong>minimum one number and a special character</strong>
+      Password should contain <strong>minimum one number, caplatlize letter and a special character</strong>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="example-full-width"> <mat-label>Phone Number*</mat-label>
-    <input matInput placeholder="975094****" formControlName="phone" class="form-control" id="phone" name="phone" [(ngModel)] = "phone" autocomplete="off" >
+    <input matInput placeholder="975094****" formControlName="phone" class="form-control" id="phone" name="phone" 
+    (change)="phone_uniq(phone)" [(ngModel)] = "phone" autocomplete="off" >
     <mat-error *ngIf="myForm.get('phone').hasError('required')">
       Phone is <strong>required</strong>
     </mat-error>
@@ -52,6 +53,3 @@
     </mat-grid-tile>
   </mat-grid-list>
 </form>
-
- <!--p>Form value: {{ myForm.value | json }}</p>
-<p>Form status: {{ myForm.valid | json }}</p-->

@@ -1,0 +1,189 @@
+<div class="mat-page-content">
+  <div class="container">
+<!--     <mat-grid-list cols="1" rowHeight="500px">
+      <mat-grid-tile> -->
+        <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper">
+          <mat-step [stepControl]="firstFormGroup">
+            <!--form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Fill out your name</ng-template>
+              <mat-form-field>
+                <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperNext>Next</button>
+              </div>
+            </form-->
+
+            <ng-template matStepLabel>Fill out your name </ng-template>
+            <mat-grid-list cols="1" rowHeight="460px">
+              <mat-grid-tile>
+                <mat-card class="step1">
+                  <mat-card-header>
+                    <mat-card-title>
+                      <mat-icon>mail_outline</mat-icon>
+                      <h3>Create New Campaign</h3>
+                    </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <mat-form-field class="example-full-width">
+                      <input matInput tabindex="1" [value]="edit_data?.campagin_name" [(ngModel)]="name" 
+                      (change)="campaign_name_uniq(name)" placeholder="Campaign Name" autoFocus="true" required>
+                    </mat-form-field>                    
+                  </mat-card-content>
+                  <mat-card-footer>
+                    <!--button mat-button  (click)="onNoClick1()" color="warn" > Cancel </button>
+                  <button type="submit" [disabled]="false" (click)="ok1(name)" color="primary" cdkFocusInitial> CONFIRM </button-->
+                    <button mat-raised-button (click)="close()">Cancel</button>
+                    <button mat-button matStepperNext mat-raised-button color="primary" 
+                    [disabled]='!edit_data?.campagin_name' (click)="name_ok(name)">Next</button>
+                  </mat-card-footer>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup" >
+            <mat-grid-list cols="1" rowHeight="460px">
+              <mat-grid-tile>
+                <mat-card class="step2">
+                  <mat-card-title>
+                    Select Your Template
+                  </mat-card-title>
+                  <mat-card-content>
+                    <form [formGroup]="secondFormGroup">
+                      <ng-template matStepLabel>Select your Template</ng-template>
+                      <table class="table" width="100%">
+                        <thead>
+                          <tr>
+                            <th>Image</th>
+                            <th>Template Name</th>
+                            <th>Description</th>
+                            <th>Email Limit</th>
+                            <th>Enable</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let template of templates">
+                            <td> <img [src]="template?.image_url" height="100" width="100"> </td>
+                            <td>{{template?.name}}</td>
+                            <td>{{template?.description}}</td>
+                            <td>{{template?.email_limit}}</td>
+                            <td><mat-slide-toggle [color]="primary" [checked]="template?.id == edit_data?.template_id"
+                             [disabled]="(template.id != id && id != 0)" (change)="template_data(template,$event)"></mat-slide-toggle></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <!--mat-form-field [checked]="template?.id == edit_data?.template_id" (click)=templatedata(template)>
+                        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+                      </mat-form-field-->
+                    </form>
+                  </mat-card-content>
+                  <mat-card-footer>
+                      <button mat-button matStepperPrevious mat-raised-button>Back</button>
+                      <button mat-button matStepperNext mat-raised-button color="primary" [disabled]='id == 0'>Next</button>
+                  </mat-card-footer>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-step>
+
+
+          <mat-step [stepControl]="thirdFormGroup">
+
+
+            <ng-template matStepLabel>Select Your asin</ng-template>
+            <mat-grid-list cols="1" rowHeight="460px">
+              <mat-grid-tile>
+                <mat-card class="step3">
+                  <mat-card-title>Inventories</mat-card-title>
+                  <mat-card-content>
+                    <table class="table" width="100%">
+                      <thead>
+                        <tr>
+                          <th>Image</th>
+                          <th>Title</th>
+                          <th>Asin</th>
+                          <th>Enable</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let inventory of inventories">
+                          <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
+                          <td>{{inventory?.find_by_asin[0].title}}</td>
+                          <td>{{inventory?.asin}}</td>
+                          <td>
+                            <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use" 
+                            [checked]="inventory.children_in_use" && inventory?.enable
+                            (change)=asin($event,inventory.asin)></mat-slide-toggle>
+                            <mat-icon *ngIf="inventory?.children_in_use" matTooltip="Asin already in use">error_outline
+                            </mat-icon>
+                            <!--mat-icon *ngIf="!inventory?.enable" matTooltip="Inventory is not enabled">error_outline
+                            </mat-icon-->
+                          </td>
+                          <!--[checked]="inventory.children_in_use" && inventory?.enable -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </mat-card-content>
+                  <!--div *ngFor="let inventory of inventories; let i = index" class="example-card"-->
+
+                  <!--/div-->
+                  <!--  <button mat-button (click)="onNoClick()" color="warn" > Cancel </button>
+                <button  mat-button (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>
+               -->
+                  <mat-card-footer>
+                    <button mat-button matStepperPrevious mat-raised-button>Back</button>
+                    <button mat-button matStepperNext mat-raised-button color="primary">Next</button>
+                  </mat-card-footer>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-step>
+
+
+          <mat-step>
+            <ng-template matStepLabel>Select Your Trigger</ng-template>
+            <!-- <p>You are now done.</p> -->
+            <mat-grid-list cols="1" rowHeight="460px">
+              <mat-grid-tile>
+                <mat-card class="step4">
+                  <mat-card-title>Schedule E-Mail
+                    <span>
+                      <button mat-mini-fab color="primary" class="float-right" [disabled]="!myForm.valid"
+                       (click)="addAddress()">
+                        <mat-icon>add</mat-icon>
+                      </button>
+                    </span>
+                  </mat-card-title>
+                  <mat-card-content>
+                    <form [formGroup]="myForm" novalidate>
+                      <div formArrayName="addresses">
+                        <div *ngFor="let address of getTasks(myForm); let i='index'">
+                          <div class="panel-heading">
+                            <label> Trigger {{i + 1}}</label>
+                            <button mat-icon-button *ngIf="myForm.controls.addresses.controls.length > 1" (click)="removeAddress(i)">
+                              <mat-icon>close</mat-icon>
+                            </button>
+                          </div>
+                          <div class="panel-body" [formGroupName]="i">
+                            <trigger [group]="myForm.controls.addresses.controls[i]"></trigger>
+                            <button mat-raised-button (click)="promotion_template()" color="primary">Template Preview</button>
+                          </div>
+                        </div>
+                      </div>
+                      <!--button mat-raised-button type="submit"  [disabled]="!myForm.valid" (click)="save(myForm)">Create Campaign</button-->
+                    </form>
+                  </mat-card-content>
+                  <mat-card-footer>
+                    <button mat-button matStepperPrevious mat-raised-button>Back</button>
+                    <!--button mat-button (click)="stepper.reset()">Create Trigger</button-->
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" (click)="save(myForm)">Create Campaign</button>
+                  </mat-card-footer>
+                </mat-card>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-step>
+        </mat-horizontal-stepper>
+<!--       </mat-grid-tile>
+    </mat-grid-list> -->
+  </div>
+</div>

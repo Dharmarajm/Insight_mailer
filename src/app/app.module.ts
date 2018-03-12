@@ -22,8 +22,10 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
 import { CampaignComponent, CampaignName, CampaignTemplate, CampaignAsin, CampaignTrigger } from './campaign/campaign.component';
 import { CampaignNewComponent, EditTemplate, DetailTemplate } from './campaign-new/campaign-new.component';
+import { CampaignEditComponent, EditTemplateEdit } from './campaign-edit/campaign-edit.component';
 import { TriggerComponent } from './campaign/trigger.component';
 import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview } from './promotion/promotion.component';
+import { PromotionEditComponent, EditSelectPromotion, EditPromotion, EditTemplatePreview } from './promotion-edit/promotion-edit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedComponent } from './shared/shared.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -56,10 +58,16 @@ import { AuthGuardService } from './shared/auth-guard.service';
     CampaignNewComponent,
     EditTemplate,
     DetailTemplate,
+    CampaignEditComponent, 
+    EditTemplateEdit,
+    EditTemplatePreview,
     TriggerComponent,
     PromotionComponent,
     SelectPromotion, 
     CreatePromotion,
+    PromotionEditComponent, 
+    EditSelectPromotion,
+    EditPromotion,
     DashboardComponent,
     SharedComponent,
     UserProfileComponent,
@@ -98,8 +106,12 @@ import { AuthGuardService } from './shared/auth-guard.service';
                 SelectPromotion, 
                 CreatePromotion,
                 TemplatePreview,
+                EditSelectPromotion, 
+                EditPromotion, 
+                EditTemplatePreview,
                 EditTemplate,
-                DetailTemplate
+                DetailTemplate,
+                EditTemplateEdit
                ],
   bootstrap: [AppComponent]
 })

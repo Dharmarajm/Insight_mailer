@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { AppService } from './../app.service';
 import { WindowService } from '../window.service';
-//import * as swal from 'sweetalert';
 import swal from 'sweetalert2'
 
 @Component({
@@ -45,24 +44,22 @@ hide: boolean = true;
  login(){
  this.data = {"auth":{"user_email": this.email,"password": this.password}}
   this.LoginService.userlogin(this.data).subscribe( res => {
+  console.log(res);
   this.status = res;
-//  alert(res);
   this.response = res;
-    this.utterance = new SpeechSynthesisUtterance('Hey You Have Succesfulli Logged In');
+   // this.utterance = new SpeechSynthesisUtterance('Hey You Have Succesfulli Logged In');
     //this.voices = window.speechSynthesis.getVoices();
-      (<any>window).speechSynthesis.speak(this.utterance);
-      sessionStorage.setItem('prathip', this.response.id);
+    //  (<any>window).speechSynthesis.speak(this.utterance);
+      //localStorage.setItem('prathip', this.response.id);
+      localStorage.setItem('prathip', this.response.jwt );
        this.nav.show();
        this.router.navigate(['dashboard']);
    },
    error => {
+   this.password = '';
     swal("Oops!", "Login Failed", "error") 
    }
    );
  }
-
-register(){
-  this.router.navigate(['register']);
-}
 
 }

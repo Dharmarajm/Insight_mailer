@@ -35,6 +35,8 @@ hide3: boolean = true;
   constructor(private UserProfileService:UserProfileService, private router:Router, private _fb: FormBuilder,public nav: AppService) { }
 
 public myForm: FormGroup;
+public myForm1: FormGroup;
+public myForm2: FormGroup;
 
   ngOnInit() {
   this.nav.show();
@@ -44,16 +46,33 @@ public myForm: FormGroup;
             email: new FormControl('',[Validators.required,Validators.email]),
             old_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
             new_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
-            confirm_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})")]),
+            confirm_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
+            //card_number: new FormControl(''),
+            //subscription_plan: new FormControl('Beta Customer',[Validators.required]),
+            //merchant_id: new FormControl('',[Validators.required]),
+            //marketplace_id: new FormControl('',[Validators.required]),
+            //aws_accesskey_id: new FormControl('',[Validators.required]),
+            //aws_secret_accesskey_id: new FormControl('',[Validators.required])
+            //phone: new FormControl('',[Validators.required,Validators.minLength(10)])
+        });
+  
+
+  this.myForm1 = new FormGroup({
             card_number: new FormControl(''),
-            subscription_plan: new FormControl('Beta Customer',[Validators.required]),
+            subscription_plan: new FormControl('Beta Customer')
+  });
+
+
+  this.myForm2 = new FormGroup({
             merchant_id: new FormControl('',[Validators.required]),
             marketplace_id: new FormControl('',[Validators.required]),
             aws_accesskey_id: new FormControl('',[Validators.required]),
             aws_secret_accesskey_id: new FormControl('',[Validators.required])
-            //phone: new FormControl('',[Validators.required,Validators.minLength(10)])
-        });
-  }
+  });
+}
+
+
+
 
    save_ok(save): void {
 localStorage.setItem("user-profile",save);
@@ -63,13 +82,22 @@ localStorage.setItem("user-profile",save);
 
 
   userprofile(){
-  this.userprofiledata = {"first_name": this.first_name,"last_name": this.last_name,"email": this.email,"old_password": this.old_password,"new_password": this.new_password,"confirm_password": this.confirm_password, "card_number": this.card_number, "subscription_plan": this.subscription_plan, "merchant_id": this.merchant_id, "marketplace_id": this.marketplace_id, "aws_accesskey_id": this.aws_accesskey_id, "aws_secret_accesskey_id": this.aws_secret_accesskey_id}
+  this.userprofiledata = {"first_name": this.first_name,"last_name": this.last_name,"email": this.email,"old_password": this.old_password,"new_password": this.new_password,"confirm_password": this.confirm_password}
     this.UserProfileService.userprofileregister(this.userprofiledata).subscribe( res => {
        // swal("Registered!", "You Have Sucessfully Registered", "success");
       //  this.router.navigate(['login']);
     });
    }
+  
+  accdetail(){
+   this.userprofiledata = {"card_number": this.card_number, "subscription_plan": this.subscription_plan}
+   this.UserProfileService.userprofileaccdetail(this.userprofiledata).subscribe(res => {});
+  }
 
+  credential(){
+   this.userprofiledata = {"merchant_id": this.merchant_id, "marketplace_id": this.marketplace_id, "aws_accesskey_id": this.aws_accesskey_id, "aws_secret_accesskey_id": this.aws_secret_accesskey_id}
+   this.UserProfileService.userprofilecredential(this.userprofiledata).subscribe( res => { });
+  }
 }
 
 

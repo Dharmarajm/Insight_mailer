@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { PromotionService } from './promotion.service';
+import { PromotionService } from './../promotion/promotion.service';
 import { AppService } from './../app.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -8,11 +8,11 @@ import { MatTableDataSource } from '@angular/material';
 import swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-promotion',
-  templateUrl: './promotion.component.html',
-  styleUrls: ['./promotion.component.css']
+ selector: 'app-promotion-edit',
+  templateUrl: './promotion-edit.component.html',
+  styleUrls: ['./../promotion/promotion.component.css']
 })
-export class PromotionComponent implements OnInit {
+export class PromotionEditComponent implements OnInit {
 
 public promotions: any;
 min_date: any;
@@ -34,7 +34,6 @@ dataSource = new MatTableDataSource;
   this.nav.show();
   this.PromotionService.getpromotion().subscribe( res => {
       this.promotions = res;
-      console.log(this.promotions);
       this.dataSource = new MatTableDataSource(this.promotions);
     });
     this.min_date = new Date()
@@ -47,7 +46,7 @@ alert(id);
     console.log(res);
     this.edit_data = res;
     localStorage.setItem('edit_data', this.edit_data);
-let dialogRef1 = this.dialog.open(SelectPromotion, {
+let dialogRef1 = this.dialog.open(EditSelectPromotion, {
                     width: '1000px',
                     disableClose: true
                   });
@@ -55,7 +54,7 @@ let dialogRef1 = this.dialog.open(SelectPromotion, {
                   dialogRef1.afterClosed().subscribe(result1 => {
                     
                    // if(result1){
-let dialogRef2 = this.dialog.open(CreatePromotion, {
+let dialogRef2 = this.dialog.open(EditPromotion, {
                     width: '1000px',
                     disableClose: true,
                     data: { id:  this.edit_data.inventory.id }
@@ -101,10 +100,7 @@ swal({
       'error'
     )
   }
-})
-
-  
-   
+})   
 }
 
 enable(event,id,inventory_id,date){
@@ -115,7 +111,6 @@ enable(event,id,inventory_id,date){
       this.data_enable = res;
     });
 
-  
 }
 
 promotion(){
@@ -132,7 +127,7 @@ promotion(){
 
 promotion_preview(data){
 
-let dialogRefprev = this.dialog.open(TemplatePreview, {
+let dialogRefprev = this.dialog.open(EditTemplatePreview, {
                     width: '1000px',
                     disableClose: true,
                     data: {data: data}
@@ -147,7 +142,7 @@ let dialogRefprev = this.dialog.open(TemplatePreview, {
 
 promote(){
 
- let dialogRef1 = this.dialog.open(SelectPromotion, {
+ let dialogRef1 = this.dialog.open(EditSelectPromotion, {
                     width: '1000px',
                     disableClose: true
                   });
@@ -155,7 +150,7 @@ promote(){
                   dialogRef1.afterClosed().subscribe(result1 => {
                     
                     if(result1){
-let dialogRef2 = this.dialog.open(CreatePromotion, {
+let dialogRef2 = this.dialog.open(EditPromotion, {
                     width: '1000px',
                     disableClose: true,
                     data: { id:  result1 }
@@ -176,17 +171,17 @@ let dialogRef2 = this.dialog.open(CreatePromotion, {
 
 
 @Component({
-  selector: 'select_promotion',
-  templateUrl: 'select_promotion.html',
+  selector: 'edit_select_promotion',
+  templateUrl: 'edit_select_promotion.html',
 })
-export class SelectPromotion {
+export class EditSelectPromotion {
 
 name: string;
 inventories: any;
 id: number = 0;
 edit_data1: any;
   constructor(
-    public dialogRef1: MatDialogRef<SelectPromotion>,private PromotionService:PromotionService) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef1: MatDialogRef<EditSelectPromotion>,private PromotionService:PromotionService) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
 ngOnInit() {
   this.edit_data1 = localStorage.getItem('edit_data');
@@ -221,10 +216,10 @@ ok(): void {
 
 
 @Component({
-  selector: 'create_promotion',
-  templateUrl: 'create_promotion.html',
+  selector: 'edit_promotion',
+  templateUrl: 'edit_promotion.html',
 })
-export class CreatePromotion {
+export class EditPromotion {
 
 // data_types
 product_asin: any;
@@ -249,7 +244,7 @@ edit_data: any;
 
 
   constructor(
-    public dialogRef2: MatDialogRef<CreatePromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef2: MatDialogRef<EditPromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
   onNoClick(): void {
     alert("sure");
@@ -269,13 +264,10 @@ edit_data: any;
    this.dialogRef2.close();
   }
 
-
-
   ngOnInit() {
   this.edit_data1 = localStorage.getItem('edit_data');
       this.PromotionService.getdata(this.data.id).subscribe( res => {
       this.data1 = res;
-
     });
 
      this.myGroup = new FormGroup({ firstName: new FormControl() });
@@ -291,9 +283,6 @@ edit_data: any;
             support_email: new FormControl('',[Validators.required,Validators.email]),
             mail_frequency: new FormControl('',Validators.required)
          });
-
-         //product_category: new FormControl(''),
-         //product_description: new FormControl(''),
   }
 
 ok(name): void {
@@ -306,26 +295,24 @@ ok(name): void {
           this.discount_price= this.data1.price_paisas - 1;
      }
   }
-
 }
 
-
-@Component({
-  selector: 'template_preview',
-  templateUrl: 'template_preview.html',
-  styleUrls: ['./promotion.component.css']
+	
+	@Component({
+  selector: 'edit_template_preview',
+  templateUrl: 'edit_template_preview.html',
+  styleUrls: ['./../promotion/promotion.component.css']
 })
-export class TemplatePreview {
+export class EditTemplatePreview {
 
 promotion_template: any;
 
   constructor(
-    public dialogRefprev: MatDialogRef<TemplatePreview>,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRefprev: MatDialogRef<EditTemplatePreview>,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
 
 ok(): void {
      this.dialogRefprev.close();
   }
-
 
 }

@@ -19,7 +19,9 @@ email: any;
 password: any;
 phone: any;
 registerdata: any;
-hide: boolean = true; 
+hide: boolean = true;
+
+status: any; 
 
   constructor(private RegisterService:RegisterService, private router:Router, private _fb: FormBuilder) { }
 
@@ -40,9 +42,14 @@ public myForm: FormGroup;
   register(){
   this.registerdata = {"first_name": this.first_name,"last_name": this.last_name,"user_email": this.email,"password": this.password,"phone": this.phone}
     this.RegisterService.register(this.registerdata).subscribe( res => {
+      console.log(res);
+      this.status = res;
+         if(this.status){
         swal("Registered!", "You Have Sucessfully Registered", "success");
         this.router.navigate(['login']);
-          swal("Registered!", "res.id" , "warning");
+        }else{
+          swal("Not Registered!", "Registration Failed" , "error");
+        }
     },
     error => { console.log(error); }
     );
@@ -51,8 +58,17 @@ public myForm: FormGroup;
    email_uniq(email){
       this.RegisterService.email_uniq(email).subscribe( res => {
       if(res){
-        alert("Email aleredy in use");
+        swal('Oops...', 'Email Already in Use!', 'warning')
         this.email = '';
+        }
+  });
+ }
+
+  phone_uniq(phone){
+      this.RegisterService.phone_uniq(phone).subscribe( res => {
+      if(res){
+        swal('Oops...', 'Number Already in Use!', 'warning')
+        this.phone = '';
         }
   });
  }

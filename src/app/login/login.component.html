@@ -31,54 +31,10 @@
             <button type="submit" mat-raised-button color="primary" class="float-right"> Login </button>
           </div>
           <a href="" class="forgot-pswd">Forgot Password?</a>
-          <p class="signup">Don't you have an account <a (click)="register()">Signup</a></p>
+          <p class="signup">Don't you have an account <a routerLink="/register">Signup</a></p>
         </form>
       </mat-card>
       <p>Powered by <a href="https://www.altiussolution.com/" target="blank">Altius Technology Solution</a></p>
     </div>
-<!--     <mat-grid-list cols="1" rowHeight="550px">
-      <mat-grid-tile>
-        <mat-card>
-          <mat-tab-group>
-             <mat-tab label="Login">
-                <form class="example-form" novalidate (ngSubmit)="login()">
-                <mat-form-field>
-                 <mat-label>Email</mat-label>
-                  <input matInput placeholder="Your@email.com" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email">
-                  <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                    Please enter a valid email address
-                  </mat-error>
-                  <mat-error *ngIf="emailFormControl.hasError('required')">
-                    Email is <strong>required</strong>
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field>
-                 <mat-label>Password</mat-label>
-                  <input matInput [type]="hide ? 'password' : 'text'" placeholder="Your passowrd" [formControl]="passwordFormControl" class="form-control" id="password" name="password" [(ngModel)] = "password" autocomplete="off" >
-                  <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon> 
-                  <mat-error *ngIf="passwordFormControl.hasError('required')">
-                    Password is <strong>required</strong>
-                  </mat-error>
-                </mat-form-field>
-                <div class="stay-signed">
-                  <mat-checkbox> Stay Signed in </mat-checkbox>
-                  <a href="" class="forgot-pswd float-right">Forgot Password?</a>
-                </div>
-                <mat-grid-list cols="1" rowHeight="90px">
-                  <mat-grid-tile>
-                    <button type="submit" mat-raised-button color="primary"> Login </button>
-                  </mat-grid-tile>
-                </mat-grid-list>
-              </form>
-            </mat-tab>
-            
-            <mat-tab label="Register"> 
-              <app-register> </app-register>
-            </mat-tab>
-
-          </mat-tab-group>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list> -->
   </div>
 </div>

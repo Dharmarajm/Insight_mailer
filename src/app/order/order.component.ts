@@ -45,7 +45,7 @@ orders: any = [];
   title: item.find_order[0].title,
   buyer_name: item.buyer_name,
   purchased_at: item.purchased_at,
-  shipment_status: item.tfm_shipment_status,
+  tfm_shipment_status: item.tfm_shipment_status,
   status: item.status
 }));
    //console.log(this.orders);

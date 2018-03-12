@@ -60,7 +60,7 @@ export class CampaignComponent implements OnInit {
   }
 
 campaign_edit(id){
-    this.router.navigate(['new_campaign', id]);
+    this.router.navigate(['edit_campaign', id]);
 }
 
 
@@ -70,9 +70,7 @@ new_campaign(){
 
 
 campaign_delete(campaign,index){
-console.log(campaign);
 this.del_id = campaign.id;
-alert(this.del_id);
 swal({
   title: 'Are you sure?',
   text: 'You will not be able to recover this file!',
@@ -83,22 +81,17 @@ swal({
 }).then((result) => {
   if (result.value) {
   this.CampaignService.delete_campaign(this.del_id).subscribe( res => {
-    console.log(res);
-    console.log(this.campaings.indexOf(campaign));
     this.campaings.splice(this.campaings.indexOf(campaign), 1);
-    
     });
     swal(
       'Deleted!',
-      'Your file has been deleted.',
+      'Your Campaing has been deleted.',
       'success'
     )
-  // For more information about handling dismissals please visit
-  // https://sweetalert2.github.io/#handling-dismissals
   } else if (result.dismiss === swal.DismissReason.cancel) {
     swal(
       'Cancelled',
-      'Your file is safe :)',
+      'Your Campaing is safe :)',
       'error'
     )
   }

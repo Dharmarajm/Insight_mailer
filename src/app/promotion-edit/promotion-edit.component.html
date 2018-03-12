@@ -1,0 +1,84 @@
+<div class="mat-page-content">
+  <div class="container">
+    <div class="filters">
+      <h1 class="page-title">My Promotions</h1>
+      <span>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        <!--button mat-mini-fab>
+          <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
+        </button-->
+        <button mat-mini-fab (click)="promote()">
+          <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+        </button>
+      </span>
+    </div>
+    <div class="row">
+      <mat-grid-list cols="5" rowHeight="520px">
+        <mat-grid-tile *ngFor=" let promotion of promotions| paginate: {itemsPerPage: 10, currentPage:page1, id:'1'} let i = 'index'">
+          <mat-card>
+            <div class="product-img">
+              <img [src]="promotion.inventory.find_by_asin[0].small_image">
+              <div class="product-details">
+                <div class="details">
+                  <h4>ASIN:&nbsp;<span>{{ promotion.inventory.asin }}</span></h4>
+                  <h4>SKU:&nbsp;<span>{{ promotion.inventory.sku }}</span></h4>
+                  <h4>TITLE:&nbsp;<span>{{ promotion.inventory.find_by_asin[0].title }}</span></h4>
+                  <h4>PRICE:&nbsp;<span>{{ promotion.inventory.price_paisas }}</span></h4>
+                  <h4>QTY:&nbsp;<span>{{ promotion.inventory.quantity }}</span></h4>
+                </div>
+              </div>
+            </div>
+            <mat-card-content>
+              <div class="modify">
+                <button mat-icon-button (click)="promotion_edit(promotion.id)">
+                  <mat-icon>mode_edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="promotion_delete(promotion,$index)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+              <h4>{{ promotion?.promotion_title }} </h4>
+              <p>{{ promotion.inventory.find_by_asin[0].title }} </p>
+              <div class="price">
+                <span><s>&#8377;{{ promotion.inventory.price_paisas }}</s>&nbsp;<b> &#8377;{{  promotion?.discount_price }}</b></span>
+                <mat-slide-toggle [color]="primary"[checked]="promotion?.enable"  
+                (change)=enable($event,promotion.id,promotion.inventory.id,i)></mat-slide-toggle>
+              </div><!--[disabled]="!(start_date[i] && end_date[i])"-->
+            </mat-card-content>
+            <mat-card-footer>
+              <mat-grid-list cols="2" rowHeight="65px">
+                <mat-grid-tile>
+                  <mat-form-field>
+                    <input matInput [min]="min_date" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="start_date[i]" placeholder="Start date">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                  <mat-form-field>
+                    <input matInput [min]="start_date[i]" [max]="maxDate" [matDatepicker]="picker" [(ngModel)]="end_date[i]" placeholder="End date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </mat-grid-tile>
+              </mat-grid-list>
+              <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="primary">Preview</button>
+<!--               <mat-grid-list cols="1" rowHeight="65px">
+                <mat-grid-tile>
+                    
+                </mat-grid-tile>
+              </mat-grid-list> -->
+            </mat-card-footer>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+    <div class="row">
+      <mat-grid-list cols="1" rowHeight="60px">
+        <mat-grid-tile>
+          <pagination-controls (pageChange)="page1 = $event" id="1" maxSize="5" directionLinks="true" autoHide="true"></pagination-controls>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</div>
