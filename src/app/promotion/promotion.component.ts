@@ -92,8 +92,6 @@ swal({
       'Your file has been deleted.',
       'success'
     )
-  // For more information about handling dismissals please visit
-  // https://sweetalert2.github.io/#handling-dismissals
   } else if (result.dismiss === swal.DismissReason.cancel) {
     swal(
       'Cancelled',

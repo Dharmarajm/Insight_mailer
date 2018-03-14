@@ -34,7 +34,7 @@ export class CampaignService {
     }
 
    campaign_create(id){
-      return this.http.post('http://192.168.1.64:3021/campaigns/create',{campaign: {campagin_name: localStorage.getItem("campaign"),user_id: 1,template_id: id}});
+      return this.http.post('http://192.168.1.64:3021/campaigns/create',{campaign: {campagin_name: localStorage.getItem("campaign"),template_id: id}});
    }
 
    campaign_update(trigger_data){

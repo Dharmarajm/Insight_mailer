@@ -8,6 +8,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';  // replaces previous Http service
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { CKEditorModule } from 'ng2-ckeditor';
@@ -41,7 +42,7 @@ import { PromotionService } from './promotion/promotion.service';
 import { DashboardService } from './dashboard/dashboard.service';
 import { UserProfileService } from './user-profile/user-profile.service';
 import { AuthGuardService } from './shared/auth-guard.service';
-
+import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,10 @@ import { AuthGuardService } from './shared/auth-guard.service';
                PromotionService,
                UserProfileService,
                DashboardService,
-               AuthGuardService
+               AuthGuardService,
+               { provide: HTTP_INTERCEPTORS,
+                 useClass: RefreshtokenInterceptor,
+                 multi: true }
              ],
   entryComponents: [
                 CampaignName,

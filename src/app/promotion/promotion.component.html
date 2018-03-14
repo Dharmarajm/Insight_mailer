@@ -41,7 +41,7 @@
               <p>{{ promotion.inventory.find_by_asin[0].title }} </p>
               <div class="price">
                 <span><s>&#8377;{{ promotion.inventory.price_paisas }}</s>&nbsp;<b> &#8377;{{  promotion?.discount_price }}</b></span>
-                <mat-slide-toggle [color]="primary"[checked]="promotion?.enable"  
+                <mat-slide-toggle [color]="primary" [checked]="promotion?.enable"  
                 (change)=enable($event,promotion.id,promotion.inventory.id,i)></mat-slide-toggle>
               </div><!--[disabled]="!(start_date[i] && end_date[i])"-->
             </mat-card-content>

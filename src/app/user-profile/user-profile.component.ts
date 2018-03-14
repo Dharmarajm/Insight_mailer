@@ -26,6 +26,7 @@ merchant_id: string;
 marketplace_id: string;
 aws_accesskey_id: string;
 aws_secret_accesskey_id: string;
+mws_auth_token: string;
 //userprofile: any;
 userprofiledata: any 
 hide1: boolean = true; 
@@ -46,14 +47,7 @@ public myForm2: FormGroup;
             email: new FormControl('',[Validators.required,Validators.email]),
             old_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
             new_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
-            confirm_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
-            //card_number: new FormControl(''),
-            //subscription_plan: new FormControl('Beta Customer',[Validators.required]),
-            //merchant_id: new FormControl('',[Validators.required]),
-            //marketplace_id: new FormControl('',[Validators.required]),
-            //aws_accesskey_id: new FormControl('',[Validators.required]),
-            //aws_secret_accesskey_id: new FormControl('',[Validators.required])
-            //phone: new FormControl('',[Validators.required,Validators.minLength(10)])
+            confirm_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")])
         });
   
 
@@ -66,12 +60,20 @@ public myForm2: FormGroup;
   this.myForm2 = new FormGroup({
             merchant_id: new FormControl('',[Validators.required]),
             marketplace_id: new FormControl('',[Validators.required]),
-            aws_accesskey_id: new FormControl('',[Validators.required]),
-            aws_secret_accesskey_id: new FormControl('',[Validators.required])
+            mws_auth_token: new FormControl('',[Validators.required])
   });
 }
 
 
+            //aws_accesskey_id: new FormControl('',[Validators.required]),
+            //aws_secret_accesskey_id: new FormControl('',[Validators.required])
+            //card_number: new FormControl(''),
+            //subscription_plan: new FormControl('Beta Customer',[Validators.required]),
+            //merchant_id: new FormControl('',[Validators.required]),
+            //marketplace_id: new FormControl('',[Validators.required]),
+            //aws_accesskey_id: new FormControl('',[Validators.required]),
+            //aws_secret_accesskey_id: new FormControl('',[Validators.required])
+            //phone: new FormControl('',[Validators.required,Validators.minLength(10)])
 
 
    save_ok(save): void {
@@ -94,8 +96,11 @@ localStorage.setItem("user-profile",save);
    this.UserProfileService.userprofileaccdetail(this.userprofiledata).subscribe(res => {});
   }
 
+ //aws_accesskey_id": this.aws_accesskey_id, "aws_secret_accesskey_id": this.aws_secret_accesskey_id}
+
+
   credential(){
-   this.userprofiledata = {"merchant_id": this.merchant_id, "marketplace_id": this.marketplace_id, "aws_accesskey_id": this.aws_accesskey_id, "aws_secret_accesskey_id": this.aws_secret_accesskey_id}
+   this.userprofiledata = {"merchant_id": this.merchant_id, "marketplace_id": this.marketplace_id, "mws_auth_token": this.mws_auth_token}
    this.UserProfileService.userprofilecredential(this.userprofiledata).subscribe( res => { });
   }
 }

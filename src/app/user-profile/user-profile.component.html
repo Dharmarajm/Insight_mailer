@@ -162,23 +162,31 @@
                 </mat-form-field>
               </mat-grid-tile>
             </mat-grid-list>
-            <mat-grid-list cols="2" rowHeight="85px">
-              <mat-grid-tile>
+            <mat-grid-list cols="1" rowHeight="85px">
+              <!--mat-grid-tile>
                 <mat-form-field class="example-full-width"> <mat-label>AWS Access Key Id</mat-label>
                   <input matInput placeholder="Enter your AWS AccessKey Id" formControlName="aws_accesskey_id" class="form-control" id="aws_accesskey_id" name="aws_accesskey_id" [(ngModel)] = "aws_accesskey_id">
-                  <!-- <mat-error *ngIf="myForm.get('aws_accesskey_id').hasError('required')">
+                  <mat-error *ngIf="myForm.get('aws_accesskey_id').hasError('required')">
                     aws_accesskey_id is <strong>required</strong>
-                  </mat-error> -->
+                  </mat-error>
+                </mat-form-field>
+              </mat-grid-tile-->
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width"> <mat-label>Mws Auth Token</mat-label>
+                  <input matInput placeholder="Enter your Mws Auth Token" formControlName="mws_auth_token" class="form-control" id="mws_auth_token" name="mws_auth_token" [(ngModel)] = "mws_auth_token">
+                  <!--mat-error *ngIf="myForm.get('Mws_auth_token').hasError('required')">
+                    Mws Auth Token is <strong>required</strong>
+                  </mat-error-->
                 </mat-form-field>
               </mat-grid-tile>
-              <mat-grid-tile>
+              <!--mat-grid-tile>
                 <mat-form-field class="example-full-width"> <mat-label>AWS Secret Accesskey Id</mat-label>
                   <input matInput placeholder="Enter your AWS Secret Accesskey Id" formControlName="aws_secret_accesskey_id" class="form-control" id="aws_secret_accesskey_id" name="aws_secret_accesskey_id" [(ngModel)] = "aws_secret_accesskey_id">
-                  <!-- <mat-error *ngIf="myForm.get('aws_secret_accesskey_id').hasError('required')">
+                  <mat-error *ngIf="myForm.get('aws_secret_accesskey_id').hasError('required')">
                     aws_secret_accesskey_id is <strong>required</strong>
-                  </mat-error> -->
+                  </mat-error>
                 </mat-form-field>
-              </mat-grid-tile>
+              </mat-grid-tile-->
             </mat-grid-list>
             <mat-grid-list cols="1" rowHeight="65px">
               <mat-grid-tile>
