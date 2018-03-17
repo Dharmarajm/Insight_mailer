@@ -19,10 +19,12 @@
                 <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
                 <td>{{inventory?.find_by_asin[0].title}}</td>
                 <td>{{inventory?.asin}}</td>
-                <td><mat-slide-toggle [color]="primary" [disabled]="(inventory.id != id && id != 0)" 
-                 *ngIf="!inventory?.promotion_in_use" (change)=asin($event,inventory.id)></mat-slide-toggle>
+                <td><mat-slide-toggle [color]="primary" [checked]="asin_data?.inventory.asin" 
+                  [disabled]="(inventory.id != id && id != 0)" 
+                 *ngIf="!inventory?.promotion_in_use && inventory?.asin == asin_data?.inventory.asin"
+                (change)=asin($event,inventory.id)></mat-slide-toggle>
                 <!--[checked]="inventory.children_in_use" [checked]="edit_data?.inventory.asin" *ngIf="!inventory?.promotion_in_use"  -->
-                <mat-icon *ngIf="inventory?.promotion_in_use" matTooltip="Promotion already in use">error_outline</mat-icon></td>
+                <mat-icon *ngIf="inventory?.promotion_in_use && inventory?.asin != asin_data?.inventory.asin" matTooltip="Promotion already in use">error_outline</mat-icon></td>
               </tr>
             </tbody>
           </table>

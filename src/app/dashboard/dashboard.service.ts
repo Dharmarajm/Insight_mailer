@@ -19,12 +19,21 @@ export class DashboardService {
         return this.http.post('http://192.168.1.64:3021/dashboard/order_stats',{ value: value });
     }
 
+     feedback_stat(value) {
+        console.log(value);
+        return this.http.post('http://192.168.1.64:3021/dashboard/feedback_stats',{ value: value });
+    }
+
     count(){
         return this.http.get('http://192.168.1.64:3021/dashboard/product');
     }
 
     doughnut() {
         return this.http.get('http://192.168.1.64:3021/dashboard/doughnut_chart');
+    }
+
+    review() {
+        return this.http.get('http://192.168.1.64:3021/dashboard/review');
     }
 
 

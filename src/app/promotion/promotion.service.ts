@@ -39,6 +39,10 @@ export class PromotionService {
         return this.http.post('http://192.168.1.64:3021/promotions', { promotion: data, id: inventory_id } );
     }
 
+    edit_promotion_data(data,id){
+       return this.http.put('http://192.168.1.64:3021/promotions/'+id, { promotion: data } );
+    }
+
     promotion_enable(data) {
         return this.http.post('http://192.168.1.64:3021/promotions/enable',data);
     }

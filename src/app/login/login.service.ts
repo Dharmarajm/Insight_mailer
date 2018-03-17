@@ -14,5 +14,8 @@ export class LoginService {
  userlogin(data) {
         return this.http.post('http://192.168.1.64:3021/user_token',data);
     }
-
+ 
+ userstatus() {
+        return this.http.get('http://192.168.1.64:3021/users/acc_status');
+    }
 }

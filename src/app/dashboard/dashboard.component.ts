@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { DashboardService } from './dashboard.service';
 import { AppService } from './../app.service';
 import {  MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,7 @@ order_statistics: any;
 review: any;
 happy_customer: any;
 unhappy_customer: any;
-
+feedback_statistics: any;
 
 
 displayedColumns1 = ['id', 'product_list', 'count'];
@@ -28,7 +29,7 @@ dataSource2 = new MatTableDataSource;
 
 values: any = ['7 Days','15 Days','30 Days','45 Days']
 
-  constructor(private DashboardService:DashboardService, public nav: AppService) { }
+  constructor(private DashboardService:DashboardService, public nav: AppService,public dialog: MatDialog) { }
 
   ngOnInit() {
   this.nav.show();
@@ -54,6 +55,16 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
    this.chartData = [ { data: this.order_statistics.count, label: 'Orders' } ];
    });
 
+   this.DashboardService.feedback_stat("30 days").subscribe( res => {
+   this.feedback_statistics = res;
+   console.log(this.feedback_statistics);
+   for (let data of this.feedback_statistics.date) {
+    this.chartLabels2.push(data);    
+    }
+
+   this.chartData2 = [ { data: this.feedback_statistics.count, label: 'Emails' } ];
+   });
+
    this.DashboardService.doughnut().subscribe( res => {
    this.review = res;
    this.happy_customer = res[0];
@@ -74,6 +85,18 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
    this.chartData = [ { data: this.order_statistics.count, label: 'Orders' } ];
    });
 
+  }
+
+  feedback_stat_filter(event){
+  this.chartLabels2 = [];
+     console.log(event.value);
+    this.DashboardService.feedback_stat(event.value).subscribe( res => {
+   this.feedback_statistics = res;
+   for (let data of this.feedback_statistics.date) {
+    this.chartLabels2.push(data);    
+    }
+   this.chartData2 = [ { data: this.feedback_statistics.count, label: 'Emails' } ];
+   });
   }
 
   chartOptions = {
@@ -97,7 +120,13 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
  public chartLabels = [];
 
-  ChartColors = [
+  ChartColors1 = [
+    { 
+      backgroundColor: 'rgbA(124, 195, 134, 1)',
+    }
+  ];
+
+  ChartColors2 = [
     { 
       backgroundColor: 'rgba(11, 193, 170, 0.2)',
       borderColor: 'rgb(11, 193, 170)',
@@ -122,7 +151,6 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
   public doughnutChartColors: any[] = [{ backgroundColor: ["#7cc387","#c8e6ce"] }];
 
   onChartClick(event) {
-    console.log(event);
   }
 
   public chartLabel1 = ['happy customers','unhappy customers'];
@@ -141,22 +169,60 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
   ];
 
   onChart1Click(event) {
-    console.log(event);
+     console.log(event.active[0]._index);
+    if(event.active[0]._index == 1){
+            let dialogRef = this.dialog.open(Feedback, {
+                    width: '1000px'
+                  });
+
+                  dialogRef.afterClosed().subscribe(result => {
+                    
+                  });
+    }
   }
 
    chartOptions2 = {
     responsive: true,
     fill: 'start',
-    showLine: false
+    showLine: false,
+    scales: {
+        xAxes: [{
+             gridLines: { drawBorder: true, display: true }
+        }],
+        yAxes: [{
+             gridLines: { drawBorder: true, display: true },
+             ticks: { beginAtZero: true }
+        }]
+    }    
   };
 
 public  chartData2 = [
-    { data: [330, 600, 260, 700, 320, 530], label: 'Account A' }
+    { data: [], label: 'Emails' }
   ];
 
- public chartLabels2 = ['January', 'February', 'March', 'April', 'May', 'June'];
+ public chartLabels2 = [];
 
   onChart2Click(event) {
     console.log(event);
   }
+}
+
+@Component({
+  selector: 'feedback',
+  templateUrl: 'feedback.html',
+})
+export class Feedback implements OnInit {
+
+feedbacks: any;
+
+  constructor(
+    public dialogRef: MatDialogRef<Feedback>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private DashboardService:DashboardService) { }
+
+    ngOnInit() {
+     this.DashboardService.review().subscribe( res => {
+       this.feedbacks = res;
+      });
+    }
+
 }

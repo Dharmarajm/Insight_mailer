@@ -38,7 +38,7 @@ export class CampaignService {
    }
 
    campaign_update(trigger_data){
-      return this.http.post('http://192.168.1.64:3021/campaigns/trigger',{campaign: {id: localStorage.getItem("campaign_id"),triggers: trigger_data}});
+      return this.http.post('http://192.168.1.64:3021/campaigns/trigger',{id: localStorage.getItem("campaign_id"),campaign: {id: localStorage.getItem("campaign_id"),triggers: trigger_data}});
    } 
     
     asin_push(asin_data) {
@@ -54,6 +54,10 @@ export class CampaignService {
 
     name_uniq(name){
       return this.http.post('http://192.168.1.64:3021/campaigns/uniq_campaign',{name: name});
+    }
+
+    getemails(id) {
+        return this.http.post('http://192.168.1.64:3021/campaigns/email_stats',{id: id});
     }
 
 }

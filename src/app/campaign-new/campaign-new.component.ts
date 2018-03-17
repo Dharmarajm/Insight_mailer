@@ -28,6 +28,7 @@ edit_id: any;
 edit_data: any;
 id: number = 0;
 name: any;
+addrCtrl: any;
 
 public myForm: FormGroup;
 public formArray: any;
@@ -44,6 +45,8 @@ values: string[] = ["ordered","shipped","delevered","returned"];
   if(this.edit_id.id){
    this.CampaignService.edit_campaign(this.edit_id.id).subscribe( res => {
    this.edit_data = res;
+   console.log(this.edit_data);
+   this.addAddressvalue(this.edit_data.triggers);
     });
     }
   this.CampaignService.getcampaigns().subscribe( res => {
@@ -52,6 +55,7 @@ values: string[] = ["ordered","shipped","delevered","returned"];
 
     this.CampaignService.gettemplates().subscribe( res => {
     this.templates = res;
+    //console.log(res);
     });
 
     this.CampaignService.getinventories().subscribe( res => {
@@ -63,7 +67,7 @@ values: string[] = ["ordered","shipped","delevered","returned"];
             addresses: this._formBuilder.array([])
         });
 
-         this.addAddress();
+        // this.addAddress();
 
           this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -104,6 +108,8 @@ localStorage.setItem("campaign",name);
     console.log(res);
     let camp_id:any = res;
     localStorage.setItem("campaign_id",camp_id);
+    let trigger = template;
+    this.addAddressvalue(trigger);
     });
     }else{
      this.id = 0;
@@ -143,25 +149,30 @@ localStorage.setItem("campaign",name);
         });
     }
 
+    addAddressvalue(trigger) {
+        const control = <FormArray>this.myForm.controls['addresses'];
+        if(control.controls.length <= trigger.email_limit){
+        for (let i in trigger.events) {
+        this.addrCtrl = this.initAddressvalue(trigger.events[i]);
+        control.push(this.addrCtrl);
+        }
+        }else{
+                alert("more than 5 triggers are not allowed");
+        }
+    }
+
+
+    initAddressvalue(trigger) {
+        return this._formBuilder.group({
+            days: [trigger.days, Validators.required],
+            trigger: [trigger.triggers, Validators.required]
+        });
+    }
+
+
     getTasks(myForm){
 
-
-    //this.CampaignService.edit_campaign(localStorage.getItem("campaign_id")).subscribe( res => { 
-          
-    //[{trigger: 'shipped', days: '4'},{trigger: 'shipped', days: '4'},{trigger: 'shipped', days: '4'},{trigger: 'shipped', 
-    //days: '4'} ]
-    // let triggerdata = res;
-     //console.log(res);
-     // console.log(myForm.get('addresses').controls);
-   //   myForm.patchValue({
-    //        name: 'test',
-     //       addresses: triggerdata
-     //  });
-
-      //  } );
-
     return myForm.get('addresses').controls
-
 
   }
 

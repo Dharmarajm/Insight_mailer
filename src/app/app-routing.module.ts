@@ -12,6 +12,8 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { PromotionEditComponent } from './promotion-edit/promotion-edit.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EmailStatusComponent } from './email-status/email-status.component';
+
 
 import { AuthGuardService as AuthGuard } from './shared/auth-guard.service';
 
@@ -27,6 +29,7 @@ const routes: Routes = [
                          { path: 'promotion/:id', component: PromotionEditComponent, canActivate: [AuthGuard] },
                          { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
                          { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard] },
+                         { path: 'email_status/:id', component: EmailStatusComponent, canActivate: [AuthGuard] },
                          { path: '**', component: LoginComponent }
                        ];
 

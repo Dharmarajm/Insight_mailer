@@ -49,7 +49,7 @@ values: string[] = ["ordered","shipped","delevered","returned"];
             addresses: this._formBuilder.array([])
         });
 
-         this.addAddress();
+   //      this.addAddress();
 
           this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
@@ -65,8 +65,9 @@ values: string[] = ["ordered","shipped","delevered","returned"];
   if(this.edit_id.id){
    this.CampaignService.edit_campaign(this.edit_id.id).subscribe( res => {
    this.edit_data = res;
-   console.log(this.edit_data.triggers);
-   //this.addAddress(this.edit_data.triggers);
+   console.log(this.edit_data);
+   this.addAddressvalue(this.edit_data.template_data);
+
     });
     }
   this.CampaignService.getcampaigns().subscribe( res => {
@@ -132,37 +133,14 @@ localStorage.setItem("campaign",name);
     }
 
    addAddress() {
-   //console.log(trigger);
         const control = <FormArray>this.myForm.controls['addresses'];
-      // console.log(trigger.length);
         if(control.controls.length <= 4){
-      //  this.pass = true;
-        //addrCtrl.controls.get('days').setValue('yourEmailId@gmail.com');
-   //     for (let i in trigger) {
-  // console.log(trigger[i]); // "0", "1", "2", trigger[i]
-
         this.addrCtrl = this.initAddress();
-
-       // this.addrCtrl.controls.get('trigger').setValue('shipped');
-       // this.addrCtrl.patchValue({
-       //     name: 'test',
-        //    addresses: this.triggerdata
-      // });
-        //console.log(this.addrCtrl);
         control.push(this.addrCtrl);
-  //  }
         }else{
                 alert("more than 5 triggers are not allowed");
         }
     }
-
-    //initAddress(trigger) {
-    //console.log(trigger);
-    //    return this._formBuilder.group({
-     //       days: [trigger.days, Validators.required],
-     //       trigger: [trigger.trigger, Validators.required]
-     //   });
-   // }
 
      initAddress() {
         return this._formBuilder.group({
@@ -171,27 +149,31 @@ localStorage.setItem("campaign",name);
         });
     }
 
+    addAddressvalue(trigger) {
+    console.log(trigger);
+       alert("hi");
+        const control = <FormArray>this.myForm.controls['addresses'];
+        if(control.controls.length <= trigger.email_limit){
+       for (let i in trigger.events) {
+        this.addrCtrl = this.initAddressvalue(trigger.events[i]);
+        control.push(this.addrCtrl);
+        }
+        }else{
+                alert("more than 5 triggers are not allowed");
+        }
+    }
+
+
+    initAddressvalue(trigger) {
+    console.log(trigger);
+        return this._formBuilder.group({
+            days: [trigger.days, Validators.required],
+            trigger: [trigger.trigger, Validators.required]
+        });
+    }
+
     getTasks(myForm){
-   // alert(this.pass);
-    //if(this.pass){
-    //this.CampaignService.edit_campaign(localStorage.getItem("campaign_id")).subscribe( res => { 
-    //      this.pass= false;
-    //[{trigger: 'shipped', days: '4'},{trigger: 'shipped', days: '4'},{trigger: 'shipped', days: '4'},{trigger: 'shipped', 
-    //days: '4'} ]
-    // this.triggerdata = res;
-    // console.log(res);
-    // alert(this.pass);
-     // console.log(myForm.get('addresses').controls);
-      //myForm.patchValue({
-        //    name: 'test',
-       //     addresses: this.triggerdata
-     //  });
-
-    //    });
-//}
     return myForm.get('addresses').controls
-
-
   }
 
   removeAddress(i: number) {

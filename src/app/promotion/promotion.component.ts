@@ -28,7 +28,7 @@ page1: any;
 
 dataSource = new MatTableDataSource;
 
-  constructor(public dialog: MatDialog,private PromotionService:PromotionService, public nav: AppService) { }
+  constructor(public dialog: MatDialog,private PromotionService:PromotionService, private router: Router,public nav: AppService) { }
 
   ngOnInit() {
   this.nav.show();
@@ -42,33 +42,33 @@ dataSource = new MatTableDataSource;
   }
 
 promotion_edit(id){
-alert(id);
-  this.PromotionService.edit_promotion(id).subscribe( res => {
-    console.log(res);
-    this.edit_data = res;
-    localStorage.setItem('edit_data', this.edit_data);
-let dialogRef1 = this.dialog.open(SelectPromotion, {
-                    width: '1000px',
-                    disableClose: true
-                  });
-
-                  dialogRef1.afterClosed().subscribe(result1 => {
+this.router.navigate(['promotion',id]);
+ // this.PromotionService.edit_promotion(id).subscribe( res => {
+  //  console.log(res);
+  //  this.edit_data = res;
+   // localStorage.setItem('edit_data', this.edit_data);
+//let dialogRef1 = this.dialog.open(SelectPromotion, {
+  //                  width: '1000px',
+    //                disableClose: true
+  //                });
+//
+    //              dialogRef1.afterClosed().subscribe(result1 => {
                     
                    // if(result1){
-let dialogRef2 = this.dialog.open(CreatePromotion, {
-                    width: '1000px',
-                    disableClose: true,
-                    data: { id:  this.edit_data.inventory.id }
-                  });
+//let dialogRef2 = this.dialog.open(CreatePromotion, {
+  //                  width: '1000px',
+    //                disableClose: true,
+      //              data: { id:  this.edit_data.inventory.id }
+        //          });
 
-                  dialogRef2.afterClosed().subscribe(result2 => {
-                       //this.promotions.unshift(result2);
-                  });
+          //        dialogRef2.afterClosed().subscribe(result2 => {
+            //           //this.promotions.unshift(result2);
+              //    });
 //}
-                  });
+                //  });
 
 
-    });
+    // });
 }
 
 promotion_delete(promotion_data,index){
@@ -162,6 +162,7 @@ let dialogRef2 = this.dialog.open(CreatePromotion, {
                   dialogRef2.afterClosed().subscribe(result2 => {
                       if(result2){
                        this.promotions.unshift(result2);
+                       this.router.navigate(['promotion']);
                       }
                   });
 }
@@ -247,7 +248,7 @@ edit_data: any;
 
 
   constructor(
-    public dialogRef2: MatDialogRef<CreatePromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef2: MatDialogRef<CreatePromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any, private router:Router) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
   onNoClick(): void {
     alert("sure");
@@ -273,7 +274,7 @@ edit_data: any;
   this.edit_data1 = localStorage.getItem('edit_data');
       this.PromotionService.getdata(this.data.id).subscribe( res => {
       this.data1 = res;
-
+     console.log(this.data1);
     });
 
      this.myGroup = new FormGroup({ firstName: new FormControl() });
@@ -295,13 +296,15 @@ edit_data: any;
   }
 
 ok(name): void {
+   this.router.navigate(['promotion']);
      this.dialogRef2.close();
+
   }
 
   discount(){
-     if(this.discount_price >= this.data1.price_paisas){
+     if(this.discount_price >= (this.data1.price_cents/100)){
           alert("promotion price should be less than actual price");
-          this.discount_price= this.data1.price_paisas - 1;
+          this.discount_price= '';
      }
   }
 

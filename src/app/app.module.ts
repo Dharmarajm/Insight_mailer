@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,9 +28,10 @@ import { CampaignEditComponent, EditTemplateEdit } from './campaign-edit/campaig
 import { TriggerComponent } from './campaign/trigger.component';
 import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview } from './promotion/promotion.component';
 import { PromotionEditComponent, EditSelectPromotion, EditPromotion, EditTemplatePreview } from './promotion-edit/promotion-edit.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent, Feedback } from './dashboard/dashboard.component';
 import { SharedComponent } from './shared/shared.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { EmailStatusComponent } from './email-status/email-status.component';
 
 //List Of Service
 import { AppService } from './app.service';
@@ -70,9 +72,11 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
     EditSelectPromotion,
     EditPromotion,
     DashboardComponent,
+    Feedback,
     SharedComponent,
     UserProfileComponent,
-    TemplatePreview
+    TemplatePreview,
+    EmailStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -85,6 +89,7 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
     CKEditorModule,
     NgxPaginationModule,
     ChartsModule,
+    NgxSpinnerModule,
     environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
   ],
   providers: [
@@ -103,6 +108,7 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
                  multi: true }
              ],
   entryComponents: [
+                Feedback,
                 CampaignName,
                 CampaignTemplate,
                 CampaignAsin,

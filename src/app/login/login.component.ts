@@ -53,7 +53,13 @@ hide: boolean = true;
       //localStorage.setItem('prathip', this.response.id);
       localStorage.setItem('prathip', this.response.jwt );
        this.nav.show();
+       this.LoginService.userstatus().subscribe( res => {
+       if (res){
        this.router.navigate(['dashboard']);
+       } else {
+       this.router.navigate(['profile']);
+       }
+       })
    },
    error => {
    this.password = '';

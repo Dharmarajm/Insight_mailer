@@ -11,7 +11,7 @@ export class UserProfileService {
 
   constructor(private http:HttpClient) { }
 
-userprofileregister(userprofiledata) {
+    userprofileregister(userprofiledata) {
         return this.http.post('http://192.168.1.64:3021/users/user_profile',userprofiledata);
     }
 
@@ -21,6 +21,14 @@ userprofileregister(userprofiledata) {
 
     userprofileaccdetail(userprofiledata){
         return this.http.post('http://192.168.1.64:3021/users/accdetail',userprofiledata);
+    }
+
+    sync(){
+        return this.http.get('http://192.168.1.64:3021/dashboard/sync');
+    }
+
+    user_data(){
+        return this.http.get('http://192.168.1.64:3021/users/user_data');
     }
 
 }

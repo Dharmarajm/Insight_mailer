@@ -7,27 +7,6 @@
       </button>
     </div>
 
-    <!--ckeditor
-    [(ngModel)]="ckeditorContent"
-    [config]="ckeConfig"
-    [readonly]="false"
-    (change)="onChange($event)"
-    (focus)="onFocus($event)"
-    (blur)="onBlur($event)"
-    debounce="500">
-    <ckgroup
-      [name]="'documenthandling'"
-      [previous]="'1'">
-      <ckbutton 
-       [name]="'imageExplorer'"
-       [command]="'insertcontent'"
-       (click)="insert($event)"
-       [icon]="'https://png.icons8.com/color/540/bow-tie-half-filled.png'"
-       [label]="'Insert_content'">
-     </ckbutton>
-   </ckgroup>
- </ckeditor-->
-
   <div class="row">
     <mat-grid-list cols="2" rowHeight="380px">
       <mat-grid-tile *ngFor=" let campaing of campaings| paginate: {itemsPerPage: 6, currentPage:page1, id:'1'} let i = 'index'">
@@ -35,6 +14,9 @@
           <mat-card-header>
             <mat-card-title>{{ campaing.campagin_name }}</mat-card-title>
             <div class="nav_ic">
+              <button mat-icon-button (click)="campaign_email_stat(campaing.id)">
+                <mat-icon>assessment</mat-icon>
+              </button>
               <button mat-icon-button (click)="campaign_edit(campaing.id)">
                 <mat-icon>edit</mat-icon>
               </button>

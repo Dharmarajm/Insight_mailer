@@ -31,7 +31,7 @@
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Product Price" formControlName="product_price" class="form-control" id="product_price" name="Product Price" [value]="data1?.price_paisas" [(ngModel)]="product_price">
+          <input matInput type=text placeholder="Product Price" formControlName="product_price" class="form-control" id="product_price" name="Product Price" [value]="data1?.price_cents / 100" [(ngModel)]="product_price">
           <!--mat-error *ngIf="product_priceFormControl.hasError('required')">
          Product Price is <strong>required</strong>
          </mat-error-->

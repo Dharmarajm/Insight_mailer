@@ -112,7 +112,7 @@
                           <td>{{inventory?.asin}}</td>
                           <td>
                             <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use" 
-                            [checked]="inventory.children_in_use" && inventory?.enable
+                            [checked]="inventory.children_in_use && inventory?.enable"
                             (change)=asin($event,inventory.asin)></mat-slide-toggle>
                             <mat-icon *ngIf="inventory?.children_in_use" matTooltip="Asin already in use">error_outline
                             </mat-icon>

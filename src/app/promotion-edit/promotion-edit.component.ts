@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PromotionService } from './../promotion/promotion.service';
 import { AppService } from './../app.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import swal from 'sweetalert2'
 
@@ -22,22 +22,22 @@ data_enable: any;
 previewSelected: any;
 data: any;
 edit_data: any;
-
+id: any;
 
 page1: any;
 
 dataSource = new MatTableDataSource;
 
-  constructor(public dialog: MatDialog,private PromotionService:PromotionService, public nav: AppService) { }
+  constructor(public dialog: MatDialog,private PromotionService:PromotionService, private routeparams: ActivatedRoute,public nav: AppService, private router: Router) { }
 
   ngOnInit() {
   this.nav.show();
-  this.PromotionService.getpromotion().subscribe( res => {
-      this.promotions = res;
-      this.dataSource = new MatTableDataSource(this.promotions);
-    });
-    this.min_date = new Date()
-    //  this.showSelected = true;
+  this.min_date = new Date();
+  this.routeparams.params.subscribe(res => { 
+  this.id = res.id
+   this.promotion_edit(this.id)
+  });
+
   }
 
 promotion_edit(id){
@@ -46,25 +46,27 @@ alert(id);
     console.log(res);
     this.edit_data = res;
     localStorage.setItem('edit_data', this.edit_data);
-let dialogRef1 = this.dialog.open(EditSelectPromotion, {
-                    width: '1000px',
-                    disableClose: true
-                  });
+//let dialogRef1 = this.dialog.open(EditSelectPromotion, {
+  //                  width: '1000px',
+    //                disableClose: true,
+      //              data: { data: this.edit_data }
+        //          });
 
-                  dialogRef1.afterClosed().subscribe(result1 => {
+             //     dialogRef1.afterClosed().subscribe(result1 => {
                     
                    // if(result1){
 let dialogRef2 = this.dialog.open(EditPromotion, {
                     width: '1000px',
                     disableClose: true,
-                    data: { id:  this.edit_data.inventory.id }
+                    data: { data:  this.edit_data }
                   });
 
                   dialogRef2.afterClosed().subscribe(result2 => {
                        //this.promotions.unshift(result2);
+                       this.router.navigate(['promotion']);
                   });
 //}
-                  });
+    //              });
 
 
     });
@@ -91,8 +93,6 @@ swal({
       'Your file has been deleted.',
       'success'
     )
-  // For more information about handling dismissals please visit
-  // https://sweetalert2.github.io/#handling-dismissals
   } else if (result.dismiss === swal.DismissReason.cancel) {
     swal(
       'Cancelled',
@@ -153,12 +153,13 @@ promote(){
 let dialogRef2 = this.dialog.open(EditPromotion, {
                     width: '1000px',
                     disableClose: true,
-                    data: { id:  result1 }
+                    data: { data:  this.data }
                   });
 
                   dialogRef2.afterClosed().subscribe(result2 => {
                       if(result2){
                        this.promotions.unshift(result2);
+                       this.router.navigate(['promotion']);
                       }
                   });
 }
@@ -174,17 +175,21 @@ let dialogRef2 = this.dialog.open(EditPromotion, {
   selector: 'edit_select_promotion',
   templateUrl: 'edit_select_promotion.html',
 })
-export class EditSelectPromotion {
+export class EditSelectPromotion implements OnInit {
 
 name: string;
 inventories: any;
 id: number = 0;
+asin_data: any;
+
 edit_data1: any;
   constructor(
-    public dialogRef1: MatDialogRef<EditSelectPromotion>,private PromotionService:PromotionService) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef1: MatDialogRef<EditSelectPromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
 ngOnInit() {
-  this.edit_data1 = localStorage.getItem('edit_data');
+  //this.edit_data1 = localStorage.getItem('edit_data');
+  console.log(this.data.data);
+  this.asin_data = this.data.data;
       this.PromotionService.getinventories().subscribe( res => {
       this.inventories = res;
     });
@@ -207,7 +212,7 @@ if (event.checked){
 
 //name
 ok(): void {
-     this.dialogRef1.close(this.id);
+     this.dialogRef1.close(this.data);
   }
 
 
@@ -219,7 +224,7 @@ ok(): void {
   selector: 'edit_promotion',
   templateUrl: 'edit_promotion.html',
 })
-export class EditPromotion {
+export class EditPromotion implements OnInit{
 
 // data_types
 product_asin: any;
@@ -244,16 +249,17 @@ edit_data: any;
 
 
   constructor(
-    public dialogRef2: MatDialogRef<EditPromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef2: MatDialogRef<EditPromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any,private router:Router) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
   onNoClick(): void {
     alert("sure");
   }
 
-  promotion(myPromotionForm){
+  promotion(myPromotionForm,id){
   
    console.log(myPromotionForm);
-   this.PromotionService.create_promotion(myPromotionForm,this.data.id).subscribe( res => {
+   console.log(id);
+   this.PromotionService.edit_promotion_data(myPromotionForm,id).subscribe( res => {
       this.dialogRef2.close(res);
     });
 
@@ -262,12 +268,18 @@ edit_data: any;
   cancel(){
    alert("promotion not created");
    this.dialogRef2.close();
+   this.router.navigate(['promotion']);
   }
 
   ngOnInit() {
+ // alert("data");
+  //console.log(this.data);
+  this.edit_data = this.data.data;
+  console.log(this.edit_data);
   this.edit_data1 = localStorage.getItem('edit_data');
-      this.PromotionService.getdata(this.data.id).subscribe( res => {
+      this.PromotionService.getdata(this.edit_data.id).subscribe( res => {
       this.data1 = res;
+      console.log(this.data1);
     });
 
      this.myGroup = new FormGroup({ firstName: new FormControl() });
@@ -290,9 +302,9 @@ ok(name): void {
   }
 
   discount(){
-     if(this.discount_price >= this.data1.price_paisas){
+     if(this.discount_price >= ((this.data1.price_paisas.fractional) / 100 )) {
           alert("promotion price should be less than actual price");
-          this.discount_price= this.data1.price_paisas - 1;
+          this.discount_price= (this.data1.price_paisas.fractional / 100) - 1;
      }
   }
 }

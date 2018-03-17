@@ -80,13 +80,13 @@ mat-card.step2{
 
 mat-card.step2 mat-card-content{
 	max-height: 320px;
-	overflow: hidden;
+	overflow: auto;
 	margin: 0;
 }
 
-mat-card.step2 mat-card-content:hover{
+/*mat-card.step2 mat-card-content:hover{
     overflow: auto;
-}
+}*/
 
 .step2 mat-card-title{
     padding: 15px;
@@ -153,13 +153,13 @@ mat-card.step3{
 
 mat-card.step3 mat-card-content{
 	max-height: 330px;
-	overflow: hidden;
+	overflow: auto;
 	margin: 0;
 }
 
-mat-card.step3 mat-card-content:hover{
+/*mat-card.step3 mat-card-content:hover{
     overflow: auto;
-}
+}*/
 
 .step3 mat-card-title{
     padding: 15px;
@@ -245,6 +245,16 @@ mat-card.step4{
 
 .step4 .mat-card-footer button{
 	margin: 0 5px;
+}
+
+.step4 .panel-body{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.step4 .panel-body button{
+    margin-left: 10px;
 }
 
 .panel-heading{

@@ -5,7 +5,8 @@ import { UserProfileService } from './user-profile.service';
 import { AppService } from './../app.service';
 import { Observable } from 'rxjs/Rx';
 //import * as swal from 'sweetalert';
-//import swal from 'sweetalert2'
+import swal from 'sweetalert2'
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-user-profile',
@@ -32,8 +33,11 @@ userprofiledata: any
 hide1: boolean = true; 
 hide2: boolean = true;
 hide3: boolean = true;
+hide4: boolean = true;
 
-  constructor(private UserProfileService:UserProfileService, private router:Router, private _fb: FormBuilder,public nav: AppService) { }
+res_data: any;
+
+  constructor(private UserProfileService:UserProfileService, private router:Router, private _fb: FormBuilder,public nav: AppService,private spinner: NgxSpinnerService) { }
 
 public myForm: FormGroup;
 public myForm1: FormGroup;
@@ -41,6 +45,11 @@ public myForm2: FormGroup;
 
   ngOnInit() {
   this.nav.show();
+ this.UserProfileService.user_data().subscribe( res => {
+  this.res_data = res;
+  console.log(this.res_data);
+ })
+
   this.myForm = new FormGroup({
             first_name: new FormControl('',[Validators.required]),
             last_name: new FormControl(''),
@@ -76,8 +85,8 @@ public myForm2: FormGroup;
             //phone: new FormControl('',[Validators.required,Validators.minLength(10)])
 
 
-   save_ok(save): void {
-localStorage.setItem("user-profile",save);
+   save_ok(): void {
+//localStorage.setItem("user-profile",save);
     // this.dialogRef1.close(name);
   }
 
@@ -86,22 +95,35 @@ localStorage.setItem("user-profile",save);
   userprofile(){
   this.userprofiledata = {"first_name": this.first_name,"last_name": this.last_name,"email": this.email,"old_password": this.old_password,"new_password": this.new_password,"confirm_password": this.confirm_password}
     this.UserProfileService.userprofileregister(this.userprofiledata).subscribe( res => {
-       // swal("Registered!", "You Have Sucessfully Registered", "success");
+       if(res){ 
+       swal("Updated!", "You Have Sucessfully Updated your Account", "success");
+       }
       //  this.router.navigate(['login']);
     });
    }
   
   accdetail(){
    this.userprofiledata = {"card_number": this.card_number, "subscription_plan": this.subscription_plan}
-   this.UserProfileService.userprofileaccdetail(this.userprofiledata).subscribe(res => {});
+   this.UserProfileService.userprofileaccdetail(this.userprofiledata).subscribe(res => {
+    if(res){ 
+       swal("Updated!", "You Have Sucessfully Updated Your Account", "success");
+       }
+   });
   }
-
- //aws_accesskey_id": this.aws_accesskey_id, "aws_secret_accesskey_id": this.aws_secret_accesskey_id}
 
 
   credential(){
    this.userprofiledata = {"merchant_id": this.merchant_id, "marketplace_id": this.marketplace_id, "mws_auth_token": this.mws_auth_token}
-   this.UserProfileService.userprofilecredential(this.userprofiledata).subscribe( res => { });
+   this.UserProfileService.userprofilecredential(this.userprofiledata).subscribe( res => {
+   if(res){ 
+   this.spinner.show();
+       this.UserProfileService.sync().subscribe( res => {
+       this.spinner.hide();
+       console.log(res);
+       swal("Linked!", "You Have Sucessfully Linked Your account", "success");
+           })
+       }
+   });
   }
 }
 

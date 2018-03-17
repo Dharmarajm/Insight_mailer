@@ -32,6 +32,7 @@ export class CampaignComponent implements OnInit {
   this.nav.show();
   this.CampaignService.getcampaigns().subscribe( res => {
     this.campaings = res;
+    console.log(this.campaings);
     });
 
     // extraPlugins: 'strinsert',
@@ -67,6 +68,10 @@ campaign_edit(id){
 new_campaign(){
      this.router.navigate(['new_campaign']);
   }
+
+campaign_email_stat(id){
+  this.router.navigate(['email_status',id]);
+}
 
 
 campaign_delete(campaign,index){

@@ -1,0 +1,158 @@
+<mat-tab-group>
+  <mat-tab label="Sent Email">
+<div class="mat-page-content">
+  <div class="container">
+    <div class="filters">
+      <h1 class="page-title">Sent Email </h1>
+      <span>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search keyword..">
+      </span>
+    </div>
+    <div class="card-border">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-cell *matCellDef="let i = index; "> {{ i + 1 }} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="buyer_name"> 
+          <mat-header-cell *matHeaderCellDef> Buyer Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.buyer_name }} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="sent_date">
+          <mat-header-cell *matHeaderCellDef> Sent Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.created_at}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="amazon_order_id">
+          <mat-header-cell *matHeaderCellDef> Amazon Order ID </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.amazon_order_id }} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="template_data">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Template Data </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.template_data}} </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="purchased_at">
+          <mat-header-cell *matHeaderCellDef> Ordered Date</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.purchased_at}} </mat-cell>
+        </ng-container> -->
+
+        <!--ng-container matColumnDef="order_quantity">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.find_order[0].order_quantity}} </mat-cell>
+    </ng-container-->
+
+        <!-- <ng-container matColumnDef="shipment_status">
+          <mat-header-cell *matHeaderCellDef> Order Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.tfm_shipment_status ? element?.tfm_shipment_status : element?.status }} </mat-cell>
+        </ng-container> -->
+
+        <!--ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.total}} </mat-cell>
+    </ng-container-->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+       <!--mat-paginator #paginator
+                 [length]="dataSource.filteredData.length"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator-->
+
+
+    </div>
+
+  </div>
+</div>
+</mat-tab>
+<mat-tab label="Pending Email">
+ <div class="mat-page-content">
+  <div class="container">
+    <div class="filters">
+      <h1 class="page-title">Sent Email </h1>
+      <span>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search keyword..">
+      </span>
+    </div>
+    <div class="card-border">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-cell *matCellDef="let i = index; "> {{ i + 1 }} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="buyer_name"> 
+          <mat-header-cell *matHeaderCellDef> Buyer Name </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{ element.buyer_name }} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="sent_date">
+          <mat-header-cell *matHeaderCellDef> Sent Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.created_at}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="amazon_order_id">
+          <mat-header-cell *matHeaderCellDef> Amazon Order ID </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.amazon_order_id }} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="template_data">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Template Data </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.template_data}} </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container matColumnDef="purchased_at">
+          <mat-header-cell *matHeaderCellDef> Ordered Date</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.purchased_at}} </mat-cell>
+        </ng-container> -->
+
+        <!--ng-container matColumnDef="order_quantity">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.find_order[0].order_quantity}} </mat-cell>
+    </ng-container-->
+
+        <!-- <ng-container matColumnDef="shipment_status">
+          <mat-header-cell *matHeaderCellDef> Order Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.tfm_shipment_status ? element?.tfm_shipment_status : element?.status }} </mat-cell>
+        </ng-container> -->
+
+        <!--ng-container matColumnDef="total">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.total}} </mat-cell>
+    </ng-container-->
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+       <!--mat-paginator #paginator
+                 [length]="dataSource.filteredData.length"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator-->
+
+
+    </div>
+
+  </div>
+</div> 
+</mat-tab>
+</mat-tab-group>

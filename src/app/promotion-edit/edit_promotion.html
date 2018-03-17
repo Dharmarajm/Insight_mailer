@@ -29,9 +29,8 @@
          Product Title is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
-
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Product Price" formControlName="product_price" class="form-control" id="product_price" name="Product Price" [value]="data1?.price_paisas" [(ngModel)]="product_price">
+          <input matInput type=text placeholder="Product Price" formControlName="product_price" class="form-control" id="product_price" name="Product Price" [value]="data1?.price_cents / 100" [(ngModel)]="product_price">
           <!--mat-error *ngIf="product_priceFormControl.hasError('required')">
          Product Price is <strong>required</strong>
          </mat-error-->
@@ -41,7 +40,7 @@
           <mat-label>Discount Price</mat-label>
           <input matInput type=number placeholder="Reduced Price For your Product" formControlName="discount_price" 
           max="data1.price_paisas" class="form-control" id="discount_price" name="Discount Price" 
-          [value]="edit_data?.discount_price" [(ngModel)]="discount_price" (change)="discount()">
+          [value]="edit_data?.discount_price" [(ngModel)]="edit_data.discount_price" (change)="discount()">
           <!--mat-error *ngIf="discount_priceFormControl.hasError('required')">
          Discount Price is <strong>required</strong>
          </mat-error-->
@@ -49,7 +48,7 @@
 
         <mat-form-field class="half-width">
           <textarea matInput type=text placeholder="Product Description" formControlName="product_description" class="form-control" id="product_description" name="Product Description" [value]="edit_data?.product_description"
-          [(ngModel)]="product_description"></textarea>
+          [(ngModel)]="edit_data.product_description"></textarea>
           <!--mat-error *ngIf="product_descriptionFormControl.hasError('required')">
          Product Description is <strong>required</strong>
          </mat-error-->
@@ -58,41 +57,41 @@
         <mat-form-field class="half-width">
           <mat-label>Personal Message</mat-label>
           <textarea matInput type=text placeholder="Enter Your message to the buyer" formControlName="personal_msg" class="form-control" id="product_msg" name="Product Message" [value]="edit_data?.personal_msg"
-          [(ngModel)]="personal_msg"></textarea>
+          [(ngModel)]="edit_data.personal_msg"></textarea>
           <!--mat-error *ngIf="product_msgFormControl.hasError('required')">
          Product Message is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Promotion Title" formControlName="promotion_title" class="form-control" id="promotion_title" name="Promotion Title" [value]="edit_data?.promotion_title" [(ngModel)]="promotion_title">
+          <input matInput type=text placeholder="Promotion Title" formControlName="promotion_title" class="form-control" id="promotion_title" name="Promotion Title" [value]="edit_data?.promotion_title" [(ngModel)]="edit_data.promotion_title">
           <!--mat-error *ngIf="promotion_titleFormControl.hasError('required')">
          Promotion Title is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Coupon Code" formControlName="coupon_code" class="form-control" id="coupon_code" name="Coupon Code" [value]="edit_data?.coupon_code" [(ngModel)]="coupon_code">
+          <input matInput type=text placeholder="Coupon Code" formControlName="coupon_code" class="form-control" id="coupon_code" name="Coupon Code" [value]="edit_data?.coupon_code" [(ngModel)]="edit_data.coupon_code">
           <!--mat-error *ngIf="coupon_codeFormControl.hasError('required')">
          Coupon Code is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Support Email" formControlName="support_email" class="form-control" id="support_email" name="Support Email" [value]="edit_data?.support_email" [(ngModel)]="support_email">
+          <input matInput type=text placeholder="Support Email" formControlName="support_email" class="form-control" id="support_email" name="Support Email" [value]="edit_data?.support_email" [(ngModel)]="edit_data.support_email">
           <!--mat-error *ngIf="support_emailFormControl.hasError('required')">
          Support Email is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=number placeholder="Frequency" formControlName="mail_frequency" class="form-control" id="Frequency" name="Frequency" [value]="edit_data?.mail_frequency" [(ngModel)]="mail_frequency">
+          <input matInput type=number placeholder="Frequency" formControlName="mail_frequency" class="form-control" id="Frequency" name="Frequency" [value]="edit_data?.mail_frequency" [(ngModel)]="edit_data.mail_frequency">
           <!--mat-error *ngIf="support_emailFormControl.hasError('required')">
          Support Email is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
         <div class="float-right">
-          <button type=submit mat-raised-button color="primary" [disabled]="!PromotionForm.valid" (click)="promotion(PromotionForm.value)"> Promote </button>
+          <button type=submit mat-raised-button color="primary" [disabled]="!PromotionForm.valid" (click)="promotion(PromotionForm.value,edit_data.id)"> Promote </button>
           <button mat-raised-button color="danger" (click)="cancel()"> Cancel </button>
         </div>
       </form>

@@ -68,7 +68,7 @@
               </mat-select>
             </mat-card-title>
             <mat-card-content>
-              <canvas baseChart [chartType]="'line'" [datasets]="chartData" [labels]="chartLabels" [colors]="ChartColors" [options]="chartOptions" [legend]="false" (chartClick)="onChartClick($event)">
+              <canvas baseChart [chartType]="'bar'" [datasets]="chartData" [labels]="chartLabels" [colors]="ChartColors1" [options]="chartOptions" [legend]="false" (chartClick)="onChartClick($event)">
               </canvas>
             </mat-card-content>
           </mat-card>
@@ -77,12 +77,12 @@
           <mat-card>
             <mat-card-title>
               Feedback Statistics
-              <mat-select placeholder="select filter">
+              <mat-select placeholder="select filter" (change)="feedback_stat_filter($event)">
                 <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
               </mat-select>
             </mat-card-title>
             <mat-card-content>
-              <canvas baseChart [chartType]="'line'" [datasets]="chartData2" [labels]="chartLabels2" [colors]="ChartColors" [options]="chartOptions2" [legend]="false" (chartClick)="onChart2Click($event)">
+              <canvas baseChart [chartType]="'line'" [datasets]="chartData2" [labels]="chartLabels2" [colors]="ChartColors2" [options]="chartOptions2" [legend]="false" (chartClick)="onChart2Click($event)">
               </canvas>
             </mat-card-content>
           </mat-card>
@@ -141,7 +141,7 @@
                   <mat-cell *matCellDef="let i = index "> {{ i + 1  }} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="product_list">
-                  <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Product Title </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element[0] | slice:0:20 }} ... </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="count">
@@ -169,7 +169,7 @@
                   <mat-cell *matCellDef="let i = index "> {{ i + 1 }} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                  <mat-header-cell *matHeaderCellDef> Asin </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> Product Title </mat-header-cell>
                   <mat-cell *matCellDef="let element"> {{element.find_order[0].title | slice:0:40 }} </mat-cell><!--| slice:0:6-->
                 </ng-container>
                 <!--ng-container matColumnDef="total">

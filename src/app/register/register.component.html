@@ -1,3 +1,12 @@
+<div class="mat-page-content login">
+  <div class="container">
+    <div class="login-panel">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <img src="/assets/logo_white.png">
+          </mat-card-title>
+        </mat-card-header>
 <form [formGroup]="myForm" class="example-form" novalidate (ngSubmit)="register()">
 <mat-form-field class="example-full-width">
  <mat-label>First Name*</mat-label>
@@ -52,4 +61,10 @@
       <button type="submit" [disabled]="!myForm.valid" mat-raised-button color="primary"> Register </button>
     </mat-grid-tile>
   </mat-grid-list>
+  <p class="signup">Already have an account <a routerLink="/login">SignIn</a></p>
 </form>
+</mat-card>
+<p>Powered by <a href="https://www.altiussolution.com/" target="blank">Altius Technology Solution</a></p>
+</div>
+  </div>
+</div>
