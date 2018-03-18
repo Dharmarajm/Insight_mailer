@@ -109,9 +109,9 @@
                           <td>{{inventory?.find_by_asin[0].title}}</td>
                           <td>{{inventory?.asin}}</td>
                           <td>
-                            <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use"
+                            <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use "
                             (change)=asin($event,inventory.asin)></mat-slide-toggle>
-                            <mat-icon *ngIf="inventory?.children_in_use" matTooltip="Asin already in use">error_outline
+                            <mat-icon *ngIf="inventory?.children_in_use " matTooltip="Asin already in use">error_outline
                             </mat-icon>
                             <!--mat-icon *ngIf="!inventory?.enable" matTooltip="Inventory is not enabled">error_outline
                             </mat-icon-->
@@ -163,7 +163,7 @@
                           </div>
                           <div class="panel-body" [formGroupName]="i">
                             <trigger [group]="myForm.controls.addresses.controls[i]"></trigger>
-                            <!--button mat-raised-button (click)="promotion_template()" color="primary">Template Preview</button-->
+                            <button mat-raised-button (click)="promotion_template(i)" color="primary">Template Preview</button>
                           </div>
                         </div>
                       </div>

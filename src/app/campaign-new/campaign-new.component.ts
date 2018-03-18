@@ -154,6 +154,8 @@ localStorage.setItem("campaign",name);
         if(control.controls.length <= trigger.email_limit){
         for (let i in trigger.events) {
         this.addrCtrl = this.initAddressvalue(trigger.events[i]);
+        //this.temp_data = trigger.events[i];
+        //this.addrCtrl.controls.push(new FormControl('template_data'));
         control.push(this.addrCtrl);
         }
         }else{
@@ -182,22 +184,24 @@ localStorage.setItem("campaign",name);
     }
 
 save(myForm) {
-      console.log(myForm.value.addresses[0]);
+      console.log(myForm.value);
      this.CampaignService.campaign_update(myForm.value.addresses).subscribe( res => {
       console.log(res);
-      //this.campaings.push(res);
+      this.campaings.push(res);
       this.router.navigate(['campaign']);
     });
 }
 
-promotion_template(){
+promotion_template(index){
   let dialogRef = this.dialog.open(EditTemplate, {
                     width: '1000px',
-                    disableClose: true
+                    disableClose: true,
+                    data: {index: index}
                   });
 
                   dialogRef.afterClosed().subscribe(result => {
-                  
+                  console.log(index);
+                  console.log(result);
                   });
 }
 
@@ -224,7 +228,7 @@ temp_data: any;
 result1: any;
 
   constructor(
-    public dialogRef: MatDialogRef<EditTemplate>,public dialog: MatDialog,private CampaignService:CampaignService) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<EditTemplate>,public dialog: MatDialog,private CampaignService:CampaignService,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
 
 ngOnInit() {
@@ -232,12 +236,11 @@ this.id = localStorage.getItem("campaign_id");
   this.CampaignService.edit_campaign(this.id).subscribe( res => {
       this.temp_data = res;
       console.log(this.temp_data);
-      this.ckeditorContent = JSON.stringify(this.temp_data.template_data);
+      console.log(this.data.index);
+      this.ckeditorContent = JSON.stringify(this.temp_data.triggers[this.data.index].template_data);
     });
 
 }
-
-data:any;
 
   insert(event){
 swal({
@@ -255,7 +258,7 @@ swal({
       if (value !== '') {
         resolve();
       } else {
-        reject('You need to select a Tier');
+        reject('You need to select a Tag');
       }
     });
   }
@@ -270,9 +273,17 @@ swal({
     this.dialogRef.close();
   }
 
-  ok(datum): void {
-    console.log(datum);
-     this.dialogRef.close();
+edited_data: any;
+
+  ok(ckeditorContent): void {
+    this.id = localStorage.getItem("campaign_id");
+  this.CampaignService.template_update(this.id,ckeditorContent,this.data.index).subscribe( res => {
+   //   this.temp_data = res;
+   //   console.log(this.temp_data);
+      console.log(res);
+   //   this.ckeditorContent = JSON.stringify(this.temp_data.triggers[this.data.index].template_data);
+    });
+     this.dialogRef.close(ckeditorContent);
   }
 
 

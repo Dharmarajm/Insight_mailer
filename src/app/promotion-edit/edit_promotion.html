@@ -7,7 +7,8 @@
       <img [src]="data1?.find_by_asin[0].small_image" alt="Smiley face" height="100%" width="auto">
     </mat-grid-tile>
     <mat-grid-tile>
-      <form [formGroup]="PromotionForm" class="example_form" novalidate (ngsubmit)="promotion(PromotionForm.value)">
+      <form [formGroup]="PromotionForm" class="example_form" novalidate 
+      (ngsubmit)="promotion(PromotionForm.value,edit_data.id)">
         <mat-form-field class="half-width">
           <input matInput type=text placeholder="Product ASIN" formControlName="product_asin" class="form-control" id="product_asin" name="product_asin" [readonly]="true" [value]="data1?.asin" [(ngModel)]="product_asin">
           <!--mat-error *ngIf="product_asin.hasError('required')">

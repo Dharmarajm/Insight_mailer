@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject  } from '@angular/core';
 import { LoginService } from './login.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { AppService } from './../app.service';
 import { WindowService } from '../window.service';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import swal from 'sweetalert2'
 
 @Component({
@@ -36,7 +37,7 @@ hide: boolean = true;
 
 
   constructor( private LoginService:LoginService, private router:Router, private _window:WindowService,
-  public nav:AppService ) { }
+  public nav:AppService,public dialog: MatDialog ) { }
 
   ngOnInit() {  
   }
@@ -67,5 +68,38 @@ hide: boolean = true;
    }
    );
  }
+
+ forget(){
+
+     let dialogRef = this.dialog.open(PasswordChange, {
+                    width: '500px'
+                  });
+
+                  dialogRef.afterClosed().subscribe(result => {
+                    
+                  });
+
+
+  }
+
+}
+
+@Component({
+  selector: 'password_change',
+  templateUrl: 'password_change.html',
+})
+export class PasswordChange implements OnInit {
+
+feedbacks: any;
+
+  constructor(
+    public dialogRef: MatDialogRef<PasswordChange>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private LoginService:LoginService) { }
+
+    ngOnInit() {
+     this.LoginService.forget_password("email").subscribe( res => {
+       console.log(res);
+      });
+    }
 
 }

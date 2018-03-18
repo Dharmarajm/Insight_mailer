@@ -18,4 +18,8 @@ export class LoginService {
  userstatus() {
         return this.http.get('http://192.168.1.64:3021/users/acc_status');
     }
+
+    forget_password(email) {
+        return this.http.post('http://192.168.1.64:3021/users/forgot_password',{email: email});
+    }
 }

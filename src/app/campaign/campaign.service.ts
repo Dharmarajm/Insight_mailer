@@ -60,4 +60,8 @@ export class CampaignService {
         return this.http.post('http://192.168.1.64:3021/campaigns/email_stats',{id: id});
     }
 
+    template_update(campaign_id,ckeditorContent,index){
+       return this.http.post('http://192.168.1.64:3021/campaigns/template_data_update',{campaign_id: campaign_id,content: ckeditorContent,index: index});
+    }
+
 }

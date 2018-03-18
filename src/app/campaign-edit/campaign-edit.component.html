@@ -26,8 +26,8 @@
                   </mat-card-header>
                   <mat-card-content>
                     <mat-form-field class="example-full-width">
-                      <input matInput tabindex="1" [value]="edit_data?.campagin_name" [(ngModel)]="name" 
-                      (change)="campaign_name_uniq(name)" placeholder="Campaign Name" autoFocus="true" required>
+                      <input matInput tabindex="1" [value]="edit_data?.campagin_name" [(ngModel)]="edit_data.campagin_name" 
+                      (change)="campaign_name_uniq(edit_data?.campagin_name)" placeholder="Campaign Name" autoFocus="true" required>
                     </mat-form-field>                    
                   </mat-card-content>
                   <mat-card-footer>
@@ -79,7 +79,7 @@
                   </mat-card-content>
                   <mat-card-footer>
                       <button mat-button matStepperPrevious mat-raised-button>Back</button>
-                      <button mat-button matStepperNext mat-raised-button color="primary" [disabled]='id == 0'>Next</button>
+                      <button mat-button matStepperNext mat-raised-button color="primary" [disabled]='id == 1'>Next</button>
                   </mat-card-footer>
                 </mat-card>
               </mat-grid-tile>
@@ -111,10 +111,10 @@
                           <td>{{inventory?.find_by_asin[0].title}}</td>
                           <td>{{inventory?.asin}}</td>
                           <td>
-                            <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use" 
+                            <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use || this.edit_data?.asin.includes(inventory?.asin) " 
                             [checked]="inventory.children_in_use && inventory?.enable"
                             (change)=asin($event,inventory.asin)></mat-slide-toggle>
-                            <mat-icon *ngIf="inventory?.children_in_use" matTooltip="Asin already in use">error_outline
+                            <mat-icon *ngIf="inventory?.children_in_use && !(this.edit_data?.asin.includes(inventory?.asin))" matTooltip="Asin already in use">error_outline
                             </mat-icon>
                             <!--mat-icon *ngIf="!inventory?.enable" matTooltip="Inventory is not enabled">error_outline
                             </mat-icon-->
@@ -166,7 +166,7 @@
                           </div>
                           <div class="panel-body" [formGroupName]="i">
                             <trigger [group]="myForm.controls.addresses.controls[i]"></trigger>
-                            <button mat-raised-button (click)="promotion_template()" color="primary">Template Preview</button>
+                            <button mat-raised-button (click)="promotion_template(i)" color="primary">Template Preview</button>
                           </div>
                         </div>
                       </div>

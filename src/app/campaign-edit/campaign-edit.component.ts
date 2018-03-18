@@ -65,8 +65,9 @@ values: string[] = ["ordered","shipped","delevered","returned"];
   if(this.edit_id.id){
    this.CampaignService.edit_campaign(this.edit_id.id).subscribe( res => {
    this.edit_data = res;
+   localStorage.setItem("campaign_id",this.edit_id.id);
    console.log(this.edit_data);
-   this.addAddressvalue(this.edit_data.template_data);
+   this.addAddressvalue(this.edit_data.triggers);
 
     });
     }
@@ -123,11 +124,13 @@ localStorage.setItem("campaign",name);
      console.log("asin added" + asin_data );
      this.CampaignService.asin_push(asin_data).subscribe( res => {
       console.log(res);
+      this.id = 0;
     });
      }else{
       console.log("asin removed" + asin_data );
       this.CampaignService.asin_remove(asin_data).subscribe( res => {
        console.log(res);
+       this.id = 1;
     });
      }
     }
@@ -151,11 +154,12 @@ localStorage.setItem("campaign",name);
 
     addAddressvalue(trigger) {
     console.log(trigger);
-       alert("hi");
         const control = <FormArray>this.myForm.controls['addresses'];
-        if(control.controls.length <= trigger.email_limit){
-       for (let i in trigger.events) {
-        this.addrCtrl = this.initAddressvalue(trigger.events[i]);
+        console.log(control.controls.length);
+        if(control.controls.length <= 4){
+        console.log(control.controls.length);
+       for (let i in trigger) {
+        this.addrCtrl = this.initAddressvalue(trigger[i]);
         control.push(this.addrCtrl);
         }
         }else{
@@ -190,10 +194,11 @@ save(myForm) {
     });
 }
 
-promotion_template(){
+promotion_template(index){
   let dialogRef = this.dialog.open(EditTemplateEdit, {
                     width: '1000px',
-                    disableClose: true
+                    disableClose: true,
+                    data: {index: index}
                   });
 
                   dialogRef.afterClosed().subscribe(result => {
@@ -222,7 +227,7 @@ temp_data: any;
 result1: any;
 
   constructor(
-    public dialogRef: MatDialogRef<EditTemplateEdit>,public dialog: MatDialog,private CampaignService:CampaignService) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<EditTemplateEdit>,public dialog: MatDialog,private CampaignService:CampaignService,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
 
 ngOnInit() {
@@ -230,12 +235,12 @@ this.id = localStorage.getItem("campaign_id");
   this.CampaignService.edit_campaign(this.id).subscribe( res => {
       this.temp_data = res;
       console.log(this.temp_data);
-      this.ckeditorContent = JSON.stringify(this.temp_data.template_data);
+      console.log(this.data.index);
+      console.log(this.temp_data.triggers[this.data.index].template_data);
+      this.ckeditorContent = this.temp_data.triggers[this.data.index].template_data;
     });
 
 }
-
-data:any;
 
   insert(event){
 swal({
@@ -268,9 +273,16 @@ swal({
     this.dialogRef.close();
   }
 
-  ok(datum): void {
-    console.log(datum);
-     this.dialogRef.close();
+  ok(ckeditorContent): void {
+    console.log(ckeditorContent);
+    this.id = localStorage.getItem("campaign_id");
+  this.CampaignService.template_update(this.id,ckeditorContent,this.data.index).subscribe( res => {
+   //   this.temp_data = res;
+   //   console.log(this.temp_data);
+      console.log(res);
+   //   this.ckeditorContent = JSON.stringify(this.temp_data.triggers[this.data.index].template_data);
+    });
+     this.dialogRef.close(ckeditorContent);
   }
 
   onChange($event) {}

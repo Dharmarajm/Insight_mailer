@@ -18,7 +18,7 @@ import { ChartsModule } from 'ng2-charts';
 
 //List Of Modules
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent, PasswordChange } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
@@ -76,7 +76,8 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
     SharedComponent,
     UserProfileComponent,
     TemplatePreview,
-    EmailStatusComponent
+    EmailStatusComponent,
+    PasswordChange
   ],
   imports: [
     BrowserModule,
@@ -121,7 +122,8 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
                 EditTemplatePreview,
                 EditTemplate,
                 DetailTemplate,
-                EditTemplateEdit
+                EditTemplateEdit,
+                PasswordChange
                ],
   bootstrap: [AppComponent]
 })

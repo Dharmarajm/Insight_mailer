@@ -15,7 +15,6 @@ export class TriggerComponent implements OnInit {
 values: string[] = ["ordered","shipped","delivered","returned"];
 
      ngOnInit() {
-
      }
 
     onlyNumberKey(num){
@@ -26,5 +25,8 @@ values: string[] = ["ordered","shipped","delivered","returned"];
         }
 
     }
+
+    promotion_template(){
+     }
    
 }

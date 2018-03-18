@@ -1,0 +1,23 @@
+<ckeditor
+    [(ngModel)]="ckeditorContent"
+    [config]="ckeConfig"
+    [readonly]="false"
+    (change)="onChange($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+    debounce="500">
+    <ckgroup
+      [name]="'documenthandling'"
+      [previous]="'1'">
+      <ckbutton 
+       [name]="'imageExplorer'"
+       [command]="'insertcontent'"
+       (click)="insert($event)"
+       [icon]="'https://png.icons8.com/color/540/bow-tie-half-filled.png'"
+       [label]="'Insert_content'">
+     </ckbutton>
+   </ckgroup>
+ </ckeditor>
+
+ <button mat-button  (click)="onNoClick()" color="warn" > Cancel </button>
+  <button type="submit" (click)="ok(ckeditorContent)" color="primary" cdkFocusInitial> save </button> 
