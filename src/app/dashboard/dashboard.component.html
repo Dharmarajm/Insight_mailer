@@ -76,7 +76,7 @@
         <mat-grid-tile>
           <mat-card>
             <mat-card-title>
-              Feedback Statistics
+              Email Statistics
               <mat-select placeholder="select filter" (change)="feedback_stat_filter($event)">
                 <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
               </mat-select>
@@ -142,7 +142,8 @@
                 </ng-container>
                 <ng-container matColumnDef="product_list">
                   <mat-header-cell *matHeaderCellDef> Product Title </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element[0] | slice:0:20 }} ... </mat-cell>
+                  <mat-cell *matCellDef="let element"><span matTooltip="{{element[0]}}"> {{element[0] | slice:0:20 }} ... </span>
+                  </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="count">
                   <mat-header-cell *matHeaderCellDef> Count </mat-header-cell>
@@ -170,7 +171,7 @@
                 </ng-container>
                 <ng-container matColumnDef="name">
                   <mat-header-cell *matHeaderCellDef> Product Title </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.find_order[0].title | slice:0:40 }} </mat-cell><!--| slice:0:6-->
+                  <mat-cell *matCellDef="let element"> <span matTooltip="{{element.find_order[0].title}}"> {{element.find_order[0].title | slice:0:40 }} </span> </mat-cell><!--| slice:0:6-->
                 </ng-container>
                 <!--ng-container matColumnDef="total">
                   <mat-header-cell *matHeaderCellDef> Order Value </mat-header-cell>

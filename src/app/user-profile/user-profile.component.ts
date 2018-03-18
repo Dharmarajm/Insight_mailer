@@ -118,10 +118,16 @@ public myForm2: FormGroup;
    if(res){ 
    this.spinner.show();
        this.UserProfileService.sync().subscribe( res => {
+       console.log(res);
        this.spinner.hide();
        console.log(res);
        swal("Linked!", "You Have Sucessfully Linked Your account", "success");
-           })
+           },
+          error => {
+          this.spinner.hide();
+    //swal("Oops!", "Problem in Linking Your Account Contact Admin", "error") 
+   }
+           )
        }
    });
   }

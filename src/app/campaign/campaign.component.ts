@@ -20,11 +20,25 @@ export class CampaignComponent implements OnInit {
   animal: string = "test";
   name: string = "test1";
   ckeditorContent:any;
-  ckeConfig: any;
+  //public ckeConfig: any;
   public  campaings: any;
   page1: any;
 
   del_id: any;
+
+  ckeConfig = {
+            height: 50,
+            uiColor: "#ebebeb",
+            language: "en",
+            allowedContent: true,
+            toolbar: [
+            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
+                { name: "editing", items: ["Find", "Replace", "SelectAll"] },
+                { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
+                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
+            ]
+        };
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService,private router:Router,public nav: AppService) { }
 
@@ -43,14 +57,10 @@ export class CampaignComponent implements OnInit {
             language: "en",
             allowedContent: true,
             toolbar: [
-            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike", "Subscript", "Superscript", "-", "RemoveFormat"] },
-                { name: "editing", items: ["Scayt", "Find", "Replace", "SelectAll"] },
+            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
+                { name: "editing", items: [Find", "Replace", "SelectAll"] },
                 { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
-                { name: "tools", items: ["Maximize", "ShowBlocks", "Preview", "Print", "Templates"] },
-                { name: "document", items: ["Source"] },
-                { name: "insert", items: ["Image", "Table", "HorizontalRule", "SpecialChar", "Iframe", "imageExplorer"] },
                 "/",
-                { name: "paragraph", items: ["NumberedList", "BulletedList", "-", "Outdent", "Indent", "CreateDiv", "-", "Blockquote"] },
                 { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
                 { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
             ]
@@ -59,6 +69,7 @@ export class CampaignComponent implements OnInit {
 
   this.ckeditorContent = `<p>My HTML</p>`;*/
   }
+
 
 campaign_edit(id){
     this.router.navigate(['edit_campaign', id]);

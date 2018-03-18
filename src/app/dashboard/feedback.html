@@ -28,12 +28,14 @@ tr:nth-child(even) {
     <th>Comments</th>
     <th>Order Id</th>
     <th>Rating</th>
+    <th>Email</th>
   </tr>
   <tr *ngFor="let feedback of feedbacks; let i = index ">
   	<td>{{ i + 1 }}</td>
     <td>{{ feedback.comments }}</td>
     <td>{{ feedback.order_id }}</td>
     <td>{{ feedback.rating  }}</td>
+    <td><button mat-icon-button (click)="replay(feedback)"><mat-icon>send</mat-icon></button></td>
   </tr>
 </table>
 

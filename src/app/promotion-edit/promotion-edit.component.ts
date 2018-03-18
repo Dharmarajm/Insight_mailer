@@ -41,7 +41,7 @@ dataSource = new MatTableDataSource;
   }
 
 promotion_edit(id){
-alert(id);
+  console.log(id);
   this.PromotionService.edit_promotion(id).subscribe( res => {
     console.log(res);
     this.edit_data = res;
@@ -272,12 +272,11 @@ edit_data: any;
   }
 
   ngOnInit() {
- // alert("data");
   //console.log(this.data);
   this.edit_data = this.data.data;
   console.log(this.edit_data);
   this.edit_data1 = localStorage.getItem('edit_data');
-      this.PromotionService.getdata(this.edit_data.id).subscribe( res => {
+      this.PromotionService.getdata(this.edit_data.inventory.id).subscribe( res => {
       this.data1 = res;
       console.log(this.data1);
     });

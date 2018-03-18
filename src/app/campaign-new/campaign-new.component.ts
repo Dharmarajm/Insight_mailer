@@ -38,6 +38,21 @@ values: string[] = ["ordered","shipped","delevered","returned"];
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService, private _formBuilder: FormBuilder, private router:Router,private route: ActivatedRoute,public nav: AppService) { }
 
+  ckeConfig = {
+            height: 50,
+            uiColor: "#ebebeb",
+            language: "en",
+            allowedContent: true,
+            toolbar: [
+            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
+                { name: "editing", items: ["Find", "Replace", "SelectAll"] },
+                { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
+                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
+            ]
+        };
+        
+
   ngOnInit() {
   this.nav.show();
   this.route.params.subscribe( params => this.edit_id = params);

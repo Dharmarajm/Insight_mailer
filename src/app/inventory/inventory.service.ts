@@ -12,11 +12,11 @@ export class InventoryService {
   constructor(private http:HttpClient) { }
 
   getinventories() {
-        return this.http.get('http://192.168.1.64:3021/inventories');
+        return this.http.get('http://api.insightmailer.com/inventories');
     }
 
     enable(event,asin){
-        return this.http.post('http://192.168.1.64:3021/inventories/enable',{asin: asin, enable: event});
+        return this.http.post('http://api.insightmailer.com/inventories/enable',{asin: asin, enable: event});
     }
 
 }

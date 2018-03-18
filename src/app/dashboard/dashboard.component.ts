@@ -161,7 +161,10 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
     animateRotate: true,
     animateScale: true,
     easing: 'easeOutBack'
-  }
+  },
+   legend: {
+            display: false
+         }
   };
 
   public chartData1 = [
@@ -223,6 +226,15 @@ feedbacks: any;
      this.DashboardService.review().subscribe( res => {
        this.feedbacks = res;
       });
+    }
+
+    replay(feedback){
+    //this.dialogRef.close();
+      console.log(feedback);
+    }
+
+    close(){
+     //this.dialogRef.close();
     }
 
 }

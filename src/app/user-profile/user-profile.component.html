@@ -178,9 +178,9 @@
                 </mat-form-field>
               </mat-grid-tile-->
               <mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>Mws Auth Token</mat-label>
+                <mat-form-field class="example-full-width"> <mat-label>MWS Auth Token</mat-label>
                   <input matInput [type]="hide4 ? 'password' : 'text'" placeholder="Enter your Mws Auth Token" formControlName="mws_auth_token" class="form-control" id="mws_auth_token" name="mws_auth_token" 
-                  [value]="res_data?.mws_auth_token" [(ngModel)] = "mws_auth_token" autocomplete="off">
+                  [value]="res_data?.mws_auth_token" [(ngModel)]="mws_auth_token" autocomplete="off">
                    <mat-icon matSuffix (click)="hide4 = !hide4">{{hide4 ? 'visibility_off' : 'visibility'}}</mat-icon>     
                   <!--mat-error *ngIf="myForm.get('Mws_auth_token').hasError('required')">
                     Mws Auth Token is <strong>required</strong>
@@ -196,6 +196,7 @@
                 </mat-form-field>
               </mat-grid-tile-->
             </mat-grid-list>
+
             <mat-grid-list cols="1" rowHeight="65px">
               <mat-grid-tile>
                 <button type="submit" mat-raised-button color="primary"  (click)="save_ok()"> Save </button>
@@ -209,6 +210,6 @@
 </div>
 
 <ngx-spinner
-bdOpacity = 0.9 bdColor = "#262424" size = "large" color = "#11ffbba7" loadingText="Your Account is Being Sync..." 
+bdOpacity = 0.9 bdColor = "#262424" size = "large" color = "#11ffbba7" loadingText="Your account is being synced" 
 type = "timer">
 </ngx-spinner>
