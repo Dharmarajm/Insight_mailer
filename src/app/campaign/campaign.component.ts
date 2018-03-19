@@ -26,7 +26,7 @@ export class CampaignComponent implements OnInit {
 
   del_id: any;
 
-  ckeConfig = {
+  /*this.ckeConfig = {
             height: 50,
             uiColor: "#ebebeb",
             language: "en",
@@ -38,7 +38,7 @@ export class CampaignComponent implements OnInit {
                 { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
                 { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
             ]
-        };
+        };*/
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService,private router:Router,public nav: AppService) { }
 

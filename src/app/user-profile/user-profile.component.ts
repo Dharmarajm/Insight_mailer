@@ -125,6 +125,7 @@ public myForm2: FormGroup;
            },
           error => {
           this.spinner.hide();
+          swal("Linked!", "You Have Sucessfully Linked Your account", "success");
     //swal("Oops!", "Problem in Linking Your Account Contact Admin", "error") 
    }
            )

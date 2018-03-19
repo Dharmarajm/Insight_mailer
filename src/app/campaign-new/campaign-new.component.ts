@@ -38,19 +38,19 @@ values: string[] = ["ordered","shipped","delevered","returned"];
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService, private _formBuilder: FormBuilder, private router:Router,private route: ActivatedRoute,public nav: AppService) { }
 
-  ckeConfig = {
+ /* ckeConfig = {
             height: 50,
             uiColor: "#ebebeb",
             language: "en",
             allowedContent: true,
             toolbar: [
-            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
+                { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
                 { name: "editing", items: ["Find", "Replace", "SelectAll"] },
-                { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
+                { name: "clipboard", items: ["Cut", "Copy", "Paste", "Undo", "Redo"] },
                 { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
-                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
+                { name: "styles", items: ["imageExplorer","Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] },
             ]
-        };
+        };*/
         
 
   ngOnInit() {
@@ -165,7 +165,9 @@ localStorage.setItem("campaign",name);
     }
 
     addAddressvalue(trigger) {
+        this.myForm.reset();
         const control = <FormArray>this.myForm.controls['addresses'];
+        control.controls = [];
         if(control.controls.length <= trigger.email_limit){
         for (let i in trigger.events) {
         this.addrCtrl = this.initAddressvalue(trigger.events[i]);
@@ -188,9 +190,7 @@ localStorage.setItem("campaign",name);
 
 
     getTasks(myForm){
-
     return myForm.get('addresses').controls
-
   }
 
   removeAddress(i: number) {
@@ -255,6 +255,21 @@ this.id = localStorage.getItem("campaign_id");
       this.ckeditorContent = JSON.stringify(this.temp_data.triggers[this.data.index].template_data);
     });
 
+this.ckeConfig = {
+            height: 400,
+            uiColor: "#ebebeb",
+            language: "en",
+            allowedContent: true,
+            toolbar: [
+            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
+                { name: "editing", items: ["Find", "Replace", "SelectAll"] },
+                { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
+                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
+            ]
+        };
+
+
 }
 
   insert(event){
@@ -264,7 +279,9 @@ swal({
   inputOptions: {
     '{{ Buyer Name}}': '{{ Buyer Name}}',
     '{{ order Id }}': '{{ Order Id }}',
-    '{{ email }}': '{{ email }}',
+    '{{ Product Title }}': '{{ Product Title }}',
+    '{{ Product Link }}': '{{ Product Link }}',
+    '{{ ASIN }}': '{{ ASIN }}'
   },
   inputPlaceholder: 'required',
   showCancelButton: true,
