@@ -49,6 +49,7 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
    this.DashboardService.order_stat("30 days").subscribe( res => {
    this.order_statistics = res;
+   console.log(this.order_statistics);
    for (let data of this.order_statistics.date) {
     this.chartLabels.push(data);    
     }

@@ -5,11 +5,11 @@
     <div class="filters">
       <h1 class="page-title">Sent Email </h1>
       <span>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search keyword..">
+        <input matInput (keyup)="applyFilter1($event.target.value)" placeholder="Search keyword..">
       </span>
     </div>
     <div class="card-border">
-      <mat-table #table [dataSource]="dataSource" matSort>
+      <mat-table #table [dataSource]="dataSource1" matSort>
 
         <!-- Position Column -->
         <ng-container matColumnDef="id">
@@ -26,7 +26,7 @@
         <!-- Weight Column -->
         <ng-container matColumnDef="sent_date">
           <mat-header-cell *matHeaderCellDef> Sent Date </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.created_at}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.sent_data}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="amazon_order_id">
@@ -83,11 +83,11 @@
     <div class="filters">
       <h1 class="page-title">Sent Email </h1>
       <span>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search keyword..">
+        <input matInput (keyup)="applyFilter2($event.target.value)" placeholder="Search keyword..">
       </span>
     </div>
     <div class="card-border">
-      <mat-table #table [dataSource]="dataSource" matSort>
+      <mat-table #table [dataSource]="dataSource2" matSort>
 
         <!-- Position Column -->
         <ng-container matColumnDef="id">
@@ -103,8 +103,8 @@
 
         <!-- Weight Column -->
         <ng-container matColumnDef="sent_date">
-          <mat-header-cell *matHeaderCellDef> Sent Date </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.created_at}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef> Scheduled Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.sent_date}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="amazon_order_id">
