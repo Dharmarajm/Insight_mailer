@@ -12,7 +12,7 @@ export class OrderService {
   constructor(private http:HttpClient) { }
 
   getorders() {
-        return this.http.get('http://api.insightmailer.com/orders');
+        return this.http.get('http://192.168.1.79:3021/orders');
     }
 
 }

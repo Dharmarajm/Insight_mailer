@@ -51,6 +51,13 @@ mat-card{
   min-height: 363px;
 }
 
+.img-grid{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: 1px solid #dedede;
+}
+
 /*.mat-grid-list .mat-grid-tile:last-child mat-card {
     margin: 0;
 }*/

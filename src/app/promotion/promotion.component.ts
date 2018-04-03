@@ -131,8 +131,7 @@ promotion(){
 promotion_preview(data){
 
 let dialogRefprev = this.dialog.open(TemplatePreview, {
-                    width: '1000px',
-                    disableClose: true,
+                    width: '500px',
                     data: {data: data}
                   });
 

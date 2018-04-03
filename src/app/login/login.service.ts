@@ -12,14 +12,14 @@ export class LoginService {
   constructor(private http:HttpClient) { }
 
  userlogin(data) {
-        return this.http.post('http://api.insightmailer.com/user_token',data);
+        return this.http.post('http://192.168.1.79:3021//user_token',data);
     }
  
  userstatus() {
-        return this.http.get('http://api.insightmailer.com/users/acc_status');
+        return this.http.get('http://192.168.1.79:3021//users/acc_status');
     }
 
     forget_password(email) {
-        return this.http.post('http://api.insightmailer.com/users/forgot_password',{email: email});
+        return this.http.post('http://192.168.1.79:3021//users/forgot_password',{email: email});
     }
 }

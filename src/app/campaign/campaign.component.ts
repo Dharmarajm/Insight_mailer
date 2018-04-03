@@ -70,6 +70,13 @@ export class CampaignComponent implements OnInit {
   this.ckeditorContent = `<p>My HTML</p>`;*/
   }
 
+  block(id){
+     console.log("blocked",id);
+     this.CampaignService.block_campaign(id).subscribe( res => {
+     console.log(res);
+     })
+  }
+
 
 campaign_edit(id){
     this.router.navigate(['edit_campaign', id]);

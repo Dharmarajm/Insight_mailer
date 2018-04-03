@@ -3,18 +3,16 @@
     <div class="filters">
       <h1 class="page-title">My Products</h1>
       <span>
-        <!-- <label>Sort by:</label>
-          <mat-select class="example-select" placeholder="Product title">
-            <mat-option value="before">Before</mat-option>
-            <mat-option value="after">After</mat-option>
-            <mat-option value="above">Above</mat-option>
-            <mat-option value="below">Below</mat-option>
-            <mat-option value="left">Left</mat-option>
-            <mat-option value="right">Right</mat-option>
-          </mat-select> -->
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
       </span>
+      <button mat-icon-button (click)="view = false">
+          <mat-icon>view_list</mat-icon>
+      </button>
+      <button mat-icon-button (click)="view = true">
+          <mat-icon>apps</mat-icon>
+      </button>
     </div>
+  <ng-template [ngIf]="view">
     <div class="row">
       <mat-grid-list cols="5" rowHeight="390px">
         <mat-grid-tile *ngFor=" let inventory of inventories| paginate: {itemsPerPage: 10, currentPage:page1, id:'1'} let i = 'index'" class="example-card">
@@ -51,47 +49,6 @@
               </table>
             </mat-card-footer>
           </mat-card>
-  <!--         <mat-card>
-            <div class="card-container">
-              <div class="card">
-                <div class="side">
-                  <mat-card class="temp"> <img mat-card-image [src]="inventory?.find_by_asin[0].small_image" alt="Image"></mat-card>
-                </div>
-                <div class="side back">
-                  <table class="table" width="60%" height="40%" align="center">
-                    <tr>
-                      <th>ASIN</th>
-                      <td>{{ inventory?.asin }}</td>
-                    </tr>
-                    <tr>
-                      <th>SKU</th>
-                      <td>{{ inventory?.sku }}</td>
-                    </tr>
-                    <tr>
-                      <th>TITLE</th>
-                      <td>{{ inventory?.find_by_asin[0].title }}</td>
-                    </tr>
-                    <tr>
-                      <th>PRICE</th>
-                      <td>{{ inventory?.price_paisas }}</td>
-                    </tr>
-                    <tr>
-                      <th>QTY</th>
-                      <td>{{ inventory?.quantity }}</td>
-                    </tr>
-                  </table>
-                </div>
-              </div>
-            </div>
-
-            <p> {{ inventory?.find_by_asin[0].title }}</p>
-
-            <mat-card-content>
-
-              <b>ASIN:<br> {{ inventory?.asin }}</b>
-              <mat-slide-toggle [color]="warn" [checked]="inventory.enable" (change)=inventory_asin($event,inventory.asin)></mat-slide-toggle>
-            </mat-card-content>
-          </mat-card> -->
         </mat-grid-tile>
       </mat-grid-list>
     </div>
@@ -102,59 +59,75 @@
         </mat-grid-tile>
       </mat-grid-list>
     </div>
+</ng-template>
 
-<!--     <style>
-      .card-container {
-        cursor: pointer;
-        height: 150px;
-        perspective: 600;
-        position: relative;
-        width: 150px;
-      }
-      
-      .card {
-        height: 100%;
-        position: absolute;
-        transform-style: preserve-3d;
-        transition: all 1s ease-in-out;
-        width: 100%;
-      }
-      
-      .card:hover {
-        transform: rotateY(180deg);
-      }
-      
-      .card .side {
-        backface-visibility: hidden;
-        border-radius: 6px;
-        position: absolute;
-        overflow: hidden;
-        width: 173px;
-        height: 148px;
-      }
-      
-      .card .back {
-        background: #eaeaed;
-        color: black;
-        outline-width: 40px;
-        line-height: 13px;
-        font-size: 10px;
-        transform: rotateY(180deg);
-        width: 172px;
-      }
-      
-      th,
-      td {
-        border: 1px solid black;
-        background-color: white;
-      }
-      
-      table {
-        border: 5px solid #1abc9c;
-        width: 172px;
-        background-color: #1abc9c;
-      }
-    </style> -->
+
+<ng-template [ngIf]="!view">
+ <div class="card-border">
+      <mat-table #table [dataSource]="dataSource" matSort>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-cell *matCellDef="let i = index; "> {{ i + 1 }} </mat-cell>
+        </ng-container>
+
+        <!-- Image Column -->
+        <ng-container matColumnDef="image">
+          <mat-header-cell *matHeaderCellDef> Product Image </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <img class="img-grid" [src]="element.small_image" height="100" width="100" alt="Image"> </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="asin">
+          <mat-header-cell *matHeaderCellDef> ASIN </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.asin}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="sku">
+          <mat-header-cell *matHeaderCellDef> SKU </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.sku}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.title }} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="price">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.price_paisas.fractional / 100}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
+        </ng-container>
+
+        
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element"> <mat-slide-toggle [checked]="element.enable" 
+            (change)=inventory_asin($event,element.asin)></mat-slide-toggle> </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+
+       <!--mat-paginator #paginator
+                 [length]="dataSource.filteredData.length"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator-->
+
+
+    </div>
+  </ng-template>
 
   </div>
 </div>

@@ -49,14 +49,16 @@
               <mat-grid-list cols="2" rowHeight="65px">
                 <mat-grid-tile>
                   <mat-form-field>
-                    <input matInput [min]="min_date" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="start_date[i]" placeholder="Start date">
+                    <input matInput [min]="min_date" [max]="maxDate" [matDatepicker]="picker1" [(ngModel)]="start_date[i]" 
+                     placeholder="Start date">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
                   <mat-form-field>
-                    <input matInput [min]="start_date[i]" [max]="maxDate" [matDatepicker]="picker" [(ngModel)]="end_date[i]" placeholder="End date">
+                    <input matInput [min]="start_date[i]" [max]="maxDate" [matDatepicker]="picker" [(ngModel)]="end_date[i]" 
+                     placeholder="End date">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>

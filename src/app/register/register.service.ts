@@ -12,15 +12,15 @@ export class RegisterService {
   constructor(private http:HttpClient) { }
 
     register(registerdata) {
-        return this.http.post('http://api.insightmailer.com/users',registerdata);
+        return this.http.post('http://192.168.1.79:3021/users',registerdata);
     }
 
     email_uniq(email){
-        return this.http.post('http://api.insightmailer.com/users/uniq_email',{email: email});
+        return this.http.post('http://192.168.1.79:3021/users/uniq_email',{email: email});
     }
 
     phone_uniq(phone){
-        return this.http.post('http://api.insightmailer.com/users/uniq_phone',{phone: phone});
+        return this.http.post('http://192.168.1.79:3021/users/uniq_phone',{phone: phone});
     }
 
 }

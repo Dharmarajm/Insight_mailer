@@ -1,6 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { CampaignService } from './../campaign/campaign.service';
 import { AppService } from './../app.service';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -38,6 +39,13 @@ public myForm: FormGroup;
 public formArray: any;
 
 
+
+dataSource = new MatTableDataSource;
+@ViewChild(MatPaginator) paginator: MatPaginator;
+@ViewChild(MatSort) sort: MatSort;
+displayedColumns = ['image','title','asin','status'];
+
+
 values: string[] = ["ordered","shipped","delevered","returned"];
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService, private _formBuilder: FormBuilder, private router:Router,private route: ActivatedRoute,public nav: AppService) { }
@@ -66,6 +74,7 @@ values: string[] = ["ordered","shipped","delevered","returned"];
   if(this.edit_id.id){
    this.CampaignService.edit_campaign(this.edit_id.id).subscribe( res => {
    this.edit_data = res;
+   this.dataSource = new MatTableDataSource(this.edit_data);
    localStorage.setItem("campaign_id",this.edit_id.id);
    console.log(this.edit_data);
    this.addAddressvalue(this.edit_data.triggers);
@@ -118,6 +127,13 @@ localStorage.setItem("campaign",name);
 
   close(){
    this.router.navigate(['campaign']);  
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    //this.inventories = this.dataSource.filteredData;
   }
 
 

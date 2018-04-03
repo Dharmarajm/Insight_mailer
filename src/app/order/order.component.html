@@ -35,7 +35,7 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="buyer_name">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Buyer Name </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.buyer_name? element?.buyer_name : "Order Canceled"}} </mat-cell>
+          <mat-cell *matCellDef="let element">  {{element.buyer_name}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="purchased_at">
@@ -44,6 +44,7 @@
         </ng-container>
 
         <!--ng-container matColumnDef="order_quantity">
+          {{element.buyer_name? element?.buyer_name : "Order Canceled"}}
       <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.find_order[0].order_quantity}} </mat-cell>
     </ng-container-->
