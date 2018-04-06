@@ -1,10 +1,12 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Pipe, PipeTransform} from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { PromotionService } from './promotion.service';
 import { AppService } from './../app.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
+import { Observable } from 'rxjs/Rx';
 import swal from 'sweetalert2'
 
 @Component({
@@ -106,13 +108,17 @@ swal({
 }
 
 enable(event,id,inventory_id,date){
-  
-      console.log(this.start_date[date],this.end_date[date]);
-  this.data = { id: id,inventory_id: inventory_id,enable: event.checked,from_date: this.start_date[date],to_date: this.end_date[date] }
+  console.log(this.start_date[date].toDateString(),this.end_date[date].toDateString());
+   if(this.start_date[date] && this.end_date[date]){
+      console.log(this.start_date[date].toDateString(),this.end_date[date].toDateString());   
+  this.data = { id: id,inventory_id: inventory_id,enable: event.checked,from_date: (this.start_date[date]).toDateString(),to_date: (this.end_date[date]).toDateString() }
   this.PromotionService.promotion_enable(this.data).subscribe( res => {
       this.data_enable = res;
     });
-
+   }else{
+   console.log(event);
+       //alert("Please select start date and end date before enable");
+  }
   
 }
 
@@ -125,7 +131,6 @@ promotion(){
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
     this.promotions = this.dataSource.filteredData;
-    console.log(this.dataSource.filteredData);
   }
 
 promotion_preview(data){
@@ -183,6 +188,9 @@ name: string;
 inventories: any;
 id: number = 0;
 edit_data1: any;
+
+dataSource = new MatTableDataSource;
+
   constructor(
     public dialogRef1: MatDialogRef<SelectPromotion>,private PromotionService:PromotionService) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
@@ -190,6 +198,17 @@ ngOnInit() {
   this.edit_data1 = localStorage.getItem('edit_data');
       this.PromotionService.getinventories().subscribe( res => {
       this.inventories = res;
+      this.inventories = this.inventories.map(item => ({
+      id: item.id,
+  small_image: item.find_by_asin[0].small_image,
+  asin: item.asin,
+  sku: item.sku,
+  title: item.find_by_asin[0].title,
+  price_paisas: item.price_paisas,
+  quantity: item.quantity,
+  enable: item.enable
+}));
+this.dataSource = new MatTableDataSource(this.inventories);
     });
   }
 
@@ -211,6 +230,14 @@ if (event.checked){
 //name
 ok(): void {
      this.dialogRef1.close(this.id);
+  }
+
+   applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    console.log(this.dataSource.filteredData);
+    this.inventories = this.dataSource.filteredData;
   }
 
 
@@ -317,10 +344,12 @@ ok(name): void {
 })
 export class TemplatePreview {
 
-promotion_template: any;
+promotion_template: SafeHtml;
 
   constructor(
-    public dialogRefprev: MatDialogRef<TemplatePreview>,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRefprev: MatDialogRef<TemplatePreview>,private sanitizer: DomSanitizer,@Inject(MAT_DIALOG_DATA) public data: any) { 
+   this.promotion_template = this.data.data;
+    }
 
 
 ok(): void {
@@ -328,4 +357,12 @@ ok(): void {
   }
 
 
+}
+
+@Pipe({ name: 'safeHtml'})
+export class SafeHtmlPipe implements PipeTransform  {
+  constructor(private sanitized: DomSanitizer) {}
+  transform(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
+  }
 }

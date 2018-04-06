@@ -12,23 +12,27 @@ export class UserProfileService {
   constructor(private http:HttpClient) { }
 
     userprofileregister(userprofiledata) {
-        return this.http.post('api.insightmailer.com/users/user_profile',userprofiledata);
+        return this.http.post('http://192.168.1.79:3021/users/user_profile',userprofiledata);
     }
 
+     userprofilepasswordchange(userprofiledata){
+        return this.http.post('http://192.168.1.79:3021/users/change_password',userprofiledata);
+    }
+    
     userprofilecredential(userprofiledata){
-        return this.http.post('api.insightmailer.com/users/credential',userprofiledata);
+        return this.http.post('http://192.168.1.79:3021/users/credential',userprofiledata);
     }
 
     userprofileaccdetail(userprofiledata){
-        return this.http.post('api.insightmailer.com/users/accdetail',userprofiledata);
+        return this.http.post('http://192.168.1.79:3021/users/accdetail',userprofiledata);
     }
 
     sync(){
-        return this.http.get('api.insightmailer.com/dashboard/sync');
+        return this.http.get('http://192.168.1.79:3021/dashboard/sync');
     }
 
     user_data(){
-        return this.http.get('api.insightmailer.com/users/user_data');
+        return this.http.get('http://192.168.1.79:3021/users/user_data');
     }
 
 }

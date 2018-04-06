@@ -176,7 +176,34 @@ mat-card.step3 mat-card-content{
 }
 
 .step3 .mat-card-footer button{
-	margin: 0 5px
+	margin: 0 5px;
+}
+
+.step3 .inventory-filter{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 0 15px;
+}
+
+.step3 .inventory-filter .inventory-enable{
+    display: flex;
+    align-items: center;
+}
+
+.step3 .inventory-filter .inventory-enable label{
+    font-weight: 500;
+}
+
+.step3 .inventory-filter input{
+    background-color: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 4px;
+    padding: 5px 25px 5px 10px;
+    font-size: 13px;
+    color: #333;
+    width: 250px;
 }
 
 ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {

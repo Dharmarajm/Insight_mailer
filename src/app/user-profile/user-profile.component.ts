@@ -42,6 +42,7 @@ res_data: any;
 public myForm: FormGroup;
 public myForm1: FormGroup;
 public myForm2: FormGroup;
+public myForm3: FormGroup;
 
   ngOnInit() {
   this.nav.show();
@@ -53,10 +54,13 @@ public myForm2: FormGroup;
   this.myForm = new FormGroup({
             first_name: new FormControl('',[Validators.required]),
             last_name: new FormControl(''),
-            email: new FormControl('',[Validators.required,Validators.email]),
+            email: new FormControl('',[Validators.required,Validators.email])
+            
+        });
+
+   this.myForm3 = new FormGroup({
             old_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
-            new_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")]),
-            confirm_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")])
+            new_password: new FormControl('',[Validators.required,Validators.minLength(6),Validators.pattern("((?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,})")])
         });
   
 
@@ -93,13 +97,22 @@ public myForm2: FormGroup;
 
 
   userprofile(){
-  this.userprofiledata = {"first_name": this.first_name,"last_name": this.last_name,"email": this.email,"old_password": this.old_password,"new_password": this.new_password,"confirm_password": this.confirm_password}
+  this.userprofiledata = {"first_name": this.first_name,"last_name": this.last_name,"email": this.email}
     this.UserProfileService.userprofileregister(this.userprofiledata).subscribe( res => {
        if(res){ 
        swal("Updated!", "You Have Sucessfully Updated your Account", "success");
        }
       //  this.router.navigate(['login']);
     });
+   }
+
+   passwordchange(){
+   this.userprofiledata = {"old_password": this.old_password,"new_password": this.new_password}
+   this.UserProfileService.userprofilepasswordchange(this.userprofiledata).subscribe( res => {
+   if(res){
+   swal("Updated!", "your password changed","success");
+   }
+   });
    }
   
   accdetail(){

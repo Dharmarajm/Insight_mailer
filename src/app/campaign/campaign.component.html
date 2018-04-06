@@ -17,8 +17,13 @@
               <button mat-icon-button (click)="campaign_email_stat(campaing.id)">
                 <mat-icon>assessment</mat-icon>
               </button>
-              <button mat-icon-button (click)="block(campaing.id)">
-                <mat-icon>block</mat-icon>
+              <button mat-icon-button *ngIf="campaing?.send_when_negative_feedback" 
+              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)">
+                <mat-icon>speaker_notes</mat-icon>
+              </button>
+              <button mat-icon-button *ngIf="!campaing?.send_when_negative_feedback" 
+              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)">
+                <mat-icon>speaker_notes_off</mat-icon>
               </button>
               <button mat-icon-button (click)="campaign_edit(campaing.id)">
                 <mat-icon>edit</mat-icon>
@@ -28,7 +33,7 @@
               </button>
               <mat-slide-toggle [color]="primary" [checked]="campaing.enable" (change)="enable(campaing.id,$event)"></mat-slide-toggle>
             </div>
-            <mat-card-subtitle><p>ASIN: <span>  {{ campaing.asin }} </span></p></mat-card-subtitle> <!-- <p>{{ campaing.asin }}</p> -->
+            <mat-card-subtitle><p>ASIN: <span>  {{ campaing.asin | slice:0:3 }}... </span></p></mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <mat-list role="list">
@@ -42,7 +47,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let trigger of campaing.triggers">
-                    <td>Feedback Message1</td>
+                    <td>{{trigger.subject}}</td>
                     <td>{{trigger.trigger}}</td>
                     <td>{{trigger.days}}</td>
                   </tr>

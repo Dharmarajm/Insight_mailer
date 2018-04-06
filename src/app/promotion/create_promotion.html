@@ -86,7 +86,7 @@
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=number placeholder="Frequency" formControlName="mail_frequency" class="form-control" id="Frequency" name="Frequency" [value]="edit_data?.mail_frequency" [(ngModel)]="mail_frequency">
+          <input matInput type=number placeholder="Frequency" formControlName="mail_frequency" class="form-control" id="Frequency" name="Frequency" min=1 [value]="edit_data?.mail_frequency" [(ngModel)]="mail_frequency">
           <!--mat-error *ngIf="support_emailFormControl.hasError('required')">
          Support Email is <strong>required</strong>
          </mat-error-->

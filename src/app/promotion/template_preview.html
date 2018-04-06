@@ -1,2 +1,2 @@
-<div [innerHtml]="data.data"></div>
+<p [innerHtml]="promotion_template | safeHtml"></p>
 <button mat-fab mat-raised-button color="primary" (click)="ok()"> Close </button>

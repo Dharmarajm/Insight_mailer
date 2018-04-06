@@ -182,6 +182,8 @@ inventories: any;
 id: number = 0;
 asin_data: any;
 
+
+
 edit_data1: any;
   constructor(
     public dialogRef1: MatDialogRef<EditSelectPromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any) { } //,@Inject(MAT_DIALOG_DATA) public data: any
@@ -191,7 +193,7 @@ ngOnInit() {
   console.log(this.data.data);
   this.asin_data = this.data.data;
       this.PromotionService.getinventories().subscribe( res => {
-      this.inventories = res;
+      this.inventories = res;    
     });
   }
 

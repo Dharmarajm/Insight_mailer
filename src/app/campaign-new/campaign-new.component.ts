@@ -3,6 +3,7 @@ import { CampaignService } from './../campaign/campaign.service';
 import { AppService } from './../app.service';
 import { Observable } from 'rxjs/Rx';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Customer, Address } from './../campaign/trigger.interface';
@@ -33,6 +34,8 @@ addrCtrl: any;
 public myForm: FormGroup;
 public formArray: any;
 
+
+dataSource = new MatTableDataSource;
 
 values: string[] = ["ordered","shipped","delevered","returned"];
 
@@ -75,6 +78,18 @@ values: string[] = ["ordered","shipped","delevered","returned"];
 
     this.CampaignService.getinventories().subscribe( res => {
     this.inventories = res;
+    this.inventories = this.inventories.map(item => ({
+      id: item.id,
+  small_image: item.find_by_asin[0].small_image,
+  asin: item.asin,
+  sku: item.sku,
+  title: item.find_by_asin[0].title,
+  price_paisas: item.price_paisas,
+  quantity: item.quantity,
+  enable: item.enable,
+  children_in_use: item.children_in_use
+}));
+this.dataSource = new MatTableDataSource(this.inventories);
     });
     
  this.myForm = this._formBuilder.group({
@@ -105,6 +120,30 @@ values: string[] = ["ordered","shipped","delevered","returned"];
      });
     }
 
+bulk_push: any[] = [];
+bulk_remove: any[]=[];
+
+    enable_all($event,inventories){
+      console.log($event.checked,inventories)
+      if($event.checked){
+        this.bulk_push = [];
+       this.inventories.filter((invent) => invent.children_in_use == false).map((data) => { 
+        data.children_in_use = "$event.checked",this.bulk_push.push(data.asin)});
+        this.CampaignService.bulk_asin_push(this.bulk_push).subscribe( res => {
+      console.log(res);
+       });
+       }else{
+       this.bulk_remove = [];
+       this.inventories.filter((invent) => invent.children_in_use == "$event.checked").map((data) => { 
+       data.children_in_use = $event.checked,this.bulk_remove.push(data.asin)});
+       this.CampaignService.asin_remove(this.bulk_remove).subscribe( res => {
+       console.log(res);
+    });
+       }
+       console.log(this.bulk_push);
+       console.log(this.bulk_remove);
+    }
+
 
   name_ok(name): void {
 localStorage.setItem("campaign",name);
@@ -113,6 +152,13 @@ localStorage.setItem("campaign",name);
 
   close(){
    this.router.navigate(['campaign']);  
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+    this.inventories = this.dataSource.filteredData;
   }
 
 
@@ -261,9 +307,9 @@ this.ckeConfig = {
             language: "en",
             allowedContent: true,
             toolbar: [
-            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
-                { name: "editing", items: ["Find", "Replace", "SelectAll"] },
-                { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
+                { name: "documenthandling", items: ["imageExplorer"] },
+                { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
+                { name: "clipboard", items: ["Undo", "Redo"] },
                 { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
                 { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
             ]
@@ -274,16 +320,16 @@ this.ckeConfig = {
 
   insert(event){
 swal({
-  title: 'Select Outage Tier',
+  title: 'List of Tags',
   input: 'select',
   inputOptions: {
-    '{{ Buyer Name}}': '{{ Buyer Name}}',
-    '{{ order Id }}': '{{ Order Id }}',
-    '{{ Product Title }}': '{{ Product Title }}',
-    '{{ Product Link }}': '{{ Product Link }}',
-    '{{ ASIN }}': '{{ ASIN }}'
+    '{{Buyer Name}}': '{{Buyer Name}}',
+    '{{order Id}}': '{{Order Id}}',
+    '{{Product Title}}': '{{Product Title}}',
+    '{{Product Link}}': '{{Product Link}}',
+    '{{ASIN}}': '{{ASIN}}'
   },
-  inputPlaceholder: 'required',
+  inputPlaceholder: 'Choose a Tag',
   showCancelButton: true,
    inputValidator: function (value) {
     return new Promise(function (resolve, reject) {

@@ -3,6 +3,7 @@ import { DashboardService } from './dashboard.service';
 import { AppService } from './../app.service';
 import {  MatTableDataSource } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import swal from 'sweetalert2'
 
 @Component({
   selector: 'app-dashboard',
@@ -129,12 +130,7 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
   ChartColors2 = [
     { 
-      backgroundColor: 'rgba(11, 193, 170, 0.2)',
-      borderColor: 'rgb(11, 193, 170)',
-      pointBackgroundColor: 'rgb(11, 193, 170)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgb(11, 193, 170)'
+      backgroundColor: 'rgbA(124, 195, 134, 1)',
     }
   ];
 
@@ -180,9 +176,21 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
                   });
 
                   dialogRef.afterClosed().subscribe(result => {
+                     if(result){
+                         let dialogRef1 = this.dialog.open(NegativeReviewMail, {
+                             width: '1000px',
+                             disableClose: true,
+                             data: {feedback: result}
+                          });
+
+                          dialogRef1.afterClosed().subscribe(result => {
+                    
+                          });
+                      }
                     
                   });
     }
+
   }
 
    chartOptions2 = {
@@ -230,12 +238,92 @@ feedbacks: any;
     }
 
     replay(feedback){
-    //this.dialogRef.close();
-      console.log(feedback);
+      this.dialogRef.close(feedback);
+    }
+
+    close(){
+     this.dialogRef.close();
+    }
+
+}
+
+@Component({
+  selector: 'review',
+  templateUrl: 'negative_review_mail.html',
+})
+export class NegativeReviewMail implements OnInit {
+
+ckeConfig: any;
+
+  constructor(
+    public dialogRef: MatDialogRef<NegativeReviewMail>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private DashboardService:DashboardService) { }
+
+    ngOnInit() {
+      this.ckeConfig = {
+            height: 400,
+            uiColor: "#ebebeb",
+            language: "en",
+            allowedContent: true,
+            toolbar: [
+            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
+                { name: "clipboard", items: ["Undo", "Redo"] },
+                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
+            ]
+        };
     }
 
     close(){
      //this.dialogRef.close();
     }
+ 
+ insert(event){
+swal({
+  title: 'Select Outage Tier',
+  input: 'select',
+  inputOptions: {
+    '{{Buyer Name}}': '{{Buyer Name}}',
+    '{{Order Id}}': '{{Order Id}}',
+    '{{Merchant_id}}': '{{Merchant_id}}',
+    '{{Product Title}}': '{{Product Title}}',
+    '{{ASIN}}': '{{ASIN}}',
+    
+  },
+  inputPlaceholder: 'required',
+  showCancelButton: true,
+   inputValidator: function (value) {
+    return new Promise(function (resolve, reject) {
+      if (value !== '') {
+        resolve();
+      } else {
+        reject('You need to select a Tier');
+      }
+    });
+  }
+}).then(function (result) {
+    let data = JSON.stringify(result.value);
+    event.insertText(data);
+});
+
+  }
+
+ onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  ok(ckeditorContent,subject): void {
+    console.log(ckeditorContent);
+  this.DashboardService.negative_feedback_mail(ckeditorContent,this.data.feedback,subject).subscribe( res => {
+      console.log(res);
+    });
+     this.dialogRef.close(ckeditorContent);
+  }
+
+  onChange($event) {}
+  onFocus($event) {}
+  onBlur($event) {}
+
+
 
 }

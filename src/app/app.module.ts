@@ -26,9 +26,9 @@ import { CampaignComponent, CampaignName, CampaignTemplate, CampaignAsin, Campai
 import { CampaignNewComponent, EditTemplate, DetailTemplate } from './campaign-new/campaign-new.component';
 import { CampaignEditComponent, EditTemplateEdit } from './campaign-edit/campaign-edit.component';
 import { TriggerComponent } from './campaign/trigger.component';
-import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview } from './promotion/promotion.component';
+import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview, SafeHtmlPipe } from './promotion/promotion.component';
 import { PromotionEditComponent, EditSelectPromotion, EditPromotion, EditTemplatePreview } from './promotion-edit/promotion-edit.component';
-import { DashboardComponent, Feedback } from './dashboard/dashboard.component';
+import { DashboardComponent, Feedback, NegativeReviewMail } from './dashboard/dashboard.component';
 import { SharedComponent } from './shared/shared.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EmailStatusComponent } from './email-status/email-status.component';
@@ -73,11 +73,13 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
     EditPromotion,
     DashboardComponent,
     Feedback,
+    NegativeReviewMail,
     SharedComponent,
     UserProfileComponent,
     TemplatePreview,
     EmailStatusComponent,
-    PasswordChange
+    PasswordChange,
+    SafeHtmlPipe
   ],
   imports: [
     BrowserModule,
@@ -110,6 +112,7 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
              ],
   entryComponents: [
                 Feedback,
+                NegativeReviewMail,
                 CampaignName,
                 CampaignTemplate,
                 CampaignAsin,

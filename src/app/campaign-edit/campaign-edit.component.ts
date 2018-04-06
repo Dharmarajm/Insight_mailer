@@ -91,6 +91,18 @@ values: string[] = ["ordered","shipped","delevered","returned"];
 
     this.CampaignService.getinventories().subscribe( res => {
     this.inventories = res;
+    this.inventories = this.inventories.map(item => ({
+      id: item.id,
+  small_image: item.find_by_asin[0].small_image,
+  asin: item.asin,
+  sku: item.sku,
+  title: item.find_by_asin[0].title,
+  price_paisas: item.price_paisas,
+  quantity: item.quantity,
+  enable: item.enable,
+  children_in_use: item.children_in_use
+}));
+this.dataSource = new MatTableDataSource(this.inventories);
     });
 
     this.ckeConfig = {
@@ -133,7 +145,7 @@ localStorage.setItem("campaign",name);
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
-    //this.inventories = this.dataSource.filteredData;
+    this.inventories = this.dataSource.filteredData;
   }
 
 
@@ -240,9 +252,9 @@ promotion_template(index){
 }
 
 @Component({
-  selector: 'edit_template_edit',
+  selector: 'edit_template',
   templateUrl: 'edit_template_edit.html',
-  styleUrls: ['./../campaign-new/campaign-new.component.css']
+  styleUrls: ['./campaign-edit.component.css']
 })
 export class EditTemplateEdit implements OnInit{
 
@@ -252,7 +264,7 @@ name: string;
 //editor
 ckeConfig: any;
 //ckeditorContent: any;
-ckeditorContent: string = '<p>Some html</p>';
+//ckeditorContent: string = '<p>Some html</p>';
 temp_data: any;
 
 result1: any;
@@ -262,27 +274,33 @@ result1: any;
 
 
 ngOnInit() {
-this.id = localStorage.getItem("campaign_id");
-  this.CampaignService.edit_campaign(this.id).subscribe( res => {
-      this.temp_data = res;
-      console.log(this.temp_data);
-      console.log(this.data.index);
-      console.log(this.temp_data.triggers[this.data.index].template_data);
-      this.ckeditorContent = this.temp_data.triggers[this.data.index].template_data;
-    });
-
+    this.ckeConfig = {
+            height: 400,
+            uiColor: "#ebebeb",
+            language: "en",
+            allowedContent: true,
+            toolbar: [
+            { name: "documenthandling", items: ["imageExplorer"] },
+            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
+                { name: "clipboard", items: ["Undo", "Redo"] },
+                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
+            ]
+        };
 }
 
   insert(event){
 swal({
-  title: 'Select Outage Tier',
+  title: 'List of Tags',
   input: 'select',
   inputOptions: {
-    '{{ Buyer Name}}': '{{ Buyer Name}}',
-    '{{ order Id }}': '{{ Order Id }}',
-    '{{ email }}': '{{ email }}',
+    '{{Buyer Name}}': '{{Buyer Name}}',
+    '{{Order Id}}': '{{Order Id}}',
+    '{{Merchant_id}}': '{{Merchant_id}}',
+    '{{Product Title}}': '{{Product Title}}',
+    '{{ASIN}}': '{{ASIN}}'
   },
-  inputPlaceholder: 'required',
+  inputPlaceholder: 'Choose a Tag',
   showCancelButton: true,
    inputValidator: function (value) {
     return new Promise(function (resolve, reject) {
@@ -308,10 +326,6 @@ swal({
     console.log(ckeditorContent);
     this.id = localStorage.getItem("campaign_id");
   this.CampaignService.template_update(this.id,ckeditorContent,this.data.index).subscribe( res => {
-   //   this.temp_data = res;
-   //   console.log(this.temp_data);
-      console.log(res);
-   //   this.ckeditorContent = JSON.stringify(this.temp_data.triggers[this.data.index].template_data);
     });
      this.dialogRef.close(ckeditorContent);
   }

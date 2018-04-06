@@ -94,6 +94,16 @@
                 <mat-card class="step3">
                   <mat-card-title>Inventories</mat-card-title>
                   <mat-card-content>
+                    <div class="inventory-filter">
+                      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+                      <span class="inventory-enable">
+                        <label>Enable All:&nbsp;</label>
+                        <mat-slide-toggle [color]="primary"
+                                (change)=enable_all($event,inventories)>
+                        </mat-slide-toggle>
+                      </span>
+                    </div>
+
                     <table class="table" width="100%">
                       <thead>
                         <tr>
@@ -105,16 +115,14 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let inventory of inventories">
-                          <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
-                          <td>{{inventory?.find_by_asin[0].title}}</td>
+                          <td> <img [src]="inventory?.small_image" alt="Smiley face" height="100" width="100"> </td>
+                          <td>{{inventory?.title}}</td>
                           <td>{{inventory?.asin}}</td>
                           <td>
-                            <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use "
+                            <mat-slide-toggle [checked]="inventory.children_in_use == '$event.checked'" [color]="primary" *ngIf="!inventory?.children_in_use || inventory.children_in_use == '$event.checked'"
                             (change)=asin($event,inventory.asin)></mat-slide-toggle>
-                            <mat-icon *ngIf="inventory?.children_in_use " matTooltip="Asin already in use">error_outline
+                            <mat-icon *ngIf="inventory?.children_in_use == true" matTooltip="Asin already in use">error_outline
                             </mat-icon>
-                            <!--mat-icon *ngIf="!inventory?.enable" matTooltip="Inventory is not enabled">error_outline
-                            </mat-icon-->
                           </td>
                           <!--[checked]="inventory.children_in_use" && inventory?.enable -->
                         </tr>

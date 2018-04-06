@@ -3,14 +3,16 @@
     <div class="filters">
       <h1 class="page-title">My Products</h1>
       <span>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+        <span>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+        </span>
+        <button mat-icon-button (click)="view = false">
+            <mat-icon>view_list</mat-icon>
+        </button>
+        <button mat-icon-button (click)="view = true">
+            <mat-icon>apps</mat-icon>
+        </button>
       </span>
-      <button mat-icon-button (click)="view = false">
-          <mat-icon>view_list</mat-icon>
-      </button>
-      <button mat-icon-button (click)="view = true">
-          <mat-icon>apps</mat-icon>
-      </button>
     </div>
   <ng-template [ngIf]="view">
     <div class="row">

@@ -47,38 +47,7 @@
                   </mat-error> -->
                 </mat-form-field>
               </mat-grid-tile>
-              <mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>Password</mat-label>
-                  <input matInput [type]="hide1 ? 'password' : 'text'" placeholder="old_password" formControlName="old_password" class="form-control" id="old_password" name="old_password" 
-                  [(ngModel)] = "old_password" autocomplete="off">
-                  <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  <!-- <mat-error *ngIf="myForm.get('old_password').hasError('required')">
-                    Password is <strong>required</strong>
-                  </mat-error> -->
-                </mat-form-field>
-              </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list cols="2" rowHeight="85px">
-              <mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>NewPassword</mat-label>
-                  <input matInput [type]="hide2 ? 'password' : 'text'" placeholder="New_Password" formControlName="new_password" class="form-control" id="new_password" name="new_password" 
-                  [(ngModel)] = "new_password" autocomplete="off">
-                  <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  <!-- <mat-error *ngIf="myForm.get('new_password').hasError('required')">
-                    Password is <strong>required</strong>
-                  </mat-error> -->
-                </mat-form-field>
-              </mat-grid-tile>
-              <mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>Confirm_Password</mat-label>
-                  <input matInput [type]="hide3 ? 'password' : 'text'" placeholder="Confirm_Password" formControlName="confirm_password" class="form-control" id="confirm_password" name="confirm_password" 
-                  [(ngModel)] = "confirm_password" autocomplete="off">
-                  <mat-icon matSuffix (click)="hide3 = !hide3">{{hide3 ? 'visibility_off' : 'visibility'}}</mat-icon>
-                  <!-- <mat-error *ngIf="myForm.get('confirm_password').hasError('required')">
-                    Password is <strong>required</strong>
-                  </mat-error> -->
-                </mat-form-field>
-              </mat-grid-tile>
+              
             </mat-grid-list>
             <mat-grid-list cols="1" rowHeight="65px">
               <mat-grid-tile>
@@ -90,6 +59,50 @@
       </mat-grid-list>
       </form>
 
+      <form [formGroup]="myForm3" class="example-form" novalidate (ngSubmit)="passwordchange()">
+      <mat-grid-list cols="2" rowHeight="230px">
+        <mat-grid-tile>
+          <div class="account-description">
+            <h2>Change Password</h2>
+            <p>Change or Reset your password</p>
+            
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-card>
+            <mat-grid-list cols="2" rowHeight="85px">
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width"> <mat-label>Old Password</mat-label>
+                  <input matInput [type]="hide1 ? 'password' : 'text'" placeholder="Your Old Password" formControlName="old_password" 
+                  class="form-control" id="old_password" name="old_password"  
+                  [(ngModel)] = "old_password" autocomplete="off">
+                  <mat-icon matSuffix (click)="hide1 = !hide1">{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  <!--mat-error *ngIf="myForm.get('card_number').hasError('required')">
+                    card_number is <strong>required</strong>
+                  </mat-error-->
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width"> <mat-label>New Password</mat-label>
+                  <input matInput [type]="hide2 ? 'password' : 'text'" placeholder="Your New Password" formControlName="new_password" class="form-control" id="new_password" name="new_password"  
+                  [(ngModel)] = "new_password" autocomplete="off">
+                  <mat-icon matSuffix (click)="hide2 = !hide2">{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+                  <!--mat-error *ngIf="myForm.get('subscription_plan').hasError('required')">
+                    subscription_plan is <strong>required</strong>
+                  </mat-error-->
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+
+            <mat-grid-list cols="1" rowHeight="65px">
+              <mat-grid-tile>
+                <button type="submit" mat-raised-button color="primary" (click)="save_ok()"> Save </button>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+      </form>
 
       <form [formGroup]="myForm1" class="example-form" novalidate (ngSubmit)="accdetail()">
       <mat-grid-list cols="2" rowHeight="230px">

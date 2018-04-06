@@ -96,6 +96,9 @@
                 <mat-card class="step3">
                   <mat-card-title>Inventories</mat-card-title>
                   <mat-card-content>
+                    <span>
+                     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+                  </span>
                     <table class="table" width="100%">
                       <thead>
                         <tr>
@@ -107,8 +110,8 @@
                       </thead>
                       <tbody>
                         <tr *ngFor="let inventory of inventories">
-                          <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
-                          <td>{{inventory?.find_by_asin[0].title}}</td>
+                          <td> <img [src]="inventory?.small_image" alt="Smiley face" height="100" width="100"> </td>
+                          <td>{{inventory?.title}}</td>
                           <td>{{inventory?.asin}}</td>
                           <td>
                             <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use || this.edit_data?.asin.includes(inventory?.asin) " 

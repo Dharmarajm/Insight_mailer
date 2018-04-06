@@ -70,9 +70,13 @@ export class CampaignComponent implements OnInit {
   this.ckeditorContent = `<p>My HTML</p>`;*/
   }
 
-  block(id){
-     console.log("blocked",id);
-     this.CampaignService.block_campaign(id).subscribe( res => {
+  block(id,status){
+    console.log(this.campaings);
+     console.log(id,status);
+     this.campaings.filter((person) => person.id == id).map((data) => data.send_when_negative_feedback = status );
+     console.log(this.campaings);
+     //.filter((camp) => camp == id) map(data => data.find(datum => datum.id == id)) 
+     this.CampaignService.block_campaign(id,status).subscribe( res => {
      console.log(res);
      })
   }

@@ -52,6 +52,7 @@ view: boolean= true;
   }
 
   inventory_asin($event,inventory){
+  this.inventories.filter((invent) => invent.asin == inventory).map((data) => data.enable = $event.checked);
    this.InventoryService.enable($event.checked,inventory).subscribe( res => {
    console.log(this.inventories);
    });  

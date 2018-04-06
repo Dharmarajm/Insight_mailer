@@ -1,7 +1,8 @@
 <mat-form-field style="width: 100%;">
     <mat-label>Subject</mat-label>
-    <input matInput placeholder="Simple placeholder">
+    <input matInput placeholder="Simple placeholder" [(ngModel)] = "subject">
   </mat-form-field>
+
 
 <ckeditor
     [(ngModel)]="ckeditorContent"
@@ -19,10 +20,10 @@
        [command]="'insertcontent'"
        (click)="insert($event)"
        [icon]="'https://png.icons8.com/color/540/bow-tie-half-filled.png'"
-       [label]="'Insert Content'">
+       [label]="'Insert_content'">
      </ckbutton>
    </ckgroup>
  </ckeditor>
 
  <button mat-button  (click)="onNoClick()" color="warn" > Cancel </button>
-  <button type="submit" (click)="ok(ckeditorContent)" color="primary" cdkFocusInitial> save </button>  
+  <button type="submit" (click)="ok(ckeditorContent,subject)" color="primary" cdkFocusInitial> save </button>  

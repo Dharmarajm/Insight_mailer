@@ -7,33 +7,37 @@ export class DashboardService {
   constructor(private http:HttpClient) { }
   
   lastest_order() {
-        return this.http.get('api.insightmailer.com/dashboard/latest_order');
+        return this.http.get('http://192.168.1.79:3021/dashboard/latest_order');
     }
 
     top_products() {
-        return this.http.get('api.insightmailer.com/dashboard/top_product');
+        return this.http.get('http://192.168.1.79:3021/dashboard/top_product');
     }
 
     order_stat(value) {
         console.log(value);
-        return this.http.post('api.insightmailer.com/dashboard/order_stats',{ value: value });
+        return this.http.post('http://192.168.1.79:3021/dashboard/order_stats',{ value: value });
     }
 
      feedback_stat(value) {
         console.log(value);
-        return this.http.post('api.insightmailer.com/dashboard/feedback_stats',{ value: value });
+        return this.http.post('http://192.168.1.79:3021/dashboard/feedback_stats',{ value: value });
     }
 
     count(){
-        return this.http.get('api.insightmailer.com/dashboard/product');
+        return this.http.get('http://192.168.1.79:3021/dashboard/product');
     }
 
     doughnut() {
-        return this.http.get('api.insightmailer.com/dashboard/doughnut_chart');
+        return this.http.get('http://192.168.1.79:3021/dashboard/doughnut_chart');
     }
 
     review() {
-        return this.http.get('api.insightmailer.com/dashboard/review');
+        return this.http.get('http://192.168.1.79:3021/dashboard/review');
+    }
+
+    negative_feedback_mail(contant,review,subject) {
+        return this.http.post('http://192.168.1.79:3021/emails/send_review_email',{ template: contant, email: review.email, subject: subject });
     }
 
 

@@ -2,6 +2,9 @@
   <header>
     <h1>Select Your Product</h1>
   </header>
+    <span>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+      </span>
   <mat-grid-list cols="1" rowHeight="340px">
     <mat-grid-tile>
         <div class="table-scroll">
@@ -16,8 +19,8 @@
             </thead>
             <tbody>
               <tr *ngFor="let inventory of inventories">
-                <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
-                <td>{{inventory?.find_by_asin[0].title}}</td>
+                <td> <img [src]="inventory?.small_image" alt="Smiley face" height="100" width="100"> </td>
+                <td>{{inventory?.title}}</td>
                 <td>{{inventory?.asin}}</td>
                 <td><mat-slide-toggle [color]="primary" [disabled]="(inventory.id != id && id != 0)" 
                  *ngIf="!inventory?.promotion_in_use" (change)=asin($event,inventory.id)></mat-slide-toggle>
