@@ -45,7 +45,6 @@ hide: boolean = true;
  login(){
  this.data = {"auth":{"user_email": this.email,"password": this.password}}
   this.LoginService.userlogin(this.data).subscribe( res => {
-  //console.log(res);
   this.status = res;
   this.response = res;
    // this.utterance = new SpeechSynthesisUtterance('Hey You Have Succesfulli Logged In');
@@ -78,8 +77,6 @@ hide: boolean = true;
                   dialogRef.afterClosed().subscribe(result => {
                     
                   });
-
-
   }
 
 }
@@ -98,7 +95,6 @@ feedbacks: any;
 
     ngOnInit() {
      this.LoginService.forget_password("email").subscribe( res => {
-       console.log(res);
       });
     }
 

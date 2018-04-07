@@ -14,21 +14,21 @@
           <mat-card-header>
             <mat-card-title>{{ campaing.campagin_name }}</mat-card-title>
             <div class="nav_ic">
-              <button mat-icon-button (click)="campaign_email_stat(campaing.id)">
+              <button mat-icon-button (click)="campaign_email_stat(campaing.id)" matTooltip="Statistics">
                 <mat-icon>assessment</mat-icon>
               </button>
               <button mat-icon-button *ngIf="campaing?.send_when_negative_feedback" 
-              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)">
+              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)" matTooltip="BlaclList On">
                 <mat-icon>speaker_notes</mat-icon>
               </button>
               <button mat-icon-button *ngIf="!campaing?.send_when_negative_feedback" 
-              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)">
+              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)" matTooltip="Blacklist Off">
                 <mat-icon>speaker_notes_off</mat-icon>
               </button>
-              <button mat-icon-button (click)="campaign_edit(campaing.id)">
+              <button mat-icon-button (click)="campaign_edit(campaing.id)" matTooltip="Edit Campaign">
                 <mat-icon>edit</mat-icon>
               </button>
-              <button mat-icon-button (click)="campaign_delete(campaing,$index)">
+              <button mat-icon-button (click)="campaign_delete(campaing,$index)" matTooltip="Delete Campaign">
                 <mat-icon>delete</mat-icon>
               </button>
               <mat-slide-toggle [color]="primary" [checked]="campaing.enable" (change)="enable(campaing.id,$event)"></mat-slide-toggle>

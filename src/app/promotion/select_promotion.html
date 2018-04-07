@@ -13,7 +13,7 @@
               <tr>
                 <th>Image</th>
                 <th>Title</th>
-                <th>Asin</th>
+                <th>ASIN</th>
                 <th>Enable</th>
               </tr>
             </thead>
@@ -47,25 +47,3 @@
     </mat-grid-tile>
   </mat-grid-list>
 </div>
-<!--   <h1> Select Your Product </h1>
-  <table class="table">
-      <tr>
-          <th>Image</th>
-          <th>Title</th> 
-          <th>Asin</th>
-          <th>Enable</th>
-      </tr>
-      <tr *ngFor="let inventory of inventories">
-         <td> <img [src]="inventory?.find_by_asin[0].small_image" alt="Smiley face" height="100" width="100"> </td>
-         <td>{{inventory?.find_by_asin[0].title}}</td>
-         <td>{{inventory?.asin}}</td>
-         <td> <mat-slide-toggle [color]="primary" [disabled]="(inventory.id != id && id != 0)" (change)=asin($event,inventory.id)></mat-slide-toggle> </td>
-      </tr>
-  </table>
-</div>
-<div mat-dialog-actions class="float-right">
-  <button mat-button (click)="cancel()" mat-raised-button>Cancel</button>
-  <button mat-button (click)="ok()" cdkFocusInitial mat-raised-button color="primary">Confirm</button>
-</div> -->
-
- <!--[checked]="inventory.children_in_use"-->

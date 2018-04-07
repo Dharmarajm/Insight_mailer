@@ -69,8 +69,20 @@ export class CampaignService {
        return this.http.post('http://192.168.1.79:3021/campaigns/template_data_update',{campaign_id: campaign_id,content: ckeditorContent,index: index});
     }
 
+    trigger_push(id){
+      return this.http.post('http://192.168.1.79:3021/campaigns/trigger_push',{id: id});
+    }
+
+    trigger_remove(id,index){
+      return this.http.post('http://192.168.1.79:3021/campaigns/trigger_remove',{id: id,index: index});
+    }
+
     block_campaign(id,status){
       return this.http.post('http://192.168.1.79:3021/campaigns/enable_blacklist',{id: id,enable: status});
+    }
+
+    subject_update(id,subject,index){
+       return this.http.post('http://192.168.1.79:3021/campaigns/subject_update',{id: id,subject: subject,index: index});
     }
 
 }

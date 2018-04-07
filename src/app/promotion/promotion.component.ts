@@ -25,6 +25,7 @@ previewSelected: any;
 data: any;
 edit_data: any;
 
+date5: any;
 
 page1: any;
 
@@ -33,10 +34,10 @@ dataSource = new MatTableDataSource;
   constructor(public dialog: MatDialog,private PromotionService:PromotionService, private router: Router,public nav: AppService) { }
 
   ngOnInit() {
+  this.date5 = new FormControl(new Date());
   this.nav.show();
   this.PromotionService.getpromotion().subscribe( res => {
       this.promotions = res;
-      console.log(this.promotions);
       this.dataSource = new MatTableDataSource(this.promotions);
     });
     this.min_date = new Date()
@@ -85,8 +86,6 @@ swal({
 }).then((result) => {
   if (result.value) {
   this.PromotionService.delete_promotion(promotion_data.id).subscribe( res => {
-    console.log(res);
-    console.log(this.promotions.indexOf(promotion_data));
      this.promotions.splice(this.promotions.indexOf(promotion_data), 1);   
     });
     swal(
@@ -107,23 +106,17 @@ swal({
    
 }
 
-enable(event,id,inventory_id,date){
-  console.log(this.start_date[date].toDateString(),this.end_date[date].toDateString());
-   if(this.start_date[date] && this.end_date[date]){
-      console.log(this.start_date[date].toDateString(),this.end_date[date].toDateString());   
-  this.data = { id: id,inventory_id: inventory_id,enable: event.checked,from_date: (this.start_date[date]).toDateString(),to_date: (this.end_date[date]).toDateString() }
+enable(event,id,inventory_id,date,from_date,to_date){
+  //console.log(from_date.toDateString(),to_date.toISOString());
+      //console.log(this.start_date[date].toDateString(),this.end_date[date].toDateString());   
+    //  console.log(this.start_date[date],this.end_date[date]);   
+  this.data = { id: id,inventory_id: inventory_id,enable: event.checked,from_date: from_date,to_date: to_date }
   this.PromotionService.promotion_enable(this.data).subscribe( res => {
       this.data_enable = res;
     });
-   }else{
-   console.log(event);
-       //alert("Please select start date and end date before enable");
-  }
-  
 }
 
 promotion(){
-  alert("promoted");
 }
 
  applyFilter(filterValue: string) {
@@ -136,7 +129,8 @@ promotion(){
 promotion_preview(data){
 
 let dialogRefprev = this.dialog.open(TemplatePreview, {
-                    width: '500px',
+                    height: '800px',
+                    width: '800px',
                     data: {data: data}
                   });
 
@@ -222,7 +216,6 @@ if (event.checked){
 }
 
   cancel(): void {
-    alert("sure");
     this.dialogRef1.close();
   }
 
@@ -236,7 +229,6 @@ ok(): void {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
-    console.log(this.dataSource.filteredData);
     this.inventories = this.dataSource.filteredData;
   }
 
@@ -281,8 +273,6 @@ edit_data: any;
   }
 
   promotion(myPromotionForm){
-  
-   console.log(myPromotionForm);
    this.PromotionService.create_promotion(myPromotionForm,this.data.id).subscribe( res => {
       this.dialogRef2.close(res);
     });
@@ -290,7 +280,7 @@ edit_data: any;
   }
 
   cancel(){
-   alert("promotion not created");
+   swal('Deleted!','Your Promotion is not created.','success')
    this.dialogRef2.close();
   }
 
@@ -300,7 +290,6 @@ edit_data: any;
   this.edit_data1 = localStorage.getItem('edit_data');
       this.PromotionService.getdata(this.data.id).subscribe( res => {
       this.data1 = res;
-     console.log(this.data1);
     });
 
      this.myGroup = new FormGroup({ firstName: new FormControl() });

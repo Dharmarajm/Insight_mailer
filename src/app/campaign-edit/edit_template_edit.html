@@ -1,6 +1,6 @@
 <mat-form-field style="width: 100%;">
     <mat-label>Subject</mat-label>
-    <input matInput placeholder="Simple placeholder">
+    <input matInput placeholder="Simple placeholder" [(ngModel)]="subject" (change)="subject_change(subject)">
   </mat-form-field>
 
 
@@ -25,5 +25,5 @@
    </ckgroup>
  </ckeditor>
 
- <button mat-button  (click)="onNoClick()" color="warn" > Cancel </button>
-  <button type="submit" (click)="ok(ckeditorContent)" color="primary" cdkFocusInitial> save </button>  
+ <button mat-raised-button (click)="onNoClick()"> Cancel </button>
+  <button mat-raised-button color="primary" (click)="ok(ckeditorContent)" cdkFocusInitial> Save </button>  

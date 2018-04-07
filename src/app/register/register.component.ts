@@ -42,7 +42,6 @@ public myForm: FormGroup;
   register(){
   this.registerdata = {"first_name": this.first_name,"last_name": this.last_name,"user_email": this.email,"password": this.password,"phone": this.phone}
     this.RegisterService.register(this.registerdata).subscribe( res => {
-      console.log(res);
       this.status = res;
          if(this.status){
         swal("Registered!", "You Have Sucessfully Registered", "success");

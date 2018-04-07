@@ -43,21 +43,10 @@
           <mat-cell *matCellDef="let element"> {{element.purchased_at}} </mat-cell>
         </ng-container>
 
-        <!--ng-container matColumnDef="order_quantity">
-          {{element.buyer_name? element?.buyer_name : "Order Canceled"}}
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Quantity </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.find_order[0].order_quantity}} </mat-cell>
-    </ng-container-->
-
         <ng-container matColumnDef="shipment_status">
           <mat-header-cell *matHeaderCellDef> Order Status </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.tfm_shipment_status ? element?.tfm_shipment_status : element?.status }} </mat-cell>
         </ng-container>
-
-        <!--ng-container matColumnDef="total">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Total </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.total}} </mat-cell>
-    </ng-container-->
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;">

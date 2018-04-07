@@ -69,14 +69,12 @@ values: string[] = ["ordered","shipped","delevered","returned"];
 
 
   this.route.params.subscribe( params => this.edit_id = params);
-  console.log(this.edit_id);
   
   if(this.edit_id.id){
    this.CampaignService.edit_campaign(this.edit_id.id).subscribe( res => {
    this.edit_data = res;
    this.dataSource = new MatTableDataSource(this.edit_data);
    localStorage.setItem("campaign_id",this.edit_id.id);
-   console.log(this.edit_data);
    this.addAddressvalue(this.edit_data.triggers);
 
     });
@@ -104,20 +102,6 @@ values: string[] = ["ordered","shipped","delevered","returned"];
 }));
 this.dataSource = new MatTableDataSource(this.inventories);
     });
-
-    this.ckeConfig = {
-            height: 400,
-            uiColor: "#ebebeb",
-            language: "en",
-            allowedContent: true,
-            toolbar: [
-            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
-                { name: "editing", items: ["Find", "Replace", "SelectAll"] },
-                { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
-                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
-                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
-            ]
-        };
    
 
   }
@@ -153,7 +137,6 @@ localStorage.setItem("campaign",name);
   if (event.checked){
   this.id = template.id;
   this.CampaignService.campaign_create(template.id).subscribe( res => {
-    console.log(res);
     let camp_id:any = res;
     localStorage.setItem("campaign_id",camp_id);
     });
@@ -166,13 +149,11 @@ localStorage.setItem("campaign",name);
     if (event.checked){
      console.log("asin added" + asin_data );
      this.CampaignService.asin_push(asin_data).subscribe( res => {
-      console.log(res);
       this.id = 0;
     });
      }else{
       console.log("asin removed" + asin_data );
       this.CampaignService.asin_remove(asin_data).subscribe( res => {
-       console.log(res);
        this.id = 1;
     });
      }
@@ -183,6 +164,9 @@ localStorage.setItem("campaign",name);
         if(control.controls.length <= 4){
         this.addrCtrl = this.initAddress();
         control.push(this.addrCtrl);
+       this.CampaignService.trigger_push(this.edit_id.id).subscribe( res => {
+    });
+
         }else{
                 alert("more than 5 triggers are not allowed");
         }
@@ -196,7 +180,6 @@ localStorage.setItem("campaign",name);
     }
 
     addAddressvalue(trigger) {
-    console.log(trigger);
         const control = <FormArray>this.myForm.controls['addresses'];
         console.log(control.controls.length);
         if(control.controls.length <= 4){
@@ -212,7 +195,6 @@ localStorage.setItem("campaign",name);
 
 
     initAddressvalue(trigger) {
-    console.log(trigger);
         return this._formBuilder.group({
             days: [trigger.days, Validators.required],
             trigger: [trigger.trigger, Validators.required]
@@ -226,12 +208,13 @@ localStorage.setItem("campaign",name);
   removeAddress(i: number) {
         const control = <FormArray>this.myForm.controls['addresses'];
         control.removeAt(i);
+        console.log(i);
+        this.CampaignService.trigger_remove(this.edit_id.id,i).subscribe( res => {
+    });
     }
 
 save(myForm) {
-      console.log(myForm.value.addresses[0]);
      this.CampaignService.campaign_update(myForm.value.addresses).subscribe( res => {
-      console.log(res);
       //this.campaings.push(res);
       this.router.navigate(['campaign']);
     });
@@ -263,9 +246,10 @@ name: string;
 
 //editor
 ckeConfig: any;
-//ckeditorContent: any;
-//ckeditorContent: string = '<p>Some html</p>';
+//ckeditorContent: string;
+ckeditorContent: string = '<p>Some html</p>';
 temp_data: any;
+subject: any;
 
 result1: any;
 
@@ -274,6 +258,14 @@ result1: any;
 
 
 ngOnInit() {
+
+this.id = localStorage.getItem("campaign_id");
+  this.CampaignService.edit_campaign(this.id).subscribe( res => {
+      this.temp_data = res;
+      this.subject = this.temp_data.triggers[this.data.index].subject;
+      this.ckeditorContent = this.temp_data.triggers[this.data.index].template_data;
+    });
+
     this.ckeConfig = {
             height: 400,
             uiColor: "#ebebeb",
@@ -323,11 +315,17 @@ swal({
   }
 
   ok(ckeditorContent): void {
-    console.log(ckeditorContent);
     this.id = localStorage.getItem("campaign_id");
   this.CampaignService.template_update(this.id,ckeditorContent,this.data.index).subscribe( res => {
+  this.temp_data = res;
+    this.ckeditorContent = this.temp_data.triggers[this.data.index].template_data;
     });
      this.dialogRef.close(ckeditorContent);
+  }
+
+  subject_change(subject){
+    this.CampaignService.subject_update(this.id,subject,this.data.index).subscribe( res => {
+    });
   }
 
   onChange($event) {}

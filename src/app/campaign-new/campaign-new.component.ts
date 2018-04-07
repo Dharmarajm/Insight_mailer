@@ -30,6 +30,7 @@ edit_data: any;
 id: number = 0;
 name: any;
 addrCtrl: any;
+camp_id: any;
 
 public myForm: FormGroup;
 public formArray: any;
@@ -40,20 +41,6 @@ dataSource = new MatTableDataSource;
 values: string[] = ["ordered","shipped","delevered","returned"];
 
   constructor(public dialog: MatDialog,private CampaignService:CampaignService, private _formBuilder: FormBuilder, private router:Router,private route: ActivatedRoute,public nav: AppService) { }
-
- /* ckeConfig = {
-            height: 50,
-            uiColor: "#ebebeb",
-            language: "en",
-            allowedContent: true,
-            toolbar: [
-                { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
-                { name: "editing", items: ["Find", "Replace", "SelectAll"] },
-                { name: "clipboard", items: ["Cut", "Copy", "Paste", "Undo", "Redo"] },
-                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
-                { name: "styles", items: ["imageExplorer","Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] },
-            ]
-        };*/
         
 
   ngOnInit() {
@@ -168,6 +155,8 @@ localStorage.setItem("campaign",name);
   this.CampaignService.campaign_create(template.id).subscribe( res => {
     console.log(res);
     let camp_id:any = res;
+
+    this.camp_id = res;
     localStorage.setItem("campaign_id",camp_id);
     let trigger = template;
     this.addAddressvalue(trigger);
@@ -198,6 +187,10 @@ localStorage.setItem("campaign",name);
         //addrCtrl.controls.get('days').setValue('yourEmailId@gmail.com');
         const addrCtrl = this.initAddress();
         control.push(addrCtrl);
+        this.CampaignService.trigger_push(this.camp_id).subscribe( res => {
+            console.log(res);
+         });
+
         }else{
                 alert("more than 5 triggers are not allowed");
         }
@@ -240,8 +233,13 @@ localStorage.setItem("campaign",name);
   }
 
   removeAddress(i: number) {
+
+     this.CampaignService.trigger_remove(this.camp_id,i).subscribe( res => {
+       console.log(res);
+    });
         const control = <FormArray>this.myForm.controls['addresses'];
         control.removeAt(i);
+
     }
 
 save(myForm) {
@@ -261,8 +259,8 @@ promotion_template(index){
                   });
 
                   dialogRef.afterClosed().subscribe(result => {
-                  console.log(index);
-                  console.log(result);
+                  //console.log(index);
+                  //console.log(result);
                   });
 }
 
@@ -285,6 +283,7 @@ ckeConfig: any;
 //ckeditorContent: any;
 ckeditorContent: string = '<p>Some html</p>';
 temp_data: any;
+subject: any;
 
 result1: any;
 
@@ -296,9 +295,8 @@ ngOnInit() {
 this.id = localStorage.getItem("campaign_id");
   this.CampaignService.edit_campaign(this.id).subscribe( res => {
       this.temp_data = res;
-      console.log(this.temp_data);
-      console.log(this.data.index);
-      this.ckeditorContent = JSON.stringify(this.temp_data.triggers[this.data.index].template_data);
+      this.subject = this.temp_data.triggers[this.data.index].subject;
+      this.ckeditorContent = this.temp_data.triggers[this.data.index].template_data;
     });
 
 this.ckeConfig = {
@@ -324,7 +322,7 @@ swal({
   input: 'select',
   inputOptions: {
     '{{Buyer Name}}': '{{Buyer Name}}',
-    '{{order Id}}': '{{Order Id}}',
+    '{{Order Id}}': '{{Order Id}}',
     '{{Product Title}}': '{{Product Title}}',
     '{{Product Link}}': '{{Product Link}}',
     '{{ASIN}}': '{{ASIN}}'
@@ -354,14 +352,20 @@ swal({
 edited_data: any;
 
   ok(ckeditorContent): void {
+  console.log(JSON.stringify(ckeditorContent));
     this.id = localStorage.getItem("campaign_id");
   this.CampaignService.template_update(this.id,ckeditorContent,this.data.index).subscribe( res => {
-   //   this.temp_data = res;
-   //   console.log(this.temp_data);
-      console.log(res);
-   //   this.ckeditorContent = JSON.stringify(this.temp_data.triggers[this.data.index].template_data);
+      this.temp_data = res;
+      this.ckeditorContent = this.temp_data.triggers[this.data.index].template_data;
     });
      this.dialogRef.close(ckeditorContent);
+  }
+
+  subject_change(subject){
+  console.log(this.id);
+    this.CampaignService.subject_update(this.id,subject,this.data.index).subscribe( res => {
+      console.log(res);
+    });
   }
 
 

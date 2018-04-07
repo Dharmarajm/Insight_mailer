@@ -38,12 +38,12 @@
                 </button>
               </div>
               <h4>{{ promotion?.promotion_title }} </h4>
-              <p>{{ promotion.inventory.find_by_asin[0].title }} </p>
+              <p>{{ promotion?.inventory.find_by_asin[0].title }} </p>
               <div class="price">
                 <span><s>&#8377;{{ promotion.inventory.price_paisas.fractional / 100 }}</s>&nbsp;<b> &#8377;{{  promotion?.discount_price }}</b></span>
                 <mat-slide-toggle [color]="primary" [checked]="promotion?.enable" 
-                [disabled]="!(start_date[i] && end_date[i])"  
-                (change)=enable($event,promotion.id,promotion.inventory.id,i)></mat-slide-toggle>
+                [disabled]="!(promotion.from_date && promotion.to_date)"  
+                (change)=enable($event,promotion.id,promotion.inventory.id,i,promotion.from_date,promotion?.to_date)></mat-slide-toggle>
               </div><!--[disabled]="!(start_date[i] && end_date[i])"  [value]="promotion.to_date"-->
             </mat-card-content>
             <mat-card-footer>
@@ -51,30 +51,23 @@
                 <mat-grid-tile>
                   <mat-form-field>
                     <input matInput [min]="min_date" [max]="maxDate" [matDatepicker]="picker1"
-                     [(ngModel)]="start_date[i]" 
+                     [(ngModel)]="promotion.from_date" 
                      placeholder="Start date">
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
-                  </mat-form-field> 
+                  </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile>
                   <mat-form-field>
-                    <input matInput [min]="start_date[i]" [max]="maxDate" [matDatepicker]="picker" 
-                    [(ngModel)]="end_date[i]" 
+                    <input matInput [min]="promotion.from_date" [max]="maxDate" [matDatepicker]="picker" 
+                    [(ngModel)]="promotion.to_date" 
                      placeholder="End date">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>
-              <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="primary">Preview</button>
-<!--               <mat-grid-list cols="1" rowHeight="65px">
-                <mat-grid-tile>
-                    
-                </mat-grid-tile>
-              </mat-grid-list> -->
-              <!-- {{start_date[i]}}
-{{end_date[i]}} -->
+              <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="primary">Sample</button>
             </mat-card-footer>
           </mat-card>
         </mat-grid-tile>

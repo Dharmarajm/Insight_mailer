@@ -50,7 +50,6 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
    this.DashboardService.order_stat("30 days").subscribe( res => {
    this.order_statistics = res;
-   console.log(this.order_statistics);
    for (let data of this.order_statistics.date) {
     this.chartLabels.push(data);    
     }
@@ -59,7 +58,6 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
    this.DashboardService.feedback_stat("30 days").subscribe( res => {
    this.feedback_statistics = res;
-   console.log(this.feedback_statistics);
    for (let data of this.feedback_statistics.date) {
     this.chartLabels2.push(data);    
     }
@@ -78,7 +76,6 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
   order_stat_filter(event){
   this.chartLabels = [];
-     console.log(event.value);
     this.DashboardService.order_stat(event.value).subscribe( res => {
    this.order_statistics = res;
    for (let data of this.order_statistics.date) {
@@ -91,7 +88,6 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
   feedback_stat_filter(event){
   this.chartLabels2 = [];
-     console.log(event.value);
     this.DashboardService.feedback_stat(event.value).subscribe( res => {
    this.feedback_statistics = res;
    for (let data of this.feedback_statistics.date) {
@@ -169,7 +165,6 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
   ];
 
   onChart1Click(event) {
-     console.log(event.active[0]._index);
     if(event.active[0]._index == 1){
             let dialogRef = this.dialog.open(Feedback, {
                     width: '1000px'
@@ -313,9 +308,7 @@ swal({
   }
 
   ok(ckeditorContent,subject): void {
-    console.log(ckeditorContent);
   this.DashboardService.negative_feedback_mail(ckeditorContent,this.data.feedback,subject).subscribe( res => {
-      console.log(res);
     });
      this.dialogRef.close(ckeditorContent);
   }
@@ -323,7 +316,5 @@ swal({
   onChange($event) {}
   onFocus($event) {}
   onBlur($event) {}
-
-
 
 }

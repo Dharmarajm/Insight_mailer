@@ -25,5 +25,5 @@
    </ckgroup>
  </ckeditor>
 
- <button mat-button  (click)="onNoClick()" color="warn" > Cancel </button>
-  <button type="submit" (click)="ok(ckeditorContent,subject)" color="primary" cdkFocusInitial> save </button>  
+ <button mat-raised-button (click)="onNoClick()"> Cancel </button>
+  <button mat-raised-button color="primary" (click)="ok(ckeditorContent,subject)" cdkFocusInitial> Send </button>  

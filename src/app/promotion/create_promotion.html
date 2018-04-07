@@ -15,14 +15,6 @@
          </mat-error-->
         </mat-form-field>
 
-        <!--mat-form-field class="half-width">
-       <input matInput type=text placeholder="Product Category" formControlName="product_category"
-       class="form-control" id="product_category" name="product_category" [(ngModel)] = "product_category"-->
-        <!--mat-error *ngIf="product_category.hasError('required')">
-         Product Category is <strong>required</strong>
-         </mat-error-->
-        <!--/mat-form-field-->
-
         <mat-form-field class="half-width">
           <input matInput type=text placeholder="Product Title" formControlName="product_title" class="form-control" id="product_title" name="Product Title" [value]="data1?.find_by_asin[0].title" [(ngModel)]="product_title">
           <!--mat-error *ngIf="product_titleFormControl.hasError('required')">
@@ -86,7 +78,7 @@
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=number placeholder="Frequency" formControlName="mail_frequency" class="form-control" id="Frequency" name="Frequency" min=1 [value]="edit_data?.mail_frequency" [(ngModel)]="mail_frequency">
+          <input matInput type=number placeholder="Mailing Gap" formControlName="mail_frequency" class="form-control" id="Frequency" name="Mailing Gap" min=1 [value]="edit_data?.mail_frequency" [(ngModel)]="mail_frequency">
           <!--mat-error *ngIf="support_emailFormControl.hasError('required')">
          Support Email is <strong>required</strong>
          </mat-error-->

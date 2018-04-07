@@ -41,9 +41,7 @@ dataSource = new MatTableDataSource;
   }
 
 promotion_edit(id){
-  console.log(id);
   this.PromotionService.edit_promotion(id).subscribe( res => {
-    console.log(res);
     this.edit_data = res;
     localStorage.setItem('edit_data', this.edit_data);
 //let dialogRef1 = this.dialog.open(EditSelectPromotion, {
@@ -84,8 +82,6 @@ swal({
 }).then((result) => {
   if (result.value) {
   this.PromotionService.delete_promotion(promotion_data.id).subscribe( res => {
-    console.log(res);
-    console.log(this.promotions.indexOf(promotion_data));
      this.promotions.splice(this.promotions.indexOf(promotion_data), 1);   
     });
     swal(
@@ -122,7 +118,6 @@ promotion(){
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
     this.promotions = this.dataSource.filteredData;
-    console.log(this.dataSource.filteredData);
   }
 
 promotion_preview(data){
@@ -190,7 +185,6 @@ edit_data1: any;
 
 ngOnInit() {
   //this.edit_data1 = localStorage.getItem('edit_data');
-  console.log(this.data.data);
   this.asin_data = this.data.data;
       this.PromotionService.getinventories().subscribe( res => {
       this.inventories = res;    
@@ -258,9 +252,6 @@ edit_data: any;
   }
 
   promotion(myPromotionForm,id){
-  
-   console.log(myPromotionForm);
-   console.log(id);
    this.PromotionService.edit_promotion_data(myPromotionForm,id).subscribe( res => {
       this.dialogRef2.close(res);
     });
@@ -274,13 +265,11 @@ edit_data: any;
   }
 
   ngOnInit() {
-  //console.log(this.data);
+
   this.edit_data = this.data.data;
-  console.log(this.edit_data);
   this.edit_data1 = localStorage.getItem('edit_data');
       this.PromotionService.getdata(this.edit_data.inventory.id).subscribe( res => {
       this.data1 = res;
-      console.log(this.data1);
     });
 
      this.myGroup = new FormGroup({ firstName: new FormControl() });

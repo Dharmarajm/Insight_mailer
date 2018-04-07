@@ -31,7 +31,7 @@ import { PromotionEditComponent, EditSelectPromotion, EditPromotion, EditTemplat
 import { DashboardComponent, Feedback, NegativeReviewMail } from './dashboard/dashboard.component';
 import { SharedComponent } from './shared/shared.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { EmailStatusComponent } from './email-status/email-status.component';
+import { EmailStatusComponent, Preview } from './email-status/email-status.component';
 
 //List Of Service
 import { AppService } from './app.service';
@@ -78,6 +78,7 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
     UserProfileComponent,
     TemplatePreview,
     EmailStatusComponent,
+    Preview,
     PasswordChange,
     SafeHtmlPipe
   ],
@@ -113,6 +114,7 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
   entryComponents: [
                 Feedback,
                 NegativeReviewMail,
+                Preview,
                 CampaignName,
                 CampaignTemplate,
                 CampaignAsin,

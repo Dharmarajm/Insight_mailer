@@ -39,21 +39,6 @@
               </span>
           </mat-card>
         </mat-grid-tile>
-        <!--       <mat-grid-tile [colspan]="1" [rowspan]="1" width="100%" *ngFor="let count of counts">
-          <mat-card class="example-card">
-            <h2>{{count.product_count}}</h2>
-            <mat-icon>grade</mat-icon> Total Products </mat-card>
-          <mat-card class="example-card">
-            <h2>{{count.order_count}}</h2>
-            <mat-icon>shopping_cart</mat-icon> Total Orders </mat-card>
-          <mat-card class="example-card">
-            <h2>{{count.order_count}}</h2>
-            <mat-icon>near_me</mat-icon> Email Sent </mat-card>
-          <mat-card class="example-card">
-            <h2>{{count.order_count}}</h2>
-            <mat-icon>mail_outline</mat-icon> Email Scheduled </mat-card>
-        </mat-grid-tile> -->
-
       </mat-grid-list>
     </div>
 
@@ -97,11 +82,7 @@
             <mat-card-title>
               Customer Statistics
             </mat-card-title>
-
-            <!-- <button mat-icon-button>
-              <mat-icon>more_vert</mat-icon>
-            </button> -->
-
+            
             <mat-card-content>
               <canvas height="180px" baseChart [chartType]="'doughnut'" [datasets]="chartData1" [labels]="chartLabel1" [colors]="doughnutChartColors" [options]="chartOptions1" [legend]="true" (chartClick)="onChart1Click($event)"> <!-- [labels]="chartLabel1" [colors]="doughnutChartColors"-->
               </canvas>
@@ -160,9 +141,6 @@
             <mat-card-title>
               Latest Orders
             </mat-card-title>
-            <!-- <button mat-icon-button>
-              <mat-icon>more_vert</mat-icon>
-            </button> -->
             <mat-card-content>
               <mat-table #table [dataSource]="dataSource2">
                 <ng-container matColumnDef="id">
@@ -173,10 +151,6 @@
                   <mat-header-cell *matHeaderCellDef> Product Title </mat-header-cell>
                   <mat-cell *matCellDef="let element"> <span matTooltip="{{element.find_order[0].title}}"> {{element.find_order[0].title | slice:0:40 }} </span> </mat-cell><!--| slice:0:6-->
                 </ng-container>
-                <!--ng-container matColumnDef="total">
-                  <mat-header-cell *matHeaderCellDef> Order Value </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> {{element.find_order[0].total}} </mat-cell>
-                </ng-container-->
                 <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
               </mat-table>
@@ -185,39 +159,5 @@
         </mat-grid-tile>
       </mat-grid-list>
     </div>
-
-
-
-    <!--div class="example-container mat-elevation-z8">
-  <mat-table #table [dataSource]="dataSource">
-
-    
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-    </ng-container>
-
-   
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
-    </ng-container>
-
-   
-    <ng-container matColumnDef="weight">
-      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
-    </ng-container>
-
-   
-    <ng-container matColumnDef="symbol">
-      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-</div-->
   </div>
 </div>

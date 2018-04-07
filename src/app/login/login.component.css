@@ -72,26 +72,6 @@ mat-card{
   color: #c5c4c0;
 }
 
-/*.mat-tab-label{
-    font-size: 20px;
-    font-weight: 500;
-    color: #000 !important;
-}*/
-
-/*.mat-icon-button{
-    position: absolute;
-    right: 0;
-    top: 0px;
-    color: #7d7d7d;
-    height: 28px;
-    width: 28px;
-    line-height: 28px;
-}
-
-.mat-icon-button .mat-icon, .mat-icon-button i {
-    line-height: 20px;
-}*/
-
 .stay-signed{
   margin-bottom: 30px;
   color: #a59a91;
@@ -104,11 +84,6 @@ mat-card{
     font-size: 13px;
     padding: 5px 0;
 }
-
-/*.forgot-pswd:hover{
-    text-decoration: underline;
-    color: #405371;
-}*/
 
 p.signup{
     color: #405371 !important;

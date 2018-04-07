@@ -38,7 +38,6 @@ orders: any = [];
   this.nav.show();
    this.OrderService.getorders().subscribe( res => {
    this.orders = res;
-   console.log(res);
    this.orders = this.orders.map(item => ({
   amazon_order_id: item.amazon_order_id,
   asin: item.find_order[0].asin,
@@ -48,7 +47,6 @@ orders: any = [];
   tfm_shipment_status: item.tfm_shipment_status,
   status: item.status
 }));
-   //console.log(this.orders);
    this.dataSource = new MatTableDataSource(this.orders);
    });
   }

@@ -46,38 +46,14 @@ export class CampaignComponent implements OnInit {
   this.nav.show();
   this.CampaignService.getcampaigns().subscribe( res => {
     this.campaings = res;
-    console.log(this.campaings);
     });
 
     // extraPlugins: 'strinsert',
-
-/*this.ckeConfig = {
-            height: 50,
-            uiColor: '#ebebeb',
-            language: "en",
-            allowedContent: true,
-            toolbar: [
-            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
-                { name: "editing", items: [Find", "Replace", "SelectAll"] },
-                { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
-                "/",
-                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
-                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
-            ]
-        };
-
-
-  this.ckeditorContent = `<p>My HTML</p>`;*/
   }
 
   block(id,status){
-    console.log(this.campaings);
-     console.log(id,status);
      this.campaings.filter((person) => person.id == id).map((data) => data.send_when_negative_feedback = status );
-     console.log(this.campaings);
-     //.filter((camp) => camp == id) map(data => data.find(datum => datum.id == id)) 
      this.CampaignService.block_campaign(id,status).subscribe( res => {
-     console.log(res);
      })
   }
 
@@ -142,9 +118,7 @@ insert(event){
 
 
 enable(_id,event){
-console.log(status);
   this.CampaignService.enable_campaign(_id,event.checked).subscribe( res => {
-    console.log(res);
     });
 }
 
@@ -165,7 +139,6 @@ openDialog(): void {
           });
          
           dialogRef2.afterClosed().subscribe(result => {
-           console.log( result );
            this.animal = result;
 
               let dialogRef3 = this.dialog.open(CampaignAsin, {
@@ -173,7 +146,6 @@ openDialog(): void {
                });
 
               dialogRef3.afterClosed().subscribe(result => {
-               console.log( result );
                this.animal = result;
 
                   let dialogRef4 = this.dialog.open(CampaignTrigger, {
@@ -218,7 +190,6 @@ name: string;
 
   onNoClick(): void {
     this.dialogRef1.close();
-    //alert("are you sure?");
   }
 
 ok(name): void {
@@ -249,7 +220,6 @@ templates:any;
 
   templatedata(template): void {
   this.CampaignService.campaign_create(template.id).subscribe( res => {
-    console.log(res);
     let camp_id:any = res;
     localStorage.setItem("campaign_id",camp_id);
     });
@@ -282,12 +252,10 @@ name: any;
     if (event.checked){
      console.log("asin added" + asin_data );
      this.CampaignService.asin_push(asin_data).subscribe( res => {
-      console.log(res);
     });
      }else{
       console.log("asin removed" + asin_data );
       this.CampaignService.asin_remove(asin_data).subscribe( res => {
-       console.log(res);
     });
      }
     }
@@ -296,7 +264,7 @@ name: any;
 
   onNoClick(): void {
     this.dialogRef3.close();
-    //alert("are you sure?");
+
   }
 
 ok(name): void {
@@ -336,11 +304,6 @@ values: string[] = ["ordered","shipped","delevered","returned"];
         
         // add address
         this.addAddress();
-        
-        /* subscribe to addresses value changes */
-        // this.myForm.controls['addresses'].valueChanges.subscribe(x => {
-        //   console.log(x);
-        // })
     }
 
     initAddress() {
@@ -359,11 +322,6 @@ values: string[] = ["ordered","shipped","delevered","returned"];
         const addrCtrl = this.initAddress();
         
         control.push(addrCtrl);
-        
-        /* subscribe to individual address value changes */
-        // addrCtrl.valueChanges.subscribe(x => {
-        //   console.log(x);
-        // })
     }
 
     removeAddress(i: number) {
@@ -372,9 +330,7 @@ values: string[] = ["ordered","shipped","delevered","returned"];
     }
 
     save(myForm) {
-      console.log(myForm.value.addresses[0]);
      this.CampaignService.campaign_update(myForm.value.addresses).subscribe( res => {
-      console.log(res);
       //this.campaings.push(res);
       this.dialogRef4.close(res);
     });

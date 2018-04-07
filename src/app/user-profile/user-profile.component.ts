@@ -48,7 +48,6 @@ public myForm3: FormGroup;
   this.nav.show();
  this.UserProfileService.user_data().subscribe( res => {
   this.res_data = res;
-  console.log(this.res_data);
  })
 
   this.myForm = new FormGroup({
@@ -131,15 +130,12 @@ public myForm3: FormGroup;
    if(res){ 
    this.spinner.show();
        this.UserProfileService.sync().subscribe( res => {
-       console.log(res);
        this.spinner.hide();
-       console.log(res);
        swal("Linked!", "You Have Sucessfully Linked Your account", "success");
            },
           error => {
           this.spinner.hide();
-          swal("Linked!", "You Have Sucessfully Linked Your account", "success");
-    //swal("Oops!", "Problem in Linking Your Account Contact Admin", "error") 
+        swal("Oops!", "Problem in Linking Your Account Contact Admin", "error") 
    }
            )
        }
