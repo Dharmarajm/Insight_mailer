@@ -135,7 +135,7 @@ public myForm3: FormGroup;
            },
           error => {
           this.spinner.hide();
-        swal("Oops!", "Problem in Linking Your Account Contact Admin", "error") 
+        swal("In Process", "Your Account Sync is in Progress Contact Admin for further details", "info") 
    }
            )
        }

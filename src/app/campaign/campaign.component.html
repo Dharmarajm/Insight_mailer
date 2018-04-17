@@ -18,11 +18,11 @@
                 <mat-icon>assessment</mat-icon>
               </button>
               <button mat-icon-button *ngIf="campaing?.send_when_negative_feedback" 
-              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)" matTooltip="BlaclList On">
+              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)" matTooltip="BlaclList Off">
                 <mat-icon>speaker_notes</mat-icon>
               </button>
               <button mat-icon-button *ngIf="!campaing?.send_when_negative_feedback" 
-              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)" matTooltip="Blacklist Off">
+              (click)="block(campaing.id,!campaing?.send_when_negative_feedback)" matTooltip="Blacklist On">
                 <mat-icon>speaker_notes_off</mat-icon>
               </button>
               <button mat-icon-button (click)="campaign_edit(campaing.id)" matTooltip="Edit Campaign">

@@ -165,7 +165,7 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
   ];
 
   onChart1Click(event) {
-    if(event.active[0]._index == 1){
+    //if(event.active[0]._index == 1){
             let dialogRef = this.dialog.open(Feedback, {
                     width: '1000px'
                   });
@@ -184,7 +184,7 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
                       }
                     
                   });
-    }
+    //}
 
   }
 
@@ -249,6 +249,8 @@ feedbacks: any;
 export class NegativeReviewMail implements OnInit {
 
 ckeConfig: any;
+ckeditorContent: any;
+subject: any;
 
   constructor(
     public dialogRef: MatDialogRef<NegativeReviewMail>,

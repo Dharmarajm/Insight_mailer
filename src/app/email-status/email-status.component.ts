@@ -34,7 +34,7 @@ pending_emails: any;
   applyFilter2(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource1.filter = filterValue;
+    this.dataSource2.filter = filterValue;
   }
 
   ngOnInit() {

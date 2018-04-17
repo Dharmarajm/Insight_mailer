@@ -40,7 +40,7 @@
               <h4>{{ promotion?.promotion_title }} </h4>
               <p>{{ promotion?.inventory.find_by_asin[0].title }} </p>
               <div class="price">
-                <span><s>&#8377;{{ promotion.inventory.price_paisas.fractional / 100 }}</s>&nbsp;<b> &#8377;{{  promotion?.discount_price }}</b></span>
+                <span><s>&#8377;{{ promotion.product_price }}</s>&nbsp;<b> &#8377;{{  promotion?.discount_price }}</b></span>
                 <mat-slide-toggle [color]="primary" [checked]="promotion?.enable" 
                 [disabled]="!(promotion.from_date && promotion.to_date)"  
                 (change)=enable($event,promotion.id,promotion.inventory.id,i,promotion.from_date,promotion?.to_date)></mat-slide-toggle>

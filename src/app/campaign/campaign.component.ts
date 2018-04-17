@@ -26,20 +26,6 @@ export class CampaignComponent implements OnInit {
 
   del_id: any;
 
-  /*this.ckeConfig = {
-            height: 50,
-            uiColor: "#ebebeb",
-            language: "en",
-            allowedContent: true,
-            toolbar: [
-            { name: "basicstyles", items: ["Bold", "Italic", "Underline", "Strike"] },
-                { name: "editing", items: ["Find", "Replace", "SelectAll"] },
-                { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
-                { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
-                { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
-            ]
-        };*/
-
   constructor(public dialog: MatDialog,private CampaignService:CampaignService,private router:Router,public nav: AppService) { }
 
   ngOnInit() {
@@ -108,7 +94,6 @@ swal({
 }
 
 insert(event){
-	//event.insertText("#{user_name}");
 	event.insertText("{{Buyer_Name}}");
 }
 

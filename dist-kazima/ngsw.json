@@ -1,0 +1,55 @@
+{
+  "configVersion": 1,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/favicon.ico",
+        "/index.html",
+        "/inline.c29e194330895f3dd5b5.bundle.js",
+        "/main.821a4a3c3587bcbab94d.bundle.js",
+        "/polyfills.7edc676f7558876c179d.bundle.js",
+        "/styles.4ccfd1dae410943d1421.bundle.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/login-bg.jpg",
+        "/assets/logo_font_white.png",
+        "/assets/logo_sml.png",
+        "/assets/logo_sml2.png",
+        "/assets/logo_white.png",
+        "/assets/logo_white2.png",
+        "/assets/promo.JPG",
+        "/assets/search.jpg",
+        "/assets/user-icon.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/inline.c29e194330895f3dd5b5.bundle.js": "d0fa44a1c58b180cc02abec828fc4bf4f3899184",
+    "/assets/login-bg.jpg": "0e4bce281c6d8d14372b6d703294efb5538d205b",
+    "/main.821a4a3c3587bcbab94d.bundle.js": "725308dfdbd29c4a1cc717272002f8287be737e0",
+    "/assets/logo_font_white.png": "fdd2ce4b572e3570727be0df26ee779e5e6cbd65",
+    "/polyfills.7edc676f7558876c179d.bundle.js": "0267c6b66c112cbe62c061936d99b915eed1e5f9",
+    "/assets/logo_sml.png": "6c5f866bf91be7a4643f2271f0a202faa635ceb9",
+    "/styles.4ccfd1dae410943d1421.bundle.css": "0163fffefdbe8615bf813c5c7eed72142757c6bf",
+    "/assets/logo_sml2.png": "59c304077f061eee8b1cc88b74d6d8d50b6473ba",
+    "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/assets/logo_white.png": "7fc561dc67960aaa5c0579e1f636800261020869",
+    "/index.html": "4e85d3326f978b605abc19626a58e7164bf7edb0",
+    "/assets/logo_white2.png": "d5e62790061a8bd072b36350226b2c5f988cd3a1",
+    "/assets/promo.JPG": "38414462b0cd1a72d73583ff04a042c7bb160cc4",
+    "/assets/search.jpg": "d498bd3d5942b8f715f34f045858eaabbd89cbd5",
+    "/assets/user-icon.png": "014f2c889e81a3e76ffc88bcf431e1f201b300bd"
+  }
+}

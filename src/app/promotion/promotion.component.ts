@@ -269,7 +269,7 @@ edit_data: any;
     public dialogRef2: MatDialogRef<CreatePromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any, private router:Router) { } //,@Inject(MAT_DIALOG_DATA) public data: any
 
   onNoClick(): void {
-    alert("sure");
+    //alert("sure");
   }
 
   promotion(myPromotionForm){

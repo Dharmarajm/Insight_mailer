@@ -98,8 +98,7 @@
                       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
                       <span class="inventory-enable">
                         <label>Enable All:&nbsp;</label>
-                        <mat-slide-toggle [color]="primary"
-                                (change)=enable_all($event,inventories)>
+                        <mat-slide-toggle (change)=enable_all($event,inventories)>
                         </mat-slide-toggle>
                       </span>
                     </div>

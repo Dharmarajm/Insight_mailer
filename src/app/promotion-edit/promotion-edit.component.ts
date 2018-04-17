@@ -86,13 +86,13 @@ swal({
     });
     swal(
       'Deleted!',
-      'Your file has been deleted.',
+      'Your Promotion has been deleted.',
       'success'
     )
   } else if (result.dismiss === swal.DismissReason.cancel) {
     swal(
       'Cancelled',
-      'Your file is safe :)',
+      'Your Promotion is safe :)',
       'error'
     )
   }
@@ -245,13 +245,14 @@ edit_data: any;
 
 
   constructor(
-    public dialogRef2: MatDialogRef<EditPromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any,private router:Router) { } //,@Inject(MAT_DIALOG_DATA) public data: any
+    public dialogRef2: MatDialogRef<EditPromotion>,private PromotionService:PromotionService,@Inject(MAT_DIALOG_DATA) public data: any,private router:Router) { }
 
   onNoClick(): void {
-    alert("sure");
+    //alert("sure");
   }
 
   promotion(myPromotionForm,id){
+    console.log(myPromotionForm);
    this.PromotionService.edit_promotion_data(myPromotionForm,id).subscribe( res => {
       this.dialogRef2.close(res);
     });
@@ -259,7 +260,7 @@ edit_data: any;
   }
 
   cancel(){
-   alert("promotion not created");
+   //alert("promotion not created");
    this.dialogRef2.close();
    this.router.navigate(['promotion']);
   }

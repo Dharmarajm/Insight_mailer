@@ -152,3 +152,25 @@ p.signup a{
 ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
     color: #0dc2ab;
 }
+
+footer{
+    background-color: #34435a;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+footer p {
+    color: #fff;
+    margin: 0;
+    font-size: 12px;
+    text-align: right;
+}
+
+footer p a{
+    color: #fff;
+    text-decoration: none;
+}

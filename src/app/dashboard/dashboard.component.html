@@ -21,12 +21,24 @@
             </span>
           </mat-card>
         </mat-grid-tile>
+
+        <!-- <mat-grid-tile>
+          <mat-card class="example-card">
+            <mat-icon>remove_shopping_cart</mat-icon>
+            <span>
+              <h2>{{count.canceled}}</h2>
+              <p>Canceled Orders</p>
+            </span>
+          </mat-card>
+        </mat-grid-tile> -->
+
+
         <mat-grid-tile>
           <mat-card class="example-card">
             <mat-icon>near_me</mat-icon>
               <span>
                 <h2>{{count.sent_email}}</h2>
-                <p>Email Sent</p>
+                <p>Campaign Email Sent</p>
               </span>
           </mat-card>
         </mat-grid-tile>
@@ -35,12 +47,34 @@
             <mat-icon>email</mat-icon>
               <span>
                 <h2>{{count.scheduled_email}}</h2>
-                <p>Email Scheduled</p>
+                <p>Campaign Email Scheduled</p>
               </span>
           </mat-card>
         </mat-grid-tile>
+
+        <!-- <mat-grid-tile>
+          <mat-card class="example-card">
+            <mat-icon>contact_mail</mat-icon>
+              <span>
+                <h2>{{count.promo_send}}</h2>
+                <p>Promotion Sent</p>
+              </span>
+          </mat-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+          <mat-card class="example-card">
+            <mat-icon>contact_mail</mat-icon>
+              <span>
+                <h2>{{count.promo_pending}}</h2>
+                <p>Promotion Scheduled</p>
+              </span>
+          </mat-card>
+        </mat-grid-tile> -->
       </mat-grid-list>
     </div>
+
+
 
     <div class="line-chart row">
       <mat-grid-list cols="2" rowHeight="370px">
@@ -48,7 +82,7 @@
           <mat-card>
             <mat-card-title>
               Order Statistics
-              <mat-select placeholder="select filter" (change)="order_stat_filter($event)">
+              <mat-select placeholder="30 Days" (change)="order_stat_filter($event)">
                 <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
               </mat-select>
             </mat-card-title>
@@ -62,7 +96,7 @@
           <mat-card>
             <mat-card-title>
               Email Statistics
-              <mat-select placeholder="select filter" (change)="feedback_stat_filter($event)">
+              <mat-select placeholder="30 Days" (change)="feedback_stat_filter($event)">
                 <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
               </mat-select>
             </mat-card-title>
