@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.FixedHeightContainer
+{
+  float:right;
+  height:400px;
+  width:100%; 
+  padding:3px; 
+}
+.Content
+{
+  height:224px;
+   overflow:auto;
+    background:#fff;
+}
+
+</style>
+</head>
+<body class="FixedHeightContainer">
+<h2>Top Products</h2>
+
+<table class="Content">
+  <tr>
+  	<th>Id</th>
+    <th>Title</th>
+    <th>Quantity</th>
+  </tr>
+  <tr *ngFor="let product of top_products; let i = index ">
+  	<td>{{ i + 1 }}</td>
+    <td>{{ product.title }}</td>
+    <td>{{ product.order_quantity }}</td>
+  </tr>
+</table>
+
+</body>
+</html>

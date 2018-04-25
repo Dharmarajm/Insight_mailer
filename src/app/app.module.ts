@@ -28,7 +28,7 @@ import { CampaignEditComponent, EditTemplateEdit } from './campaign-edit/campaig
 import { TriggerComponent } from './campaign/trigger.component';
 import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview, SafeHtmlPipe } from './promotion/promotion.component';
 import { PromotionEditComponent, EditSelectPromotion, EditPromotion, EditTemplatePreview } from './promotion-edit/promotion-edit.component';
-import { DashboardComponent, Feedback, NegativeReviewMail } from './dashboard/dashboard.component';
+import { DashboardComponent, Feedback, NegativeReviewMail, AllTopProducts, DailyOrders } from './dashboard/dashboard.component';
 import { SharedComponent } from './shared/shared.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EmailStatusComponent, Preview } from './email-status/email-status.component';
@@ -74,6 +74,8 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
     DashboardComponent,
     Feedback,
     NegativeReviewMail,
+    AllTopProducts,
+    DailyOrders,
     SharedComponent,
     UserProfileComponent,
     TemplatePreview,
@@ -114,6 +116,8 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
   entryComponents: [
                 Feedback,
                 NegativeReviewMail,
+                AllTopProducts,
+                DailyOrders,
                 Preview,
                 CampaignName,
                 CampaignTemplate,

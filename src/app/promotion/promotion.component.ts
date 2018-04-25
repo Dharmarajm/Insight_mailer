@@ -7,6 +7,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material';
 import { Observable } from 'rxjs/Rx';
+import { map } from 'rxjs/operators';
 import swal from 'sweetalert2'
 
 @Component({
@@ -46,32 +47,6 @@ dataSource = new MatTableDataSource;
 
 promotion_edit(id){
 this.router.navigate(['promotion',id]);
- // this.PromotionService.edit_promotion(id).subscribe( res => {
-  //  console.log(res);
-  //  this.edit_data = res;
-   // localStorage.setItem('edit_data', this.edit_data);
-//let dialogRef1 = this.dialog.open(SelectPromotion, {
-  //                  width: '1000px',
-    //                disableClose: true
-  //                });
-//
-    //              dialogRef1.afterClosed().subscribe(result1 => {
-                    
-                   // if(result1){
-//let dialogRef2 = this.dialog.open(CreatePromotion, {
-  //                  width: '1000px',
-    //                disableClose: true,
-      //              data: { id:  this.edit_data.inventory.id }
-        //          });
-
-          //        dialogRef2.afterClosed().subscribe(result2 => {
-            //           //this.promotions.unshift(result2);
-              //    });
-//}
-                //  });
-
-
-    // });
 }
 
 promotion_delete(promotion_data,index){
@@ -109,7 +84,31 @@ swal({
 enable(event,id,inventory_id,date,from_date,to_date){
   //console.log(from_date.toDateString(),to_date.toISOString());
       //console.log(this.start_date[date].toDateString(),this.end_date[date].toDateString());   
-    //  console.log(this.start_date[date],this.end_date[date]);   
+    //  console.log(this.start_date[date],this.end_date[date]);
+/*    if(!event.checked){
+      swal({
+  title: 'Are you sure?',
+  text: 'You will not be able to recover this file!',
+  type: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, keep it'
+}).then((result) => {
+  if (result.value) {
+    swal(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+  } else if (result.dismiss === swal.DismissReason.cancel) {
+    swal(
+      'Cancelled',
+      'Your file is safe :)',
+      'error'
+    )
+  }
+})  
+    } */  
   this.data = { id: id,inventory_id: inventory_id,enable: event.checked,from_date: from_date,to_date: to_date }
   this.PromotionService.promotion_enable(this.data).subscribe( res => {
       this.data_enable = res;
@@ -244,8 +243,9 @@ ok(): void {
 export class CreatePromotion {
 
 // data_types
-product_asin: any;
-product_title: any;
+image: any;
+asin: any;
+title: any;
 product_price: any;
 discount_price: any;
 product_description: any;
@@ -259,6 +259,7 @@ mail_frequency: any;
 name: string;
 edit_data1: any;
 edit_data: any;
+inv_data: any;
 
   data1:any;
   public PromotionForm: FormGroup;
@@ -273,6 +274,7 @@ edit_data: any;
   }
 
   promotion(myPromotionForm){
+  console.log(myPromotionForm);
    this.PromotionService.create_promotion(myPromotionForm,this.data.id).subscribe( res => {
       this.dialogRef2.close(res);
     });
@@ -288,9 +290,6 @@ edit_data: any;
 
   ngOnInit() {
   this.edit_data1 = localStorage.getItem('edit_data');
-      this.PromotionService.getdata(this.data.id).subscribe( res => {
-      this.data1 = res;
-    });
 
      this.myGroup = new FormGroup({ firstName: new FormControl() });
      this.PromotionForm = new FormGroup({
@@ -306,8 +305,14 @@ edit_data: any;
             mail_frequency: new FormControl('',Validators.required)
          });
 
-         //product_category: new FormControl(''),
-         //product_description: new FormControl(''),
+      
+            this.PromotionService.getdata(this.data.id).subscribe( res => {
+              this.data1 = res;
+              this.product_price = (this.data1.price_cents)/100;
+              this.asin = this.data1.asin;
+              this.title = this.data1.find_by_asin[0].title;
+              this.image = this.data1.find_by_asin[0].small_image;
+    })
   }
 
 ok(name): void {

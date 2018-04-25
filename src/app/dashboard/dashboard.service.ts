@@ -14,9 +14,16 @@ export class DashboardService {
         return this.http.get('http://192.168.1.79:3021/dashboard/top_product');
     }
 
+    all_top_products() {
+        return this.http.get('http://192.168.1.79:3021/dashboard/all_top_product');
+    }
+
     order_stat(value) {
-        console.log(value);
         return this.http.post('http://192.168.1.79:3021/dashboard/order_stats',{ value: value });
+    }
+
+    daily_order(value) {
+        return this.http.post('http://192.168.1.79:3021/dashboard/day_order',{ date: value });
     }
 
      feedback_stat(value) {

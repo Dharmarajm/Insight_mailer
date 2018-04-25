@@ -4,26 +4,26 @@
   </header>
   <mat-grid-list cols="2" rowHeight="400px">
     <mat-grid-tile>
-      <img [src]="data1?.find_by_asin[0].small_image" alt="Smiley face" height="100%" width="auto">
+      <img [src]="image" alt="Smiley face" height="100%" width="auto">
     </mat-grid-tile>
     <mat-grid-tile>
       <form [formGroup]="PromotionForm" class="example_form" novalidate (ngsubmit)="promotion(PromotionForm.value)">
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Product ASIN" formControlName="product_asin" class="form-control" id="product_asin" name="product_asin" [readonly]="true" [value]="data1?.asin" [(ngModel)]="product_asin">
+          <input matInput type=text placeholder="Product ASIN" formControlName="product_asin" class="form-control" id="product_asin" name="product_asin" [readonly]="true" [value]="asin" [(ngModel)]="product_asin">
           <!--mat-error *ngIf="product_asin.hasError('required')">
          Product ASIN is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Product Title" formControlName="product_title" class="form-control" id="product_title" name="Product Title" [value]="data1?.find_by_asin[0].title" [(ngModel)]="product_title">
+          <input matInput type=text placeholder="Product Title" formControlName="product_title" class="form-control" id="product_title" name="Product Title" [readonly]="true" [value]="title" [(ngModel)]="product_title">
           <!--mat-error *ngIf="product_titleFormControl.hasError('required')">
          Product Title is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Product Price" formControlName="product_price" class="form-control" id="product_price" name="Product Price" [value]="data1?.price_cents / 100" [(ngModel)]="product_price">
+          <input matInput type=text placeholder="Product Price" formControlName="product_price" class="form-control" id="product_price" name="Product Price" [value]="product_price" [(ngModel)]="product_price">
           <!--mat-error *ngIf="product_priceFormControl.hasError('required')">
          Product Price is <strong>required</strong>
          </mat-error-->

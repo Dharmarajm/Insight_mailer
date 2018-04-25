@@ -20,6 +20,7 @@ review: any;
 happy_customer: any;
 unhappy_customer: any;
 feedback_statistics: any;
+all_top_products: any;
 
 
 displayedColumns1 = ['id', 'product_list', 'count'];
@@ -41,6 +42,7 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
  this.DashboardService.top_products().subscribe( res => {
    this.top_products = res;
    this.dataSource1 = new MatTableDataSource(this.top_products);
+   console.log(this.dataSource1);
    });
 
   this.DashboardService.lastest_order().subscribe( res => {
@@ -85,6 +87,20 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
    });
 
   }
+
+  latest_order_full(){
+            let dialogRef_all_products = this.dialog.open(AllTopProducts, {
+                    width: '1000px',
+                    //disableClose: true
+                  });
+
+                  dialogRef_all_products.afterClosed().subscribe(result => {
+                    
+                  });
+
+  }
+
+  
 
   feedback_stat_filter(event){
   this.chartLabels2 = [];
@@ -144,6 +160,18 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
   public doughnutChartColors: any[] = [{ backgroundColor: ["#7cc387","#c8e6ce"] }];
 
   onChartClick(event) {
+    if(event.active[0]){
+   // console.log(event.active[0]._model.label);
+  //      let dialogRef_all_products = this.dialog.open(DailyOrders, {
+    //                width: '1000px',
+                    //disableClose: true
+      //              data: {date: event.active[0]._model.label}
+        //          });
+
+          //        dialogRef_all_products.afterClosed().subscribe(result => {
+                    
+            //      });
+    }
   }
 
   public chartLabel1 = ['happy customers','unhappy customers'];
@@ -318,5 +346,57 @@ swal({
   onChange($event) {}
   onFocus($event) {}
   onBlur($event) {}
+
+}
+
+
+@Component({
+  selector: 'all_top_products',
+  templateUrl: 'all_top_products.html',
+})
+export class AllTopProducts implements OnInit {
+
+top_products: any;
+
+  constructor(
+    public dialogRef: MatDialogRef<AllTopProducts>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private DashboardService:DashboardService) { }
+
+    ngOnInit() {
+    this.DashboardService.all_top_products().subscribe( res => {
+     this.top_products = res;
+    });
+    }
+
+
+    close(){
+     this.dialogRef.close();
+    }
+
+}
+
+
+@Component({
+  selector: 'daily_orders',
+  templateUrl: 'daily_orders.html',
+})
+export class DailyOrders implements OnInit {
+
+daily_orders: any;
+
+  constructor(
+    public dialogRef: MatDialogRef<DailyOrders>,
+    @Inject(MAT_DIALOG_DATA) public data: any, private DashboardService:DashboardService) { }
+
+    ngOnInit() {
+    this.DashboardService.daily_order(this.data.date).subscribe( res => {
+     this.daily_orders = res;
+    });
+    }
+
+
+    close(){
+     this.dialogRef.close();
+    }
 
 }

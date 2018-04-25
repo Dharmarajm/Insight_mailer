@@ -44,16 +44,7 @@ promotion_edit(id){
   this.PromotionService.edit_promotion(id).subscribe( res => {
     this.edit_data = res;
     localStorage.setItem('edit_data', this.edit_data);
-//let dialogRef1 = this.dialog.open(EditSelectPromotion, {
-  //                  width: '1000px',
-    //                disableClose: true,
-      //              data: { data: this.edit_data }
-        //          });
-
-             //     dialogRef1.afterClosed().subscribe(result1 => {
-                    
-                   // if(result1){
-let dialogRef2 = this.dialog.open(EditPromotion, {
+    let dialogRef2 = this.dialog.open(EditPromotion, {
                     width: '1000px',
                     disableClose: true,
                     data: { data:  this.edit_data }
@@ -63,10 +54,6 @@ let dialogRef2 = this.dialog.open(EditPromotion, {
                        //this.promotions.unshift(result2);
                        this.router.navigate(['promotion']);
                   });
-//}
-    //              });
-
-
     });
 }
 

@@ -140,7 +140,7 @@
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
-          <mat-card>
+          <mat-card><!--(click)="latest_order_full()"-->
             <mat-card-title>
               Top Product
             </mat-card-title>
@@ -157,12 +157,12 @@
                 </ng-container>
                 <ng-container matColumnDef="product_list">
                   <mat-header-cell *matHeaderCellDef> Product Title </mat-header-cell>
-                  <mat-cell *matCellDef="let element"><span matTooltip="{{element[0]}}"> {{element[0] | slice:0:20 }} ... </span>
+                  <mat-cell *matCellDef="let element"><span matTooltip="{{element.title}}"> {{ element.title | slice:0:20 }} ... </span>
                   </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="count">
                   <mat-header-cell *matHeaderCellDef> Count </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> <span>{{element[1] }}</span> </mat-cell>
+                  <mat-cell *matCellDef="let element"> <span>{{ element.order_quantity }}</span> </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
@@ -171,7 +171,7 @@
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
-          <mat-card>
+          <mat-card routerLink="/order">
             <mat-card-title>
               Latest Orders
             </mat-card-title>
