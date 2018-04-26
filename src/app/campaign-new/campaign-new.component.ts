@@ -101,7 +101,11 @@ this.dataSource = new MatTableDataSource(this.inventories);
   campaign_name_uniq(name){
       this.CampaignService.name_uniq(name).subscribe( res => {
       if(res){
-        alert("Campaign name aleredy in use");
+        swal(
+            'Alert!',
+            'Campaign name aleredy in use!',
+            'warning'
+             )
         this.name = '';
         }
      });

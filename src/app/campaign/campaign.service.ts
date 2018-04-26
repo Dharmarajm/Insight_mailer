@@ -58,7 +58,7 @@ export class CampaignService {
     }
 
     name_uniq(name){
-      return this.http.post('http://192.168.1.79:3021/campaigns/uniq_campaign',{name: name});
+      return this.http.post('http://192.168.1.79:3021/campaigns/uniq_campaign',{campaign_name: name});
     }
 
     getemails(id) {

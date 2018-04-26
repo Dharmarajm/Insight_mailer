@@ -23,9 +23,10 @@
                 <td>{{inventory?.title}}</td>
                 <td>{{inventory?.asin}}</td>
                 <td><mat-slide-toggle [color]="primary" [disabled]="(inventory.id != id && id != 0)" 
-                 *ngIf="!inventory?.promotion_in_use" (change)=asin($event,inventory.id)></mat-slide-toggle>
+                 *ngIf="!inventory.promotion_in_use" (change)=asin($event,inventory.id)></mat-slide-toggle>
                 <!--[checked]="inventory.children_in_use" [checked]="edit_data?.inventory.asin" *ngIf="!inventory?.promotion_in_use"  -->
-                <mat-icon *ngIf="inventory?.promotion_in_use" matTooltip="Promotion already in use">error_outline</mat-icon></td>
+                <mat-icon *ngIf="inventory.promotion_in_use" matTooltip="Promotion already in use">error_outline</mat-icon>
+              </td>
               </tr>
             </tbody>
           </table>

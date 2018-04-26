@@ -1,43 +1,73 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
+<style type="text/css">
+  .fedd th{
+    text-align: center;
+    background-color: #c8e6ce;
+  }
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
+  
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
+   .mat-button, .mat-raised-button{
+    background-color: #7dc586;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}  
+
+.fedd td:hover {
+    background-color: #1fbba7;
+} 
+  .fedd tr:nth-child(odd){ 
+    background: #dae5f4;
+  }
+  /*  Define the background color for all the EVEN background rows  */
+  .fedd tr:nth-child(even){
+    background: #c8e6ce;
+  }
+
 </style>
-</head>
-<body>
-<h2>Feedbacks</h2>
 
-<table>
-  <tr>
-  	<th>Id</th>
-    <th>Comments</th>
-    <th>Order Id</th>
-    <th>Rating</th>
-    <th>Email</th>
-  </tr>
-  <tr *ngFor="let feedback of feedbacks; let i = index ">
-  	<td>{{ i + 1 }}</td>
-    <td>{{ feedback.comments }}</td>
-    <td>{{ feedback.order_id }}</td>
-    <td>{{ feedback.rating  }}</td>
-    <td><button mat-icon-button (click)="replay(feedback)"><mat-icon>send</mat-icon></button></td>
-  </tr>
-</table>
+<div class="popup-select">
+  <header>
+    <h1>Negative Feedback Alert!</h1>
+  </header>
+    <span>
+        
+      </span>
+  <mat-grid-list cols="1" rowHeight="340px">
+    <mat-grid-tile>
+        <div class="table-scroll">
+          <table class="table fedd" width="100%" style="line-height: 30px; background-color: #c8e6ce;">
+            <thead>
+              <tr>
+               <th>Id</th>
+               <th>Comments</th>
+               <th>Order Id</th>
+               <th>Rating</th>
+               <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let feedback of feedbacks; let i = index ">
+              <td>{{ i + 1 }}</td>
+              <td>{{ feedback.comments }}</td>
+              <td>{{ feedback.order_id }}</td>
+              <td style = "text-align: center;">{{ feedback.rating  }}</td>
+             <td><button mat-icon-button (click)="replay(feedback)"><mat-icon>send</mat-icon></button></td>
+          </tr>
+            </tbody>
+          </table>
+        </div>
+          <!--div *ngFor="let inventory of inventories; let i = index" class="example-card"-->
 
-</body>
-</html>
+          <!--/div-->
+          <!--  <button mat-button (click)="onNoClick()" color="warn" > Cancel </button>
+        <button  mat-button (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>
+       -->
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+      <button mat-raised-button color="danger" (click)="close()"> Close </button>
+   
+</div>

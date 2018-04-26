@@ -199,7 +199,8 @@ ngOnInit() {
   title: item.find_by_asin[0].title,
   price_paisas: item.price_paisas,
   quantity: item.quantity,
-  enable: item.enable
+  enable: item.enable,
+  promotion_in_use: item.promotion_in_use
 }));
 this.dataSource = new MatTableDataSource(this.inventories);
     });
@@ -246,6 +247,8 @@ export class CreatePromotion {
 image: any;
 asin: any;
 title: any;
+product_asin: any;
+product_title: any;
 product_price: any;
 discount_price: any;
 product_description: any;
@@ -323,7 +326,11 @@ ok(name): void {
 
   discount(){
      if(this.discount_price >= (this.data1.price_cents/100)){
-          alert("promotion price should be less than actual price");
+          swal(
+            'Alert!',
+            'promotion price should be less than actual price!',
+            'warning'
+             )
           this.discount_price= '';
      }
   }

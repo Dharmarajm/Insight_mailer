@@ -90,7 +90,7 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
   latest_order_full(){
             let dialogRef_all_products = this.dialog.open(AllTopProducts, {
-                    width: '1000px',
+                    width: '1500px',
                     //disableClose: true
                   });
 
@@ -161,16 +161,15 @@ values: any = ['7 Days','15 Days','30 Days','45 Days']
 
   onChartClick(event) {
     if(event.active[0]){
-   // console.log(event.active[0]._model.label);
-  //      let dialogRef_all_products = this.dialog.open(DailyOrders, {
-    //                width: '1000px',
+        let dialogRef_all_products = this.dialog.open(DailyOrders, {
+                    width: '1500px',
                     //disableClose: true
-      //              data: {date: event.active[0]._model.label}
-        //          });
+                    data: {date: event.active[0]._model.label}
+                  });
 
-          //        dialogRef_all_products.afterClosed().subscribe(result => {
+                  dialogRef_all_products.afterClosed().subscribe(result => {
                     
-            //      });
+                  });
     }
   }
 
@@ -267,6 +266,8 @@ feedbacks: any;
     close(){
      this.dialogRef.close();
     }
+
+    
 
 }
 
@@ -383,12 +384,14 @@ top_products: any;
 export class DailyOrders implements OnInit {
 
 daily_orders: any;
+date: any;
 
   constructor(
     public dialogRef: MatDialogRef<DailyOrders>,
     @Inject(MAT_DIALOG_DATA) public data: any, private DashboardService:DashboardService) { }
 
     ngOnInit() {
+    this.date = this.data.date;
     this.DashboardService.daily_order(this.data.date).subscribe( res => {
      this.daily_orders = res;
     });

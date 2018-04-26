@@ -188,7 +188,6 @@ if (event.checked){
 }
 
   cancel(): void {
-    alert("sure");
     this.dialogRef1.close();
   }
 
@@ -281,8 +280,12 @@ ok(name): void {
 
   discount(){
      if(this.discount_price >= ((this.data1.price_paisas.fractional) / 100 )) {
-          alert("promotion price should be less than actual price");
-          this.discount_price= (this.data1.price_paisas.fractional / 100) - 1;
+          swal(
+            'Alert!',
+            'promotion price should be less than actual price!',
+            'warning'
+             )
+          this.discount_price= '';
      }
   }
 }

@@ -1,60 +1,71 @@
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
+<style type="text/css">
+  .all_top th{
+    text-align: center;
+    background-color: #c8e6ce;
 
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
+  }
+  .mat-button, .mat-raised-button{
+    background-color: #7dc586;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    border-radius: 20px;
+} 
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
 
-.FixedHeightContainer
-{
-  float:right;
-  height:400px;
-  width:100%; 
-  padding:3px; 
-}
-.Content
-{
-  height:224px;
-   overflow:auto;
-    background:#fff;
-}
-
+.all_top tr:nth-child(odd){ 
+    background: #dae5f4;
+  }
+  /*  Define the background color for all the EVEN background rows  */
+  .all_top tr:nth-child(even){
+    background: #c8e6ce;
+  }
+  
 </style>
-</head>
-<body class="FixedHeightContainer">
-<h2>Top Products</h2>
+<div class="popup-select">
+  <header>
+    <h1>Daily Orders: {{date}}</h1>
+  </header>
+    <span>
+       
+      </span>
+  <mat-grid-list cols="1" rowHeight="340px">
+    <mat-grid-tile>
+        <div class="table-scroll">
+          <table class="table daily all_top"  width="100%" style="line-height: 30px; background-color: #c8e6ce;">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Amazon OrderId</th>
+                <th>Asin</th>
+                <th>Title</th>
+                <th>Buyer Name</th>
+                <th>Order Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of daily_orders; let i = index ">
+                <td>{{ i + 1 }}</td>
+                <td>{{ product?.amazon_order_id }}</td>
+                <td>{{ product?.find_order[0].asin }}</td>
+                <td>{{ product?.find_order[0].title }}</td>
+                <td>{{ product?.buyer_name }}</td>
+                <td>{{ product?.tfm_shipment_status ? product?.tfm_shipment_status : product?.status }}</td>
+                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <!--div *ngFor="let inventory of inventories; let i = index" class="example-card"-->
 
-<table class="Content">
-  <tr>
-  	<th>Id</th>
-    <th>Amazon OrderId</th>
-    <th>Asin</th>
-    <th>Title</th>
-    <th>Buyer Name</th>
-    <th>Order Status</th>
-  </tr>
-  <tr *ngFor="let product of daily_orders; let i = index ">
-  	<td>{{ i + 1 }}</td>
-    <td>{{ product?.amazon_order_id }}</td>
-    <td>{{ product?.find_order[0].asin }}</td>
-    <td>{{ product?.find_order[0].title }}</td>
-    <td>{{ product?.buyer_name }}</td>
-    <td>{{ product?.tfm_shipment_status ? product?.tfm_shipment_status : product?.status }}</td>
-  </tr>
-</table>
-
-</body>
-</html>
+          <!--/div-->
+          <!--  <button mat-button (click)="onNoClick()" color="warn" > Cancel </button>
+        <button  mat-button (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>
+       -->
+    </mat-grid-tile>
+  </mat-grid-list>
+  
+     <button mat-raised-button color="danger" (click)="close()"> Close </button> 
+    
+</div>
