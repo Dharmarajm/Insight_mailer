@@ -4,15 +4,14 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 import { AppService } from './../app.service';
-import { WindowService } from '../window.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import swal from 'sweetalert2'
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  providers: [WindowService]
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
 
@@ -21,10 +20,9 @@ email:any;
 password:any;
 data:any;
 status:any;
-utterance:any;
-voices:any;
 response:any;
 hide: boolean = true;
+userdata:any={};
 
  emailFormControl = new FormControl('', [
     Validators.required,
@@ -36,10 +34,17 @@ hide: boolean = true;
   ]);
 
 
-  constructor( private LoginService:LoginService, private router:Router, private _window:WindowService,
-  public nav:AppService,public dialog: MatDialog ) { }
+  constructor( private LoginService:LoginService, private router:Router,
+  public nav:AppService,public dialog: MatDialog, public appComp:AppComponent ) { }
 
   ngOnInit() {  
+    this.nav.hide();
+     
+  }
+  emailChange(){
+  
+   this.email= this.email.toLowerCase().trim();
+   this.email=this.email.replace(" ","");
   }
 
  login(){
@@ -47,9 +52,6 @@ hide: boolean = true;
   this.LoginService.userlogin(this.data).subscribe( res => {
   this.status = res;
   this.response = res;
-   // this.utterance = new SpeechSynthesisUtterance('Hey You Have Succesfulli Logged In');
-    //this.voices = window.speechSynthesis.getVoices();
-    //  (<any>window).speechSynthesis.speak(this.utterance);
       //localStorage.setItem('prathip', this.response.id);
       localStorage.setItem('prathip', this.response.jwt );
        this.nav.show();
@@ -60,6 +62,14 @@ hide: boolean = true;
        this.router.navigate(['profile']);
        }
        })
+
+       this.nav.user_data().subscribe(res => {
+    this.userdata = res;
+    if(this.userdata.lastname == null){
+      this.userdata.lastname ="";
+    }
+  this.appComp.name=this.userdata.firstname + ' ' + this.userdata.lastname;
+  })
    },
    error => {
    this.password = '';
@@ -71,7 +81,8 @@ hide: boolean = true;
  forget(){
 
      let dialogRef = this.dialog.open(PasswordChange, {
-                    width: '500px'
+                    width: '500px',
+                    position: {top: '10%',left:'28%'}
                   });
 
                   dialogRef.afterClosed().subscribe(result => {
@@ -86,16 +97,44 @@ hide: boolean = true;
   templateUrl: 'password_change.html',
 })
 export class PasswordChange implements OnInit {
-
+email:any;
 feedbacks: any;
+emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
   constructor(
     public dialogRef: MatDialogRef<PasswordChange>,
     @Inject(MAT_DIALOG_DATA) public data: any, private LoginService:LoginService) { }
 
     ngOnInit() {
-     this.LoginService.forget_password("email").subscribe( res => {
-      });
+     
     }
 
+    emailChange(){
+  
+  // this.email= this.email.toLowerCase().trim();
+   this.email=this.email.trim().replace(" ","");
+  }
+  ForgetSubmit(){
+
+    if(this.email == null){
+      return;
+    }
+   
+ this.LoginService.forget_password(this.email).subscribe( res => {
+   if(res == null){
+    swal("Oops!", "Invalid Email", "error") 
+    }else{
+      swal("Password!", "New password send your registered Email", "success");
+   }
+    this.dialogRef.close();
+      });
+
+  }
+
+
 }
+
+

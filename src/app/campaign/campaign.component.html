@@ -1,19 +1,43 @@
 <div class="mat-page-content">
-  <div class="container">
-    <div class="filters">
-      <h1 class="page-title">Email Campaigns</h1>
-      <button mat-mini-fab color="primary" class="float-right" (click)="new_campaign()">
-        <mat-icon>add</mat-icon>
+  <div class="filters">
+   <div class="container">    
+      <h1 class="page-title">Email Campaigns
+      <button mat-button mat-raised-button (click)="new_campaign()" class="blue float-right">
+        Add New Email Campaign
       </button>
+      </h1>
     </div>
-
+  </div>
+<div class="container">
   <div class="row">
-    <mat-grid-list cols="2" rowHeight="380px">
-      <mat-grid-tile *ngFor=" let campaing of campaings| paginate: {itemsPerPage: 6, currentPage:page1, id:'1'} let i = 'index'">
+      <div class="col-md-12 col-sm-12" *ngFor=" let campaing of campaings| paginate: {itemsPerPage: 6, currentPage:page1, id:'1'} let i = 'index'">
         <mat-card>
           <mat-card-header>
             <mat-card-title>{{ campaing.campagin_name }}</mat-card-title>
-            <div class="nav_ic">
+
+            <mat-card-subtitle><p>ASIN: <span>  {{ campaing.asin | slice:0:3 }}... </span></p></mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-list role="list">
+              <table class="table" width="100%">
+                <thead>
+                  <tr>
+                    <th>Subjects</th>
+                    <th>Trigger</th>
+                    <th>Days</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let trigger of campaing.triggers">
+                    <td>{{trigger.subject}}</td>
+                    <td>{{trigger.triggers}}</td>
+                    <td>{{trigger.days}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </mat-list>
+          </mat-card-content>
+            <mat-card-actions>
               <button mat-icon-button (click)="campaign_email_stat(campaing.id)" matTooltip="Statistics">
                 <mat-icon>assessment</mat-icon>
               </button>
@@ -31,33 +55,12 @@
               <button mat-icon-button (click)="campaign_delete(campaing,$index)" matTooltip="Delete Campaign">
                 <mat-icon>delete</mat-icon>
               </button>
+              <div class="nav_ic float-right">
               <mat-slide-toggle [color]="primary" [checked]="campaing.enable" (change)="enable(campaing.id,$event)"></mat-slide-toggle>
             </div>
-            <mat-card-subtitle><p>ASIN: <span>  {{ campaing.asin | slice:0:3 }}... </span></p></mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <mat-list role="list">
-              <table class="table" width="100%">
-                <thead>
-                  <tr>
-                    <th>Subjects</th>
-                    <th>Trigger</th>
-                    <th>Days</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let trigger of campaing.triggers">
-                    <td>{{trigger.subject}}</td>
-                    <td>{{trigger.trigger}}</td>
-                    <td>{{trigger.days}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </mat-list>
-          </mat-card-content>
+            
+         </mat-card-actions>
         </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
   </div>
   <div class="row">
     <mat-grid-list cols="1" rowHeight="60px">

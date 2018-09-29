@@ -1,12 +1,35 @@
-<div class="promotion-popup">
+<style type="text/css">
+  .pad-15{
+    padding: 15px;
+  }
+  .promotion-popup img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  form{
+    padding: 60px 0 0 0;
+  }
+  @media screen and (max-width: 699px) and (min-width: 319px){
+    .promotion-popup img{
+      width: 120px;
+      height: auto;
+    }
+    form{
+      padding: 20px 0 0 0;
+    }
+  }
+</style>
+<div class="promotion-popup popup-select">
   <header>
     <h1>Promotion Center</h1>
   </header>
-  <mat-grid-list cols="2" rowHeight="400px">
-    <mat-grid-tile>
+  <div class="container">
+    <div class="row">
+    <div class="col-md-6 col-sm-12 text-center d-flex align-items-center">
       <img [src]="data1?.find_by_asin[0].small_image" alt="Smiley face" height="100%" width="auto">
-    </mat-grid-tile>
-    <mat-grid-tile>
+    </div>
+    <div class="col-md-6 col-sm-12">
       <form [formGroup]="PromotionForm" class="example_form" novalidate 
       (ngsubmit)="promotion(PromotionForm.value,edit_data.id)">
         <mat-form-field class="half-width">
@@ -17,11 +40,19 @@
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Product Title" formControlName="product_title" class="form-control" id="product_title" name="Product Title" [value]="data1?.find_by_asin[0].title" [(ngModel)]="product_title">
+          <input matInput type=text placeholder="Product Title" formControlName="product_title" class="form-control" id="product_title" matTooltip="{{data1?.find_by_asin[0].title}}" name="Product Title" [value]="data1?.find_by_asin[0].title" [(ngModel)]="product_title">
           <!--mat-error *ngIf="product_titleFormControl.hasError('required')">
          Product Title is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
+
+        <mat-form-field class="half-width">
+          <input matInput type=text placeholder="Product sku" formControlName="product_sku" class="form-control" id="product_sku" name="Product Sku" [readonly]="true" [value]="data1?.sku" [(ngModel)]="product_sku">
+          <!--mat-error *ngIf="product_titleFormControl.hasError('required')">
+         Product Title is <strong>required</strong>
+         </mat-error-->
+        </mat-form-field>
+
         <mat-form-field class="half-width">
           <input matInput type=text placeholder="Product Price" formControlName="product_price" class="form-control" id="product_price" name="Product Price" [value]="edit_data.product_price" [(ngModel)]="product_price">
           <!--mat-error *ngIf="product_priceFormControl.hasError('required')">
@@ -75,15 +106,17 @@
          Support Email is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
-        <div class="float-right">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 pad-15 text-center">
           <button type=submit mat-raised-button color="primary" [disabled]="!PromotionForm.valid" (click)="promotion(PromotionForm.value,edit_data.id)"> Promote </button>
           <button mat-raised-button color="danger" (click)="cancel()"> Cancel </button>
         </div>
+       </div>
       </form>
-    </mat-grid-tile>
-
+    </div>
+   </div>
    <!-- <p>Form value: {{ PromotionForm.value | json }}</p>
   <p>Form status: {{ PromotionForm.status | json }}</p>-->
 
-  </mat-grid-list>
+  </div>
 </div>

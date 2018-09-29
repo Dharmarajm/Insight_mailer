@@ -1,4 +1,56 @@
+<style>
+  .mat-header-row {
+    top: 0;
+    position: sticky;
+    z-index: 1;
+    background-color: inherit;
+}
+</style>
+<div class="mat-page-content email-status">
+  <div class="filters">
+    <div class="container">
+      <h1 class="page-title">Statistics 
+        <button mat-button mat-raised-button class="blue float-right" routerLink="/campaign"><i class="ti-arrow-left"></i>Back to Campaign</button>
+        <span class="float-right d-flex align-items-center">
+          <input matInput placeholder="Search keyword..">
+        </span>
+
+      </h1>
+    </div>
+  </div>
+  <div class="container">
 <mat-tab-group>
+   <mat-tab label="Summary">
+   <mat-grid-list cols="3">
+        <mat-grid-tile>
+         <mat-card class="example-card">
+            <mat-icon>grade</mat-icon>
+            <span>
+              <h2>{{status.asin}}</h2>
+              <p>Asin Included</p>
+            </span>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+         <mat-card class="example-card">
+            <mat-icon>grade</mat-icon>
+            <span>
+              <h2>{{status.sent}}</h2>
+              <p>Campaign Email Sent</p>
+            </span>
+          </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
+         <mat-card class="example-card">
+            <mat-icon>grade</mat-icon>
+            <span>
+              <h2>{{status.scheduled}}</h2>
+              <p>Campaign Email Scheduled</p>
+            </span>
+          </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+  </mat-tab>
   <mat-tab label="Sent Email">
 <div class="mat-page-content">
   <div class="container">
@@ -8,7 +60,9 @@
         <input matInput (keyup)="applyFilter1($event.target.value)" placeholder="Search keyword..">
       </span>
     </div>
-    <div class="card-border">
+  </div>
+    <div class="container" (scroll)="onScroll($event)" style="overflow: auto; max-height: 500px;">
+    <div class="card-border emailbg" >
       <mat-table #table [dataSource]="dataSource1" matSort>
 
         <!-- Position Column -->
@@ -35,9 +89,9 @@
         </ng-container>
 
         <!-- Symbol Column -->
-        <ng-container matColumnDef="template_data">
-          <mat-header-cell *matHeaderCellDef> Template </mat-header-cell>
-          <mat-cell *matCellDef="let element"> Work in Progress<!--mat-icon matTooltip="Preview" (click)="preview_template(element.template_data)">visibility</mat-icon--></mat-cell>
+        <ng-container matColumnDef="subject">
+          <mat-header-cell *matHeaderCellDef> subject </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.subject}}<!--mat-icon matTooltip="Preview" (click)="preview_template(element.template_data)">visibility</mat-icon--></mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -53,8 +107,8 @@
 
 
     </div>
-
-  </div>
+</div>
+  
 </div>
 </mat-tab>
 <mat-tab label="Pending Email">
@@ -66,7 +120,8 @@
         <input matInput (keyup)="applyFilter2($event.target.value)" placeholder="Search keyword..">
       </span>
     </div>
-    <div class="card-border">
+    </div>
+    <div class="card-border" (scroll)="onScrollPending($event)" style="overflow: auto; max-height: 500px;">
       <mat-table #table [dataSource]="dataSource2" matSort>
 
         <!-- Position Column -->
@@ -93,9 +148,9 @@
         </ng-container>
 
         <!-- Symbol Column -->
-        <ng-container matColumnDef="template_data">
-          <mat-header-cell *matHeaderCellDef> Template </mat-header-cell>
-          <mat-cell *matCellDef="let element"> Work in Progress<!--mat-icon matTooltip="Preview" (click)="preview_template(element.template_data)">visibility</mat-icon--> </mat-cell>
+        <ng-container matColumnDef="subject">
+          <mat-header-cell *matHeaderCellDef> subject </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.subject}}<!--mat-icon matTooltip="Preview" (click)="preview_template(element.template_data)">visibility</mat-icon--> </mat-cell>
         </ng-container>
         
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
@@ -112,7 +167,9 @@
 
     </div>
 
-  </div>
+  
 </div> 
 </mat-tab>
 </mat-tab-group>
+</div>
+</div>

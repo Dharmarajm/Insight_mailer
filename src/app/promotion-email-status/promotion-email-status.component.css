@@ -1,0 +1,15 @@
+mat-grid-list{
+  margin:10px 0px;
+}
+
+mat-card{
+    width: 100%;
+    margin: 10px;
+    padding: 15px;
+}
+
+mat-card-title{
+  font-size: 16px;
+  color: #433e3b;
+  margin-bottom: 15px;
+}

@@ -2,34 +2,56 @@
   <div class="container">
     <mat-toolbar>
      <a matTooltip="Home" routerLink="/dashboard" class="logo">
-         <img src="assets/logo_sml.png">
+         <img src="assets/logo_white_04.png">
      </a>
       <div class="menu">
       	<span>
-	        <button mat-button routerLink="/dashboard"> Overview </button>
-	        <button mat-button routerLink="/inventory"> My Products </button>
-	        <button mat-button routerLink="/order"> My Orders </button>
-	        <button mat-button routerLink="/campaign"> Email Campaigns </button>
-	        <button mat-button routerLink="/promotion"> Promotions </button>
+	        <button mat-button routerLink="/dashboard" routerLinkActive="active" > Overview </button>
+	        <button mat-button routerLink="/inventory" routerLinkActive="active"> My Products </button>
+	        <button mat-button routerLink="/order" routerLinkActive="active"> My Orders </button>
+	        <button mat-button routerLink="/campaign" routerLinkActive="active"> Email Campaigns </button>
+	        <button mat-button routerLink="/promotion" routerLinkActive="active"> Promotions </button>
       	</span>      
         <span>
-	        <button matTooltip="Notification" mat-icon-button>
-	          <mat-icon>notifications_none</mat-icon>
+	        <button   matTooltip="Notification" mat-icon-button [popover]="myPopover">
+	          <mat-icon matBadge="22" >notifications_none</mat-icon>
 	        </button>
-	        <button matTooltip="Profile" mat-icon-button routerLink="/profile">
+					<button matTooltip="{{name}}" mat-icon-button routerLink="/profile">
+						
+           
+
 	          <div mat-card-avatar class="avatar-image"></div>
 	        </button>
 	        <button matTooltip="logout" mat-icon-button (click)=logout()>
 	          <mat-icon>power_settings_new</mat-icon>
-	        </button>
-        </span>
-      </div>
+					</button>
+					
+				</span>
+				
+				<popover-content #myPopover 
+                placement="bottom"
+                [animation]="true" 
+                [closeOnClickOutside]="true" >
+    <!-- <b>Very</b> <span style="color: #C21F39">Dynamic</span> <span style="color: #00b3ee">Reusable</span>
+    <b><i><span style="color: #ffc520">Popover With</span></i></b> <small>Html support</small>. -->
+    
+			<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+		
+</popover-content>
+      <!-- </div>
       <div class="toggle-menu">
         <button matTooltip="Menu" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>menu</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-			<button mat-menu-item routerLink="/dashboard"> Overview </button>
+			<button mat-menu-item routerLink="/dashboard" > Overview </button>
 			<button mat-menu-item routerLink="/inventory"> My Products </button>
 			<button mat-menu-item routerLink="/order"> My Orders </button>
 			<button mat-menu-item routerLink="/campaign"> Email Campaigns </button>
@@ -43,8 +65,18 @@
 				<span>logout</span>
 			</button>
         </mat-menu>
-      </div>
+			</div> -->
+			</div>
     </mat-toolbar>    
   </div>
 </header>	
 <router-outlet></router-outlet>
+
+
+<!-- <div id="popover-content-logout" class="hide">
+	<form class="form-inline" role="form">
+		<div class="form-group"> 
+			<div *ngFor="let ia of data">{{ia}}</div>
+		</div>
+	</form>
+</div> -->

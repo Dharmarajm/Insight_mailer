@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 //import { Observable } from 'rxjs/Observable';
+import { Global } from '../global';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -9,18 +10,18 @@ const httpOptions = {
 @Injectable()
 export class RegisterService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,public global:Global) { }
 
     register(registerdata) {
-        return this.http.post('http://192.168.1.79:3021/users',registerdata);
+        return this.http.post(this.global.apiUrl+'users',registerdata);
     }
 
     email_uniq(email){
-        return this.http.post('http://192.168.1.79:3021/users/uniq_email',{email: email});
+        return this.http.post(this.global.apiUrl+'users/uniq_email',{email: email});
     }
 
     phone_uniq(phone){
-        return this.http.post('http://192.168.1.79:3021/users/uniq_phone',{phone: phone});
+        return this.http.post(this.global.apiUrl+'users/uniq_phone',{phone: phone});
     }
 
 }

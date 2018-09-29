@@ -1,0 +1,38 @@
+<mat-form-field style="width: 100%;">
+    <mat-label>Subject</mat-label>
+    <input matInput placeholder="Simple placeholder" [(ngModel)] = "subject">
+  </mat-form-field>
+
+  <!-- <mat-select placeholder="Suggestion Reply" [(ngModel)]="selectedValue" name="food" (change)="commentChange(selectedValue)">
+    <mat-option *ngFor="let food of suggestion.primary" [value]="food" matTooltip="{{food}}">
+      {{food}}
+    </mat-option>
+  </mat-select> -->
+
+<ckeditor
+    [(ngModel)]="ckeditorContent"
+    [config]="ckeConfig"
+    [readonly]="false"
+    (change)="onChange($event)"
+    (focus)="onFocus($event)"
+    (blur)="onBlur($event)"
+    debounce="500">
+    <ckgroup
+      [name]="'documenthandling'"
+      [previous]="'1'">
+      <ckbutton 
+       [name]="'imageExplorer'"
+       [command]="'insertcontent'"
+       (click)="insert($event)"
+       [icon]="'https://png.icons8.com/color/540/bow-tie-half-filled.png'"
+       [label]="'Insert_content'">
+     </ckbutton>
+   </ckgroup>
+ </ckeditor>
+
+ <div> 
+ <button mat-raised-button (click)="onNoClick()"> Cancel </button>
+  <button mat-raised-button color="primary" [disabled]="ckeditorContent == '' || subject ==null" (click)="send(ckeditorContent,subject)" cdkFocusInitial> Send </button>  
+
+ <!--  <button mat-raised-button color="primary" style="float: right;"> Save Comment </button>  --> 
+</div>

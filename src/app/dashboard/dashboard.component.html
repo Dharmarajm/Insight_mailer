@@ -1,26 +1,36 @@
 <div class="mat-page-content">
+  <div class="title_holder">
+   <div class="container">
+    <h1 class="page-title">Dashboard</h1> 
+  </div>
+</div>
   <div class="container">
-    <h1 class="page-title">Dashboard</h1>
-    <div class="overview row">
-      <mat-grid-list cols="4" rowHeight="110px" *ngFor="let count of counts">
-        <mat-grid-tile>
-         <mat-card class="example-card">
-            <mat-icon>grade</mat-icon>
+    <div class="overview row" *ngFor="let count of counts">
+
+      <h4 class="ex1" >Successful Days: <ng2-odometer [number]="count.days" [config]="{ animation: 'count', format: 'ddddd', theme: 'default' }"></ng2-odometer></h4>
+
+      <div class="col-md-3 col-sm-6">
+        <mat-card matTooltip="Products Listed" class="card_01">
             <span>
-              <h2>{{count.product_count}}</h2>
-              <p>Total Products</p>
+              <p>You have</p>
+              <!--<h2>{{count.product_count}}</h2>-->
+              <h2><ng2-odometer [number]="count.product_count" [config]="{ animation: 'count', format: 'ddddd', theme: 'default' }"></ng2-odometer></h2>
+              <p>Products Listed</p>
             </span>
+            <mat-icon>grade</mat-icon>    
           </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-card class="example-card">
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <mat-card matTooltip="Successful Orders" class="card_02">
+            <span>
+              <p>You have</p>
+              <!--<h2>{{count.order_count}}</h2>-->
+               <h2><ng2-odometer [number]="count.order_count" [config]="{ animation: 'count', format: 'ddddd', theme: 'default' }"></ng2-odometer></h2>
+              <p>Successful Orders</p>
+            </span>
             <mat-icon>shopping_cart</mat-icon>
-            <span>
-              <h2>{{count.order_count}}</h2>
-              <p>Total Orders</p>
-            </span>
           </mat-card>
-        </mat-grid-tile>
+        </div>
 
         <!-- <mat-grid-tile>
           <mat-card class="example-card">
@@ -33,24 +43,28 @@
         </mat-grid-tile> -->
 
 
-        <mat-grid-tile>
-          <mat-card class="example-card">
+        <div class="col-md-3 col-sm-6">
+          <mat-card matTooltip="Email Sent" class="card_03">
             <mat-icon>near_me</mat-icon>
               <span>
-                <h2>{{count.sent_email}}</h2>
-                <p>Campaign Email Sent</p>
+                <p>Campaign Email</p>
+                <!--<h2>{{count.sent_email}}</h2>-->
+                <h2><ng2-odometer [number]="count.sent_email" [config]="{ animation: 'count', format: 'ddddd', theme: 'default' }"></ng2-odometer>/<ng2-odometer [number]="count.scheduled_email" [config]="{ animation: 'count', format: 'ddddd', theme: 'default' }"></ng2-odometer></h2>
+                <p>Sent/Scheduled</p>
               </span>
           </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-card class="example-card">
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <mat-card matTooltip="Email Scheduled" class="card_04">
             <mat-icon>email</mat-icon>
               <span>
-                <h2>{{count.scheduled_email}}</h2>
-                <p>Campaign Email Scheduled</p>
+                <p>Promotion Email</p>
+                <!--<h2>{{count.scheduled_email}}</h2>-->
+                <h2><ng2-odometer [number]="count.promo_send" [config]="{ animation: 'count', format: 'ddddd', theme: 'default' }"></ng2-odometer>/<ng2-odometer [number]="count.promo_scheduled" [config]="{ animation: 'count', format: 'ddddd', theme: 'default' }"></ng2-odometer></h2>
+                <p>Sent/Scheduled</p>
               </span>
           </mat-card>
-        </mat-grid-tile>
+        </div>
 
         <!-- <mat-grid-tile>
           <mat-card class="example-card">
@@ -71,52 +85,63 @@
               </span>
           </mat-card>
         </mat-grid-tile> -->
-      </mat-grid-list>
     </div>
 
 
 
     <div class="line-chart row">
-      <mat-grid-list cols="2" rowHeight="370px">
-        <mat-grid-tile>
-          <mat-card>
+      <div class="col-md-6 col-sm-12">
+        <div>
             <mat-card-title>
-              Order Statistics
+              <span>
+              <mat-icon>bar_chart</mat-icon>
+              Order Statistics ({{state_count}})
+            </span>
               <mat-select placeholder="30 Days" (change)="order_stat_filter($event)">
                 <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
               </mat-select>
-            </mat-card-title>
+            </mat-card-title></div>
+            <mat-card>
             <mat-card-content>
               <canvas baseChart [chartType]="'bar'" [datasets]="chartData" [labels]="chartLabels" [colors]="ChartColors1" [options]="chartOptions" [legend]="false" (chartClick)="onChartClick($event)">
               </canvas>
             </mat-card-content>
           </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-card>
+          </div>
+        <div class="col-md-6 col-sm-12">
+          <div>
             <mat-card-title>
-              Email Statistics
+              <span>
+              <mat-icon>email</mat-icon>
+              Email Statistics ({{feedState_count}})
+            </span>
               <mat-select placeholder="30 Days" (change)="feedback_stat_filter($event)">
                 <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
               </mat-select>
-            </mat-card-title>
+            </mat-card-title></div>
+          <mat-card>
+
             <mat-card-content>
               <canvas baseChart [chartType]="'bar'" [datasets]="chartData2" [labels]="chartLabels2" [colors]="ChartColors2" [options]="chartOptions2" [legend]="false" (chartClick)="onChart2Click($event)">
               </canvas>
             </mat-card-content>
           </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </div>
+        </div>
+      </div>
+    
 
     <div class="doughnut-chart row">
-      <mat-grid-list cols="3" rowHeight="410px">
-        <mat-grid-tile>
-          <mat-card>
+     <div class="col-md-4 col-sm-12">
+        <div>
             <mat-card-title>
+            <span>
+              <mat-icon>person</mat-icon>
               Customer Statistics
-            </mat-card-title>
-            
+            </span>
+            <!-- <a href="" class="btn-white">View More</a> -->
+          </mat-card-title>
+            </div>
+              <mat-card>
             <mat-card-content>
               <canvas height="180px" baseChart [chartType]="'doughnut'" [datasets]="chartData1" [labels]="chartLabel1" [colors]="doughnutChartColors" [options]="chartOptions1" [legend]="true" (chartClick)="onChart1Click($event)"> <!-- [labels]="chartLabel1" [colors]="doughnutChartColors"-->
               </canvas>
@@ -138,21 +163,24 @@
               </div>
             </mat-card-footer>
           </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-card (click)="latest_order_full()">
-            <mat-card-title>
-              Top Product
-            </mat-card-title>
+        </div>
+      
 
-            <!-- <button mat-icon-button>
-              <mat-icon>more_vert</mat-icon>
-            </button> -->
+        <div class="col-md-4 col-sm-12">
+         <mat-card-title>
+            <span>
+              <mat-icon>photo</mat-icon>
+              Top Product
+            </span>
+            <a (click)="latest_order_full()" class="btn-white" style="cursor: pointer;">View More</a>
+          </mat-card-title>
+        <mat-card>
+
 
             <mat-card-content>
               <mat-table #table [dataSource]="dataSource1">
                 <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
                   <mat-cell *matCellDef="let i = index "> {{ i + 1  }} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="product_list">
@@ -169,29 +197,172 @@
               </mat-table>
             </mat-card-content>
           </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-card routerLink="/order">
+        </div>
+
+
+
+        <div class="col-md-4 col-sm-12">
+         <mat-card-title>
+            <span>
+              <mat-icon>group_add</mat-icon>
+              Repeated Customers
+            </span>
+            <a (click)="all_repeat_customer()" class="btn-white" style="cursor: pointer;">View More</a>
+          </mat-card-title>
+        <mat-card>
+
+
+            <mat-card-content>
+              <mat-table #table [dataSource]="dataSource3">
+                <ng-container matColumnDef="id">
+                  <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
+                  <mat-cell *matCellDef="let i = index "> {{ i + 1  }} </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="product_list">
+                  <mat-header-cell *matHeaderCellDef> Customer Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element"><span matTooltip="{{element[0][1]}}"> {{ element[0][1] | slice:0:20 }} </span>
+                  </mat-cell>
+                </ng-container>
+                <ng-container matColumnDef="count">
+                  <mat-header-cell *matHeaderCellDef> Count </mat-header-cell>
+                  <mat-cell *matCellDef="let element"> <span>{{ element[1] }}</span> </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns1"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns1;"></mat-row>
+              </mat-table>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+
+
+
+
+ <div class="doughnut-chart row">
+        <div class="col-md-6 col-sm-12">
+           <div>
             <mat-card-title>
+            <span>
+              <mat-icon>bar_chart</mat-icon>
+              Geo Graph
+            </span>
+           
+          </mat-card-title>
+            </div>
+         <!--  <mat-card-title>
+            <span>
+              <mat-icon>shopping_cart</mat-icon>
               Latest Orders
-            </mat-card-title>
+            </span>
+          </mat-card-title>
+        <mat-card routerLink="/order">
             <mat-card-content>
               <mat-table #table [dataSource]="dataSource2">
                 <ng-container matColumnDef="id">
-                  <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+                  <mat-header-cell *matHeaderCellDef> # </mat-header-cell>
                   <mat-cell *matCellDef="let i = index "> {{ i + 1 }} </mat-cell>
                 </ng-container>
                 <ng-container matColumnDef="name">
                   <mat-header-cell *matHeaderCellDef> Product Title </mat-header-cell>
-                  <mat-cell *matCellDef="let element"> <span matTooltip="{{element.find_order[0].title}}"> {{element.find_order[0].title | slice:0:40 }} </span> </mat-cell><!--| slice:0:6-->
+                  <mat-cell *matCellDef="let element"> <span matTooltip="{{element.find_order[0].title}}"> {{element.find_order[0].title | slice:0:30 }} </span> </mat-cell>
                 </ng-container>
                 <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns2;"></mat-row>
               </mat-table>
             </mat-card-content>
+          </mat-card> -->
+
+          <div id="visualization"></div>
+        </div>
+
+
+
+
+
+
+     
+     <div class="col-md-6 col-sm-12">
+        <div>
+            <mat-card-title>
+            <span>
+              <mat-icon>shopping_cart</mat-icon>
+              Order Statistics
+            </span>
+            <!-- <a href="" class="btn-white">View More</a> -->
+          </mat-card-title>
+            </div>
+              <mat-card>
+            <mat-card-content>
+              <canvas width="511px" height="270px" baseChart [chartType]="'doughnut'" [datasets]="chartData3" [labels]="chartLabel3" [colors]="doughnutChartColors1" [options]="chartOptions3" [legend]="true" > <!-- [labels]="chartLabel1" [colors]="doughnutChartColors"-->
+              </canvas>
+            </mat-card-content>
+           <!--  <mat-card-footer>
+              <div class="doughnut-label">
+                <span></span>
+                <span>
+                  <h3>{{ canceled }}</h3>
+                  <p>Canceled</p>
+                </span>
+              </div>
+              <div class="doughnut-label">
+                <span></span>
+                <span>
+                  <h3>{{ unshipped }}</h3>
+                  <p>Unshipped</p>
+                </span>
+              </div>
+              <div class="doughnut-label">
+                <span></span>
+                <span>
+                  <h3>{{ pickup }}</h3>
+                  <p>Pickup</p>
+                </span>
+              </div>
+              <div class="doughnut-label">
+                <span></span>
+                <span>
+                  <h3>{{ return }}</h3>
+                  <p>Return</p>
+                </span>
+              </div>
+              <div class="doughnut-label">
+                <span></span>
+                <span>
+                  <h3>{{ reject }}</h3>
+                  <p>Reject</p>
+                </span>
+              </div>
+              <div class="doughnut-label">
+                <span></span>
+                <span>
+                  <h3>{{ delivered }}</h3>
+                  <p>Delivered</p>
+                </span>
+              </div>
+              <div class="doughnut-label">
+                <span></span>
+                <span>
+                  <h3>{{ pending}}</h3>
+                  <p>Pending</p>
+                </span>
+              </div>
+            </mat-card-footer> -->
           </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+        </div>
+
+
+
+        
+
+
+        
+        
+
+
+
+
+
+
     </div>
   </div>
-</div>

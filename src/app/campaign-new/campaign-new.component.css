@@ -1,6 +1,15 @@
 .mat-stepper-horizontal{
-	/*background-color: unset;*/
-	margin-top: 5px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top:120px;
+    /*height: calc(100% - 76px)*/
+    margin-bottom: 50px;
+}
+
+body {
+    background-color: #fff;
+    padding-bottom: 50px;
 }
 
 ::ng-deep .mat-step-header .mat-step-icon-not-touched {
@@ -21,8 +30,25 @@ mat-card{
     border:none !important;
 }
 
+/*::ng-deep .mat-card-header-text {
+    margin: 0 auto !important;
+}
+*/
 .mat-horizontal-content-container{
-	padding-bottom: 0;
+    padding-bottom: 0;
+    margin-top: 16px;
+    max-width: 64%!important;
+    width: 64%!important;
+    border-radius: 6px;
+    border:1px solid #e6eaee;
+}
+
+@media (min-width: 1024px){
+    ::ng-deep .mat-horizontal-stepper-header-container, ::ng-deep .mat-horizontal-content-container {
+        max-width: 1270px;
+        padding: 0 10px;
+        margin: auto;
+    }
 }
 
 .step1 .mat-card-footer {
@@ -33,12 +59,21 @@ mat-card{
 }
 
 .step1 .mat-card-footer button{
-	margin: 0 4px;
+    margin: 0 4px;
+    background: #1fbba7;
+    border:1px solid #04b19d;
+    color: #fff!important;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2);
+}
+.step1 .mat-card-footer button:hover{
+    background: #5e9beb!important;
+    border: 1px solid #4d86d2!important;
 }
 
 .step1 .mat-card-header{
     margin: -24px -24px 0 -24px;
     padding: 24px;
+    justify-content: center;
     /*background-color: #f4f4f4;*/
 }
 
@@ -48,40 +83,41 @@ mat-card{
 }
 
 .step1 .mat-card-content{
-	margin-bottom: 0px;
+    margin-bottom: 0px;
 }
 
 .step1 mat-card-title{
-	text-align: center;
-	margin-bottom: 0;
+    text-align: center;
+    margin-bottom: 0;
 }
 
 .step1 mat-card-title h3{
-	font-size: 24px;
+    font-size: 24px;
     font-weight: 400;
     color: #393939;
+    margin-top: 10px;
     margin-bottom: 0;
 }
 
 .step1 mat-icon{
     font-size: 30px;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     border: 2px solid;
     color: #0dc2ab;
-    padding: 6px;
+    padding: 4px 3px;
 }
 
 mat-card.step2{
-	padding: 0 ;
-	width: 100%;
+    padding: 0 ;
+    width: 100%;
 }
 
 mat-card.step2 mat-card-content{
-	max-height: 320px;
-	overflow: auto;
-	margin: 0;
+    /*max-height: calc(100vh - 310px);*/
+    overflow: auto;
+    margin: 0;
 }
 
 /*mat-card.step2 mat-card-content:hover{
@@ -89,55 +125,65 @@ mat-card.step2 mat-card-content{
 }*/
 
 .step2 mat-card-title{
-    padding: 15px;
-    font-size: 18px;
-    /*border-bottom: 1px solid #dedede;*/
+    padding: 15px 15px 15px 0;
+    font-size: 24px;
+    text-align: center;
     margin: 0;
 }
 
 .step2 .mat-card-footer{
-	margin: 0;
+    margin: 30px 0 0 0;
     padding: 15px;
     text-align: center;
     /*border-top: 1px solid #dedede;*/
 }
 
 .step2 .mat-card-footer button{
-	margin: 0 5px
+    margin: 0 5px
 }
 
 .table{
-	padding: 10px;
+    padding: 10px;
 }
 
 .table tr th{
-	text-align: left;
+    text-align: left;
 }
 
 .table tr td:first-child, .table tr td:last-child, .table tr th:first-child, .table tr th:last-child {
-	text-align: center;
+    text-align: center;
 }
 
 .table td img {
     border-radius: 50%;
     height: 50px;
     width: 50px;
+    object-fit: contain;
     border: 1px solid #dedede;
 }
 
 .table thead th{
-	padding: 10px 0;
-	border-bottom: 1px solid #dedede;
-	font-size: 13px;
+    padding: 10px .75rem;
+    border-bottom: 1px solid #efefef;
+    font-size: 13px;
 }
 
 .table tbody td{
-	border-bottom: 1px solid #dedede;
-	font-size: 12px;
+    border-bottom: 1px solid #efefef;
+    font-size: 12px;
+    vertical-align: middle;
 }
 
 .table tbody tr:last-child td{
-	border-bottom: 0px solid #dedede;
+    border-bottom: 0px solid #dedede;
+}
+
+.table tbody tr:nth-child(even){
+  background-color: #f7f7f7;
+}
+
+.table thead tr{
+    background-color: #f7f7f7;   
 }
 
 /*.table tbody tr:hover {
@@ -147,14 +193,14 @@ mat-card.step2 mat-card-content{
 
 
 mat-card.step3{
-	padding: 0 ;
-	width: 100%;
+    padding: 0 ;
+    width: 100%;
 }
 
 mat-card.step3 mat-card-content{
-	max-height: 330px;
-	overflow: auto;
-	margin: 0;
+    /*max-height: calc(100vh - 310px);*/
+    overflow: auto;
+    margin: 0;
 }
 
 /*mat-card.step3 mat-card-content:hover{
@@ -162,38 +208,45 @@ mat-card.step3 mat-card-content{
 }*/
 
 .step3 mat-card-title{
-    padding: 15px;
-    font-size: 18px;
-    /*border-bottom: 1px solid #dedede;*/
+    padding: 15px 15px 15px 0;
+    font-size: 24px;
+    text-align: center;
     margin: 0;
 }
 
 .step3 .mat-card-footer{
-	margin: 0;
+    margin: 0;
     padding: 15px;
     text-align: center;
     /*border-top: 1px solid #dedede;*/
 }
 
 .step3 .mat-card-footer button{
-	margin: 0 5px;
+    margin: 0 5px;
 }
 
 .step3 .inventory-filter{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 10px;
-    padding: 0 15px;
+    background-color: #e9eff3;
+    margin: 0;
+    padding: 10px;
+    /*border-bottom: 1px solid #ddd;*/
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 
 .step3 .inventory-filter .inventory-enable{
     display: flex;
     align-items: center;
+    margin-right: 15px;
 }
 
 .step3 .inventory-filter .inventory-enable label{
     font-weight: 500;
+    margin-bottom: 0px;
 }
 
 .step3 .inventory-filter input{
@@ -207,7 +260,7 @@ mat-card.step3 mat-card-content{
 }
 
 ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-    background-color: #7dc586;
+    background-color: #20bba7;
 }
 
 ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
@@ -241,7 +294,7 @@ mat-card.step3 mat-card-content{
 
 
 mat-card.step4{
-	padding: 15px;
+    padding: 15px;
 }
 
 .step4 mat-card-title {
@@ -253,7 +306,6 @@ mat-card.step4{
 }
 
 .step4 .mat-card-content{
-    max-height: 300px;
     overflow: auto;
     width: 100%;
     margin-bottom: 0;
@@ -261,7 +313,12 @@ mat-card.step4{
     margin-right: -15px;
     padding: 0 15px;
 }
-
+.step4 .mat-card-inner{
+    background: #f7f7f7;
+    padding: 30px;
+    border: 1px solid #f1f1f1;
+    margin-bottom: 20px;
+}
 .step4 .mat-card-footer {
     display: block;
     margin: 0;
@@ -271,7 +328,7 @@ mat-card.step4{
 }
 
 .step4 .mat-card-footer button{
-	margin: 0 5px;
+    margin: 0 5px;
 }
 
 .step4 .panel-body{
@@ -280,12 +337,16 @@ mat-card.step4{
     align-items: center;
 }
 
+::ng-deep .step4 .panel-body mat-form-field:last-child{
+    margin-left: 10px;
+}
+
 .step4 .panel-body button{
     margin-left: 10px;
 }
 
 .panel-heading{
-	margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .panel-heading label{
@@ -325,4 +386,91 @@ mat-card.step4{
 .mat-horizontal-stepper-header-container {
     width: 840px;
     margin: auto;
+}
+
+.mat-horizontal-stepper-content{
+    margin-top: 10px;
+}
+
+.pad-15 {
+  padding: 15px;
+}
+.campaign_title{
+    text-align: center;
+    margin-top:45px;
+}
+.campaign_title h3{
+    font-size:24px;
+    color: #354052;
+}
+.campaign_title p{
+    color:#6e7d91;
+    margin-top:10px;
+}
+.tmpl_icon{
+    float: left;
+    width: 21%;
+    margin-right: 20px;
+}
+
+.tmpl_content{
+        float: left;
+    width: 66.5%;
+}
+.tmpl_content h2{
+   font-size: 18px;
+    font-weight: 600;
+}
+.tmpl_content p{
+    font-size: 15px;
+    line-height: 20px;
+}
+.tmpl_content h4{
+    font-size: 15px;
+    font-weight: 600;
+    color: #0081c6;
+    margin-bottom: 0px;
+}
+.tmpl_container{
+    border-bottom: 1px solid #d6d6d6;
+    padding-bottom: 25px;
+    margin-top: 40px!important;
+}
+.tmpl_container .mat-raised-button, .trigger_container .mat-raised-button{
+        background: #fff!important;
+    color: #5e9beb!important;
+    box-shadow: none!important;
+    border: 1px solid #4377bb;
+    font-size: 13px!important;
+}
+.mat-form-field-infix{
+    width: 253px!important;
+}
+
+@media screen and (max-width: 699px) and (min-width: 319px){
+    .step4 .mat-card-content {
+        overflow: auto;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .step4 .panel-body{
+        display: block;
+        text-align: center;
+    }
+    ::ng-deep .step4 .mat-form-field {
+        width: 100%;
+    }
+    ::ng-deep .step4 .panel-body mat-form-field:last-child {
+        margin-left: 0px;
+    }
+    .panel-heading{
+        margin-top: 10px;
+    }
+    ::ng-deep .cke_reset {
+        max-height: 330px;
+    }
+    ::ng-deep .cke_contents.cke_reset {
+        height: 160px !important;
+    }
 }

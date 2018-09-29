@@ -15,15 +15,9 @@
             </form-->
 
             <ng-template matStepLabel>Fill out your name </ng-template>
-            <mat-grid-list cols="1" rowHeight="460px">
-              <mat-grid-tile>
+            <div class="row">
+              <div class="col-md-8 col-sm-12 col-center">
                 <mat-card class="step1">
-                  <mat-card-header>
-                    <mat-card-title>
-                      <mat-icon>mail_outline</mat-icon>
-                      <h3>Create New Campaign</h3>
-                    </mat-card-title>
-                  </mat-card-header>
                   <mat-card-content>
                     <mat-form-field class="example-full-width">
                       <input matInput tabindex="1" [value]="edit_data?.campagin_name" [(ngModel)]="edit_data.campagin_name" 
@@ -38,10 +32,11 @@
                     [disabled]='!edit_data?.campagin_name' (click)="name_ok(name)">Next</button>
                   </mat-card-footer>
                 </mat-card>
-              </mat-grid-tile>
-            </mat-grid-list>
+              </div>
+            </div>
           </mat-step>
-          <mat-step [stepControl]="secondFormGroup" >
+
+          <!--mat-step [stepControl]="secondFormGroup" >
             <mat-grid-list cols="1" rowHeight="460px">
               <mat-grid-tile>
                 <mat-card class="step2">
@@ -72,33 +67,33 @@
                           </tr>
                         </tbody>
                       </table>
-                      <!--mat-form-field [checked]="template?.id == edit_data?.template_id" (click)=templatedata(template)>
-                        <input matInput placeholder="Address" formControlName="secondCtrl" required>
-                      </mat-form-field-->
                     </form>
                   </mat-card-content>
                   <mat-card-footer>
                       <button mat-button matStepperPrevious mat-raised-button>Back</button>
-                      <button mat-button matStepperNext mat-raised-button color="primary" [disabled]='id == 1'>Next</button>
+                      <button mat-button matStepperNext mat-raised-button color="primary" [disabled]='id == 1' (click)="edit_template()">Next</button>
                   </mat-card-footer>
                 </mat-card>
               </mat-grid-tile>
             </mat-grid-list>
-          </mat-step>
+          </mat-step-->
 
 
-          <mat-step [stepControl]="thirdFormGroup">
-
-
+          <mat-step [stepControl]="secondFormGroup">
             <ng-template matStepLabel>Select Your asin</ng-template>
-            <mat-grid-list cols="1" rowHeight="460px">
-              <mat-grid-tile>
+            <div class="row">
+              <div class="col-md-12 col-sm-12">
                 <mat-card class="step3">
                   <mat-card-title>Inventories</mat-card-title>
-                  <mat-card-content>
-                    <span>
-                     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
-                  </span>
+                  <mat-card-content (scroll)="onScroll($event)" style="overflow: auto; max-height: 300px;">
+                    <div class="inventory-filter">
+                      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
+                       <span class="inventory-enable">
+                        <label>Enable All:&nbsp;</label>
+                        <mat-slide-toggle (change)=enable_all($event,inventories)>
+                        </mat-slide-toggle>
+                    </span>
+                  </div>
                     <table class="table" width="100%">
                       <thead>
                         <tr>
@@ -115,7 +110,7 @@
                           <td>{{inventory?.asin}}</td>
                           <td>
                             <mat-slide-toggle [color]="primary" *ngIf="!inventory?.children_in_use || this.edit_data?.asin.includes(inventory?.asin) " 
-                            [checked]="inventory.children_in_use && inventory?.enable"
+                            [checked]="inventory.children_in_use && this.edit_data?.asin.includes(inventory?.asin)"
                             (change)=asin($event,inventory.asin)></mat-slide-toggle>
                             <mat-icon *ngIf="inventory?.children_in_use && !(this.edit_data?.asin.includes(inventory?.asin))" matTooltip="Asin already in use">error_outline
                             </mat-icon>
@@ -135,19 +130,19 @@
                -->
                   <mat-card-footer>
                     <button mat-button matStepperPrevious mat-raised-button>Back</button>
-                    <button mat-button matStepperNext mat-raised-button color="primary">Next</button>
+                    <button mat-button matStepperNext mat-raised-button color="primary" (click)="asin_array_push()">Next</button>
                   </mat-card-footer>
                 </mat-card>
-              </mat-grid-tile>
-            </mat-grid-list>
+              </div>
+            </div>
           </mat-step>
 
 
           <mat-step>
             <ng-template matStepLabel>Select Your Trigger</ng-template>
             <!-- <p>You are now done.</p> -->
-            <mat-grid-list cols="1" rowHeight="460px">
-              <mat-grid-tile>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-center">
                 <mat-card class="step4">
                   <mat-card-title>Schedule E-Mail
                     <span>
@@ -179,11 +174,11 @@
                   <mat-card-footer>
                     <button mat-button matStepperPrevious mat-raised-button>Back</button>
                     <!--button mat-button (click)="stepper.reset()">Create Trigger</button-->
-                    <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" (click)="save(myForm)">Create Campaign</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!myForm.valid" (click)="save(myForm)">Edit Campaign</button>
                   </mat-card-footer>
                 </mat-card>
-              </mat-grid-tile>
-            </mat-grid-list>
+              </div>
+            </div>
           </mat-step>
         </mat-horizontal-stepper>
 <!--       </mat-grid-tile>

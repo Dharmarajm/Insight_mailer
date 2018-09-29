@@ -1,12 +1,21 @@
 <div [formGroup]="adressForm">
-  <!-- <button mat-fab color="primary">Start</button> -->
  <mat-form-field>
-  <mat-select placeholder="Select Triggers" formControlName="trigger">
-    <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
+  <mat-select placeholder="Select Triggers" formControlName="trigger" > <!-- [disabled]="true" -->
+    <mat-option *ngFor="let value of values" [value]="value" (click)="triggerdropdown(value)"> {{ value }} </mat-option>
   </mat-select>
 </mat-form-field>
 <mat-form-field>
  <input type="number" min='0' max='30' (change)="onlyNumberKey(num)"  [(ngModel)] = "num" matInput placeholder="Days" formControlName="days" />
 </mat-form-field>
-<!-- <button mat-fab color="primary">End</button> -->
+<mat-form-field>
+   <input type="text" matInput placeholder="Subject" formControlName="subject" />
+</mat-form-field>
+<mat-grid-list cols="1" rowHeight="70px">
+  <mat-grid-tile>1</mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+  <mat-grid-tile>4</mat-grid-tile>
+  <mat-grid-tile>5</mat-grid-tile>
+  <mat-grid-tile>6</mat-grid-tile>
+</mat-grid-list>
 </div>

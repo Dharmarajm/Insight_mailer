@@ -4,14 +4,23 @@ mat-grid-list{
 
 mat-card{
     width: 100%;
-    margin: 10px;
-    padding: 15px;
+    margin: 0 0 25px;
+    padding:20px;
 }
 
 mat-card-title{
-  font-size: 16px;
-  color: #433e3b;
+  font-size:21px;
+  color: #354052;
   margin-bottom: 15px;
+}
+
+mat-card-title span{
+  display: inline-flex;
+  align-items: center;
+}
+
+mat-card-title span mat-icon{
+  margin-right: 10px;
 }
 
 mat-select{
@@ -19,10 +28,15 @@ mat-select{
     float: right;
     border: 1px solid #ddd;
     border-radius: 4px;
-    height: 18px;
-    margin-right: 14px;
+/*    height: 18px;*/
+    /*margin-right: 14px;*/
     padding: 5px;
     font-size: 14px;
+    background: #fff;
+}
+
+::ng-deep .popup-select mat-icon{
+  cursor: pointer;
 }
 
 .mat-header-cell {
@@ -34,6 +48,7 @@ mat-select{
 .overview mat-card{
   display: inline-flex;
   align-items: center;
+  margin: 0 0 25px;
 }
 
 .overview mat-card span{
@@ -41,32 +56,46 @@ mat-select{
 }
 
 .overview mat-card mat-icon{
-    font-size: 24px;
-    color: #7cc387;
-    background-color: #c8e6ce;
+        font-size: 39px;
+    color: #ffffff!important;
+    /* background-color: #ffffff!important; */
     border-radius: 50%;
-    padding: 12px;
+    height: 50px;
+    width: 50px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: absolute;
+    right: 13px;
+    top: 12px;
 }
 
 .overview mat-card h2{
     margin: 0;
-    font-weight: 300;
-    font-size: 34px;
-    color: #303133;
+    font-weight: 400;
+    font-size:48px;
+    color: #fff;
 }
 
 .overview mat-card p{
     margin: 0;
-    font-weight: 200;
-    color: #97989c;
+    font-weight: 400;
+    color: #fff;
 }
 
 .line-chart mat-card-title{
-  margin-bottom: 30px;
+  /*margin-bottom: 30px;*/
 }
 
 .doughnut-chart mat-card{
-  min-height: 355px;
+  min-height: 375px;
+  cursor: pointer;
 }
 
 .doughnut-chart mat-card button{
@@ -87,7 +116,7 @@ mat-select{
 }
 
 .mat-header-row, .mat-row {
-    border-bottom-color: rgba(0,0,0, .07);
+    border-bottom-color:#edeff1;
 }
 
 .mat-row:last-child{
@@ -108,11 +137,16 @@ mat-select{
 }
 
 .mat-cell.mat-column-count span{
-    background-color: #7cc387;
-    padding: 5px 10px;
+    background-color:#dee4ec;
+    height: 35px;
+    width: 35px;
     border-radius: 50%;
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
     display: inline-flex;
-    color: #fff;
+    align-items: center;
+    justify-content: center;
+    color:#767c84;
 }
 
 .doughnut-label{
@@ -122,12 +156,17 @@ mat-select{
 }
 
 .doughnut-label span:first-child{
-    background-color: #c9e6ce;
-    padding: 10px;
+    padding:4px;
     border-radius: 4px;
     border-radius: 1px;
-    height: 30px;
+    height: 50px;
     margin-right: 15px;
+}
+.doughnut-label span.hc{
+    background-color: #7cc387;
+}
+.doughnut-label span.uhc{
+    background-color: #c8e6ce;
 }
 
 .doughnut-label h3{
@@ -139,9 +178,11 @@ mat-select{
   font-size: 14px;
 }
 
-.mat-cell {
-    color: #433e3b;
+
+h4.ex1 {
+    padding-left: 82%;
 }
+
 
 ::ng-deep .mat-form-field-ripple {
     background-color: #0dc2ab;

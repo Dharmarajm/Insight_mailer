@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Customer, Address } from './trigger.interface';
+import { CampaignService } from './../campaign/campaign.service';
 
 @Component({
     moduleId: module.id,
@@ -11,8 +12,11 @@ export class TriggerComponent implements OnInit {
  @Input('group')
     public adressForm: FormGroup;
     num: number;
+    values: string[] = ["ordered","shipped","delivered","returned"];
 
-values: string[] = ["ordered","shipped","delivered","returned"];
+    constructor(public campaign: CampaignService){
+
+    }
 
      ngOnInit() {
      }
@@ -27,6 +31,13 @@ values: string[] = ["ordered","shipped","delivered","returned"];
     }
 
     promotion_template(){
+     }
+
+     triggerdropdown(value){
+         console.log(value)
+         this.campaign.campaigndropdown(value).subscribe((res){
+            console.log(res);
+         })
      }
    
 }

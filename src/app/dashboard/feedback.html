@@ -1,44 +1,16 @@
-<style type="text/css">
-  .fedd th{
-    text-align: center;
-    background-color: #c8e6ce;
-  }
-
-  
-
-   .mat-button, .mat-raised-button{
-    background-color: #7dc586;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    border-radius: 20px;
-}  
-
-.fedd td:hover {
-    background-color: #1fbba7;
-} 
-  .fedd tr:nth-child(odd){ 
-    background: #dae5f4;
-  }
-  /*  Define the background color for all the EVEN background rows  */
-  .fedd tr:nth-child(even){
-    background: #c8e6ce;
-  }
-
-</style>
-
 <div class="popup-select">
-  <header>
-    <h1>Negative Feedback Alert!</h1>
+  <header class="neg-feed">
+    <h1 class="d-flex justify-content-between align-items-center">Negative Feedback Alert!
+     <mat-icon (click)="close()">close</mat-icon>
+    </h1>
   </header>
     <span>
         
       </span>
-  <mat-grid-list cols="1" rowHeight="340px">
-    <mat-grid-tile>
-        <div class="table-scroll">
-          <table class="table fedd" width="100%" style="line-height: 30px; background-color: #c8e6ce;">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12 daily_order">
+          <table class="table">
             <thead>
               <tr>
                <th>Id</th>
@@ -54,7 +26,7 @@
               <td>{{ feedback.comments }}</td>
               <td>{{ feedback.order_id }}</td>
               <td style = "text-align: center;">{{ feedback.rating  }}</td>
-             <td><button mat-icon-button (click)="replay(feedback)"><mat-icon>send</mat-icon></button></td>
+             <td><mat-icon (click)="replay(feedback)">send</mat-icon></td>
           </tr>
             </tbody>
           </table>
@@ -65,8 +37,8 @@
           <!--  <button mat-button (click)="onNoClick()" color="warn" > Cancel </button>
         <button  mat-button (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>
        -->
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </div>
   
       <button mat-raised-button color="danger" (click)="close()"> Close </button>
    

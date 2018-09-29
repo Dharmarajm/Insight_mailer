@@ -1,39 +1,41 @@
 <div class="mat-page-content">
+<div class="filters">
   <div class="container">
-    <div class="filters">
-      <h1 class="page-title">My Promotions</h1>
-      <span>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-        <!--button mat-mini-fab>
-          <mat-icon aria-label="Example icon-button with a heart icon">delete</mat-icon>
-        </button-->
-        <button mat-mini-fab (click)="promote()">
+      <h1 class="page-title">My Promotions
+      <span class="float-right d-flex align-items-center">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter" appAutofocus>
+        <button mat-button mat-raised-button (click)="promote();topproductChange()" class="blue">
           <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
         </button>
       </span>
+      </h1>
     </div>
+  </div>
+  <div class="container">
     <div class="row">
-      <mat-grid-list cols="5" rowHeight="520px">
-        <mat-grid-tile *ngFor=" let promotion of promotions| paginate: {itemsPerPage: 10, currentPage:page1, id:'1'} let i = 'index'">
+        <div class="col-md-3 col-sm-6 col-xs-12" *ngFor=" let promotion of promotions| paginate: {itemsPerPage: 10, currentPage:page1, id:'1'} let i = 'index'">
           <mat-card>
             <div class="product-img">
               <img [src]="promotion.inventory.find_by_asin[0].small_image">
-              <div class="product-details">
+              <!--div class="product-details">
                 <div class="details">
                   <h4>ASIN:&nbsp;<span>{{ promotion.inventory.asin }}</span></h4>
                   <h4>SKU:&nbsp;<span>{{ promotion.inventory.sku }}</span></h4>
                   <h4>TITLE:&nbsp;<span>{{ promotion.inventory.find_by_asin[0].title }}</span></h4>
-                  <h4>PRICE:&nbsp;<span>{{ promotion.inventory.price_paisas.fractional / 100 }}</span></h4>
+                  <h4>PRICE:&nbsp;<span>{{ promotion.inventory.price_paisas.fractional }}</span></h4>
                   <h4>QTY:&nbsp;<span>{{ promotion.inventory.quantity }}</span></h4>
                 </div>
-              </div>
+              </div-->
             </div>
             <mat-card-content>
               <div class="modify">
-                <button mat-icon-button (click)="promotion_edit(promotion.id)">
+                <button mat-icon-button (click)="promotion_email_stat(promotion.id)" matTooltip="Statistics">
+                  <mat-icon>assessment</mat-icon>
+                </button>
+                <button mat-icon-button (click)="promotion_edit(promotion.id)" matTooltip="edit">
                   <mat-icon>mode_edit</mat-icon>
                 </button>
-                <button mat-icon-button (click)="promotion_delete(promotion,$index)">
+                <button mat-icon-button (click)="promotion_delete(promotion,$index)" matTooltip="delete">
                   <mat-icon>delete</mat-icon>
                 </button>
               </div>
@@ -67,11 +69,10 @@
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>
-              <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="primary">Sample</button>
+              <!-- <button mat-raised-button (click)="promotion_preview(promotion.promotion_template)" color="primary">Sample</button> -->
             </mat-card-footer>
           </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+       </div>
     </div>
     <div class="row">
       <mat-grid-list cols="1" rowHeight="60px">

@@ -1,9 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ServiceWorkerModule } from '@angular/service-worker';
+//import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +16,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { ChartsModule } from 'ng2-charts';
+import { Ng2OdometerModule } from 'ng2-odometer';
+import {PopoverModule} from "ng2-popover";
 
 
 //List Of Modules
@@ -22,16 +26,17 @@ import { LoginComponent, PasswordChange } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { OrderComponent } from './order/order.component';
-import { CampaignComponent, CampaignName, CampaignTemplate, CampaignAsin, CampaignTrigger } from './campaign/campaign.component';
-import { CampaignNewComponent, EditTemplate, DetailTemplate } from './campaign-new/campaign-new.component';
-import { CampaignEditComponent, EditTemplateEdit } from './campaign-edit/campaign-edit.component';
+import { CampaignComponent, CampaignTrigger } from './campaign/campaign.component';
+import { CampaignNewComponent, EditTemplate, DetailTemplate, SelectTagNew } from './campaign-new/campaign-new.component';
+import { CampaignEditComponent, EditTemplateEdit, SelectTag } from './campaign-edit/campaign-edit.component';
 import { TriggerComponent } from './campaign/trigger.component';
 import { PromotionComponent, SelectPromotion, CreatePromotion, TemplatePreview, SafeHtmlPipe } from './promotion/promotion.component';
 import { PromotionEditComponent, EditSelectPromotion, EditPromotion, EditTemplatePreview } from './promotion-edit/promotion-edit.component';
-import { DashboardComponent, Feedback, NegativeReviewMail, AllTopProducts, DailyOrders } from './dashboard/dashboard.component';
+import { DashboardComponent, Feedback, NegativeReviewMail, AllTopProducts, DailyOrders,RepeatCustomerMail, SentimentAnalysis,AllRepeatCustomers } from './dashboard/dashboard.component';
 import { SharedComponent } from './shared/shared.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { EmailStatusComponent, Preview } from './email-status/email-status.component';
+import { PromotionEmailStatusComponent } from './promotion-email-status/promotion-email-status.component';
 
 //List Of Service
 import { AppService } from './app.service';
@@ -46,6 +51,9 @@ import { UserProfileService } from './user-profile/user-profile.service';
 import { AuthGuardService } from './shared/auth-guard.service';
 import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
 
+import { Global } from './global';
+import { AutofocusDirective } from './shared/autofocus.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,15 +62,14 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
     InventoryComponent,
     OrderComponent,
     CampaignComponent,
-    CampaignName,
-    CampaignTemplate,
-    CampaignAsin,
     CampaignTrigger,
     CampaignNewComponent,
     EditTemplate,
     DetailTemplate,
+    SelectTagNew,
     CampaignEditComponent, 
     EditTemplateEdit,
+    SelectTag,
     EditTemplatePreview,
     TriggerComponent,
     PromotionComponent,
@@ -80,9 +87,14 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
     UserProfileComponent,
     TemplatePreview,
     EmailStatusComponent,
+    PromotionEmailStatusComponent,
     Preview,
     PasswordChange,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    AllRepeatCustomers,
+    RepeatCustomerMail,
+    SentimentAnalysis,
+    AutofocusDirective
   ],
   imports: [
     BrowserModule,
@@ -95,10 +107,14 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
     CKEditorModule,
     NgxPaginationModule,
     ChartsModule,
+    NgbModule.forRoot(),
     NgxSpinnerModule,
-    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []
+    InfiniteScrollModule,
+    Ng2OdometerModule.forRoot(),
+    PopoverModule
   ],
   providers: [
+                Global,
                AppService,
                LoginService,
                RegisterService,
@@ -117,11 +133,10 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
                 Feedback,
                 NegativeReviewMail,
                 AllTopProducts,
+                AllRepeatCustomers,
+                RepeatCustomerMail,
                 DailyOrders,
                 Preview,
-                CampaignName,
-                CampaignTemplate,
-                CampaignAsin,
                 CampaignTrigger,
                 SelectPromotion, 
                 CreatePromotion,
@@ -131,8 +146,11 @@ import { RefreshtokenInterceptor } from './shared/refreshtoken.interceptor';
                 EditTemplatePreview,
                 EditTemplate,
                 DetailTemplate,
+                SelectTagNew,
                 EditTemplateEdit,
-                PasswordChange
+                SelectTag,
+                PasswordChange,
+                SentimentAnalysis
                ],
   bootstrap: [AppComponent]
 })

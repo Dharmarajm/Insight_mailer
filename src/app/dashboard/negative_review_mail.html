@@ -3,6 +3,11 @@
     <input matInput placeholder="Simple placeholder" [(ngModel)] = "subject">
   </mat-form-field>
 
+  <mat-select placeholder="Suggestion Reply" [(ngModel)]="selectedValue" name="food" (change)="commentChange(selectedValue)">
+    <mat-option *ngFor="let food of suggestion.primary" [value]="food" matTooltip="{{food}}">
+      {{food}}
+    </mat-option>
+  </mat-select>
 
 <ckeditor
     [(ngModel)]="ckeditorContent"
@@ -25,5 +30,9 @@
    </ckgroup>
  </ckeditor>
 
+ <div> 
  <button mat-raised-button (click)="onNoClick()"> Cancel </button>
-  <button mat-raised-button color="primary" (click)="ok(ckeditorContent,subject)" cdkFocusInitial> Send </button>  
+  <button mat-raised-button color="primary" [disabled]="ckeditorContent == '' || subject ==null" (click)="ok(ckeditorContent,subject)" cdkFocusInitial> Send </button>  
+
+ <!--  <button mat-raised-button color="primary" style="float: right;"> Save Comment </button>  --> 
+</div>

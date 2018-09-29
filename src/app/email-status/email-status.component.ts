@@ -14,14 +14,31 @@ import { map } from 'rxjs/operators';
 })
 export class EmailStatusComponent implements OnInit {
 
-displayedColumns = ['id', 'buyer_name','sent_date', 'amazon_order_id','template_data' ];
+displayedColumns = ['id', 'buyer_name','sent_date', 'amazon_order_id','subject' ];
 dataSource1 = new MatTableDataSource();
 dataSource2 = new MatTableDataSource();
 
-emails: any;
+
+emails: any=[];
 camp_id: any;
-sent_emails: any;
-pending_emails: any;
+sent_emails: any=[];
+pending_emails: any=[];
+status: any;
+
+send_scroll:any=[];
+sendpage: any = 1;
+sendsearch_page: number = 1;
+sendmail_scroll: boolean = true;
+senddateShow:boolean;
+
+pending_scroll:any=[];
+pendingpage: any = 1;
+pendingsearch_page: number = 1;
+pendingmail_scroll: boolean = true;
+pendingdateShow:boolean;
+
+@ViewChild(MatPaginator) paginator: MatPaginator;
+@ViewChild(MatSort) sort: MatSort;
 
   constructor(public CampaignService:CampaignService, public nav: AppService, private router:Router,private route: ActivatedRoute,public dialog: MatDialog) { }
 
@@ -40,25 +57,43 @@ pending_emails: any;
   ngOnInit() {
   this.nav.show();
 
+
   this.route.params.subscribe( params => this.camp_id = params.id);
 
-   this.CampaignService.getemails(this.camp_id).subscribe( res => { 
+  this.sendpage = 1;
+  this.sendsearch_page = 1;
+  this.sendmail_scroll = true;
+
+  this.pendingpage = 1;
+  this.pendingsearch_page = 1;
+  this.pendingmail_scroll = true;
+
+   this.CampaignService.campaign_stat(this.camp_id).subscribe( res => {
+         this.status = res[0];
+   })
+
+   this.CampaignService.getemails(this.camp_id,this.sendpage).subscribe( res => { 
+     
    this.emails = res;
+  
    this.sent_emails = this.emails.sent.map(item => ({
    buyer_name: item.template_data.buyer_name,
    sent_date: item.trigger_date,
    amazon_order_id: item.template_data.amazon_order_id,
-   template_data: item.template_data
+   subject: item.subject
 }));
    this.pending_emails = this.emails.pending.map(item => ({
    buyer_name: item.template_data.buyer_name,
    sent_date: item.trigger_date,
    amazon_order_id: item.template_data.amazon_order_id,
-   template_data: item.template_data
+   subject: item.subject
 }));
    this.dataSource1 = new MatTableDataSource(this.sent_emails);
    this.dataSource2 = new MatTableDataSource(this.pending_emails);
    });
+
+   this.senddateShow=true;
+   this.pendingdateShow=true;
   
   }
 
@@ -73,6 +108,105 @@ pending_emails: any;
                   dialogRef.afterClosed().subscribe(result1 => {
 
                   })
+  }
+
+  onScroll(e) {
+    const tableViewHeight = e.target.offsetHeight // viewport: ~500px
+      const tableScrollHeight = e.target.scrollHeight // length of all table
+      const scrollLocation = e.target.scrollTop; // how far user scrolled
+      const buffer = 400;
+      const limit = tableScrollHeight - tableViewHeight - buffer;
+      //alert(this.sent_emails.length);
+  
+     if (scrollLocation > limit && this.senddateShow==true) {
+     
+     if(this.sendmail_scroll && this.sent_emails.length == (20*this.sendpage)){
+      this.sendpage = this.sendpage + 1;
+     console.log(this.sendpage);
+      this.CampaignService.getemails(this.camp_id,this.sendpage).debounceTime(200).throttleTime(50).subscribe( res => { 
+        this.emails = res;
+        this.send_scroll = this.emails.sent.map(item => ({
+        buyer_name: item.template_data.buyer_name,
+        sent_date: item.trigger_date,
+        amazon_order_id: item.template_data.amazon_order_id,
+        subject: item.subject
+     }));
+    
+     this.send_scroll.map(item => this.sent_emails.push(item));
+        this.dataSource1 = new MatTableDataSource(this.sent_emails);
+        console.log(this.sent_emails);
+       
+        });
+      }
+    //   }else if(!this.sendmail_scroll && this.orders.length == (20*this.search_page)){
+    //    this.search_page = this.search_page + 1;
+    //    this.OrderService.order_search(this.filter_search,this.search_page).debounceTime(400).throttleTime(400).subscribe( res => {
+    //     this.orders_scroll = res;
+    //     this.orders_scroll = this.orders_scroll.map(item => ({
+    //     amazon_order_id: item.amazon_order_id,
+    //     asin: item.find_order[0].asin,
+    //     title: item.find_order[0].title,
+    //     buyer_name: item.buyer_name,
+    //     purchased_at: item.purchased_at,
+    //     tfm_shipment_status: item.tfm_shipment_status,
+    //     status: item.status
+    // }));
+    // this.orders_scroll.map(item => this.orders.push(item));
+    //  this.dataSource = new MatTableDataSource(this.orders);
+    //  });
+    //   }
+  
+    }
+  
+  }
+
+  onScrollPending(e) {
+    const tableViewHeight = e.target.offsetHeight // viewport: ~500px
+      const tableScrollHeight = e.target.scrollHeight // length of all table
+      const scrollLocation = e.target.scrollTop; // how far user scrolled
+      const buffer = 400;
+      const limit = tableScrollHeight - tableViewHeight - buffer;
+  
+     if (scrollLocation > limit && this.pendingdateShow==true) {
+     
+     if(this.pendingmail_scroll && this.pending_emails.length == (20*this.pendingpage)){
+      this.pendingpage = this.pendingpage + 1;
+     console.log(this.sendpage);
+      this.CampaignService.getemails(this.camp_id,this.pendingpage).debounceTime(200).throttleTime(50).subscribe( res => { 
+        this.emails = res;
+        this.pending_scroll = this.emails.pending.map(item => ({
+          buyer_name: item.template_data.buyer_name,
+          sent_date: item.trigger_date,
+          amazon_order_id: item.template_data.amazon_order_id,
+          subject: item.subject
+     }));
+    
+     this.pending_scroll.map(item => this.pending_emails.push(item));
+        this.dataSource2 = new MatTableDataSource(this.pending_emails);
+        console.log(this.pending_emails);
+       
+        });
+      }
+    //   }else if(!this.sendmail_scroll && this.orders.length == (20*this.search_page)){
+    //    this.search_page = this.search_page + 1;
+    //    this.OrderService.order_search(this.filter_search,this.search_page).debounceTime(400).throttleTime(400).subscribe( res => {
+    //     this.orders_scroll = res;
+    //     this.orders_scroll = this.orders_scroll.map(item => ({
+    //     amazon_order_id: item.amazon_order_id,
+    //     asin: item.find_order[0].asin,
+    //     title: item.find_order[0].title,
+    //     buyer_name: item.buyer_name,
+    //     purchased_at: item.purchased_at,
+    //     tfm_shipment_status: item.tfm_shipment_status,
+    //     status: item.status
+    // }));
+    // this.orders_scroll.map(item => this.orders.push(item));
+    //  this.dataSource = new MatTableDataSource(this.orders);
+    //  });
+    //   }
+  
+    }
+  
   }
 
 }

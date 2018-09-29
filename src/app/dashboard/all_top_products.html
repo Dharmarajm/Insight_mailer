@@ -1,56 +1,37 @@
-<style type="text/css">
-  .all_top th{
-    text-align: center;
-    background-color: #c8e6ce;
-
-  }
-  .mat-button, .mat-raised-button{
-    background-color: #20bba7;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    border-radius: 20px;
-}
-
-
-.all_top td:hover {
-    background-color: #1fbba7;
-} 
-.all_top tr:nth-child(odd){ 
-    background: #dae5f4;
-  }
-  /*  Define the background color for all the EVEN background rows  */
-  .all_top tr:nth-child(even){
-    background: #c8e6ce;
-  }
-
-  
-</style>
-
 <div class="popup-select">
   <header>
-    <h1 >Top Performing Products</h1>
+    <h1 class="d-flex justify-content-between align-items-center">Top Performing Products
+     <mat-icon (click)="close()">close</mat-icon>
+    </h1>
   </header>
     <span>
-        
+         <mat-select placeholder="45 Days" (change)="top_order_filter($event)" style="width: 40%;">
+                <mat-option *ngFor="let value of values" [value]="value"> {{ value }} </mat-option>
+              </mat-select>
       </span>
-  <mat-grid-list cols="1" rowHeight="340px">
-    <mat-grid-tile>
-        <div class="table-scroll">
-          <table class="table table-striped all_top" width="100%"  style="line-height: 30px;">
+      <button mat-raised-button (click)="datareverse()">Sort</button>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12 daily_order">
+          <table class="table">
             <thead>
               <tr>
                 <th>Id</th>
                 <th>Title</th>
+                <th>Seller SKU</th> 
                 <th>Quantity</th>
+                <th>Customer count</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let product of top_products; let i = index ">
+              <tr *ngFor="let product of top_products; let i = index " >
               <td>{{ i + 1 }}</td>
-              <td>{{ product.title }}</td>
+              <td>{{ product.title[0] }}</td>
+              <td>{{ product.title[1] }}</td>
               <td><b>{{ product.order_quantity }}</b></td>
+              <td><b>{{ product.asin }}</b></td>
+              <td><mat-icon routerLink="/promotion" (click)="productClick(product)">send</mat-icon></td>
           </tr>
             </tbody>
           </table>
@@ -61,8 +42,8 @@
           <!--  <button mat-button (click)="onNoClick()" color="warn" > Cancel </button>
         <button  mat-button (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>
        -->
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </div>
   
       <button mat-raised-button color="" (click)="close()"> Close </button>
     

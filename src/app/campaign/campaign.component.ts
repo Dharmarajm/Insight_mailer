@@ -62,7 +62,7 @@ campaign_delete(campaign,index){
 this.del_id = campaign.id;
 swal({
   title: 'Are you sure?',
-  text: 'You will not be able to recover this file!',
+  text: 'All Scheduled Mails and Campaign will be deleted!',
   type: 'warning',
   showCancelButton: true,
   confirmButtonText: 'Yes, delete it!',
@@ -74,13 +74,13 @@ swal({
     });
     swal(
       'Deleted!',
-      'Your Campaing has been deleted.',
+      'Your Campaign is deleted.',
       'success'
     )
   } else if (result.dismiss === swal.DismissReason.cancel) {
     swal(
       'Cancelled',
-      'Your Campaing is safe :)',
+      'Your Campaign is safe :)',
       'error'
     )
   }
@@ -108,158 +108,13 @@ enable(_id,event){
 }
 
 
-openDialog(): void {
-    let dialogRef1 = this.dialog.open(CampaignName, {
-      width: '500px',
-      disableClose: true
-    });
-
-    dialogRef1.afterClosed().subscribe(result => {
-      this.animal = result;
-      let dialogRef2;
-      if(this.animal){
-          let dialogRef2 = this.dialog.open(CampaignTemplate, {
-            width: '1000px',
-            disableClose: true
-          });
-         
-          dialogRef2.afterClosed().subscribe(result => {
-           this.animal = result;
-
-              let dialogRef3 = this.dialog.open(CampaignAsin, {
-                width: '1000px'
-               });
-
-              dialogRef3.afterClosed().subscribe(result => {
-               this.animal = result;
-
-                  let dialogRef4 = this.dialog.open(CampaignTrigger, {
-                    width: '1000px',
-                    disableClose: true
-                  });
-
-                  dialogRef4.afterClosed().subscribe(result => {
-                    this.campaings.unshift(result);
-                  });
-
-
-                  
-                  
-
-                });
-
-           });
-
-        } // this is for dialog1 cancel button
-
-     });
-
-
-  }
-
-
-}
-
-
-@Component({
-  selector: 'campaign_name',
-  templateUrl: 'campaign_name.html',
-  styleUrls: ['./campaign.component.css']
-})
-export class CampaignName {
-
-name: string;
-
-  constructor(
-    public dialogRef1: MatDialogRef<CampaignName>) { } //,@Inject(MAT_DIALOG_DATA) public data: any
-
-  onNoClick(): void {
-    this.dialogRef1.close();
-  }
-
-ok(name): void {
-this.name = name;
-localStorage.setItem("campaign",this.name);
-     this.dialogRef1.close(this.name);
-  }
-
-
-}
-
-@Component({
-  selector: 'CampaignTemplate',
-  templateUrl: 'campaign_template.html',
-})
-export class CampaignTemplate {
-
-templates:any;
-
-  constructor(
-    public dialogRef2: MatDialogRef<CampaignTemplate>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private CampaignService:CampaignService) {
-   this.CampaignService.gettemplates().subscribe( res => {
-    this.templates = res;
-    });
-
-   }
-
-  templatedata(template): void {
-  this.CampaignService.campaign_create(template.id).subscribe( res => {
-    let camp_id:any = res;
-    localStorage.setItem("campaign_id",camp_id);
-    });
-    this.dialogRef2.close();
-  }
-
-
-}
-
-@Component({
-  selector: 'campaign_asin',
-  templateUrl: 'campaign_asin.html',
-})
-export class CampaignAsin {
-
-inventories:any;
-name: any;
-
-  constructor(
-    public dialogRef3: MatDialogRef<CampaignAsin>,
-    @Inject(MAT_DIALOG_DATA) public data: any,private CampaignService:CampaignService) { 
-
- this.CampaignService.getinventories().subscribe( res => {
-    this.inventories = res;
-    });
-
-    }
-
-    asin(event,asin_data){
-    if (event.checked){
-     console.log("asin added" + asin_data );
-     this.CampaignService.asin_push(asin_data).subscribe( res => {
-    });
-     }else{
-      console.log("asin removed" + asin_data );
-      this.CampaignService.asin_remove(asin_data).subscribe( res => {
-    });
-     }
-    }
-
-  
-
-  onNoClick(): void {
-    this.dialogRef3.close();
-
-  }
-
-ok(name): void {
-localStorage.setItem("campaign",name);
-     this.dialogRef3.close(name);
-  }
 
 
 
 }
+
+
+
 
 @Component({
   selector: 'campaign_trigger',

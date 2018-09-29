@@ -7,11 +7,13 @@ export class AuthGuardService implements CanActivate {
   constructor(public router: Router) {}
 
   canActivate(): boolean {
+  
     if (!localStorage.getItem('prathip')) {
       this.router.navigate(['login']);
       alert("Please Login");
       return false;
     }
+
     return true;
   }
 

@@ -1,13 +1,36 @@
+<style type="text/css">
+  .pad-15 {
+      padding: 15px;
+  }
+  .pad-0{
+    padding: 0;
+  }
+  .popup-select .table-scroll {
+      width: auto !important;
+      margin-bottom: 0 !important;
+  }
+  
+  .popup-select .promotion-filter input{
+      background-color: #fff;
+      border: 1px solid #eaeaea;
+      border-radius: 4px;
+      padding: 5px 25px 5px 10px;
+      font-size: 13px;
+      color: #333;
+      width: 250px;
+  }
+</style>
 <div class="popup-select">
   <header>
     <h1>Select Your Product</h1>
   </header>
-    <span>
+    <div class="container">
+    <div class="promotion-filter d-flex justify-content-end pad-15">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
-      </span>
-  <mat-grid-list cols="1" rowHeight="340px">
-    <mat-grid-tile>
-        <div class="table-scroll">
+     </div>
+     
+  <div class="row table-scroll" (scroll)="onScroll($event)" style="overflow: auto; max-height: 325px;">
+      <div class="col-md-12 pad-0">
           <table class="table" width="100%">
             <thead>
               <tr>
@@ -18,33 +41,38 @@
               </tr>
             </thead>
             <tbody>
+              <!--div class="search-results"
+            infiniteScroll 
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()"
+            [scrollWindow]="false"-->
               <tr *ngFor="let inventory of inventories">
                 <td> <img [src]="inventory?.small_image" alt="Smiley face" height="100" width="100"> </td>
                 <td>{{inventory?.title}}</td>
                 <td>{{inventory?.asin}}</td>
-                <td><mat-slide-toggle [color]="primary" [disabled]="(inventory.id != id && id != 0)" 
+                <td><mat-slide-toggle [color]="primary" [checked]="(inventory.id == id )" 
                  *ngIf="!inventory.promotion_in_use" (change)=asin($event,inventory.id)></mat-slide-toggle>
                 <!--[checked]="inventory.children_in_use" [checked]="edit_data?.inventory.asin" *ngIf="!inventory?.promotion_in_use"  -->
                 <mat-icon *ngIf="inventory.promotion_in_use" matTooltip="Promotion already in use">error_outline</mat-icon>
               </td>
               </tr>
+            <!--/div-->
             </tbody>
           </table>
-        </div>
           <!--div *ngFor="let inventory of inventories; let i = index" class="example-card"-->
 
           <!--/div-->
           <!--  <button mat-button (click)="onNoClick()" color="warn" > Cancel </button>
         <button  mat-button (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>
        -->
-    </mat-grid-tile>
-  </mat-grid-list>
-  <mat-grid-list cols="1" rowHeight="70px">
-    <mat-grid-tile>
-      <div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12 text-center pad-15">
         <button mat-button (click)="cancel()" mat-raised-button>Cancel</button>
         <button mat-button (click)="ok()" cdkFocusInitial mat-raised-button [disabled]='id == 0' color="primary">Confirm</button>
       </div>
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </div>
 </div>

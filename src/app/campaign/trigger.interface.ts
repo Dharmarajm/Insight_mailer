@@ -6,4 +6,5 @@ export interface Customer {
 export interface Address {
     trigger: string[];
     days: number;
+    subject: string;
 }

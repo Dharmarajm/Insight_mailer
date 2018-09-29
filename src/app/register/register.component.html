@@ -8,9 +8,9 @@
           </mat-card-title>
         </mat-card-header>
 <form [formGroup]="myForm" class="example-form" novalidate (ngSubmit)="register()">
-<mat-form-field class="example-full-width">
+<!-- <mat-form-field class="example-full-width">
  <mat-label>First Name*</mat-label>
-    <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name" autocomplete="off" >
+    <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [(ngModel)] = "first_name" autocomplete="off" appAutofocus>
     <mat-error *ngIf="myForm.get('first_name').hasError('required')">
       First Name is <strong>required</strong>
     </mat-error>
@@ -19,11 +19,11 @@
   <mat-form-field class="example-full-width">
    <mat-label>Last Name</mat-label>
     <input matInput placeholder="Lastname" formControlName="last_name" class="form-control" id="last_name" name="last_name" [(ngModel)] = "last_name" autocomplete="off">
-  </mat-form-field>
+  </mat-form-field> -->
 
   <mat-form-field class="example-full-width"> <mat-label>Email*</mat-label>
     <input matInput placeholder="Your@email.com*" formControlName="email" class="form-control" id="email" name="email" 
-    (change)="email_uniq(email)" [(ngModel)]="email" autocomplete="off" >
+    (change)="email_uniq(email)" (keyup)="emailChange()" [(ngModel)]="email" autocomplete="off" >
     <!--mat-icon matTooltip="Asin already in use">error_outline</mat-icon-->
     <mat-error *ngIf="myForm.get('email').hasError('required') ">
       Email is <strong>required</strong>
@@ -32,7 +32,7 @@
       Please enter a valid email address
     </mat-error>
   </mat-form-field>
-  <mat-form-field class="example-full-width"> <mat-label>Password*</mat-label>
+  <!-- <mat-form-field class="example-full-width"> <mat-label>Password*</mat-label>
    
     <input matInput [type]="hide ? 'password' : 'text'" placeholder="Space not allowed" formControlName="password" class="form-control" id="password" name="password" [(ngModel)] = "password" autocomplete="off" >
     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
@@ -45,7 +45,7 @@
     <mat-error *ngIf="myForm.get('password').hasError('pattern')">
       Password should contain <strong>minimum one number, caplatlize letter and a special character</strong>
     </mat-error>
-  </mat-form-field>
+  </mat-form-field> -->
   <mat-form-field class="example-full-width"> <mat-label>Phone Number*</mat-label>
     <input matInput placeholder="975094****" formControlName="phone" class="form-control" id="phone" name="phone" 
     (change)="phone_uniq(phone)" [(ngModel)] = "phone" autocomplete="off" >

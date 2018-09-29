@@ -1,0 +1,49 @@
+mat-grid-list{
+  margin:10px 0px;
+}
+
+mat-card{
+    width: 100%;
+    margin: 10px;
+    padding: 15px;
+}
+
+mat-card-title{
+  font-size: 16px;
+  color: #433e3b;
+  margin-bottom: 15px;
+}
+
+.email-status .filters{
+	top: 0;
+	margin-top: 0px;
+}
+.email-status .filters .page-title {
+    /*display: inline-flex;*/
+    align-items: center;
+    /*justify-content: space-between;*/
+    width: 100%;
+}
+.email-status .filters .mat-input-element {
+    /*background-position: 152px 6px;*/
+}
+.card-border{
+  background-color: #fff;
+  /*padding: 15px;*/
+  margin-bottom: 15px;
+}
+
+.mat-header-cell {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333333;
+}
+
+/*.mat-cell {
+    color: #645f5b;
+    font-size: 12px;
+}*/
+
+.mat-header-row {
+  background: #ebf3f7;
+}

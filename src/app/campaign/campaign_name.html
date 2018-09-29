@@ -1,9 +1,0 @@
-<div mat-dialog-content>
-  <p><b>Create New Campaign {{name}}</b></p>
-   <mat-form-field class="example-full-width">
-    <input matInput tabindex="1" [(ngModel)] = "name" placeholder= "Campaign Name" autoFocus="true">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button  (click)="onNoClick()" color="warn" > Cancel </button>
-  <button type="submit" [disabled]="false" (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>  

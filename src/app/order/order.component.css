@@ -1,8 +1,9 @@
 .card-border{
   background-color: #fff;
-  padding: 15px;
+  overflow: auto;
   margin-bottom: 15px;
 }
+
 
 .mat-header-cell {
     font-size: 14px;
@@ -10,19 +11,16 @@
     color: #333333;
 }
 
-.mat-cell {
-    color: #645f5b;
-    font-size: 12px;
-}
-
 .mat-header-row {
-  position: sticky;
-  top: 0;
-  background: #fbfbfb;
+  background: #f5f8fa;
+    top: 0 !important;
+    position: sticky !important;
+    z-index: 1 !important;
+    background-color: inherit !important;
 }
 
 mat-row:nth-child(odd) {
-    background-color: #fbfbfb;
+    background-color: #f7f7f7;
 }
 
 .mat-column-id {
@@ -92,4 +90,24 @@ mat-row:nth-child(odd) {
 
 ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
     color: #0dc2ab;
+}
+.mat-table {
+    width: 100%;
+    display: table;
+}
+span.Canceled{
+  color: #ee5267;
+  font-weight: bold;
+}
+span.Unshipped{
+  color: #d870af;
+  font-weight: bold;
+}
+span.Delivered{
+  color: #3e8c50;
+  font-weight: bold;
+}
+span.Shipped{
+  color: #40a9d9;
+  font-weight: bold;
 }

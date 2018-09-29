@@ -1,4 +1,4 @@
-<div class="mat-page-content login">
+<div class="login">
   <div class="container">
     <div class="login-panel">
       <mat-card>
@@ -8,9 +8,9 @@
           </mat-card-title>
         </mat-card-header>
         <form class="example-form" novalidate (ngSubmit)="login()">
-          <mat-form-field>
+          <mat-form-field >
            <mat-label>Email</mat-label>
-            <input matInput placeholder="Your@email.com" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email">
+            <input matInput placeholder="Your@email.com" (keyup)="emailChange()" [formControl]="emailFormControl" class="form-control" id="email" name="email" [(ngModel)] = "email" appAutofocus >
             <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
               Please enter a valid email address
             </mat-error>
@@ -30,7 +30,7 @@
             <mat-checkbox> Remember Me </mat-checkbox>
             <button type="submit" mat-raised-button color="primary" class="float-right"> Login </button>
           </div>
-           <!--a class="forgot-pswd" (click)="forget()">Forgot Password?</a-->
+           <a class="forgot-pswd" (click)="forget()">Forgot Password?</a>
           <p class="signup">Don't you have an account <a routerLink="/register">Signup</a></p>
         </form>
       </mat-card>
@@ -38,8 +38,4 @@
     </div>
   </div>
 </div>
-<!--footer>
-  <div class="container">
-    <p>Powered by <a href="https://www.altiussolution.com/" target="blank">Altius Solutions</a></p>
-  </div>
-</footer-->
+

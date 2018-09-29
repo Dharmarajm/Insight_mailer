@@ -1,13 +1,36 @@
-<div class="promotion-popup">
+<style type="text/css">
+  .pad-15{
+    padding: 15px;
+  }
+  .promotion-popup img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+  form{
+    padding: 60px 0 0 0;
+  }
+  @media screen and (max-width: 699px) and (min-width: 319px){
+    .promotion-popup img{
+      width: 120px;
+      height: auto;
+    }
+    form{
+      padding: 20px 0 0 0;
+    }
+  }
+</style>
+<div class="promotion-popup popup-select">
   <header>
     <h1>Promotion Center</h1>
   </header>
-  <mat-grid-list cols="2" rowHeight="400px">
-    <mat-grid-tile>
+  <div class="container">
+    <div class="row">
+    <div class="col-md-6 col-sm-12 text-center d-flex align-items-center">
       <img [src]="image" alt="Smiley face" height="100%" width="auto">
-    </mat-grid-tile>
-    <mat-grid-tile>
-      <form [formGroup]="PromotionForm" class="example_form" novalidate (ngsubmit)="promotion(PromotionForm.value)">
+    </div>
+    <div class="col-md-6 col-sm-12 text-center">
+      <form [formGroup]="PromotionForm" class="example_form text-left" novalidate (ngsubmit)="promotion(PromotionForm.value)">
         <mat-form-field class="half-width">
           <input matInput type=text placeholder="Product ASIN" formControlName="product_asin" class="form-control" id="product_asin" name="product_asin" [readonly]="true" [value]="asin" [(ngModel)]="product_asin">
           <!--mat-error *ngIf="product_asin.hasError('required')">
@@ -16,7 +39,14 @@
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=text placeholder="Product Title" formControlName="product_title" class="form-control" id="product_title" name="Product Title" [readonly]="true" [value]="title" [(ngModel)]="product_title">
+          <input matInput type=text placeholder="Product Title" formControlName="product_title" class="form-control" id="product_title"  matTooltip="{{title}}" name="Product Title" [readonly]="true" [value]="title" [(ngModel)]="product_title">
+          <!--mat-error *ngIf="product_titleFormControl.hasError('required')">
+         Product Title is <strong>required</strong>
+         </mat-error-->
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+          <input matInput type=text placeholder="Product sku" formControlName="product_sku" class="form-control" id="product_sku" name="Product Sku" [readonly]="true" [value]="sku" [(ngModel)]="product_sku">
           <!--mat-error *ngIf="product_titleFormControl.hasError('required')">
          Product Title is <strong>required</strong>
          </mat-error-->
@@ -78,21 +108,40 @@
         </mat-form-field>
 
         <mat-form-field class="half-width">
-          <input matInput type=number placeholder="Mailing Gap" formControlName="mail_frequency" class="form-control" id="Frequency" name="Mailing Gap" min=1 [value]="edit_data?.mail_frequency" [(ngModel)]="mail_frequency">
+          <input matInput type=number placeholder="Frequency of days" formControlName="mail_frequency" class="form-control" id="Frequency" name="Frequency of days" min=1 [value]="edit_data?.mail_frequency" [(ngModel)]="mail_frequency">
           <!--mat-error *ngIf="support_emailFormControl.hasError('required')">
          Support Email is <strong>required</strong>
          </mat-error-->
         </mat-form-field>
-        <div class="float-right">
+
+                  <mat-form-field>
+                    <input matInput  [matDatepicker]="picker1"
+                     [(ngModel)]="start_date" 
+                     placeholder="Start date">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                  </mat-form-field>
+             
+                  <mat-form-field>
+                    <input matInput [min]="promotion.from_date" [max]="maxDate" [matDatepicker]="picker" 
+                    [(ngModel)]="end_date" 
+                     placeholder="End date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+              
+        <div class="row">
+            <div class="col-md-12 col-sm-12 text-center pad-15">
           <button type=submit mat-raised-button color="primary" [disabled]="!PromotionForm.valid" (click)="promotion(PromotionForm.value)"> Promote </button>
           <button mat-raised-button color="danger" (click)="cancel()"> Cancel </button>
         </div>
+      </div>
       </form>
-    </mat-grid-tile>
-
-    <!--p>Form value: {{ PromotionForm.value | json }}</p>
+    </div>
+   </div>
+       <!--p>Form value: {{ PromotionForm.value | json }}</p>
   <p>Form status: {{ PromotionForm.status | json }}</p-->
 
 
-  </mat-grid-list>
+  </div>
 </div>

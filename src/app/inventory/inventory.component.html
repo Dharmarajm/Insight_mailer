@@ -1,33 +1,48 @@
 <div class="mat-page-content">
-  <div class="container">
-    <div class="filters">
-      <h1 class="page-title">My Products</h1>
-      <span>
-        <span>
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search..">
-        </span>
+  <div class="filters">
+   <div class="container">
+      <h1 class="page-title">My Products
+      <span class="float-right d-flex align-items-center">
         <button mat-icon-button (click)="view = false">
-            <mat-icon>view_list</mat-icon>
+            <i class="ti-view-list-alt"></i> 
         </button>
         <button mat-icon-button (click)="view = true">
-            <mat-icon>apps</mat-icon>
+            <i class="ti-layout-grid2"></i>
         </button>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search.." appAutofocus>
       </span>
+     </h1>
     </div>
+  </div> 
+
+<div class="container">
+  
   <ng-template [ngIf]="view">
-    <div class="row">
-      <mat-grid-list cols="5" rowHeight="390px">
-        <mat-grid-tile *ngFor=" let inventory of inventories| paginate: {itemsPerPage: 10, currentPage:page1, id:'1'} let i = 'index'" class="example-card">
+      <div *ngIf="inventories.length == 0">
+        <p>No data</p>
+               </div>
+   
+     <!--div class="search-results"
+            infiniteScroll
+            [infiniteScrollDistance]="2"
+            [infiniteScrollThrottle]="50"
+            (scrolled)="onScroll()"-->
+    <div class="row" (scroll)="onScrollDown($event)" style="overflow: auto; max-height: 500px;">
+        <div class="col-md-3 col-sm-6 col-xs-12" *ngFor=" let inventory of inventories let i = 'index'">
+       
+    
+
           <mat-card>
+            <div class="mat_price">{{ inventory?.price_paisas.fractional }}</div>
             <div class="product-img">
               <img [src]="inventory?.small_image" alt="Image">
-              <div class="product-details">
+              <!--div class="product-details">
                 <h4>ASIN:&nbsp;<span>{{ inventory?.asin }}</span></h4>
                 <h4>SKU:&nbsp;<span>{{ inventory?.sku }}</span></h4>
                 <h4>TITLE:&nbsp;<span>{{ inventory?.title  }}</span></h4>
-                <h4>PRICE:&nbsp;<span>{{ inventory?.price_paisas.fractional / 100 }}</span></h4>
+                <h4>PRICE:&nbsp;<span>{{ inventory?.price_paisas.fractional }}</span></h4>
                 <h4>QTY:&nbsp;<span>{{ inventory?.quantity }}</span></h4>
-              </div>
+              </div-->
             </div>
             <mat-card-content>
               <p>{{ inventory?.title | slice:0:50 }}</p>
@@ -37,81 +52,85 @@
                 <thead>
                   <tr>
                     <th>ASIN</th>
-                    <th>Status</th>
+                    <!-- <th class="text-center">Status</th> -->
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td>{{ inventory?.asin }}</td>
-                    <td>
+                    <!-- <td>
                       <mat-slide-toggle [checked]="inventory.enable" (change)=inventory_asin($event,inventory.asin)></mat-slide-toggle>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>
             </mat-card-footer>
           </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>
+        </div>
     </div>
-    <div class="row">
+    <!--div class="row">
       <mat-grid-list cols="1" rowHeight="60px">
         <mat-grid-tile>
           <pagination-controls (pageChange)="page1 = $event" id="1" maxSize="5" directionLinks="true" autoHide="true"></pagination-controls>
         </mat-grid-tile>
       </mat-grid-list>
-    </div>
+    </div-->
+  <!--/div-->
 </ng-template>
 
-
 <ng-template [ngIf]="!view">
+  <!--div class="search-results"
+         infinite-scroll
+         [infiniteScrollDistance]="2"
+         [infiniteScrollThrottle]="10"
+         (scrolled)="onScrollDown()"-->
  <div class="card-border">
-      <mat-table #table [dataSource]="dataSource" matSort>
+      <mat-table #table [dataSource]="dataSource" matSort (scroll)="onScrollDown($event)" style="overflow: auto; max-height: 500px;">
 
         <!-- Position Column -->
         <ng-container matColumnDef="id">
-          <mat-header-cell *matHeaderCellDef> S.No </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> # </mat-header-cell> 
           <mat-cell *matCellDef="let i = index; "> {{ i + 1 }} </mat-cell>
         </ng-container>
 
         <!-- Image Column -->
         <ng-container matColumnDef="image">
-          <mat-header-cell *matHeaderCellDef> Product Image </mat-header-cell>
-          <mat-cell *matCellDef="let element"> <img class="img-grid" [src]="element.small_image" height="100" width="100" alt="Image"> </mat-cell>
+          <mat-header-cell *matHeaderCellDef class="text-center"> Product </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="text-center"> <img class="img-grid" [src]="element.small_image" height="100" width="100" alt="Image"> </mat-cell>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="asin">
-          <mat-header-cell *matHeaderCellDef> ASIN </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.asin}} </mat-cell>
+          <mat-header-cell *matHeaderCellDef class="text-center"> ASIN </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="text-center"> {{element.asin}} </mat-cell>
         </ng-container>
 
         <!-- Weight Column -->
         <ng-container matColumnDef="sku">
-          <mat-header-cell *matHeaderCellDef> SKU </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef class="text-center"> SKU </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.sku}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="title">
-          <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef class="text-center"> Title </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.title }} </mat-cell>
         </ng-container>
 
         <!-- Symbol Column -->
         <ng-container matColumnDef="price">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.price_paisas.fractional / 100}} </mat-cell>
+          <mat-cell *matCellDef="let element"> {{element.price_paisas.fractional }} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="quantity">
-          <mat-header-cell *matHeaderCellDef> Quantity </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> Qty </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.quantity}} </mat-cell>
         </ng-container>
 
         
         <ng-container matColumnDef="status">
-          <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-          <mat-cell *matCellDef="let element"> <mat-slide-toggle [checked]="element.enable" 
+          <mat-header-cell *matHeaderCellDef class="text-center"> Status </mat-header-cell>
+          <mat-cell *matCellDef="let element" class="text-center"> <mat-slide-toggle [checked]="element.enable" 
             (change)=inventory_asin($event,element.asin)></mat-slide-toggle> </mat-cell>
         </ng-container>
 
@@ -129,7 +148,13 @@
 
 
     </div>
+  <!--/div-->
   </ng-template>
 
   </div>
 </div>
+
+<ngx-spinner
+bdOpacity = 0.9 bdColor = "#262424" size = "large" color = "#11ffbba7" loadingText="Loading..." 
+type = "pacman">
+</ngx-spinner>

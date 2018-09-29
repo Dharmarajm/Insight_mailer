@@ -16,7 +16,7 @@ mat-card{
  /* width: -webkit-fill-available;*/
   /*width: -moz-available;*/
   width: 100%;
-  margin: 10px;
+  margin: 0 0 10px;
   padding: 0px 15px;
   min-height: 490px;
 }
@@ -53,7 +53,7 @@ mat-card-content p{
 .product-img img{
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: contain;
 }
 
 .product-details {
@@ -66,7 +66,20 @@ mat-card-content p{
   width: 100%;
   opacity: 0;
   transition: .5s ease;
-  background: rgba(34,34,34,.9);
+  transition-delay: 0.5s;
+  background: rgba(34,34,34,.8);
+}
+
+.product-img:hover img{
+    -ms-transform: scale(1.1,1.1);
+    transition: 0.5s ease;
+    -webkit-transform: scale(1.1,1.1);
+    transform: scale(1.1,1.1);
+    -webkit-box-shadow: 10px 10px 91px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 10px 10px 91px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 10px 91px 0px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    background-color: #fff;
 }
 
 .product-img:hover .product-details {
@@ -101,7 +114,7 @@ mat-card-content p{
 }
 
 ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-    background-color: #7dc586;
+    background-color: #20bba7;
 }
 
 ::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
@@ -160,11 +173,11 @@ mat-card-content p{
 }
 
 .price span s{
-  color: #3c3c3c;
+  color: #ababab;
 }
 
 .price span b{
-  color: #7fc684;
+  color: #5e9beb;
 }
 
 .mat-card-content h4 {
@@ -184,21 +197,21 @@ mat-card-content p{
     position: absolute;
     /*width: -webkit-fill-available;*/
     /*width: -moz-available;*/
-    width: 100%;
-    left: 0;
-    top: 202px;
+    right: 0;
+    top: 11px;
     display: none;
     justify-content: flex-end;
     align-items: center;
     /*padding: 2px 10px;*/
-    background-color: rgba(170, 170, 170, 0.5);
+/*    background-color: rgba(34,34,34,.8);*/
+    background: rgb(255, 255, 255, .8);
 }
 
 .modify .mat-icon-button {
     width: 25px;
     height: 25px;
     line-height: 14px;
-    color: #fff;
+    color:#1fbba7;
     margin: 2px 10px 2px 0px;
 }
 
@@ -230,4 +243,9 @@ mat-card-content p{
 
 ::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
     color: #0dc2ab;
+}
+.mat-raised-button:not, .mat-raised-button{
+  box-shadow:none!important;
+  -webkit-box-shadow:none!important;
+  -moz-box-shadow:none!important;
 }

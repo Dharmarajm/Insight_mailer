@@ -1,3 +1,30 @@
 <!--p [innerHtml]="promotion_template | safeHtml"></p-->
-<img src="/assets/promo.JPG" alt="Image" style="width: 80%;height: 95%;align-content: baseline;padding: 5% 40% 0% 10%;">
-<button mat-fab mat-raised-button color="primary" (click)="ok()"> Close </button>
+<style type="text/css">
+	.popup-select header{
+	    position: sticky !important;
+	    top: -24px;
+	}
+	.pad-15{
+		padding: 15px;
+	}
+	.mat-icon{
+		cursor: pointer;
+	}
+	::ng-deep .cdk-overlay-pane{
+		max-height: calc(100vh - 70px) !important;
+	}
+</style>
+<div class="popup-select">
+	<header>
+		<h1>Template Preview
+			<mat-icon (click)="ok()" class="float-right">close</mat-icon>
+		</h1>
+	</header>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-sm-12 text-center pad-15">
+				<img src="/assets/promo.JPG" alt="Image" style="height: 100%; width: auto; object-fit: contain;">
+			</div>
+		</div>
+	</div>
+</div>

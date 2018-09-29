@@ -1,39 +1,16 @@
-<style type="text/css">
-  .all_top th{
-    text-align: center;
-    background-color: #c8e6ce;
-
-  }
-  .mat-button, .mat-raised-button{
-    background-color: #7dc586;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    border-radius: 20px;
-} 
-
-
-.all_top tr:nth-child(odd){ 
-    background: #dae5f4;
-  }
-  /*  Define the background color for all the EVEN background rows  */
-  .all_top tr:nth-child(even){
-    background: #c8e6ce;
-  }
-  
-</style>
 <div class="popup-select">
   <header>
-    <h1>Daily Orders: {{date}}</h1>
+    <h1 class="d-flex justify-content-between align-items-center">Daily Orders: {{date}}
+      <mat-icon (click)="close()">close</mat-icon>
+    </h1>
   </header>
     <span>
        
       </span>
-  <mat-grid-list cols="1" rowHeight="340px">
-    <mat-grid-tile>
-        <div class="table-scroll">
-          <table class="table daily all_top"  width="100%" style="line-height: 30px; background-color: #c8e6ce;">
+   <div class="container">
+    <div class="row">
+        <div class="col-md-12 daily_order">
+          <table class="table">
             <thead>
               <tr>
                 <th>Id</th>
@@ -63,8 +40,8 @@
           <!--  <button mat-button (click)="onNoClick()" color="warn" > Cancel </button>
         <button  mat-button (click)="ok(name)" color="primary" cdkFocusInitial> CONFIRM </button>
        -->
-    </mat-grid-tile>
-  </mat-grid-list>
+    </div>
+  </div>
   
      <button mat-raised-button color="danger" (click)="close()"> Close </button> 
     

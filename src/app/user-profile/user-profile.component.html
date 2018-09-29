@@ -1,31 +1,102 @@
+
 <div class="mat-page-content">
   <div class="container">
     <h1>My Profile</h1>
+    <form [formGroup]="myForm2" class="example-form" novalidate (ngSubmit)="credential()">
+      <mat-grid-list cols="2" rowHeight="315px">
+        <mat-grid-tile>
+          <div class="account-description">
+            <h2>Marketplace Credentials</h2>
+            <p>Please Provide your marketplace credentials to help us get connected with Amazon.</p>
+          </div>
+          <a href="https://sellercentral.amazon.in/gp/mws/registration/register.html?signInPageDisplayed=1&developerName=Insight Mailer&devMWSAccountId=8066-9756-3350" target="blank">Link</a>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <mat-card>
+            <mat-grid-list cols="2" rowHeight="85px">
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width"> <mat-label>Merchant Id</mat-label>
+                  <input matInput placeholder="Enter your merchant_id" formControlName="merchant_id" class="form-control" id="merchant_id" name="merchant_id" [value]="res_data?.merchant_id" 
+                  [(ngModel)] = "merchant_id" (keyup)="merchantChange()" autocomplete="off">
+                  <!-- <mat-error *ngIf="myForm.get('merchant_id').hasError('required')">
+                    merchant_id is <strong>required</strong>
+                  </mat-error> -->
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width"> <mat-label>MarketPlace Id</mat-label>
+                  <input matInput placeholder="Enter your marketplace_id" formControlName="marketplace_id" class="form-control" id="marketplace_id" name="marketplace_id" [value]="res_data?.marketplace_id" 
+                  [(ngModel)] = "marketplace_id"  (keyup)="marketplaceChange()" autocomplete="off">
+                  <!-- <mat-error *ngIf="myForm.get('marketplace_id').hasError('required')">
+                    marketplace_id is <strong>required</strong>
+                  </mat-error> -->
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <mat-grid-list cols="1" rowHeight="85px">
+              <!--mat-grid-tile>
+                <mat-form-field class="example-full-width"> <mat-label>AWS Access Key Id</mat-label>
+                  <input matInput placeholder="Enter your AWS AccessKey Id" formControlName="aws_accesskey_id" class="form-control" id="aws_accesskey_id" name="aws_accesskey_id" [(ngModel)] = "aws_accesskey_id">
+                  <mat-error *ngIf="myForm.get('aws_accesskey_id').hasError('required')">
+                    aws_accesskey_id is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </mat-grid-tile-->
+              <mat-grid-tile>
+                <mat-form-field class="example-full-width"> <mat-label>MWS Auth Token</mat-label>
+                  <input matInput [type]="hide4 ? 'password' : 'text'" placeholder="Enter your Mws Auth Token" formControlName="mws_auth_token" class="form-control" id="mws_auth_token" name="mws_auth_token" 
+                  [value]="res_data?.mws_auth_token" [(ngModel)]="mws_auth_token" (keyup)="mwsChange()" autocomplete="off" >
+                   <mat-icon matSuffix (click)="hide4 = !hide4">{{hide4 ? 'visibility_off' : 'visibility'}}</mat-icon>     
+                  <!--mat-error *ngIf="myForm.get('Mws_auth_token').hasError('required')">
+                    Mws Auth Token is <strong>required</strong>
+                  </mat-error-->
+                </mat-form-field>
+              </mat-grid-tile>
+              <!--mat-grid-tile>
+                <mat-form-field class="example-full-width"> <mat-label>AWS Secret Accesskey Id</mat-label>
+                  <input matInput placeholder="Enter your AWS Secret Accesskey Id" formControlName="aws_secret_accesskey_id" class="form-control" id="aws_secret_accesskey_id" name="aws_secret_accesskey_id" [(ngModel)] = "aws_secret_accesskey_id">
+                  <mat-error *ngIf="myForm.get('aws_secret_accesskey_id').hasError('required')">
+                    aws_secret_accesskey_id is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </mat-grid-tile-->
+            </mat-grid-list>
+
+            <mat-grid-list cols="1" rowHeight="65px">
+              <mat-grid-tile>
+                <button type="submit" mat-raised-button color="primary"  (click)="save_ok()"> Save </button>
+              </mat-grid-tile>
+            </mat-grid-list>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+      </form>
       <form [formGroup]="myForm" class="example-form" novalidate (ngSubmit)="userprofile()">
       <mat-grid-list cols="2" rowHeight="400px">
         <mat-grid-tile>
           <div class="account-description">
-            <div class="profile-img">
+            <!-- <div class="profile-img">
               <img src="/assets/user-icon.png">
               <div class="profile-overlay">
                 <mat-icon>mode_edit</mat-icon>
                 <span>Edit</span>
               </div>
-            </div>
+            </div> -->
             <h2>User Profile</h2>
             <p>You can edit your profile related information and change your password here.</p>
           </div>
-        </mat-grid-tile>
+        </mat-grid-tile> 
         <mat-grid-tile>
           <mat-card>
             <mat-grid-list cols="2" rowHeight="85px">
               <mat-grid-tile>
                 <mat-form-field class="example-full-width">
                   <mat-label>First Name</mat-label>
-                   <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name" [value]="res_data?.firstname" [(ngModel)] = "first_name" autocomplete="off">
+                   <input matInput placeholder="Firstname*" formControlName="first_name" class="form-control" id="first_name" name="first_name"  [(ngModel)] = "first_name" autocomplete="off">
                     <!--mat-error *ngIf="myForm.get('first_name').hasError('required')"> 
                     First Name is <strong>required</strong>
                   </mat-error-->
+
                 </mat-form-field>
               </mat-grid-tile>
               <mat-grid-tile>
@@ -104,45 +175,52 @@
       </mat-grid-list>
       </form>
 
-      <form [formGroup]="myForm1" class="example-form" novalidate (ngSubmit)="accdetail()">
+      <form [formGroup]="myForm1" class="example-form" novalidate (ngSubmit)="pay()" >
       <mat-grid-list cols="2" rowHeight="230px">
         <mat-grid-tile>
           <div class="account-description">
             <h2>Billing Information</h2>
             <p>Please Keep the payment information up to date to avoid deactivation</p>
-            <label>Next Billing Date: <span><!--06-03-2018--></span></label>
+            <!-- <label>Next Billing Date : <span>{{billdetail[0].bill_date}}</span></label>
+            <div><label>Remaining Days : <span>{{billdetail[0].remain}} days</span></label></div> -->
           </div>
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-card>
             <mat-grid-list cols="2" rowHeight="85px">
-              <mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>Card Number</mat-label>
-                  <input matInput placeholder="1654 5412 5412 ****" formControlName="card_number" 
-                  class="form-control" id="card_number" name="card_number" [readonly]="true" 
-                  [(ngModel)] = "card_number" autocomplete="off">
-                  <!--mat-error *ngIf="myForm.get('card_number').hasError('required')">
-                    card_number is <strong>required</strong>
-                  </mat-error-->
-                </mat-form-field>
-              </mat-grid-tile>
+            
               <mat-grid-tile>
                 <mat-form-field class="example-full-width"> <mat-label>Subscription Plan</mat-label>
-                  <input matInput placeholder="Your subscription plan" formControlName="subscription_plan" class="form-control" id="subscription_plan" name="subscription_plan" [readonly]="true" 
-                  [(ngModel)] = "subscription_plan" autocomplete="off">
-                  <!--mat-error *ngIf="myForm.get('subscription_plan').hasError('required')">
-                    subscription_plan is <strong>required</strong>
-                  </mat-error-->
+                
+                  <mat-select  placeholder="Your subscription plan" (change)="subscriChange($event)">
+                <mat-option *ngFor="let value of planName" [value]="value"> {{ value }} </mat-option>
+              </mat-select>
+            
+                </mat-form-field>
+                <!-- <a href="http://www.google.com" target="blank">Plans?</a> -->
+              
+              </mat-grid-tile>
+              
+                <mat-grid-tile>
+               <mat-form-field class="example-full-width"> <mat-label>Duration</mat-label>
+               
+                 <mat-select placeholder="Duration" (change)="durationChange($event)">
+                <mat-option *ngFor="let value of package_details" [value]="value"> {{ value.plan_duration}}Month ({{value.email_limit}}Emails) </mat-option>
+              </mat-select>
                 </mat-form-field>
               </mat-grid-tile>
             </mat-grid-list>
 
             <mat-grid-list cols="2" rowHeight="65px">
               <mat-grid-tile>
-                <button type="submit" mat-raised-button color="primary" [disabled]="true" > Remove Card </button>
+                   <mat-form-field class="example-full-width"> <mat-label>Amount (Inclusive of Tax)</mat-label>
+                <input matInput placeholder="Amount" formControlName="totalamount" class="form-control" id="totalamount" name="totalamount" 
+                  [(ngModel)] = "totalamount" readonly="true" autocomplete="off">
+                   </mat-form-field>
               </mat-grid-tile>
-              <mat-grid-tile>
-                <button  type="submit" mat-raised-button color="primary" [disabled]="true" > Billing History </button>
+
+               <mat-grid-tile>
+                <button  type="submit" mat-raised-button color="primary" > Pay </button>
               </mat-grid-tile>
             </mat-grid-list>
           </mat-card>
@@ -150,77 +228,81 @@
       </mat-grid-list>
       </form>
 
-
-      <form [formGroup]="myForm2" class="example-form" novalidate (ngSubmit)="credential()">
-      <mat-grid-list cols="2" rowHeight="315px">
+      <form [formGroup]="myFormrecharge" class="example-form" novalidate (ngSubmit)="packagePay()" >
+      <mat-grid-list cols="2" rowHeight="230px">
         <mat-grid-tile>
           <div class="account-description">
-            <h2>Marketplace Credentials</h2>
-            <p>Please Provide your marketplace credentials to help us get connected with Amazon.</p>
+            <h2>Package Information</h2>
+            <p>If you need Topup the Package</p>
+            <!-- <label>Next Billing Date : <span>{{billdetail[0].bill_date}}</span></label>
+            <div><label>Remaining Days : <span>{{billdetail[0].remain}} days</span></label></div> -->
           </div>
         </mat-grid-tile>
         <mat-grid-tile>
           <mat-card>
             <mat-grid-list cols="2" rowHeight="85px">
+            
               <mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>Merchant Id</mat-label>
-                  <input matInput placeholder="Enter your merchant_id" formControlName="merchant_id" class="form-control" id="merchant_id" name="merchant_id" [value]="res_data?.merchant_id" 
-                  [(ngModel)] = "merchant_id" autocomplete="off">
-                  <!-- <mat-error *ngIf="myForm.get('merchant_id').hasError('required')">
-                    merchant_id is <strong>required</strong>
-                  </mat-error> -->
+                <mat-form-field class="example-full-width"> <mat-label>Package</mat-label>
+                
+                  <mat-select  placeholder="Your subscription plan" (change)="packageChange($event)">
+                <mat-option *ngFor="let value of package" [value]="value.topup_pack"> {{ value.topup_pack }} Emails </mat-option>
+              </mat-select>
+            
+                </mat-form-field>
+               
+              
+              </mat-grid-tile>
+               <!-- <a href="http://www.google.com" target="blank">Plans?</a> -->
+              
+                <mat-grid-tile>
+               <mat-form-field class="example-full-width"> <mat-label>No of Package</mat-label>
+               
+                 <mat-select placeholder="Duration" (change)="noofpackChange($event)">
+                <mat-option *ngFor="let value of values" [value]="value"> {{ value}} </mat-option>
+              </mat-select>
                 </mat-form-field>
               </mat-grid-tile>
-              <mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>MarketPlace Id</mat-label>
-                  <input matInput placeholder="Enter your marketplace_id" formControlName="marketplace_id" class="form-control" id="marketplace_id" name="marketplace_id" [value]="res_data?.marketplace_id" 
-                  [(ngModel)] = "marketplace_id" autocomplete="off">
-                  <!-- <mat-error *ngIf="myForm.get('marketplace_id').hasError('required')">
-                    marketplace_id is <strong>required</strong>
-                  </mat-error> -->
-                </mat-form-field>
-              </mat-grid-tile>
-            </mat-grid-list>
-            <mat-grid-list cols="1" rowHeight="85px">
-              <!--mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>AWS Access Key Id</mat-label>
-                  <input matInput placeholder="Enter your AWS AccessKey Id" formControlName="aws_accesskey_id" class="form-control" id="aws_accesskey_id" name="aws_accesskey_id" [(ngModel)] = "aws_accesskey_id">
-                  <mat-error *ngIf="myForm.get('aws_accesskey_id').hasError('required')">
-                    aws_accesskey_id is <strong>required</strong>
-                  </mat-error>
-                </mat-form-field>
-              </mat-grid-tile-->
-              <mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>MWS Auth Token</mat-label>
-                  <input matInput [type]="hide4 ? 'password' : 'text'" placeholder="Enter your Mws Auth Token" formControlName="mws_auth_token" class="form-control" id="mws_auth_token" name="mws_auth_token" 
-                  [value]="res_data?.mws_auth_token" [(ngModel)]="mws_auth_token" autocomplete="off">
-                   <mat-icon matSuffix (click)="hide4 = !hide4">{{hide4 ? 'visibility_off' : 'visibility'}}</mat-icon>     
-                  <!--mat-error *ngIf="myForm.get('Mws_auth_token').hasError('required')">
-                    Mws Auth Token is <strong>required</strong>
-                  </mat-error-->
-                </mat-form-field>
-              </mat-grid-tile>
-              <!--mat-grid-tile>
-                <mat-form-field class="example-full-width"> <mat-label>AWS Secret Accesskey Id</mat-label>
-                  <input matInput placeholder="Enter your AWS Secret Accesskey Id" formControlName="aws_secret_accesskey_id" class="form-control" id="aws_secret_accesskey_id" name="aws_secret_accesskey_id" [(ngModel)] = "aws_secret_accesskey_id">
-                  <mat-error *ngIf="myForm.get('aws_secret_accesskey_id').hasError('required')">
-                    aws_secret_accesskey_id is <strong>required</strong>
-                  </mat-error>
-                </mat-form-field>
-              </mat-grid-tile-->
             </mat-grid-list>
 
-            <mat-grid-list cols="1" rowHeight="65px">
+            <mat-grid-list cols="2" rowHeight="65px">
               <mat-grid-tile>
-                <button type="submit" mat-raised-button color="primary"  (click)="save_ok()"> Save </button>
+                   <mat-form-field class="example-full-width"> <mat-label>Amount (Inclusive of Tax)</mat-label>
+                <input matInput placeholder="Amount" formControlName="packagetotalamount" class="form-control" id="packagetotalamount" name="packagetotalamount" 
+                  [(ngModel)] = "packagetotalamount" readonly="true" autocomplete="off">
+                   </mat-form-field>
+              </mat-grid-tile>
+
+               <mat-grid-tile>
+                <button  type="submit" mat-raised-button color="primary" > Pay Now </button>
               </mat-grid-tile>
             </mat-grid-list>
           </mat-card>
         </mat-grid-tile>
       </mat-grid-list>
       </form>
+ 
+
+      
     </div>
 </div>
+
+<!-- <form action="/purchase" method="POST">
+  
+  <script
+      src="https://checkout.razorpay.com/v1/checkout.js"
+      data-key= "rzp_test_IeYgScfVGKnASR"
+      data-amount="500"
+      data-buttontext="Pay Now"
+      data-name="Insight Mailer"
+      data-description="Monthly Payment"
+      data-image="https://img.myloview.cz/plakaty/mrkani-tvar-emotikon-400-71360928.jpg"
+      data-prefill.name="tested"
+      data-prefill.email="support@razorpay.com"
+      data-theme.color="green"
+  ></script>
+  <input type="hidden" value="Hidden Element" name="hidden">
+  </form> -->
 
 <ngx-spinner
 bdOpacity = 0.9 bdColor = "#262424" size = "large" color = "#11ffbba7" loadingText="Your account is being synced" 

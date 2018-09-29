@@ -164,6 +164,7 @@ inventories: any;
 id: number = 0;
 asin_data: any;
 
+page: any = 1;
 
 
 edit_data1: any;
@@ -173,7 +174,7 @@ edit_data1: any;
 ngOnInit() {
   //this.edit_data1 = localStorage.getItem('edit_data');
   this.asin_data = this.data.data;
-      this.PromotionService.getinventories().subscribe( res => {
+      this.PromotionService.getinventories(this.page).subscribe( res => {
       this.inventories = res;    
     });
   }
@@ -211,6 +212,7 @@ export class EditPromotion implements OnInit{
 // data_types
 product_asin: any;
 product_title: any;
+product_sku:any;
 product_price: any;
 discount_price: any;
 product_description: any;
@@ -263,6 +265,7 @@ edit_data: any;
      this.PromotionForm = new FormGroup({
             product_asin: new FormControl(''),
             product_title: new FormControl(''),
+            product_sku:new FormControl(''),
             product_price: new FormControl(''),
             discount_price: new FormControl('',Validators.required),
             product_description: new FormControl(''),
@@ -279,7 +282,7 @@ ok(name): void {
   }
 
   discount(){
-     if(this.discount_price >= ((this.data1.price_paisas.fractional) / 100 )) {
+     if(this.discount_price >= ((this.data1.price_paisas.fractional)  )) {
           swal(
             'Alert!',
             'promotion price should be less than actual price!',
